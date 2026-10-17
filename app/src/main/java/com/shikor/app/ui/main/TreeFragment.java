@@ -53,6 +53,7 @@ public class TreeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         personViewModel = new ViewModelProvider(requireActivity()).get(PersonViewModel.class);
+        personViewModel.syncFromCloud();
 
         setupTreeView();
         setupControls();

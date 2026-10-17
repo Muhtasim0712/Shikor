@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.shikor.app.data.local.AppDatabase;
@@ -18,6 +19,7 @@ import com.shikor.app.data.local.entities.PhotoEntity;
 import com.shikor.app.data.local.entities.StoryEntity;
 import com.shikor.app.util.AppExecutors;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -248,6 +250,10 @@ public class FamilyRepository {
                 .addOnFailureListener(e -> Log.w(TAG, "Story sync to Firestore postponed (offline): " + e.getMessage()));
     }
 
+    public LiveData<StoryEntity> getStoryById(String storyId) {
+        return storyDao.getStoryById(storyId);
+    }
+
     // --- PHOTO QUERIES & CRUD ---
 
     public LiveData<List<PhotoEntity>> getTimelinePhotos(String familyId) {
@@ -260,9 +266,247 @@ public class FamilyRepository {
             photo.setSyncState(PhotoEntity.SYNC_STATE_PENDING);
             photoDao.insert(photo);
 
+            syncPhotoToFirestore(photo);
+
             executors.mainThread().execute(() -> {
                 if (callback != null) callback.onSuccess(null);
             });
         });
+    }
+
+    private void syncPhotoToFirestore(PhotoEntity photo) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", photo.getId());
+        map.put("personId", photo.getPersonId());
+        map.put("familyId", photo.getFamilyId());
+        map.put("path", photo.getPath());
+        map.put("caption", photo.getCaption());
+        map.put("year", photo.getYear());
+        map.put("taggedPersonIds", photo.getTaggedPersonIds());
+        map.put("createdAt", photo.getCreatedAt());
+        map.put("updatedAt", photo.getUpdatedAt());
+
+        firestore.collection("families")
+                .document(photo.getFamilyId())
+                .collection("photos")
+                .document(photo.getId())
+                .set(map, SetOptions.merge())
+                .addOnSuccessListener(aVoid -> executors.diskIO().execute(() -> {
+                    photo.setSyncState(PhotoEntity.SYNC_STATE_SYNCED);
+                    photoDao.update(photo);
+                }))
+                .addOnFailureListener(e -> Log.w(TAG, "Photo sync to Firestore postponed (offline): " + e.getMessage()));
+    }
+
+    public void deletePhoto(PhotoEntity photo, RepositoryCallback<Void> callback) {
+        executors.diskIO().execute(() -> {
+            photoDao.delete(photo);
+
+            firestore.collection("families")
+                    .document(photo.getFamilyId())
+                    .collection("photos")
+                    .document(photo.getId())
+                    .delete()
+                    .addOnFailureListener(e -> Log.e(TAG, "Failed to delete photo in Firestore", e));
+
+            executors.mainThread().execute(() -> {
+                if (callback != null) callback.onSuccess(null);
+            });
+        });
+    }
+
+    // --- CLOUD SYNC-DOWN (FIRESTORE -> ROOM) ---
+
+    /**
+     * Pulls family metadata, members, stories, and timeline photos from Cloud Firestore
+     * and inserts them into the local Room database.
+     */
+    public void syncDownFamilyData(String familyId, RepositoryCallback<Void> callback) {
+        if (familyId == null || familyId.trim().isEmpty()) {
+            if (callback != null) callback.onError("Invalid family ID");
+            return;
+        }
+
+        // 1. Fetch Family metadata
+        firestore.collection("families").document(familyId).get()
+                .addOnSuccessListener(familyDoc -> {
+                    if (familyDoc.exists()) {
+                        String name = familyDoc.getString("name");
+                        String code = familyDoc.getString("code");
+                        String adminUid = familyDoc.getString("adminUid");
+                        Long updatedLong = familyDoc.getLong("updatedAt");
+                        long updatedAt = updatedLong != null ? updatedLong : System.currentTimeMillis();
+
+                        FamilyEntity familyEntity = new FamilyEntity(
+                                familyId, name, code, adminUid, updatedAt, FamilyEntity.SYNC_STATE_SYNCED
+                        );
+                        executors.diskIO().execute(() -> familyDao.insert(familyEntity));
+                    }
+                })
+                .addOnFailureListener(e -> Log.w(TAG, "Family metadata sync-down failed: " + e.getMessage()));
+
+        // 2. Fetch People Collection
+        firestore.collection("families")
+                .document(familyId)
+                .collection("people")
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    List<PersonEntity> people = new ArrayList<>();
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                        PersonEntity person = parsePersonFromDoc(doc, familyId);
+                        if (person != null) {
+                            people.add(person);
+                        }
+                    }
+
+                    executors.diskIO().execute(() -> {
+                        if (!people.isEmpty()) {
+                            personDao.insertAll(people);
+                            Log.d(TAG, "Successfully synced down " + people.size() + " family members from Firestore.");
+                        }
+
+                        // 3. Once people are safely in Room, sync stories & photos (to satisfy foreign key constraints)
+                        syncDownStories(familyId);
+                        syncDownPhotos(familyId);
+
+                        executors.mainThread().execute(() -> {
+                            if (callback != null) callback.onSuccess(null);
+                        });
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Failed to sync family members from Firestore: " + e.getMessage(), e);
+                    if (callback != null) callback.onError(e.getLocalizedMessage());
+                });
+    }
+
+    private void syncDownStories(String familyId) {
+        firestore.collection("families")
+                .document(familyId)
+                .collection("stories")
+                .get()
+                .addOnSuccessListener(querySnapshot -> executors.diskIO().execute(() -> {
+                    List<StoryEntity> stories = new ArrayList<>();
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                        StoryEntity story = parseStoryFromDoc(doc, familyId);
+                        if (story != null && personDao.getPersonByIdSync(story.getPersonId()) != null) {
+                            stories.add(story);
+                        }
+                    }
+                    if (!stories.isEmpty()) {
+                        storyDao.insertAll(stories);
+                        Log.d(TAG, "Successfully synced down " + stories.size() + " stories from Firestore.");
+                    }
+                }))
+                .addOnFailureListener(e -> Log.w(TAG, "Stories sync-down postponed: " + e.getMessage()));
+    }
+
+    private void syncDownPhotos(String familyId) {
+        firestore.collection("families")
+                .document(familyId)
+                .collection("photos")
+                .get()
+                .addOnSuccessListener(querySnapshot -> executors.diskIO().execute(() -> {
+                    List<PhotoEntity> photos = new ArrayList<>();
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                        PhotoEntity photo = parsePhotoFromDoc(doc, familyId);
+                        if (photo != null && personDao.getPersonByIdSync(photo.getPersonId()) != null) {
+                            photos.add(photo);
+                        }
+                    }
+                    if (!photos.isEmpty()) {
+                        photoDao.insertAll(photos);
+                        Log.d(TAG, "Successfully synced down " + photos.size() + " photos from Firestore.");
+                    }
+                }))
+                .addOnFailureListener(e -> Log.w(TAG, "Photos sync-down postponed: " + e.getMessage()));
+    }
+
+    private PersonEntity parsePersonFromDoc(DocumentSnapshot doc, String fallbackFamilyId) {
+        try {
+            String id = doc.getString("id") != null ? doc.getString("id") : doc.getId();
+            String familyId = doc.getString("familyId") != null ? doc.getString("familyId") : fallbackFamilyId;
+            String fullName = doc.getString("fullName") != null ? doc.getString("fullName") : "";
+            String nickName = doc.getString("nickName");
+            String gender = doc.getString("gender") != null ? doc.getString("gender") : "other";
+            String birthDate = doc.getString("birthDate");
+            String deathDate = doc.getString("deathDate");
+            Boolean isDeceasedBool = doc.getBoolean("isDeceased");
+            boolean isDeceased = isDeceasedBool != null ? isDeceasedBool : false;
+            String hometown = doc.getString("hometown");
+            String occupation = doc.getString("occupation");
+            String phoneNumber = doc.getString("phoneNumber");
+            String biography = doc.getString("biography");
+            String photoPath = doc.getString("photoPath");
+            String fatherId = doc.getString("fatherId");
+            String motherId = doc.getString("motherId");
+            String spouseId = doc.getString("spouseId");
+            String marriageDate = doc.getString("marriageDate");
+            String createdByUid = doc.getString("createdByUid");
+            Long genLong = doc.getLong("generation");
+            int generation = genLong != null ? genLong.intValue() : 0;
+            Long updatedLong = doc.getLong("updatedAt");
+            long updatedAt = updatedLong != null ? updatedLong : System.currentTimeMillis();
+
+            return new PersonEntity(id, familyId, fullName, nickName, gender, birthDate, deathDate,
+                    isDeceased, hometown, occupation, phoneNumber, biography, photoPath, fatherId,
+                    motherId, spouseId, marriageDate, createdByUid, generation, updatedAt,
+                    PersonEntity.SYNC_STATE_SYNCED);
+        } catch (Exception e) {
+            Log.e(TAG, "Error parsing Person from Firestore doc: " + doc.getId(), e);
+            return null;
+        }
+    }
+
+    private StoryEntity parseStoryFromDoc(DocumentSnapshot doc, String fallbackFamilyId) {
+        try {
+            String id = doc.getString("id") != null ? doc.getString("id") : doc.getId();
+            String personId = doc.getString("personId");
+            if (personId == null || personId.isEmpty()) return null;
+            String familyId = doc.getString("familyId") != null ? doc.getString("familyId") : fallbackFamilyId;
+            String title = doc.getString("title") != null ? doc.getString("title") : "";
+            String body = doc.getString("body");
+            String audioPath = doc.getString("audioPath");
+            Long durLong = doc.getLong("audioDurationMs");
+            long duration = durLong != null ? durLong : 0L;
+            String photoPath = doc.getString("photoPath");
+            Long createdLong = doc.getLong("createdAt");
+            long createdAt = createdLong != null ? createdLong : System.currentTimeMillis();
+            String authorUid = doc.getString("authorUid");
+            Long updatedLong = doc.getLong("updatedAt");
+            long updatedAt = updatedLong != null ? updatedLong : System.currentTimeMillis();
+
+            return new StoryEntity(id, personId, familyId, title, body, audioPath, duration,
+                    photoPath, createdAt, authorUid, updatedAt, StoryEntity.SYNC_STATE_SYNCED);
+        } catch (Exception e) {
+            Log.e(TAG, "Error parsing Story from Firestore doc: " + doc.getId(), e);
+            return null;
+        }
+    }
+
+    private PhotoEntity parsePhotoFromDoc(DocumentSnapshot doc, String fallbackFamilyId) {
+        try {
+            String id = doc.getString("id") != null ? doc.getString("id") : doc.getId();
+            String personId = doc.getString("personId");
+            if (personId == null || personId.isEmpty()) return null;
+            String familyId = doc.getString("familyId") != null ? doc.getString("familyId") : fallbackFamilyId;
+            String path = doc.getString("path") != null ? doc.getString("path") : "";
+            String caption = doc.getString("caption");
+            Long yearLong = doc.getLong("year");
+            int year = yearLong != null ? yearLong.intValue() : 0;
+            @SuppressWarnings("unchecked")
+            List<String> taggedIds = (List<String>) doc.get("taggedPersonIds");
+            if (taggedIds == null) taggedIds = new ArrayList<>();
+            Long createdLong = doc.getLong("createdAt");
+            long createdAt = createdLong != null ? createdLong : System.currentTimeMillis();
+            Long updatedLong = doc.getLong("updatedAt");
+            long updatedAt = updatedLong != null ? updatedLong : System.currentTimeMillis();
+
+            return new PhotoEntity(id, personId, familyId, path, caption, year, taggedIds,
+                    createdAt, updatedAt, PhotoEntity.SYNC_STATE_SYNCED);
+        } catch (Exception e) {
+            Log.e(TAG, "Error parsing Photo from Firestore doc: " + doc.getId(), e);
+            return null;
+        }
     }
 }

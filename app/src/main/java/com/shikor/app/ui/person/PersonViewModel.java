@@ -38,6 +38,13 @@ public class PersonViewModel extends AndroidViewModel {
         return currentFamilyId;
     }
 
+    public void syncFromCloud() {
+        String familyId = Prefs.getInstance(getApplication()).getFamilyId();
+        if (familyId != null && !familyId.isEmpty()) {
+            repository.syncDownFamilyData(familyId, null);
+        }
+    }
+
     public LiveData<List<PersonEntity>> getPeople() {
         if (currentFamilyId == null || currentFamilyId.isEmpty()) {
             return new MutableLiveData<>();

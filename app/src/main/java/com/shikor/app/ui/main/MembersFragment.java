@@ -56,6 +56,7 @@ public class MembersFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         personViewModel = new ViewModelProvider(requireActivity()).get(PersonViewModel.class);
+        personViewModel.syncFromCloud();
 
         setupRecyclerView();
         setupSearchAndFilters();

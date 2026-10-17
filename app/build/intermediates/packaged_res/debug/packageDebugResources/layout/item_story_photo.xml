@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Story item with photo card layout -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_medium"
+    android:layout_marginVertical="@dimen/spacing_small"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation"
+    app:strokeColor="?attr/colorOutline"
+    app:strokeWidth="0.5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+
+            <ImageView
+                android:id="@+id/ivStoryPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Story photo"
+                android:scaleType="centerCrop" />
+
+            <!-- Audio Badge Pill if audio attached -->
+            <LinearLayout
+                android:id="@+id/layoutAudioBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@drawable/bg_code_box"
+                android:backgroundTint="?attr/colorSurface"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_small"
+                android:paddingVertical="@dimen/spacing_tiny"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@android:drawable/ic_btn_speak_now"
+                    app:tint="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/tvAudioDurationBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_tiny"
+                    android:text="00:00"
+                    android:textAppearance="?attr/textAppearanceLabelSmall"
+                    android:textColor="?attr/colorOnSurface" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium">
+
+            <TextView
+                android:id="@+id/tvStoryTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvStoryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:textAppearance="?attr/textAppearanceLabelSmall"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+
+            <TextView
+                android:id="@+id/tvStoryExcerpt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:ellipsize="end"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="2"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?attr/colorOnSurface" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

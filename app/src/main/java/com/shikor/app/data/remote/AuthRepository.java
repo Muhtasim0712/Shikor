@@ -11,6 +11,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.shikor.app.data.repository.FamilyRepository;
 import com.shikor.app.util.Prefs;
 
 import java.security.SecureRandom;
@@ -158,9 +159,13 @@ public class AuthRepository {
                                             String code = familyDoc.getString("code");
                                             Prefs.getInstance(appContext).setFamily(familyId, familyName, code);
                                         }
+                                        FamilyRepository.getInstance(appContext).syncDownFamilyData(familyId, null);
                                         callback.onSuccess();
                                     })
-                                    .addOnFailureListener(e -> callback.onSuccess());
+                                    .addOnFailureListener(e -> {
+                                        FamilyRepository.getInstance(appContext).syncDownFamilyData(familyId, null);
+                                        callback.onSuccess();
+                                    });
                         } else {
                             callback.onSuccess();
                         }

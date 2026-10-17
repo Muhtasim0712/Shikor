@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import com.shikor.app.R;
+import com.shikor.app.data.repository.FamilyRepository;
 import com.shikor.app.databinding.ActivityMainBinding;
 import com.shikor.app.ui.base.BaseActivity;
 import com.shikor.app.util.Prefs;
@@ -33,12 +34,27 @@ public class MainActivity extends BaseActivity {
             binding.toolbar.setTitle(familyName);
         }
 
+        // Trigger background cloud sync-down to restore/update family data from Firestore
+        String familyId = Prefs.getInstance(this).getFamilyId();
+        if (familyId != null && !familyId.isEmpty()) {
+            FamilyRepository.getInstance(this).syncDownFamilyData(familyId, null);
+        }
+
         setupBottomNavigation();
 
         // Default screen is MembersFragment (or TreeFragment)
         if (savedInstanceState == null) {
             loadFragment(new MembersFragment());
             binding.bottomNavigation.setSelectedItemId(R.id.nav_members);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String familyId = Prefs.getInstance(this).getFamilyId();
+        if (familyId != null && !familyId.isEmpty()) {
+            FamilyRepository.getInstance(this).syncDownFamilyData(familyId, null);
         }
     }
 
@@ -52,7 +68,7 @@ public class MainActivity extends BaseActivity {
                 loadFragment(new TreeFragment());
                 return true;
             } else if (itemId == R.id.nav_timeline) {
-                // Future phase will load TimelineFragment
+                loadFragment(new TimelineFragment());
                 return true;
             } else if (itemId == R.id.nav_settings) {
                 // Future phase will load SettingsFragment

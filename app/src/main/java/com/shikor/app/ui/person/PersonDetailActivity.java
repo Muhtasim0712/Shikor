@@ -8,16 +8,21 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.chip.Chip;
+import com.shikor.app.adapter.StoryAdapter;
 import com.shikor.app.data.local.entities.PersonEntity;
 import com.shikor.app.databinding.ActivityPersonDetailBinding;
 import com.shikor.app.ui.base.BaseActivity;
+import com.shikor.app.ui.story.AddStoryActivity;
+import com.shikor.app.ui.story.StoryDetailActivity;
+import com.shikor.app.ui.story.StoryViewModel;
 
 import java.util.List;
 
 /**
- * PersonDetailActivity - Displays full profile, relatives, and triggers implicit intents
+ * PersonDetailActivity - Displays full profile, relatives, stories, and triggers implicit intents
  * (ACTION_DIAL, ACTION_VIEW geo:, ACTION_SEND).
  *
  * CONCEPT: Implicit Intents:
@@ -31,6 +36,8 @@ public class PersonDetailActivity extends BaseActivity {
 
     private ActivityPersonDetailBinding binding;
     private PersonViewModel personViewModel;
+    private StoryViewModel storyViewModel;
+    private StoryAdapter storyAdapter;
     private String personId;
     private PersonEntity currentPerson;
 
@@ -50,12 +57,45 @@ public class PersonDetailActivity extends BaseActivity {
 
         binding.toolbar.setNavigationOnClickListener(v -> finish());
         personViewModel = new ViewModelProvider(this).get(PersonViewModel.class);
+        storyViewModel = new ViewModelProvider(this).get(StoryViewModel.class);
 
         setupClickListeners();
+        setupStoriesRecyclerView();
         observePerson();
+        observeStories();
+    }
+
+    private void setupStoriesRecyclerView() {
+        storyAdapter = new StoryAdapter(story -> {
+            Intent intent = new Intent(PersonDetailActivity.this, StoryDetailActivity.class);
+            intent.putExtra(StoryDetailActivity.EXTRA_STORY_ID, story.getId());
+            startActivity(intent);
+        });
+        binding.rvPersonStories.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvPersonStories.setAdapter(storyAdapter);
+    }
+
+    private void observeStories() {
+        storyViewModel.getStoriesForPerson(personId).observe(this, stories -> {
+            if (stories != null && !stories.isEmpty()) {
+                binding.rvPersonStories.setVisibility(View.VISIBLE);
+                binding.tvNoStories.setVisibility(View.GONE);
+                storyAdapter.submitList(stories);
+            } else {
+                binding.rvPersonStories.setVisibility(View.GONE);
+                binding.tvNoStories.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void setupClickListeners() {
+        // Add Story
+        binding.btnAddStory.setOnClickListener(v -> {
+            Intent intent = new Intent(PersonDetailActivity.this, AddStoryActivity.class);
+            intent.putExtra(AddStoryActivity.EXTRA_PERSON_ID, personId);
+            startActivity(intent);
+        });
+
         // CONCEPT: Implicit Intent with ACTION_DIAL
         binding.btnCall.setOnClickListener(v -> {
             if (currentPerson != null && !TextUtils.isEmpty(currentPerson.getPhoneNumber())) {

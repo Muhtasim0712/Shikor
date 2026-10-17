@@ -288,6 +288,50 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Stories & Oral Memories Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Stories &amp; Oral Memories"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="?attr/colorPrimary"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddStory"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/min_touch_target"
+                    android:text="+ Add Story"
+                    app:icon="@android:drawable/ic_menu_add" />
+            </LinearLayout>
+
+            <!-- Stories RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPersonStories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvNoStories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="No stories recorded yet. Tap '+ Add Story' to record an oral memory or write a story."
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+
             <!-- Edit Relative Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnEditPerson"
