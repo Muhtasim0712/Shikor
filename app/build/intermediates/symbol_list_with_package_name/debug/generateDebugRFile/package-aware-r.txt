@@ -79,13 +79,18 @@ dimen text_size_subtitle
 dimen text_size_title
 drawable bg_code_box
 drawable bg_window_dawn
+drawable ic_chart_view
 drawable ic_dawn_botanical_accent
+drawable ic_fit_screen
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_nature_tree
 drawable ic_shikor_logo
 font noto_sans_bengali
 font noto_sans_bengali_bold
 font noto_sans_bengali_regular
+id action_fit_tree
+id action_view_mode
 id addEditRoot
 id avatarPreview
 id avatarView
@@ -96,6 +101,7 @@ id btnContinueToMain
 id btnCreateFamily
 id btnEditPerson
 id btnEmptyAction
+id btnFitTree
 id btnForgotPassword
 id btnGoToLogin
 id btnGoToRegister
@@ -109,6 +115,7 @@ id btnSavePerson
 id btnShare
 id btnShareCode
 id btnTakePhoto
+id btnToggleMode
 id cardBiography
 id cardCreateFamily
 id cardJoinFamily
@@ -153,6 +160,8 @@ id loadingOverlay
 id loadingText
 id loginRoot
 id mainRoot
+id menu_mode_classic_chart
+id menu_mode_natural_tree
 id navHostContainer
 id nav_members
 id nav_settings
@@ -228,8 +237,11 @@ layout item_member
 layout layout_empty_state
 layout layout_loading
 menu bottom_nav_menu
+menu menu_tree_view
 mipmap ic_launcher
 mipmap ic_launcher_round
+string action_fit_tree
+string action_recenter
 string already_have_account
 string app_name
 string app_tagline
@@ -279,6 +291,8 @@ string register_title
 string reset_password_sent
 string save
 string share_family_code
+string tree_view_chart
+string tree_view_natural
 style Base_Theme_Shikor
 style ShapeAppearance_Shikor_Large
 style ShapeAppearance_Shikor_Medium

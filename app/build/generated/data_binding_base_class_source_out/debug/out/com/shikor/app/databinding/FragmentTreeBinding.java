@@ -22,7 +22,13 @@ public final class FragmentTreeBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final MaterialButton btnFitTree;
+
+  @NonNull
   public final MaterialButton btnReCenter;
+
+  @NonNull
+  public final MaterialButton btnToggleMode;
 
   @NonNull
   public final FamilyTreeView familyTreeView;
@@ -37,11 +43,14 @@ public final class FragmentTreeBinding implements ViewBinding {
   public final CoordinatorLayout treeFragmentRoot;
 
   private FragmentTreeBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull MaterialButton btnReCenter, @NonNull FamilyTreeView familyTreeView,
+      @NonNull MaterialButton btnFitTree, @NonNull MaterialButton btnReCenter,
+      @NonNull MaterialButton btnToggleMode, @NonNull FamilyTreeView familyTreeView,
       @NonNull Spinner spinnerTreeRoot, @NonNull LayoutEmptyStateBinding treeEmptyState,
       @NonNull CoordinatorLayout treeFragmentRoot) {
     this.rootView = rootView;
+    this.btnFitTree = btnFitTree;
     this.btnReCenter = btnReCenter;
+    this.btnToggleMode = btnToggleMode;
     this.familyTreeView = familyTreeView;
     this.spinnerTreeRoot = spinnerTreeRoot;
     this.treeEmptyState = treeEmptyState;
@@ -75,9 +84,21 @@ public final class FragmentTreeBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btnFitTree;
+      MaterialButton btnFitTree = ViewBindings.findChildViewById(rootView, id);
+      if (btnFitTree == null) {
+        break missingId;
+      }
+
       id = R.id.btnReCenter;
       MaterialButton btnReCenter = ViewBindings.findChildViewById(rootView, id);
       if (btnReCenter == null) {
+        break missingId;
+      }
+
+      id = R.id.btnToggleMode;
+      MaterialButton btnToggleMode = ViewBindings.findChildViewById(rootView, id);
+      if (btnToggleMode == null) {
         break missingId;
       }
 
@@ -102,8 +123,8 @@ public final class FragmentTreeBinding implements ViewBinding {
 
       CoordinatorLayout treeFragmentRoot = (CoordinatorLayout) rootView;
 
-      return new FragmentTreeBinding((CoordinatorLayout) rootView, btnReCenter, familyTreeView,
-          spinnerTreeRoot, binding_treeEmptyState, treeFragmentRoot);
+      return new FragmentTreeBinding((CoordinatorLayout) rootView, btnFitTree, btnReCenter,
+          btnToggleMode, familyTreeView, spinnerTreeRoot, binding_treeEmptyState, treeFragmentRoot);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

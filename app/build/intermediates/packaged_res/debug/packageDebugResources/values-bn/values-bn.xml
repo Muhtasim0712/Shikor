@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="action_fit_tree">সম্পূর্ণ গাছ দেখুন</string>
+    <string name="action_recenter">পুনরায় কেন্দ্র</string>
     <string name="already_have_account">ইতিমধ্যে অ্যাকাউন্ট আছে? লগ ইন করুন</string>
     <string name="app_name">শিকড়</string>
     <string name="app_tagline">পারিবারিক স্মৃতি, ঐতিহ্য ও ইতিহাস সংরক্ষণে</string>
@@ -43,4 +45,6 @@
     <string name="reset_password_sent">পাসওয়ার্ড রিসেট ইমেইল পাঠানো হয়েছে</string>
     <string name="save">সংরক্ষণ</string>
     <string name="share_family_code">ফ্যামিলি কোড শেয়ার করুন</string>
+    <string name="tree_view_chart">চার্ট রূপ</string>
+    <string name="tree_view_natural">বৃক্ষ রূপ</string>
 </resources>

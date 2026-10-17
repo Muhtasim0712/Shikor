@@ -50,11 +50,29 @@
                 android:minHeight="@dimen/min_touch_target" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnToggleMode"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/tree_view_chart"
+                app:icon="@drawable/ic_chart_view"
+                app:iconTint="?attr/colorPrimary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFitTree"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/action_fit_tree"
+                app:icon="@drawable/ic_fit_screen"
+                app:iconTint="?attr/colorPrimary" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnReCenter"
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:contentDescription="Re-center Tree"
+                android:contentDescription="@string/action_recenter"
                 app:icon="@android:drawable/ic_menu_rotate"
                 app:iconTint="?attr/colorPrimary" />
         </LinearLayout>

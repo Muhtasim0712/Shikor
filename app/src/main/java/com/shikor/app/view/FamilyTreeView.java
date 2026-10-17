@@ -1,34 +1,32 @@
 package com.shikor.app.view;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Rect;
+import android.graphics.Picture;
 import android.graphics.RectF;
-import android.graphics.Shader;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.text.TextUtils;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.OverScroller;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
-import com.shikor.app.R;
 import com.shikor.app.data.local.entities.PersonEntity;
 import com.shikor.app.util.AppExecutors;
+import com.shikor.app.util.Prefs;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,18 +35,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * FamilyTreeView - Interactive Custom View rendering an interactive hierarchical family tree.
+ * FamilyTreeView - Interactive Canvas View rendering an authentic living family tree or classic chart.
  *
- * CONCEPT: Custom View 1: FamilyTreeView
- * - Generation-based tree layout algorithm computed off the UI thread (couples as a unit,
- *   children centered under parents, no overlaps)
- * - Canvas drawing with Matrix transforms (scale + translate)
- * - Pinch-zoom via ScaleGestureDetector (clamped 0.4x to 3.0x)
- * - Pan and fling via GestureDetector and OverScroller
- * - Tap hit-testing via inverse Matrix
- * - Visible bounds quick reject optimization
- * - Paint objects pre-allocated once in constructor
- * - Saved and restored state on rotation
+ * CONCEPT:
+ * - Shikor means 'root': oldest ancestors are roots and trunk at the bottom, newer generations grow upward into branches.
+ * - Non-overlapping layout calculated off the UI thread via TreeLayoutEngine.
+ * - Static layers (trunk, roots, branches, foliage) pre-recorded to android.graphics.Picture display-list cache.
+ * - Hardware-accelerated Canvas drawing with Matrix transforms (pinch-zoom 0.4x - 3.0x, pan, fling).
+ * - Organic branch sway animation via ValueAnimator (respects system animation scale, pauses offscreen).
+ * - Exact tap hit-testing via inverse transformation and sway matrices.
+ * - Double-tap to re-center, fitWholeTree() for one-tap overview.
+ * - Toggleable between Natural Tree view and Classic Chart view, persisted in Prefs.
+ * - Rotation state saved and restored across configuration changes.
  */
 public class FamilyTreeView extends View {
 
@@ -58,17 +56,13 @@ public class FamilyTreeView extends View {
 
     private OnPersonClickListener listener;
 
-    // Sizing constants (in pixels, scaled by density)
-    private float NODE_WIDTH;
-    private float NODE_HEIGHT;
-    private float COUPLE_GAP;
-    private float SIBLING_GAP;
-    private float LEVEL_GAP;
-    private float AVATAR_RADIUS;
+    // View Modes
+    private String viewMode = Prefs.VIEW_MODE_NATURAL_TREE;
 
-    // Transformation Matrix and gestures
+    // Transformation Matrix and Gestures
     private final Matrix transformMatrix = new Matrix();
     private final Matrix inverseMatrix = new Matrix();
+    private final Matrix swayMatrix = new Matrix();
     private final float[] matrixValues = new float[9];
     private float currentScale = 1.0f;
     private static final float MIN_SCALE = 0.4f;
@@ -78,35 +72,26 @@ public class FamilyTreeView extends View {
     private GestureDetector gestureDetector;
     private OverScroller scroller;
 
-    // Paints pre-allocated in constructor (never inside onDraw)
-    private final Paint nodeBgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint nodeBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint textNamePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint textYearsPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint edgePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint spouseEdgePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint avatarBgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint avatarTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint deceasedDotPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
-    private final Matrix avatarShaderMatrix = new Matrix();
-
-    private final Path edgePath = new Path();
-    private final RectF tempRect = new RectF();
-    private final Rect textBounds = new Rect();
-    private final float[] touchPoint = new float[2];
+    // Canvas & Viewport
     private final RectF visibleViewport = new RectF();
+    private final float[] touchPoint = new float[2];
+    private float density;
 
-    // Data structures
+    // Data Structures
     private List<PersonEntity> rawPeople = new ArrayList<>();
     private final Map<String, PersonEntity> personMap = new HashMap<>();
     private final Map<String, Bitmap> photoCache = new HashMap<>();
-    private final List<TreeUnit> treeUnits = new ArrayList<>();
+    private TreeLayoutEngine.LayoutResult layoutResult = new TreeLayoutEngine.LayoutResult();
     private String rootPersonId = null;
+    private String selectedPersonId = null;
 
-    private float treeBoundsWidth = 0;
-    private float treeBoundsHeight = 0;
-    private float nodeCornerRadius = 16;
+    // Renderer & Static Cache
+    private TreePainter treePainter;
+    private Picture staticLayerPicture = null;
+
+    // Canopy Sway Animator
+    private ValueAnimator swayAnimator;
+    private float currentSwayAngle = 0f;
 
     public FamilyTreeView(Context context) {
         super(context);
@@ -124,63 +109,18 @@ public class FamilyTreeView extends View {
     }
 
     private void init(Context context) {
-        float density = getResources().getDisplayMetrics().density;
-        NODE_WIDTH = 130 * density;
-        NODE_HEIGHT = 64 * density;
-        COUPLE_GAP = 16 * density;
-        SIBLING_GAP = 28 * density;
-        LEVEL_GAP = 80 * density;
-        AVATAR_RADIUS = 20 * density;
-        nodeCornerRadius = 16 * density;
+        density = getResources().getDisplayMetrics().density;
+        viewMode = Prefs.getInstance(context).getTreeViewMode();
 
-        // Initialize paints
-        nodeBgPaint.setStyle(Paint.Style.FILL);
-        nodeBgPaint.setColor(ContextCompat.getColor(context, R.color.surface));
-
-        nodeBorderPaint.setStyle(Paint.Style.STROKE);
-        nodeBorderPaint.setStrokeWidth(2 * density);
-
-        textNamePaint.setTextSize(13 * density);
-        textNamePaint.setFakeBoldText(true);
-        textNamePaint.setColor(ContextCompat.getColor(context, R.color.on_surface));
-
-        textYearsPaint.setTextSize(11 * density);
-        textYearsPaint.setColor(ContextCompat.getColor(context, R.color.on_surface_variant));
-
-        edgePaint.setStyle(Paint.Style.STROKE);
-        edgePaint.setStrokeWidth(2.5f * density);
-        edgePaint.setColor(ContextCompat.getColor(context, R.color.tree_connector));
-
-        spouseEdgePaint.setStyle(Paint.Style.STROKE);
-        spouseEdgePaint.setStrokeWidth(2f * density);
-        spouseEdgePaint.setColor(ContextCompat.getColor(context, R.color.secondary));
-
-        avatarBgPaint.setStyle(Paint.Style.FILL);
-        avatarBgPaint.setColor(ContextCompat.getColor(context, R.color.primary_container));
-
-        avatarTextPaint.setTextSize(12 * density);
-        avatarTextPaint.setFakeBoldText(true);
-        avatarTextPaint.setTextAlign(Paint.Align.CENTER);
-        avatarTextPaint.setColor(ContextCompat.getColor(context, R.color.on_primary_container));
-
-        deceasedDotPaint.setStyle(Paint.Style.FILL);
-        deceasedDotPaint.setColor(ContextCompat.getColor(context, R.color.deceased_indicator));
-
-        try {
-            android.graphics.Typeface tfBold = androidx.core.content.res.ResourcesCompat.getFont(context, R.font.noto_sans_bengali_bold);
-            android.graphics.Typeface tfRegular = androidx.core.content.res.ResourcesCompat.getFont(context, R.font.noto_sans_bengali_regular);
-            if (tfBold != null) {
-                textNamePaint.setTypeface(tfBold);
-                avatarTextPaint.setTypeface(tfBold);
-            }
-            if (tfRegular != null) {
-                textYearsPaint.setTypeface(tfRegular);
-            }
-        } catch (Exception ignored) {}
-
+        treePainter = new TreePainter(context);
         scroller = new OverScroller(context);
 
-        // CONCEPT: ScaleGestureDetector for pinch zoom (clamped 0.4 to 3.0)
+        initGestureDetectors(context);
+        initSwayAnimator();
+    }
+
+    private void initGestureDetectors(Context context) {
+        // Pinch-zoom via ScaleGestureDetector (clamped 0.4x to 3.0x)
         scaleDetector = new ScaleGestureDetector(context, new ScaleGestureDetector.SimpleOnScaleGestureListener() {
             @Override
             public boolean onScale(@NonNull ScaleGestureDetector detector) {
@@ -195,7 +135,7 @@ public class FamilyTreeView extends View {
             }
         });
 
-        // CONCEPT: GestureDetector for drag, fling, tap, and double tap
+        // Pan, fling, tap, and double tap
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onScroll(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
@@ -226,6 +166,47 @@ public class FamilyTreeView extends View {
         });
     }
 
+    private void initSwayAnimator() {
+        if (!isAnimationScaleEnabled()) {
+            currentSwayAngle = 0f;
+            return;
+        }
+
+        swayAnimator = ValueAnimator.ofFloat(-0.35f, 0.35f);
+        swayAnimator.setDuration(3600); // 3.6s gentle dawn breeze oscillation
+        swayAnimator.setRepeatMode(ValueAnimator.REVERSE);
+        swayAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        swayAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        swayAnimator.addUpdateListener(animation -> {
+            if (isNaturalTreeMode()) {
+                currentSwayAngle = (float) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+    }
+
+    private boolean isAnimationScaleEnabled() {
+        try {
+            float scale = Settings.Global.getFloat(
+                    getContext().getContentResolver(),
+                    Settings.Global.ANIMATOR_DURATION_SCALE,
+                    1.0f
+            );
+            return scale > 0.05f;
+        } catch (Exception e) {
+            return true;
+        }
+    }
+
+    private boolean isNaturalTreeMode() {
+        return Prefs.VIEW_MODE_NATURAL_TREE.equals(viewMode);
+    }
+
+    private boolean isNightMode() {
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+    }
+
     public void setOnPersonClickListener(OnPersonClickListener listener) {
         this.listener = listener;
     }
@@ -237,169 +218,112 @@ public class FamilyTreeView extends View {
             personMap.put(p.getId(), p);
         }
 
-        // Cache photos on background thread
         loadPhotosInBackground();
-
-        // Calculate layout
-        calculateTreeLayout();
+        calculateTreeLayout(true);
     }
 
     public void setRoot(String personId) {
         this.rootPersonId = personId;
-        calculateTreeLayout();
+        calculateTreeLayout(true);
+    }
+
+    public void setSelectedPersonId(String personId) {
+        this.selectedPersonId = personId;
+        invalidate();
+    }
+
+    public String getViewMode() {
+        return viewMode;
+    }
+
+    public void setViewMode(String mode) {
+        if (this.viewMode.equals(mode)) return;
+        this.viewMode = mode;
+        Prefs.getInstance(getContext()).setTreeViewMode(mode);
+
+        if (isNaturalTreeMode()) {
+            startSwayAnimation();
+        } else {
+            stopSwayAnimation();
+            currentSwayAngle = 0f;
+        }
+
+        calculateTreeLayout(true);
     }
 
     /**
-     * CONCEPT: Layout algorithm computed on a background thread via AppExecutors,
-     * then posted back to the UI thread.
+     * Calculates the non-overlapping layout off the UI thread and pre-records static display-lists.
      */
-    private void calculateTreeLayout() {
+    private void calculateTreeLayout(boolean shouldRecenter) {
         if (rawPeople.isEmpty()) {
-            treeUnits.clear();
+            layoutResult = new TreeLayoutEngine.LayoutResult();
+            staticLayerPicture = null;
             invalidate();
             return;
         }
 
+        final boolean natural = isNaturalTreeMode();
+        final String rootId = this.rootPersonId;
+        final List<PersonEntity> peopleSnapshot = new ArrayList<>(this.rawPeople);
+
         AppExecutors.getInstance().diskIO().execute(() -> {
-            List<TreeUnit> computedUnits = computeUnitsAndLayout();
+            TreeLayoutEngine.LayoutResult computedResult = TreeLayoutEngine.calculateLayout(
+                    peopleSnapshot,
+                    rootId,
+                    natural,
+                    treePainter.NODE_WIDTH,
+                    treePainter.NODE_HEIGHT,
+                    treePainter.COUPLE_GAP,
+                    treePainter.SIBLING_GAP,
+                    treePainter.LEVEL_GAP,
+                    density
+            );
+
+            // Pre-record static layer Picture off UI thread for 60fps performance
+            Picture picture = recordStaticLayersPicture(computedResult, natural, isNightMode());
 
             AppExecutors.getInstance().mainThread().execute(() -> {
-                this.treeUnits.clear();
-                this.treeUnits.addAll(computedUnits);
-                reCenterTree();
+                this.layoutResult = computedResult;
+                this.staticLayerPicture = picture;
+
+                if (shouldRecenter) {
+                    reCenterTree();
+                } else {
+                    invalidate();
+                }
+
+                if (natural) {
+                    startSwayAnimation();
+                } else {
+                    stopSwayAnimation();
+                }
             });
         });
     }
 
     /**
-     * Assigns generation levels, groups married couples as a unit, and centers children under parents.
+     * Pre-records static tree structure (roots, trunk, branches, foliage) into an android.graphics.Picture.
      */
-    private List<TreeUnit> computeUnitsAndLayout() {
-        List<TreeUnit> units = new ArrayList<>();
-        Map<String, TreeUnit> unitMap = new HashMap<>();
+    private Picture recordStaticLayersPicture(TreeLayoutEngine.LayoutResult layout, boolean natural, boolean nightMode) {
+        if (layout.bounds.isEmpty()) return null;
 
-        // Group into TreeUnits (person + spouse)
-        Map<String, Boolean> visited = new HashMap<>();
-        for (PersonEntity p : rawPeople) {
-            if (Boolean.TRUE.equals(visited.get(p.getId()))) continue;
+        Picture picture = new Picture();
+        int recW = Math.max(1, (int) Math.ceil(layout.bounds.right + (300 * density)));
+        int recH = Math.max(1, (int) Math.ceil(layout.bounds.bottom + (300 * density)));
 
-            PersonEntity spouse = null;
-            if (p.getSpouseId() != null && personMap.containsKey(p.getSpouseId())) {
-                spouse = personMap.get(p.getSpouseId());
-                visited.put(spouse.getId(), true);
-            }
-            visited.put(p.getId(), true);
-
-            TreeUnit unit = new TreeUnit(p, spouse);
-            units.add(unit);
-            unitMap.put(p.getId(), unit);
-            if (spouse != null) {
-                unitMap.put(spouse.getId(), unit);
-            }
+        Canvas picCanvas = picture.beginRecording(recW, recH);
+        if (natural) {
+            treePainter.drawNaturalTreeStaticStructure(picCanvas, layout, nightMode);
+        } else {
+            treePainter.drawClassicChartStaticLayers(picCanvas, layout);
         }
-
-        // Establish Parent-Child hierarchy between units
-        for (TreeUnit unit : units) {
-            String fId = unit.primary.getFatherId();
-            String mId = unit.primary.getMotherId();
-            TreeUnit parentUnit = null;
-
-            if (fId != null && unitMap.containsKey(fId)) {
-                parentUnit = unitMap.get(fId);
-            } else if (mId != null && unitMap.containsKey(mId)) {
-                parentUnit = unitMap.get(mId);
-            }
-
-            if (parentUnit != null && parentUnit != unit) {
-                unit.parentUnit = parentUnit;
-                if (!parentUnit.childrenUnits.contains(unit)) {
-                    parentUnit.childrenUnits.add(unit);
-                }
-            }
-        }
-
-        // Determine Root units (units with no parents in tree)
-        List<TreeUnit> rootUnits = new ArrayList<>();
-        for (TreeUnit unit : units) {
-            if (unit.parentUnit == null) {
-                rootUnits.add(unit);
-            }
-        }
-
-        // Measure subtree widths recursively
-        float totalWidth = 0;
-        for (TreeUnit rootUnit : rootUnits) {
-            measureSubtreeWidth(rootUnit);
-            totalWidth += rootUnit.subtreeWidth + SIBLING_GAP;
-        }
-
-        // Position nodes starting from generation 0
-        float currentX = 0;
-        for (TreeUnit rootUnit : rootUnits) {
-            positionSubtree(rootUnit, currentX, 0);
-            currentX += rootUnit.subtreeWidth + SIBLING_GAP;
-        }
-
-        // Calculate global tree bounds
-        float minX = Float.MAX_VALUE;
-        float maxX = Float.MIN_VALUE;
-        float minY = Float.MAX_VALUE;
-        float maxY = Float.MIN_VALUE;
-
-        for (TreeUnit u : units) {
-            minX = Math.min(minX, u.primaryRect.left);
-            maxX = Math.max(maxX, u.spouse != null ? u.spouseRect.right : u.primaryRect.right);
-            minY = Math.min(minY, u.primaryRect.top);
-            maxY = Math.max(maxY, u.primaryRect.bottom);
-        }
-
-        treeBoundsWidth = maxX - minX;
-        treeBoundsHeight = maxY - minY;
-
-        return units;
-    }
-
-    private float measureSubtreeWidth(TreeUnit unit) {
-        float unitWidth = unit.spouse != null ? (NODE_WIDTH * 2 + COUPLE_GAP) : NODE_WIDTH;
-        if (unit.childrenUnits.isEmpty()) {
-            unit.subtreeWidth = unitWidth;
-            return unit.subtreeWidth;
-        }
-
-        float childrenTotalWidth = 0;
-        for (TreeUnit child : unit.childrenUnits) {
-            childrenTotalWidth += measureSubtreeWidth(child);
-        }
-        childrenTotalWidth += (unit.childrenUnits.size() - 1) * SIBLING_GAP;
-
-        unit.subtreeWidth = Math.max(unitWidth, childrenTotalWidth);
-        return unit.subtreeWidth;
-    }
-
-    private void positionSubtree(TreeUnit unit, float leftX, int level) {
-        float unitWidth = unit.spouse != null ? (NODE_WIDTH * 2 + COUPLE_GAP) : NODE_WIDTH;
-        float y = level * (NODE_HEIGHT + LEVEL_GAP);
-
-        // Center the parent unit over its subtree
-        float unitCenterX = leftX + (unit.subtreeWidth / 2.0f);
-        float primaryLeft = unitCenterX - (unitWidth / 2.0f);
-
-        unit.primaryRect.set(primaryLeft, y, primaryLeft + NODE_WIDTH, y + NODE_HEIGHT);
-        if (unit.spouse != null) {
-            float spouseLeft = primaryLeft + NODE_WIDTH + COUPLE_GAP;
-            unit.spouseRect.set(spouseLeft, y, spouseLeft + NODE_WIDTH, y + NODE_HEIGHT);
-        }
-
-        // Position children
-        float childX = leftX;
-        for (TreeUnit child : unit.childrenUnits) {
-            positionSubtree(child, childX, level + 1);
-            childX += child.subtreeWidth + SIBLING_GAP;
-        }
+        picture.endRecording();
+        return picture;
     }
 
     private void loadPhotosInBackground() {
         AppExecutors.getInstance().diskIO().execute(() -> {
+            boolean updated = false;
             for (PersonEntity p : rawPeople) {
                 if (p.getPhotoPath() != null && !photoCache.containsKey(p.getId())) {
                     File file = new File(p.getPhotoPath());
@@ -409,27 +333,90 @@ public class FamilyTreeView extends View {
                         Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), opts);
                         if (bitmap != null) {
                             photoCache.put(p.getId(), bitmap);
+                            updated = true;
                         }
                     }
                 }
             }
-            postInvalidate();
+            if (updated) {
+                postInvalidate();
+            }
         });
     }
 
+    /**
+     * Fits the entire family tree within the current view bounds.
+     */
+    public void fitWholeTree() {
+        int viewWidth = getWidth();
+        int viewHeight = getHeight();
+        if (viewWidth <= 0 || viewHeight <= 0 || layoutResult.bounds.isEmpty()) return;
+
+        float padding = 48 * density;
+        float availW = Math.max(10, viewWidth - (2 * padding));
+        float availH = Math.max(10, viewHeight - (2 * padding));
+
+        float boundsW = Math.max(1, layoutResult.bounds.width());
+        float boundsH = Math.max(1, layoutResult.bounds.height());
+
+        float scaleX = availW / boundsW;
+        float scaleY = availH / boundsH;
+        float targetScale = Math.min(scaleX, scaleY);
+
+        currentScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, targetScale));
+
+        transformMatrix.reset();
+        transformMatrix.postTranslate(-layoutResult.bounds.centerX(), -layoutResult.bounds.centerY());
+        transformMatrix.postScale(currentScale, currentScale);
+        transformMatrix.postTranslate(viewWidth / 2.0f, viewHeight / 2.0f);
+
+        invalidate();
+    }
+
+    /**
+     * Centers view on the oldest ancestors / trunk base or selected person.
+     */
     public void reCenterTree() {
         int viewWidth = getWidth();
         int viewHeight = getHeight();
-        if (viewWidth <= 0 || viewHeight <= 0 || treeUnits.isEmpty()) return;
+        if (viewWidth <= 0 || viewHeight <= 0 || layoutResult.allUnits.isEmpty()) return;
 
         currentScale = 1.0f;
         transformMatrix.reset();
 
-        float firstUnitX = treeUnits.get(0).primaryRect.centerX();
-        float firstUnitY = treeUnits.get(0).primaryRect.centerY();
+        float targetX;
+        float targetY;
 
-        float dx = (viewWidth / 2.0f) - firstUnitX;
-        float dy = (viewHeight / 4.0f) - firstUnitY;
+        TreeUnit targetUnit = null;
+        if (selectedPersonId != null) {
+            for (TreeUnit u : layoutResult.allUnits) {
+                if (u.primary.getId().equals(selectedPersonId) ||
+                        (u.spouse != null && u.spouse.getId().equals(selectedPersonId))) {
+                    targetUnit = u;
+                    break;
+                }
+            }
+        }
+
+        if (targetUnit != null) {
+            targetX = targetUnit.primaryRect.centerX();
+            targetY = targetUnit.primaryRect.centerY();
+        } else if (isNaturalTreeMode()) {
+            targetX = layoutResult.trunkBaseX;
+            targetY = layoutResult.trunkTopY;
+        } else {
+            targetX = layoutResult.rootUnits.isEmpty()
+                    ? layoutResult.allUnits.get(0).primaryRect.centerX()
+                    : layoutResult.rootUnits.get(0).primaryRect.centerX();
+            targetY = layoutResult.rootUnits.isEmpty()
+                    ? layoutResult.allUnits.get(0).primaryRect.centerY()
+                    : layoutResult.rootUnits.get(0).primaryRect.centerY();
+        }
+
+        float dx = (viewWidth / 2.0f) - targetX;
+        float dy = isNaturalTreeMode()
+                ? (viewHeight * 0.65f) - targetY
+                : (viewHeight / 3.0f) - targetY;
 
         transformMatrix.postTranslate(dx, dy);
         invalidate();
@@ -452,25 +439,36 @@ public class FamilyTreeView extends View {
     }
 
     /**
-     * CONCEPT: Hit testing nodes using the inverse Matrix transform
+     * Hit testing nodes using inverse Matrix transforms, taking organic branch sway into account.
      */
     private void handleNodeTap(float screenX, float screenY) {
-        if (listener == null) return;
+        if (listener == null || layoutResult.allUnits.isEmpty()) return;
 
         transformMatrix.invert(inverseMatrix);
         touchPoint[0] = screenX;
         touchPoint[1] = screenY;
         inverseMatrix.mapPoints(touchPoint);
 
+        // Account for branch sway angle when in natural tree mode
+        if (isNaturalTreeMode() && currentSwayAngle != 0f) {
+            swayMatrix.reset();
+            swayMatrix.setRotate(-currentSwayAngle, layoutResult.trunkBaseX, layoutResult.groundY);
+            swayMatrix.mapPoints(touchPoint);
+        }
+
         float virtualX = touchPoint[0];
         float virtualY = touchPoint[1];
 
-        for (TreeUnit unit : treeUnits) {
+        for (TreeUnit unit : layoutResult.allUnits) {
             if (unit.primaryRect.contains(virtualX, virtualY)) {
+                selectedPersonId = unit.primary.getId();
+                invalidate();
                 listener.onPersonClick(unit.primary.getId());
                 return;
             }
             if (unit.spouse != null && unit.spouseRect.contains(virtualX, virtualY)) {
+                selectedPersonId = unit.spouse.getId();
+                invalidate();
                 listener.onPersonClick(unit.spouse.getId());
                 return;
             }
@@ -480,9 +478,13 @@ public class FamilyTreeView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if (layoutResult.allUnits.isEmpty()) return;
+
+        final boolean natural = isNaturalTreeMode();
+        final boolean night = isNightMode();
 
         canvas.save();
-        // CONCEPT: Apply Matrix transform (scale + translate) to canvas
+        // 1. Apply Matrix transform (scale + translate) to canvas
         canvas.concat(transformMatrix);
 
         // Calculate visible viewport rectangle for performance optimization
@@ -490,135 +492,70 @@ public class FamilyTreeView extends View {
         visibleViewport.set(0, 0, getWidth(), getHeight());
         inverseMatrix.mapRect(visibleViewport);
 
-        // 1. Draw connecting tree edges
-        drawEdges(canvas);
-
-        // 2. Draw nodes (couples and individual family members)
-        drawNodes(canvas);
-
-        canvas.restore();
-    }
-
-    /**
-     * CONCEPT: Drawing hierarchical lines (parent connectors, horizontal sibling bars, spouse lines)
-     */
-    private void drawEdges(Canvas canvas) {
-        for (TreeUnit unit : treeUnits) {
-            // Spouse connection line
-            if (unit.spouse != null) {
-                float y = unit.primaryRect.centerY();
-                canvas.drawLine(unit.primaryRect.right, y, unit.spouseRect.left, y, spouseEdgePaint);
-            }
-
-            // Parent to children connector
-            if (!unit.childrenUnits.isEmpty()) {
-                float parentMidX = unit.spouse != null
-                        ? (unit.primaryRect.left + unit.spouseRect.right) / 2.0f
-                        : unit.primaryRect.centerX();
-                float parentBottomY = unit.primaryRect.bottom;
-
-                float branchY = parentBottomY + (LEVEL_GAP / 2.0f);
-
-                // Vertical drop from parent
-                canvas.drawLine(parentMidX, parentBottomY, parentMidX, branchY, edgePaint);
-
-                // Horizontal sibling bar spanning between first and last child
-                TreeUnit firstChild = unit.childrenUnits.get(0);
-                TreeUnit lastChild = unit.childrenUnits.get(unit.childrenUnits.size() - 1);
-                float firstChildMidX = firstChild.primaryRect.centerX();
-                float lastChildMidX = lastChild.primaryRect.centerX();
-
-                canvas.drawLine(firstChildMidX, branchY, lastChildMidX, branchY, edgePaint);
-
-                // Vertical drop to each child
-                for (TreeUnit child : unit.childrenUnits) {
-                    float childMidX = child.primaryRect.centerX();
-                    canvas.drawLine(childMidX, branchY, childMidX, child.primaryRect.top, edgePaint);
-                }
-            }
+        // 2. Stationary Natural Background (Sky Gradient, Stars, Earth, Grass Line)
+        if (natural) {
+            treePainter.drawBackground(canvas, layoutResult, night);
         }
-    }
 
-    /**
-     * CONCEPT: Node drawing with quickReject for off-screen nodes
-     */
-    private void drawNodes(Canvas canvas) {
-        for (TreeUnit unit : treeUnits) {
-            // Draw primary person node
+        // 3. Tree Sway Transform
+        canvas.save();
+        if (natural && currentSwayAngle != 0f) {
+            canvas.rotate(currentSwayAngle, layoutResult.trunkBaseX, layoutResult.groundY);
+        }
+
+        // 4. Pre-recorded Static Tree Structure from Picture Display-List Cache
+        if (staticLayerPicture != null) {
+            staticLayerPicture.draw(canvas);
+        }
+
+        // 5. Dynamic Leaf / Badge Nodes with quickReject
+        for (TreeUnit unit : layoutResult.allUnits) {
             if (RectF.intersects(visibleViewport, unit.primaryRect)) {
-                drawPersonNode(canvas, unit.primary, unit.primaryRect);
+                treePainter.drawPersonNode(canvas, unit.primary, unit.primaryRect, photoCache, selectedPersonId, natural);
             }
-
-            // Draw spouse node
             if (unit.spouse != null && RectF.intersects(visibleViewport, unit.spouseRect)) {
-                drawPersonNode(canvas, unit.spouse, unit.spouseRect);
+                treePainter.drawPersonNode(canvas, unit.spouse, unit.spouseRect, photoCache, selectedPersonId, natural);
             }
         }
+
+        canvas.restore(); // Restore sway
+        canvas.restore(); // Restore transformMatrix
     }
 
-    private void drawPersonNode(Canvas canvas, PersonEntity person, RectF rect) {
-        // Gender colored border
-        int ringColor = "female".equalsIgnoreCase(person.getGender())
-                ? ContextCompat.getColor(getContext(), R.color.gender_female)
-                : ContextCompat.getColor(getContext(), R.color.gender_male);
-        nodeBorderPaint.setColor(ringColor);
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        startSwayAnimation();
+    }
 
-        // Draw card background
-        canvas.drawRoundRect(rect, nodeCornerRadius, nodeCornerRadius, nodeBgPaint);
-        canvas.drawRoundRect(rect, nodeCornerRadius, nodeCornerRadius, nodeBorderPaint);
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        stopSwayAnimation();
+    }
 
-        // Draw Avatar on left side of node
-        float avatarCenterX = rect.left + AVATAR_RADIUS + 12;
-        float avatarCenterY = rect.centerY();
-
-        Bitmap photo = photoCache.get(person.getId());
-        if (photo != null) {
-            int size = Math.min(photo.getWidth(), photo.getHeight());
-            Bitmap cropped = Bitmap.createBitmap(photo, (photo.getWidth() - size) / 2, (photo.getHeight() - size) / 2, size, size);
-            BitmapShader shader = new BitmapShader(cropped, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-            float scale = (AVATAR_RADIUS * 2) / (float) size;
-            avatarShaderMatrix.reset();
-            avatarShaderMatrix.setScale(scale, scale);
-            avatarShaderMatrix.postTranslate(avatarCenterX - AVATAR_RADIUS, avatarCenterY - AVATAR_RADIUS);
-            shader.setLocalMatrix(avatarShaderMatrix);
-            bitmapPaint.setShader(shader);
-            canvas.drawCircle(avatarCenterX, avatarCenterY, AVATAR_RADIUS, bitmapPaint);
+    @Override
+    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        if (visibility == VISIBLE) {
+            startSwayAnimation();
         } else {
-            if ("female".equalsIgnoreCase(person.getGender())) {
-                avatarBgPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_female_bg));
-                avatarTextPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_female_text));
-            } else if ("male".equalsIgnoreCase(person.getGender())) {
-                avatarBgPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_male_bg));
-                avatarTextPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_male_text));
-            } else {
-                avatarBgPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_other_bg));
-                avatarTextPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_other_text));
-            }
-            canvas.drawCircle(avatarCenterX, avatarCenterY, AVATAR_RADIUS, avatarBgPaint);
-            String initials = person.getInitials();
-            avatarTextPaint.getTextBounds(initials, 0, initials.length(), textBounds);
-            canvas.drawText(initials, avatarCenterX, avatarCenterY + (textBounds.height() / 2f), avatarTextPaint);
-        }
-
-        // Draw deceased dot if deceased
-        if (person.isDeceased()) {
-            float dotX = avatarCenterX + (AVATAR_RADIUS * 0.7f);
-            float dotY = avatarCenterY - (AVATAR_RADIUS * 0.7f);
-            canvas.drawCircle(dotX, dotY, 4.5f, deceasedDotPaint);
-        }
-
-        // Draw Name and Lifespan
-        float textX = avatarCenterX + AVATAR_RADIUS + 10;
-        String name = TextUtils.ellipsize(person.getFullName(), new android.text.TextPaint(textNamePaint), rect.right - textX - 8, TextUtils.TruncateAt.END).toString();
-        canvas.drawText(name, textX, rect.centerY() - 4, textNamePaint);
-
-        String lifespan = person.getLifeSpan();
-        if (!lifespan.isEmpty()) {
-            canvas.drawText(lifespan, textX, rect.centerY() + 16, textYearsPaint);
+            stopSwayAnimation();
         }
     }
 
-    // CONCEPT: Save and restore transformation state across configuration changes
+    private void startSwayAnimation() {
+        if (swayAnimator != null && !swayAnimator.isRunning() && isAnimationScaleEnabled() && isNaturalTreeMode()) {
+            swayAnimator.start();
+        }
+    }
+
+    private void stopSwayAnimation() {
+        if (swayAnimator != null && swayAnimator.isRunning()) {
+            swayAnimator.cancel();
+        }
+    }
+
     @Nullable
     @Override
     protected Parcelable onSaveInstanceState() {
@@ -628,6 +565,8 @@ public class FamilyTreeView extends View {
         bundle.putFloatArray("matrix_values", matrixValues);
         bundle.putFloat("scale", currentScale);
         bundle.putString("root_id", rootPersonId);
+        bundle.putString("view_mode", viewMode);
+        bundle.putString("selected_id", selectedPersonId);
         return bundle;
     }
 
@@ -635,7 +574,7 @@ public class FamilyTreeView extends View {
     protected void onRestoreInstanceState(Parcelable state) {
         if (state instanceof Bundle) {
             Bundle bundle = (Bundle) state;
-            Parcelable superState = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU)
+            Parcelable superState = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
                     ? bundle.getParcelable("super_state", Parcelable.class)
                     : bundle.getParcelable("super_state");
             super.onRestoreInstanceState(superState);
@@ -645,28 +584,11 @@ public class FamilyTreeView extends View {
             }
             currentScale = bundle.getFloat("scale", 1.0f);
             rootPersonId = bundle.getString("root_id");
+            viewMode = bundle.getString("view_mode", Prefs.VIEW_MODE_NATURAL_TREE);
+            selectedPersonId = bundle.getString("selected_id");
             invalidate();
         } else {
             super.onRestoreInstanceState(state);
-        }
-    }
-
-    /**
-     * TreeUnit represents a single node or married couple in the tree hierarchy.
-     */
-    private static class TreeUnit {
-        final PersonEntity primary;
-        final PersonEntity spouse;
-        TreeUnit parentUnit;
-        final List<TreeUnit> childrenUnits = new ArrayList<>();
-
-        final RectF primaryRect = new RectF();
-        final RectF spouseRect = new RectF();
-        float subtreeWidth = 0;
-
-        TreeUnit(PersonEntity primary, PersonEntity spouse) {
-            this.primary = primary;
-            this.spouse = spouse;
         }
     }
 }

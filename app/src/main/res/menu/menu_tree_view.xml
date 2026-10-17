@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_fit_tree"
+        android:icon="@drawable/ic_fit_screen"
+        android:title="@string/action_fit_tree"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_view_mode"
+        android:icon="@drawable/ic_nature_tree"
+        android:title="@string/tree_view_natural"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_mode_natural_tree"
+                    android:title="@string/tree_view_natural" />
+                <item
+                    android:id="@+id/menu_mode_classic_chart"
+                    android:title="@string/tree_view_chart" />
+            </group>
+        </menu>
+    </item>
+
+</menu>

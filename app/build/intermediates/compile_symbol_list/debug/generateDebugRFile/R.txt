@@ -78,13 +78,18 @@ int dimen text_size_subtitle 0x0
 int dimen text_size_title 0x0
 int drawable bg_code_box 0x0
 int drawable bg_window_dawn 0x0
+int drawable ic_chart_view 0x0
 int drawable ic_dawn_botanical_accent 0x0
+int drawable ic_fit_screen 0x0
 int drawable ic_launcher_background 0x0
 int drawable ic_launcher_foreground 0x0
+int drawable ic_nature_tree 0x0
 int drawable ic_shikor_logo 0x0
 int font noto_sans_bengali 0x0
 int font noto_sans_bengali_bold 0x0
 int font noto_sans_bengali_regular 0x0
+int id action_fit_tree 0x0
+int id action_view_mode 0x0
 int id addEditRoot 0x0
 int id avatarPreview 0x0
 int id avatarView 0x0
@@ -95,6 +100,7 @@ int id btnContinueToMain 0x0
 int id btnCreateFamily 0x0
 int id btnEditPerson 0x0
 int id btnEmptyAction 0x0
+int id btnFitTree 0x0
 int id btnForgotPassword 0x0
 int id btnGoToLogin 0x0
 int id btnGoToRegister 0x0
@@ -108,6 +114,7 @@ int id btnSavePerson 0x0
 int id btnShare 0x0
 int id btnShareCode 0x0
 int id btnTakePhoto 0x0
+int id btnToggleMode 0x0
 int id cardBiography 0x0
 int id cardCreateFamily 0x0
 int id cardJoinFamily 0x0
@@ -152,6 +159,8 @@ int id loadingOverlay 0x0
 int id loadingText 0x0
 int id loginRoot 0x0
 int id mainRoot 0x0
+int id menu_mode_classic_chart 0x0
+int id menu_mode_natural_tree 0x0
 int id navHostContainer 0x0
 int id nav_members 0x0
 int id nav_settings 0x0
@@ -227,8 +236,11 @@ int layout item_member 0x0
 int layout layout_empty_state 0x0
 int layout layout_loading 0x0
 int menu bottom_nav_menu 0x0
+int menu menu_tree_view 0x0
 int mipmap ic_launcher 0x0
 int mipmap ic_launcher_round 0x0
+int string action_fit_tree 0x0
+int string action_recenter 0x0
 int string already_have_account 0x0
 int string app_name 0x0
 int string app_tagline 0x0
@@ -278,6 +290,8 @@ int string register_title 0x0
 int string reset_password_sent 0x0
 int string save 0x0
 int string share_family_code 0x0
+int string tree_view_chart 0x0
+int string tree_view_natural 0x0
 int style Base_Theme_Shikor 0x0
 int style ShapeAppearance_Shikor_Large 0x0
 int style ShapeAppearance_Shikor_Medium 0x0

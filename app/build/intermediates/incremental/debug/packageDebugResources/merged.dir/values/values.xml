@@ -67,6 +67,8 @@
     <dimen name="text_size_headline">28sp</dimen>
     <dimen name="text_size_subtitle">18sp</dimen>
     <dimen name="text_size_title">22sp</dimen>
+    <string name="action_fit_tree">Fit whole tree</string>
+    <string name="action_recenter">Re-center</string>
     <string name="already_have_account">Already have an account? Sign In</string>
     <string name="app_name">Shikor</string>
     <string name="app_tagline">Preserving family roots, memories &amp; stories</string>
@@ -116,6 +118,8 @@
     <string name="reset_password_sent">Password reset email sent</string>
     <string name="save">Save</string>
     <string name="share_family_code">Share Family Code</string>
+    <string name="tree_view_chart">Chart view</string>
+    <string name="tree_view_natural">Tree view</string>
     <style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
         
         <item name="colorPrimary">@color/primary</item>

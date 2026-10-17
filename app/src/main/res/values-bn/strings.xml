@@ -47,6 +47,12 @@
     <string name="nav_timeline">টাইমলাইন</string>
     <string name="nav_settings">সেটিংস</string>
 
+    <!-- Tree View & Actions -->
+    <string name="tree_view_natural">বৃক্ষ রূপ</string>
+    <string name="tree_view_chart">চার্ট রূপ</string>
+    <string name="action_fit_tree">সম্পূর্ণ গাছ দেখুন</string>
+    <string name="action_recenter">পুনরায় কেন্দ্র</string>
+
     <!-- General -->
     <string name="loading">লোড হচ্ছে…</string>
     <string name="save">সংরক্ষণ</string>

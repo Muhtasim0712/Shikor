@@ -26,6 +26,8 @@ public class MainActivity extends BaseActivity {
         setContentView(binding.getRoot());
         applySystemWindowInsets(binding.getRoot());
 
+        setSupportActionBar(binding.toolbar);
+
         String familyName = Prefs.getInstance(this).getFamilyName();
         if (familyName != null && !familyName.isEmpty()) {
             binding.toolbar.setTitle(familyName);

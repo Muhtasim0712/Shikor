@@ -19,6 +19,10 @@ public class Prefs {
     private static final String KEY_REMINDER_MINUTE = "key_reminder_minute";
     private static final String KEY_NOTIFICATIONS_ENABLED = "key_notifications_enabled";
     private static final String KEY_APP_LANGUAGE = "key_app_language";
+    private static final String KEY_TREE_VIEW_MODE = "key_tree_view_mode";
+
+    public static final String VIEW_MODE_NATURAL_TREE = "natural_tree";
+    public static final String VIEW_MODE_CLASSIC_CHART = "classic_chart";
 
     private static Prefs sInstance;
     private final SharedPreferences preferences;
@@ -104,6 +108,14 @@ public class Prefs {
 
     public void setLanguage(String lang) {
         preferences.edit().putString(KEY_APP_LANGUAGE, lang).apply();
+    }
+
+    public String getTreeViewMode() {
+        return preferences.getString(KEY_TREE_VIEW_MODE, VIEW_MODE_NATURAL_TREE);
+    }
+
+    public void setTreeViewMode(String mode) {
+        preferences.edit().putString(KEY_TREE_VIEW_MODE, mode).apply();
     }
 
     public void clearSession() {
