@@ -1,16 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- CONCEPT: Material 3 DayNight Theme with calm, eye-soothing dawn palette -->
     <style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Palette Mapping: Forest Green Primary -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/on_primary</item>
         <item name="colorPrimaryContainer">@color/primary_container</item>
         <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
 
+        <!-- Palette Mapping: Warm Bark Brown Secondary -->
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorOnSecondary">@color/on_secondary</item>
         <item name="colorSecondaryContainer">@color/secondary_container</item>
         <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
 
+        <!-- Palette Mapping: Soft Gold Tertiary -->
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
+
+        <!-- Surfaces & Backgrounds: Warm Cream -->
         <item name="android:colorBackground">@color/background</item>
         <item name="colorOnBackground">@color/on_background</item>
         <item name="colorSurface">@color/surface</item>
@@ -18,14 +27,170 @@
         <item name="colorSurfaceVariant">@color/surface_variant</item>
         <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
 
+        <!-- Outlines & Errors: Muted Natural Tones -->
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
         <item name="colorError">@color/error</item>
         <item name="colorOnError">@color/on_error</item>
+        <item name="colorErrorContainer">@color/error_container</item>
+        <item name="colorOnErrorContainer">@color/on_error_container</item>
 
-        <!-- Window Insets and Edge-to-Edge compatibility -->
+        <!-- Window Background: Calm Dawn Gradient with Faint Botanical Accent -->
+        <item name="android:windowBackground">@drawable/bg_window_dawn</item>
+
+        <!-- System Bars & Edge-to-Edge Insets Handling -->
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- Gentle Motion: Shared-element-free short fade window transitions (180-200ms) -->
+        <item name="android:windowAnimationStyle">@style/ShikorWindowAnimation</item>
+
+        <!-- Typography: Noto Sans Bengali font bundled offline for English & Bangla -->
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Shikor.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Shikor.BodyMedium</item>
+
+        <!-- Rounded Shape System: 16dp cards/dialogs, 24dp buttons/chips -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Shikor.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Shikor.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Shikor.Large</item>
+
+        <!-- Component Theming -->
+        <item name="toolbarStyle">@style/Widget.Shikor.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Widget.Shikor.BottomNavigationView</item>
+        <item name="floatingActionButtonStyle">@style/Widget.Shikor.FloatingActionButton</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.Shikor.ExtendedFloatingActionButton</item>
+        <item name="textInputStyle">@style/Widget.Shikor.TextInputLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.Shikor.CardView</item>
+        <item name="materialButtonStyle">@style/Widget.Shikor.Button</item>
+        <item name="chipStyle">@style/Widget.Shikor.Chip</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Shikor.MaterialAlertDialog</item>
     </style>
 
     <style name="Theme.Shikor" parent="Base.Theme.Shikor" />
+
+    <!-- Window Animations (Gentle subtle fade, respects Remove Animations system setting) -->
+    <style name="ShikorWindowAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in_subtle</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out_subtle</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in_subtle</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out_subtle</item>
+    </style>
+
+    <!-- Typography Styles (Body text at least 16sp, comfortable 24sp line height) -->
+    <style name="TextAppearance.Shikor.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:lineHeight">24sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="TextAppearance.Shikor.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:lineHeight">24sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <!-- Shape Styles -->
+    <style name="ShapeAppearance.Shikor.Small" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Shikor.Medium" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">@dimen/card_corner_radius</item>
+    </style>
+
+    <style name="ShapeAppearance.Shikor.Large" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSize">@dimen/button_corner_radius</item>
+    </style>
+
+    <!-- Toolbar Style: on Surface color with OnSurface / Primary title -->
+    <style name="Widget.Shikor.Toolbar" parent="Widget.Material3.Toolbar.Surface">
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="titleTextColor">?attr/colorOnSurface</item>
+        <item name="subtitleTextColor">?attr/colorOnSurfaceVariant</item>
+        <item name="navigationIconTint">?attr/colorOnSurface</item>
+    </style>
+
+    <!-- Bottom Navigation: on Surface color with primary active item & soft elevation -->
+    <style name="Widget.Shikor.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="itemIconTint">@color/bottom_nav_item_tint</item>
+        <item name="itemTextColor">@color/bottom_nav_item_tint</item>
+        <item name="elevation">2dp</item>
+    </style>
+
+    <!-- Floating Action Buttons: PrimaryContainer / Primary with rounded corners -->
+    <style name="Widget.Shikor.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">@color/primary_container</item>
+        <item name="tint">@color/on_primary_container</item>
+        <item name="elevation">2dp</item>
+    </style>
+
+    <style name="Widget.Shikor.ExtendedFloatingActionButton" parent="Widget.Material3.ExtendedFloatingActionButton.Primary">
+        <item name="backgroundTint">@color/primary_container</item>
+        <item name="android:textColor">@color/on_primary_container</item>
+        <item name="iconTint">@color/on_primary_container</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="elevation">2dp</item>
+    </style>
+
+    <!-- Text Inputs: Rounded Outlined Style (16dp corners) -->
+    <style name="Widget.Shikor.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/input_corner_radius</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+    </style>
+
+    <!-- Cards: 16dp rounded corners, soft 1dp elevation and subtle outline -->
+    <style name="Widget.Shikor.CardView" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+        <item name="strokeColor">@color/outline</item>
+        <item name="strokeWidth">0.5dp</item>
+    </style>
+
+    <!-- Buttons: 24dp rounded corners, 48dp minimum touch target -->
+    <style name="Widget.Shikor.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+    </style>
+
+    <style name="Widget.Shikor.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+    </style>
+
+    <style name="Widget.Shikor.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+        <item name="strokeColor">@color/outline</item>
+    </style>
+
+    <!-- Chips: in SecondaryContainer with 24dp rounded corners -->
+    <style name="Widget.Shikor.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_background_selector</item>
+        <item name="android:textColor">@color/chip_text_selector</item>
+        <item name="chipStrokeColor">@color/chip_stroke_selector</item>
+        <item name="chipStrokeWidth">0.5dp</item>
+        <item name="chipCornerRadius">@dimen/chip_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+    </style>
+
+    <!-- Dialogs: 16dp rounded corners with surface background -->
+    <style name="ThemeOverlay.Shikor.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Shikor.Medium</item>
+        <item name="colorSurface">@color/surface</item>
+    </style>
 </resources>

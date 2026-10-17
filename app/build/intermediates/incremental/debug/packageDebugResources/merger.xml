@@ -4,17 +4,26 @@
         <attr format="dimension" name="ringWidth"/>
         <attr format="string" name="initials"/>
         <attr format="boolean" name="isDeceased"/>
-    </declare-styleable></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values\colors.xml" qualifiers=""><color name="primary">#2D5A27</color><color name="primary_variant">#1E3F1A</color><color name="on_primary">#FFFFFF</color><color name="primary_container">#D4E8D0</color><color name="on_primary_container">#0A2008</color><color name="secondary">#8C4A2F</color><color name="secondary_variant">#68321D</color><color name="on_secondary">#FFFFFF</color><color name="secondary_container">#F8DBD1</color><color name="on_secondary_container">#351004</color><color name="background">#FBFDF7</color><color name="on_background">#1A1C19</color><color name="surface">#FFFFFF</color><color name="on_surface">#1A1C19</color><color name="surface_variant">#DEE5D9</color><color name="on_surface_variant">#424940</color><color name="error">#BA1A1A</color><color name="on_error">#FFFFFF</color><color name="success">#2E7D32</color><color name="outline">#72796F</color><color name="gender_male">#2A6F97</color><color name="gender_female">#A23B72</color><color name="gender_other">#70577D</color><color name="deceased_indicator">#2B2B2B</color><color name="tree_connector">#5C645A</color><color name="white">#FFFFFF</color><color name="black">#000000</color><color name="transparent">#00000000</color></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values\dimens.xml" qualifiers=""><dimen name="min_touch_target">48dp</dimen><dimen name="spacing_tiny">4dp</dimen><dimen name="spacing_small">8dp</dimen><dimen name="spacing_medium">16dp</dimen><dimen name="spacing_large">24dp</dimen><dimen name="spacing_xlarge">32dp</dimen><dimen name="spacing_huge">48dp</dimen><dimen name="text_size_caption">13sp</dimen><dimen name="text_size_body">16sp</dimen><dimen name="text_size_subtitle">18sp</dimen><dimen name="text_size_title">22sp</dimen><dimen name="text_size_headline">28sp</dimen><dimen name="text_size_display">34sp</dimen><dimen name="avatar_size_small">40dp</dimen><dimen name="avatar_size_medium">56dp</dimen><dimen name="avatar_size_large">96dp</dimen><dimen name="avatar_ring_width_default">3dp</dimen><dimen name="card_corner_radius">16dp</dimen><dimen name="card_elevation">2dp</dimen></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values\strings.xml" qualifiers=""><string name="app_name">Shikor</string><string name="app_tagline">Preserving family roots, memories &amp; stories</string><string name="login_title">Welcome Back</string><string name="login_subtitle">Sign in to access your family archive</string><string name="register_title">Join Shikor</string><string name="register_subtitle">Start your digital family legacy</string><string name="email_label">Email Address</string><string name="password_label">Password</string><string name="confirm_password_label">Confirm Password</string><string name="name_label">Full Name</string><string name="login_button">Sign In</string><string name="register_button">Create Account</string><string name="forgot_password">Forgot Password?</string><string name="dont_have_account">Don\'t have an account? Register</string><string name="already_have_account">Already have an account? Sign In</string><string name="reset_password_sent">Password reset email sent</string><string name="family_setup_title">Family Space</string><string name="family_setup_subtitle">Create a new family space or join an existing one</string><string name="create_family_title">Create New Family</string><string name="create_family_desc">Start a brand new family archive and receive a 6-character code to invite relatives.</string><string name="family_name_label">Family Name (e.g. Chowdhury Family)</string><string name="create_family_btn">Create Family</string><string name="join_family_title">Join Existing Family</string><string name="join_family_desc">Enter the 6-character family code provided by an existing family member.</string><string name="family_code_label">6-Character Family Code</string><string name="join_family_btn">Join Family</string><string name="share_family_code">Share Family Code</string><string name="family_code_invite_message">Join our family archive on Shikor! Our family code is: %s</string><string name="error_empty_field">This field cannot be empty</string><string name="error_invalid_email">Enter a valid email address</string><string name="error_short_password">Password must be at least 6 characters</string><string name="error_password_mismatch">Passwords do not match</string><string name="error_invalid_code">Family code must be exactly 6 characters</string><string name="error_auth_failed">Authentication failed: %s</string><string name="error_family_not_found">Family code not found. Please verify with your family admin.</string><string name="nav_tree">Family Tree</string><string name="nav_members">Members</string><string name="nav_timeline">Timeline</string><string name="nav_settings">Settings</string><string name="loading">Loading…</string><string name="save">Save</string><string name="cancel">Cancel</string><string name="logout">Log Out</string></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values\themes.xml" qualifiers=""><style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
+    </declare-styleable></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values\colors.xml" qualifiers=""><color name="primary">#3F6B4F</color><color name="primary_variant">#2E533B</color><color name="on_primary">#FFFFFF</color><color name="primary_container">#D7E8D5</color><color name="on_primary_container">#0C2614</color><color name="secondary">#8A6A4B</color><color name="secondary_variant">#6E5136</color><color name="on_secondary">#FFFFFF</color><color name="secondary_container">#EBDDCB</color><color name="on_secondary_container">#2F1F10</color><color name="background">#F6F3EA</color><color name="on_background">#2B2F2A</color><color name="surface">#FBF9F3</color><color name="on_surface">#2B2F2A</color><color name="surface_variant">#ECE7D8</color><color name="on_surface_variant">#525850</color><color name="error">#B3473F</color><color name="on_error">#FFFFFF</color><color name="outline">#B9B5A6</color><color name="gender_male">#4B7B8D</color><color name="gender_female">#A05D6D</color><color name="gender_other">#7E6E8E</color><color name="deceased_indicator">#434842</color><color name="tree_connector">#82887E</color><color name="white">#FFFFFF</color><color name="black">#2B2F2A</color><color name="transparent">#00000000</color><color name="tertiary_container">#F8E8C7</color><color name="gender_female_text">#491B26</color><color name="window_gradient_end">#EEF3E9</color><color name="on_tertiary_container">#332302</color><color name="outline_variant">#D4D0C2</color><color name="gender_other_bg">#EBE5F2</color><color name="gender_female_bg">#F5E4E8</color><color name="gender_other_text">#352943</color><color name="gender_male_text">#183A46</color><color name="tertiary">#C9A24B</color><color name="error_container">#FAD9D7</color><color name="window_gradient_center">#F6F3EA</color><color name="overlay_scrim">#402B2F2A</color><color name="gender_male_bg">#DFECF1</color><color name="on_error_container">#420F0C</color><color name="on_tertiary">#FFFFFF</color><color name="window_gradient_start">#FBF9F3</color></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values\dimens.xml" qualifiers=""><dimen name="min_touch_target">48dp</dimen><dimen name="spacing_tiny">4dp</dimen><dimen name="spacing_small">8dp</dimen><dimen name="spacing_medium">16dp</dimen><dimen name="spacing_large">24dp</dimen><dimen name="spacing_xlarge">32dp</dimen><dimen name="spacing_huge">48dp</dimen><dimen name="text_size_caption">13sp</dimen><dimen name="text_size_body">16sp</dimen><dimen name="text_size_subtitle">18sp</dimen><dimen name="text_size_title">22sp</dimen><dimen name="text_size_headline">28sp</dimen><dimen name="text_size_display">34sp</dimen><dimen name="avatar_size_small">40dp</dimen><dimen name="avatar_size_medium">56dp</dimen><dimen name="avatar_size_large">96dp</dimen><dimen name="avatar_ring_width_default">3dp</dimen><dimen name="card_corner_radius">16dp</dimen><dimen name="card_elevation">1dp</dimen><dimen name="dialog_corner_radius">16dp</dimen><dimen name="input_corner_radius">16dp</dimen><dimen name="button_corner_radius">24dp</dimen><dimen name="chip_corner_radius">24dp</dimen></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values\strings.xml" qualifiers=""><string name="app_name">Shikor</string><string name="app_tagline">Preserving family roots, memories &amp; stories</string><string name="login_title">Welcome Back</string><string name="login_subtitle">Sign in to access your family archive</string><string name="register_title">Join Shikor</string><string name="register_subtitle">Start your digital family legacy</string><string name="email_label">Email Address</string><string name="password_label">Password</string><string name="confirm_password_label">Confirm Password</string><string name="name_label">Full Name</string><string name="login_button">Sign In</string><string name="register_button">Create Account</string><string name="forgot_password">Forgot Password?</string><string name="dont_have_account">Don\'t have an account? Register</string><string name="already_have_account">Already have an account? Sign In</string><string name="reset_password_sent">Password reset email sent</string><string name="family_setup_title">Family Space</string><string name="family_setup_subtitle">Create a new family space or join an existing one</string><string name="create_family_title">Create New Family</string><string name="create_family_desc">Start a brand new family archive and receive a 6-character code to invite relatives.</string><string name="family_name_label">Family Name (e.g. Chowdhury Family)</string><string name="create_family_btn">Create Family</string><string name="join_family_title">Join Existing Family</string><string name="join_family_desc">Enter the 6-character family code provided by an existing family member.</string><string name="family_code_label">6-Character Family Code</string><string name="join_family_btn">Join Family</string><string name="share_family_code">Share Family Code</string><string name="family_code_invite_message">Join our family archive on Shikor! Our family code is: %s</string><string name="error_empty_field">This field cannot be empty</string><string name="error_invalid_email">Enter a valid email address</string><string name="error_short_password">Password must be at least 6 characters</string><string name="error_password_mismatch">Passwords do not match</string><string name="error_invalid_code">Family code must be exactly 6 characters</string><string name="error_auth_failed">Authentication failed: %s</string><string name="error_family_not_found">Family code not found. Please verify with your family admin.</string><string name="nav_tree">Family Tree</string><string name="nav_members">Members</string><string name="nav_timeline">Timeline</string><string name="nav_settings">Settings</string><string name="loading">Loading…</string><string name="save">Save</string><string name="cancel">Cancel</string><string name="logout">Log Out</string></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values\themes.xml" qualifiers=""><style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
+        
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/on_primary</item>
         <item name="colorPrimaryContainer">@color/primary_container</item>
         <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
 
+        
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorOnSecondary">@color/on_secondary</item>
         <item name="colorSecondaryContainer">@color/secondary_container</item>
         <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
 
+        
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
+
+        
         <item name="android:colorBackground">@color/background</item>
         <item name="colorOnBackground">@color/on_background</item>
         <item name="colorSurface">@color/surface</item>
@@ -22,38 +31,193 @@
         <item name="colorSurfaceVariant">@color/surface_variant</item>
         <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
 
+        
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
         <item name="colorError">@color/error</item>
         <item name="colorOnError">@color/on_error</item>
+        <item name="colorErrorContainer">@color/error_container</item>
+        <item name="colorOnErrorContainer">@color/on_error_container</item>
+
+        
+        <item name="android:windowBackground">@drawable/bg_window_dawn</item>
 
         
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
-    </style><style name="Theme.Shikor" parent="Base.Theme.Shikor"/></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values-bn\strings.xml" qualifiers="bn"><string name="app_name">শিকড়</string><string name="app_tagline">পারিবারিক স্মৃতি, ঐতিহ্য ও ইতিহাস সংরক্ষণে</string><string name="login_title">স্বাগতম</string><string name="login_subtitle">আপনার পারিবারিক আর্কাইভে প্রবেশ করুন</string><string name="register_title">শিকড়ে যোগ দিন</string><string name="register_subtitle">আপনার ডিজিটাল বংশলতিকা তৈরি শুরু করুন</string><string name="email_label">ইমেইল ঠিকানা</string><string name="password_label">পাসওয়ার্ড</string><string name="confirm_password_label">পাসওয়ার্ড নিশ্চিত করুন</string><string name="name_label">সম্পূর্ণ নাম</string><string name="login_button">লগ ইন</string><string name="register_button">অ্যাকাউন্ট তৈরি করুন</string><string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string><string name="dont_have_account">অ্যাকাউন্ট নেই? রেজিস্টার করুন</string><string name="already_have_account">ইতিমধ্যে অ্যাকাউন্ট আছে? লগ ইন করুন</string><string name="reset_password_sent">পাসওয়ার্ড রিসেট ইমেইল পাঠানো হয়েছে</string><string name="family_setup_title">পারিবারিক স্পেস</string><string name="family_setup_subtitle">নতুন পরিবার শুরু করুন অথবা যুক্ত হোন</string><string name="create_family_title">নতুন পরিবার তৈরি করুন</string><string name="create_family_desc">একটি নতুন পারিবারিক অ্যালবাম শুরু করুন এবং আত্মীয়দের আমন্ত্রণ জানাতে ৬ অক্ষরের কোড পান।</string><string name="family_name_label">পরিবারের নাম (যেমন: চৌধুরী পরিবার)</string><string name="create_family_btn">পরিবার তৈরি করুন</string><string name="join_family_title">পরিবারে যুক্ত হোন</string><string name="join_family_desc">আত্মীয়দের পাঠানো ৬ অক্ষরের পারিবারিক কোডটি দিন।</string><string name="family_code_label">৬ অক্ষরের ফ্যামিলি কোড</string><string name="join_family_btn">যুক্ত হোন</string><string name="share_family_code">ফ্যামিলি কোড শেয়ার করুন</string><string name="family_code_invite_message">শিকড় অ্যাপে আমাদের পরিবারে যুক্ত হোন! আমাদের কোড: %s</string><string name="error_empty_field">এই ঘরটি পূরণ করুন</string><string name="error_invalid_email">সঠিক ইমেইল লিখুন</string><string name="error_short_password">পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে</string><string name="error_password_mismatch">পাসওয়ার্ড দুটি মিলছে না</string><string name="error_invalid_code">ফ্যামিলি কোড ঠিক ৬ অক্ষরের হতে হবে</string><string name="error_auth_failed">প্রবেশ ব্যর্থ হয়েছে: %s</string><string name="error_family_not_found">ফ্যামিলি কোডটি খুঁজে পাওয়া যায়নি।</string><string name="nav_tree">বংশলতিকা</string><string name="nav_members">সদস্যবৃন্দ</string><string name="nav_timeline">টাইমলাইন</string><string name="nav_settings">সেটিংস</string><string name="loading">লোড হচ্ছে…</string><string name="save">সংরক্ষণ</string><string name="cancel">বাতিল</string><string name="logout">লগ আউট</string></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values-night\themes.xml" qualifiers="night-v8"><style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">#9CD493</item>
-        <item name="colorOnPrimary">#063908</item>
-        <item name="colorPrimaryContainer">#1E511D</item>
-        <item name="colorOnPrimaryContainer">#B7F1AE</item>
+        <item name="android:windowLightNavigationBar">true</item>
 
-        <item name="colorSecondary">#FFB59C</item>
-        <item name="colorOnSecondary">#54210D</item>
-        <item name="colorSecondaryContainer">#70351F</item>
-        <item name="colorOnSecondaryContainer">#FFDBCF</item>
+        
+        <item name="android:windowAnimationStyle">@style/ShikorWindowAnimation</item>
 
-        <item name="android:colorBackground">#111411</item>
-        <item name="colorOnBackground">#E2E3DE</item>
-        <item name="colorSurface">#191C19</item>
-        <item name="colorOnSurface">#E2E3DE</item>
-        <item name="colorSurfaceVariant">#424940</item>
-        <item name="colorOnSurfaceVariant">#C2C9BD</item>
+        
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Shikor.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Shikor.BodyMedium</item>
 
-        <item name="colorError">#FFB4AB</item>
-        <item name="colorOnError">#690005</item>
+        
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Shikor.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Shikor.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Shikor.Large</item>
 
+        
+        <item name="toolbarStyle">@style/Widget.Shikor.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Widget.Shikor.BottomNavigationView</item>
+        <item name="floatingActionButtonStyle">@style/Widget.Shikor.FloatingActionButton</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.Shikor.ExtendedFloatingActionButton</item>
+        <item name="textInputStyle">@style/Widget.Shikor.TextInputLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.Shikor.CardView</item>
+        <item name="materialButtonStyle">@style/Widget.Shikor.Button</item>
+        <item name="chipStyle">@style/Widget.Shikor.Chip</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Shikor.MaterialAlertDialog</item>
+    </style><style name="Theme.Shikor" parent="Base.Theme.Shikor"/><style name="Widget.Shikor.ExtendedFloatingActionButton" parent="Widget.Material3.ExtendedFloatingActionButton.Primary">
+        <item name="backgroundTint">@color/primary_container</item>
+        <item name="android:textColor">@color/on_primary_container</item>
+        <item name="iconTint">@color/on_primary_container</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="elevation">2dp</item>
+    </style><style name="Widget.Shikor.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+    </style><style name="ShapeAppearance.Shikor.Small" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">8dp</item>
+    </style><style name="ShapeAppearance.Shikor.Medium" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">@dimen/card_corner_radius</item>
+    </style><style name="TextAppearance.Shikor.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:lineHeight">24sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style><style name="Widget.Shikor.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="itemIconTint">@color/bottom_nav_item_tint</item>
+        <item name="itemTextColor">@color/bottom_nav_item_tint</item>
+        <item name="elevation">2dp</item>
+    </style><style name="Widget.Shikor.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/input_corner_radius</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+    </style><style name="TextAppearance.Shikor.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:lineHeight">24sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style><style name="ShikorWindowAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in_subtle</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out_subtle</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in_subtle</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out_subtle</item>
+    </style><style name="Widget.Shikor.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+        <item name="strokeColor">@color/outline</item>
+    </style><style name="Widget.Shikor.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+    </style><style name="Widget.Shikor.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">@color/primary_container</item>
+        <item name="tint">@color/on_primary_container</item>
+        <item name="elevation">2dp</item>
+    </style><style name="Widget.Shikor.Toolbar" parent="Widget.Material3.Toolbar.Surface">
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="titleTextColor">?attr/colorOnSurface</item>
+        <item name="subtitleTextColor">?attr/colorOnSurfaceVariant</item>
+        <item name="navigationIconTint">?attr/colorOnSurface</item>
+    </style><style name="Widget.Shikor.CardView" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+        <item name="strokeColor">@color/outline</item>
+        <item name="strokeWidth">0.5dp</item>
+    </style><style name="Widget.Shikor.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_background_selector</item>
+        <item name="android:textColor">@color/chip_text_selector</item>
+        <item name="chipStrokeColor">@color/chip_stroke_selector</item>
+        <item name="chipStrokeWidth">0.5dp</item>
+        <item name="chipCornerRadius">@dimen/chip_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+    </style><style name="ThemeOverlay.Shikor.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Shikor.Medium</item>
+        <item name="colorSurface">@color/surface</item>
+    </style><style name="ShapeAppearance.Shikor.Large" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSize">@dimen/button_corner_radius</item>
+    </style></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values-bn\strings.xml" qualifiers="bn"><string name="app_name">শিকড়</string><string name="app_tagline">পারিবারিক স্মৃতি, ঐতিহ্য ও ইতিহাস সংরক্ষণে</string><string name="login_title">স্বাগতম</string><string name="login_subtitle">আপনার পারিবারিক আর্কাইভে প্রবেশ করুন</string><string name="register_title">শিকড়ে যোগ দিন</string><string name="register_subtitle">আপনার ডিজিটাল বংশলতিকা তৈরি শুরু করুন</string><string name="email_label">ইমেইল ঠিকানা</string><string name="password_label">পাসওয়ার্ড</string><string name="confirm_password_label">পাসওয়ার্ড নিশ্চিত করুন</string><string name="name_label">সম্পূর্ণ নাম</string><string name="login_button">লগ ইন</string><string name="register_button">অ্যাকাউন্ট তৈরি করুন</string><string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string><string name="dont_have_account">অ্যাকাউন্ট নেই? রেজিস্টার করুন</string><string name="already_have_account">ইতিমধ্যে অ্যাকাউন্ট আছে? লগ ইন করুন</string><string name="reset_password_sent">পাসওয়ার্ড রিসেট ইমেইল পাঠানো হয়েছে</string><string name="family_setup_title">পারিবারিক স্পেস</string><string name="family_setup_subtitle">নতুন পরিবার শুরু করুন অথবা যুক্ত হোন</string><string name="create_family_title">নতুন পরিবার তৈরি করুন</string><string name="create_family_desc">একটি নতুন পারিবারিক অ্যালবাম শুরু করুন এবং আত্মীয়দের আমন্ত্রণ জানাতে ৬ অক্ষরের কোড পান।</string><string name="family_name_label">পরিবারের নাম (যেমন: চৌধুরী পরিবার)</string><string name="create_family_btn">পরিবার তৈরি করুন</string><string name="join_family_title">পরিবারে যুক্ত হোন</string><string name="join_family_desc">আত্মীয়দের পাঠানো ৬ অক্ষরের পারিবারিক কোডটি দিন।</string><string name="family_code_label">৬ অক্ষরের ফ্যামিলি কোড</string><string name="join_family_btn">যুক্ত হোন</string><string name="share_family_code">ফ্যামিলি কোড শেয়ার করুন</string><string name="family_code_invite_message">শিকড় অ্যাপে আমাদের পরিবারে যুক্ত হোন! আমাদের কোড: %s</string><string name="error_empty_field">এই ঘরটি পূরণ করুন</string><string name="error_invalid_email">সঠিক ইমেইল লিখুন</string><string name="error_short_password">পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে</string><string name="error_password_mismatch">পাসওয়ার্ড দুটি মিলছে না</string><string name="error_invalid_code">ফ্যামিলি কোড ঠিক ৬ অক্ষরের হতে হবে</string><string name="error_auth_failed">প্রবেশ ব্যর্থ হয়েছে: %s</string><string name="error_family_not_found">ফ্যামিলি কোডটি খুঁজে পাওয়া যায়নি।</string><string name="nav_tree">বংশলতিকা</string><string name="nav_members">সদস্যবৃন্দ</string><string name="nav_timeline">টাইমলাইন</string><string name="nav_settings">সেটিংস</string><string name="loading">লোড হচ্ছে…</string><string name="save">সংরক্ষণ</string><string name="cancel">বাতিল</string><string name="logout">লগ আউট</string></file><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values-night\themes.xml" qualifiers="night-v8"><style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+
+        
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+
+        
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
+
+        
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+
+        
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+        <item name="colorErrorContainer">@color/error_container</item>
+        <item name="colorOnErrorContainer">@color/on_error_container</item>
+
+        
+        <item name="android:windowBackground">@drawable/bg_window_dawn</item>
+
+        
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
-    </style></file><file name="file_paths" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\xml\file_paths.xml" qualifiers="" type="xml"/><file name="kinship_terms" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\xml\kinship_terms.xml" qualifiers="" type="xml"/><file name="activity_add_edit_person" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\layout\activity_add_edit_person.xml" qualifiers="" type="layout"/><file name="activity_person_detail" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\layout\activity_person_detail.xml" qualifiers="" type="layout"/><file name="fragment_members" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\layout\fragment_members.xml" qualifiers="" type="layout"/><file name="item_member" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\layout\item_member.xml" qualifiers="" type="layout"/><file name="bottom_nav_menu" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\menu\bottom_nav_menu.xml" qualifiers="" type="menu"/></source></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Nafij\Desktop\Shikor\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~:!&lt;dir>navigation"><source path="C:\Users\Nafij\Desktop\Shikor\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Nafij\Desktop\Shikor\app\build\generated\res\processDebugGoogleServices"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~:!&lt;dir>navigation"><source path="C:\Users\Nafij\Desktop\Shikor\app\build\generated\res\processDebugGoogleServices"><file path="C:\Users\Nafij\Desktop\Shikor\app\build\generated\res\processDebugGoogleServices\values\values.xml" qualifiers=""><string name="gcm_defaultSenderId" translatable="false">633789903240</string><string name="google_api_key" translatable="false">AIzaSyAU2hCyArCSlXJOr7teRfJIsORTShA1tio</string><string name="google_app_id" translatable="false">1:633789903240:android:b1f8ca375a233fb5450a3d</string><string name="google_crash_reporting_api_key" translatable="false">AIzaSyAU2hCyArCSlXJOr7teRfJIsORTShA1tio</string><string name="google_storage_bucket" translatable="false">shikor-app.firebasestorage.app</string><string name="project_id" translatable="false">shikor-app</string></file></source></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="res-processDebugGoogleServices$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"/><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="res-processDebugGoogleServices" generated-set="res-processDebugGoogleServices$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~:!&lt;dir>navigation"/><mergedItems><configuration qualifiers=""><declare-styleable name="AvatarView">
+        <item name="android:windowLightNavigationBar">false</item>
+
+        
+        <item name="android:windowAnimationStyle">@style/ShikorWindowAnimation</item>
+
+        
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Shikor.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Shikor.BodyMedium</item>
+
+        
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Shikor.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Shikor.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Shikor.Large</item>
+
+        
+        <item name="toolbarStyle">@style/Widget.Shikor.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Widget.Shikor.BottomNavigationView</item>
+        <item name="floatingActionButtonStyle">@style/Widget.Shikor.FloatingActionButton</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.Shikor.ExtendedFloatingActionButton</item>
+        <item name="textInputStyle">@style/Widget.Shikor.TextInputLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.Shikor.CardView</item>
+        <item name="materialButtonStyle">@style/Widget.Shikor.Button</item>
+        <item name="chipStyle">@style/Widget.Shikor.Chip</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Shikor.MaterialAlertDialog</item>
+    </style></file><file name="file_paths" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\xml\file_paths.xml" qualifiers="" type="xml"/><file name="kinship_terms" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\xml\kinship_terms.xml" qualifiers="" type="xml"/><file name="activity_add_edit_person" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\layout\activity_add_edit_person.xml" qualifiers="" type="layout"/><file name="activity_person_detail" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\layout\activity_person_detail.xml" qualifiers="" type="layout"/><file name="fragment_members" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\layout\fragment_members.xml" qualifiers="" type="layout"/><file name="item_member" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\layout\item_member.xml" qualifiers="" type="layout"/><file name="bottom_nav_menu" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\menu\bottom_nav_menu.xml" qualifiers="" type="menu"/><file name="fragment_tree" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\layout\fragment_tree.xml" qualifiers="" type="layout"/><file name="fade_in_subtle" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\anim\fade_in_subtle.xml" qualifiers="" type="anim"/><file name="fade_out_subtle" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\anim\fade_out_subtle.xml" qualifiers="" type="anim"/><file name="bottom_nav_item_tint" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\color\bottom_nav_item_tint.xml" qualifiers="" type="color"/><file name="chip_background_selector" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\color\chip_background_selector.xml" qualifiers="" type="color"/><file name="chip_stroke_selector" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\color\chip_stroke_selector.xml" qualifiers="" type="color"/><file name="chip_text_selector" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\color\chip_text_selector.xml" qualifiers="" type="color"/><file name="text_input_box_stroke" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\color\text_input_box_stroke.xml" qualifiers="" type="color"/><file name="bg_window_dawn" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\drawable\bg_window_dawn.xml" qualifiers="" type="drawable"/><file name="ic_dawn_botanical_accent" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\drawable\ic_dawn_botanical_accent.xml" qualifiers="" type="drawable"/><file name="bg_window_dawn" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\drawable-night\bg_window_dawn.xml" qualifiers="night-v8" type="drawable"/><file name="noto_sans_bengali" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\font\noto_sans_bengali.xml" qualifiers="" type="font"/><file name="noto_sans_bengali_bold" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\font\noto_sans_bengali_bold.ttf" qualifiers="" type="font"/><file name="noto_sans_bengali_regular" path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\font\noto_sans_bengali_regular.ttf" qualifiers="" type="font"/><file path="C:\Users\Nafij\Desktop\Shikor\app\src\main\res\values-night\colors.xml" qualifiers="night-v8"><color name="primary">#9CCB9F</color><color name="primary_variant">#7FA882</color><color name="on_primary">#0F2417</color><color name="primary_container">#2A4132</color><color name="on_primary_container">#B8E8BA</color><color name="secondary">#D3B08A</color><color name="secondary_variant">#B5936F</color><color name="on_secondary">#3B2510</color><color name="secondary_container">#4E3823</color><color name="on_secondary_container">#F0D7B8</color><color name="tertiary">#E0C27A</color><color name="tertiary_container">#4D401F</color><color name="on_tertiary">#3D3004</color><color name="on_tertiary_container">#FBE7AC</color><color name="background">#121A15</color><color name="on_background">#E3E8E0</color><color name="surface">#1A241D</color><color name="on_surface">#E3E8E0</color><color name="surface_variant">#26332A</color><color name="on_surface_variant">#B5BEB2</color><color name="outline">#55604F</color><color name="outline_variant">#394437</color><color name="error">#E58E86</color><color name="on_error">#441815</color><color name="error_container">#63231F</color><color name="on_error_container">#FAD9D7</color><color name="overlay_scrim">#80000000</color><color name="window_gradient_start">#121A15</color><color name="window_gradient_center">#16221B</color><color name="window_gradient_end">#1B2920</color><color name="gender_male">#89B8C9</color><color name="gender_male_bg">#203640</color><color name="gender_male_text">#DFECF1</color><color name="gender_female">#DCA2AF</color><color name="gender_female_bg">#42232B</color><color name="gender_female_text">#F5E4E8</color><color name="gender_other">#BDB0CF</color><color name="gender_other_bg">#31273C</color><color name="gender_other_text">#EBE5F2</color><color name="deceased_indicator">#979E94</color><color name="tree_connector">#4A584A</color><color name="white">#FFFFFF</color><color name="black">#121A15</color><color name="transparent">#00000000</color></file></source></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Nafij\Desktop\Shikor\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~:!&lt;dir>navigation"><source path="C:\Users\Nafij\Desktop\Shikor\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Nafij\Desktop\Shikor\app\build\generated\res\processDebugGoogleServices"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~:!&lt;dir>navigation"><source path="C:\Users\Nafij\Desktop\Shikor\app\build\generated\res\processDebugGoogleServices"><file path="C:\Users\Nafij\Desktop\Shikor\app\build\generated\res\processDebugGoogleServices\values\values.xml" qualifiers=""><string name="gcm_defaultSenderId" translatable="false">633789903240</string><string name="google_api_key" translatable="false">AIzaSyAU2hCyArCSlXJOr7teRfJIsORTShA1tio</string><string name="google_app_id" translatable="false">1:633789903240:android:b1f8ca375a233fb5450a3d</string><string name="google_crash_reporting_api_key" translatable="false">AIzaSyAU2hCyArCSlXJOr7teRfJIsORTShA1tio</string><string name="google_storage_bucket" translatable="false">shikor-app.firebasestorage.app</string><string name="project_id" translatable="false">shikor-app</string></file></source></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="res-processDebugGoogleServices$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"/><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="res-processDebugGoogleServices" generated-set="res-processDebugGoogleServices$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~:!&lt;dir>navigation"/><mergedItems><configuration qualifiers=""><declare-styleable name="AvatarView">
         <attr format="color" name="ringColor"/>
         <attr format="dimension" name="ringWidth"/>
         <attr format="string" name="initials"/>

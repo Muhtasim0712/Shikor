@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CONCEPT: Faint organic botanical motif at ultra-low alpha (2-3%) for calming window ambience -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="220dp"
+    android:height="220dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <path
+        android:fillColor="@color/primary"
+        android:fillAlpha="0.035"
+        android:pathData="M85,15 C70,18 60,30 55,42 C51,52 48,65 30,75 C20,80 10,83 5,85 C15,84 28,78 35,70 C42,62 46,50 50,38 C54,26 68,14 85,15 Z" />
+    <path
+        android:fillColor="@color/primary"
+        android:fillAlpha="0.03"
+        android:pathData="M60,35 C65,25 78,22 88,24 C82,32 72,37 60,35 Z" />
+    <path
+        android:fillColor="@color/primary"
+        android:fillAlpha="0.025"
+        android:pathData="M48,50 C40,42 42,30 52,25 C50,35 44,45 48,50 Z" />
+    <path
+        android:fillColor="@color/secondary"
+        android:fillAlpha="0.02"
+        android:pathData="M35,66 C25,60 28,48 38,45 C34,54 30,62 35,66 Z" />
+</vector>

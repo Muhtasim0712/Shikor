@@ -11,8 +11,8 @@
     android:focusable="true"
     android:minHeight="@dimen/min_touch_target"
     app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="1dp"
-    app:strokeColor="@color/outline"
+    app:cardElevation="@dimen/card_elevation"
+    app:strokeColor="?attr/colorOutline"
     app:strokeWidth="0.5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,7 +59,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAppearance="?attr/textAppearanceBodySmall"
-                android:textColor="@color/primary" />
+                android:textColor="?attr/colorPrimary" />
 
             <TextView
                 android:id="@+id/tvMemberLifespan"
@@ -79,7 +79,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/outline" />
+            app:tint="?attr/colorOutline" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

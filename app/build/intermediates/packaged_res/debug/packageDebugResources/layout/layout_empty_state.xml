@@ -16,7 +16,7 @@
         android:layout_height="80dp"
         android:contentDescription="@string/app_name"
         android:src="@android:drawable/ic_menu_gallery"
-        app:tint="@color/outline" />
+        app:tint="?attr/colorPrimary" />
 
     <TextView
         android:id="@+id/tvEmptyTitle"

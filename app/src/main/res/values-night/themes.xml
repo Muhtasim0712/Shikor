@@ -1,27 +1,72 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- CONCEPT: Dark mode theme configuration using deep forest charcoal & amber bark palette -->
     <style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">#9CD493</item>
-        <item name="colorOnPrimary">#063908</item>
-        <item name="colorPrimaryContainer">#1E511D</item>
-        <item name="colorOnPrimaryContainer">#B7F1AE</item>
+        <!-- Palette Mapping: Soft Sage Primary -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
 
-        <item name="colorSecondary">#FFB59C</item>
-        <item name="colorOnSecondary">#54210D</item>
-        <item name="colorSecondaryContainer">#70351F</item>
-        <item name="colorOnSecondaryContainer">#FFDBCF</item>
+        <!-- Palette Mapping: Warm Amber Bark Secondary -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
 
-        <item name="android:colorBackground">#111411</item>
-        <item name="colorOnBackground">#E2E3DE</item>
-        <item name="colorSurface">#191C19</item>
-        <item name="colorOnSurface">#E2E3DE</item>
-        <item name="colorSurfaceVariant">#424940</item>
-        <item name="colorOnSurfaceVariant">#C2C9BD</item>
+        <!-- Palette Mapping: Soft Dawn Gold Tertiary -->
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
 
-        <item name="colorError">#FFB4AB</item>
-        <item name="colorOnError">#690005</item>
+        <!-- Surfaces & Backgrounds: Deep Forest Charcoal -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
 
+        <!-- Outlines & Errors: Muted Natural Tones -->
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+        <item name="colorErrorContainer">@color/error_container</item>
+        <item name="colorOnErrorContainer">@color/on_error_container</item>
+
+        <!-- Window Background: Deep Green-Black Dawn Gradient with Faint Botanical Accent -->
+        <item name="android:windowBackground">@drawable/bg_window_dawn</item>
+
+        <!-- System Bars in Dark Mode -->
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        <!-- Gentle Motion: Shared-element-free short fade window transitions -->
+        <item name="android:windowAnimationStyle">@style/ShikorWindowAnimation</item>
+
+        <!-- Typography: Noto Sans Bengali font bundled offline for English & Bangla -->
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Shikor.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Shikor.BodyMedium</item>
+
+        <!-- Rounded Shape System: 16dp cards/dialogs, 24dp buttons/chips -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Shikor.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Shikor.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Shikor.Large</item>
+
+        <!-- Component Theming -->
+        <item name="toolbarStyle">@style/Widget.Shikor.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Widget.Shikor.BottomNavigationView</item>
+        <item name="floatingActionButtonStyle">@style/Widget.Shikor.FloatingActionButton</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.Shikor.ExtendedFloatingActionButton</item>
+        <item name="textInputStyle">@style/Widget.Shikor.TextInputLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.Shikor.CardView</item>
+        <item name="materialButtonStyle">@style/Widget.Shikor.Button</item>
+        <item name="chipStyle">@style/Widget.Shikor.Chip</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Shikor.MaterialAlertDialog</item>
     </style>
 </resources>

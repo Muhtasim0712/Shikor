@@ -35,6 +35,7 @@ public class NotificationHelper {
             );
             remindersChannel.setDescription("Notifications for birthdays, anniversaries, and remembrance days");
             remindersChannel.enableLights(true);
+            remindersChannel.setLightColor(androidx.core.content.ContextCompat.getColor(context, com.shikor.app.R.color.tertiary));
             remindersChannel.enableVibration(true);
             manager.createNotificationChannel(remindersChannel);
 

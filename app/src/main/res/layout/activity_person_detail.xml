@@ -15,11 +15,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorSurface"
             app:navigationIcon="@android:drawable/ic_menu_revert"
-            app:navigationIconTint="?attr/colorOnPrimary"
+            app:navigationIconTint="?attr/colorOnSurface"
             app:title="Relative Profile"
-            app:titleTextColor="?attr/colorOnPrimary" />
+            app:titleTextColor="?attr/colorOnSurface" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -38,8 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/outline"
+                app:cardElevation="@dimen/card_elevation"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="0.5dp">
 
                 <LinearLayout
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="@color/primary" />
+                        android:textColor="?attr/colorPrimary" />
 
                     <TextView
                         android:id="@+id/tvDetailLifespan"
@@ -131,8 +131,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
                 app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="1dp"
-                app:strokeColor="@color/outline"
+                app:cardElevation="@dimen/card_elevation"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="0.5dp">
 
                 <LinearLayout
@@ -146,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:text="Key Facts"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="@color/primary"
+                        android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
 
                     <TextView
@@ -169,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="@color/secondary"
+                        android:textColor="?attr/colorSecondary"
                         android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -180,8 +180,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
                 app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="1dp"
-                app:strokeColor="@color/outline"
+                app:cardElevation="@dimen/card_elevation"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="0.5dp">
 
                 <LinearLayout
@@ -195,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:text="Immediate Relatives"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="@color/primary"
+                        android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
 
                     <TextView
@@ -259,8 +259,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
                 app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="1dp"
-                app:strokeColor="@color/outline"
+                app:cardElevation="@dimen/card_elevation"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="0.5dp">
 
                 <LinearLayout
@@ -274,7 +274,7 @@
                         android:layout_height="wrap_content"
                         android:text="Biography &amp; Life Story"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="@color/primary"
+                        android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
 
                     <TextView
@@ -298,7 +298,7 @@
                 android:layout_marginBottom="@dimen/spacing_large"
                 android:minHeight="@dimen/min_touch_target"
                 android:text="Edit Relative Details"
-                app:cornerRadius="@dimen/card_corner_radius"
+                app:cornerRadius="@dimen/button_corner_radius"
                 app:icon="@android:drawable/ic_menu_edit" />
 
         </LinearLayout>

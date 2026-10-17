@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity {
                 loadFragment(new MembersFragment());
                 return true;
             } else if (itemId == R.id.nav_tree) {
-                // Future phase will load TreeFragment
+                loadFragment(new TreeFragment());
                 return true;
             } else if (itemId == R.id.nav_timeline) {
                 // Future phase will load TimelineFragment

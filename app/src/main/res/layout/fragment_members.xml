@@ -19,8 +19,8 @@
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginBottom="@dimen/spacing_tiny"
             app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardElevation="2dp"
-            app:strokeColor="@color/outline"
+            app:cardElevation="@dimen/card_elevation"
+            app:strokeColor="?attr/colorOutline"
             app:strokeWidth="0.5dp">
 
             <LinearLayout
@@ -36,7 +36,7 @@
                     android:layout_height="24dp"
                     android:contentDescription="@string/app_name"
                     android:src="@android:drawable/ic_menu_search"
-                    app:tint="@color/outline" />
+                    app:tint="?attr/colorOutline" />
 
                 <EditText
                     android:id="@+id/etSearchMembers"
@@ -59,7 +59,7 @@
                     android:contentDescription="@string/cancel"
                     android:src="@android:drawable/ic_menu_close_clear_cancel"
                     android:visibility="gone"
-                    app:tint="@color/outline" />
+                    app:tint="?attr/colorOutline" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- CONCEPT: 48dp touch targets and accessible layout sizing -->
+    <!-- CONCEPT: 48dp minimum touch targets for accessibility and senior-friendly design -->
     <dimen name="min_touch_target">48dp</dimen>
 
-    <!-- Standard Margins and Spacings -->
+    <!-- Standard Margins and Spacings (Generous padding in multiples of 8dp) -->
     <dimen name="spacing_tiny">4dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_medium">16dp</dimen>
@@ -11,7 +11,7 @@
     <dimen name="spacing_xlarge">32dp</dimen>
     <dimen name="spacing_huge">48dp</dimen>
 
-    <!-- Text Sizes - Large readable fonts for elders -->
+    <!-- Text Sizes - Comfortable body text at 16sp+ for clarity -->
     <dimen name="text_size_caption">13sp</dimen>
     <dimen name="text_size_body">16sp</dimen>
     <dimen name="text_size_subtitle">18sp</dimen>
@@ -25,7 +25,13 @@
     <dimen name="avatar_size_large">96dp</dimen>
     <dimen name="avatar_ring_width_default">3dp</dimen>
 
-    <!-- Card & Elevation -->
+    <!-- Shapes: 16dp cards/dialogs, 24dp buttons/chips -->
     <dimen name="card_corner_radius">16dp</dimen>
-    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="dialog_corner_radius">16dp</dimen>
+    <dimen name="input_corner_radius">16dp</dimen>
+    <dimen name="button_corner_radius">24dp</dimen>
+    <dimen name="chip_corner_radius">24dp</dimen>
+
+    <!-- Soft Elevation: low shadows, tonal surfaces -->
+    <dimen name="card_elevation">1dp</dimen>
 </resources>

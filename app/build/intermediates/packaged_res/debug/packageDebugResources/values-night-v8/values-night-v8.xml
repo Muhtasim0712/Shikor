@@ -1,28 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="background">#121A15</color>
+    <color name="black">#121A15</color>
+    <color name="deceased_indicator">#979E94</color>
+    <color name="error">#E58E86</color>
+    <color name="error_container">#63231F</color>
+    <color name="gender_female">#DCA2AF</color>
+    <color name="gender_female_bg">#42232B</color>
+    <color name="gender_female_text">#F5E4E8</color>
+    <color name="gender_male">#89B8C9</color>
+    <color name="gender_male_bg">#203640</color>
+    <color name="gender_male_text">#DFECF1</color>
+    <color name="gender_other">#BDB0CF</color>
+    <color name="gender_other_bg">#31273C</color>
+    <color name="gender_other_text">#EBE5F2</color>
+    <color name="on_background">#E3E8E0</color>
+    <color name="on_error">#441815</color>
+    <color name="on_error_container">#FAD9D7</color>
+    <color name="on_primary">#0F2417</color>
+    <color name="on_primary_container">#B8E8BA</color>
+    <color name="on_secondary">#3B2510</color>
+    <color name="on_secondary_container">#F0D7B8</color>
+    <color name="on_surface">#E3E8E0</color>
+    <color name="on_surface_variant">#B5BEB2</color>
+    <color name="on_tertiary">#3D3004</color>
+    <color name="on_tertiary_container">#FBE7AC</color>
+    <color name="outline">#55604F</color>
+    <color name="outline_variant">#394437</color>
+    <color name="overlay_scrim">#80000000</color>
+    <color name="primary">#9CCB9F</color>
+    <color name="primary_container">#2A4132</color>
+    <color name="primary_variant">#7FA882</color>
+    <color name="secondary">#D3B08A</color>
+    <color name="secondary_container">#4E3823</color>
+    <color name="secondary_variant">#B5936F</color>
+    <color name="surface">#1A241D</color>
+    <color name="surface_variant">#26332A</color>
+    <color name="tertiary">#E0C27A</color>
+    <color name="tertiary_container">#4D401F</color>
+    <color name="transparent">#00000000</color>
+    <color name="tree_connector">#4A584A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="window_gradient_center">#16221B</color>
+    <color name="window_gradient_end">#1B2920</color>
+    <color name="window_gradient_start">#121A15</color>
     <style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">#9CD493</item>
-        <item name="colorOnPrimary">#063908</item>
-        <item name="colorPrimaryContainer">#1E511D</item>
-        <item name="colorOnPrimaryContainer">#B7F1AE</item>
+        
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
 
-        <item name="colorSecondary">#FFB59C</item>
-        <item name="colorOnSecondary">#54210D</item>
-        <item name="colorSecondaryContainer">#70351F</item>
-        <item name="colorOnSecondaryContainer">#FFDBCF</item>
+        
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
 
-        <item name="android:colorBackground">#111411</item>
-        <item name="colorOnBackground">#E2E3DE</item>
-        <item name="colorSurface">#191C19</item>
-        <item name="colorOnSurface">#E2E3DE</item>
-        <item name="colorSurfaceVariant">#424940</item>
-        <item name="colorOnSurfaceVariant">#C2C9BD</item>
+        
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
 
-        <item name="colorError">#FFB4AB</item>
-        <item name="colorOnError">#690005</item>
+        
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
 
+        
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+        <item name="colorErrorContainer">@color/error_container</item>
+        <item name="colorOnErrorContainer">@color/on_error_container</item>
+
+        
+        <item name="android:windowBackground">@drawable/bg_window_dawn</item>
+
+        
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        
+        <item name="android:windowAnimationStyle">@style/ShikorWindowAnimation</item>
+
+        
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Shikor.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Shikor.BodyMedium</item>
+
+        
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Shikor.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Shikor.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Shikor.Large</item>
+
+        
+        <item name="toolbarStyle">@style/Widget.Shikor.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Widget.Shikor.BottomNavigationView</item>
+        <item name="floatingActionButtonStyle">@style/Widget.Shikor.FloatingActionButton</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.Shikor.ExtendedFloatingActionButton</item>
+        <item name="textInputStyle">@style/Widget.Shikor.TextInputLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.Shikor.CardView</item>
+        <item name="materialButtonStyle">@style/Widget.Shikor.Button</item>
+        <item name="chipStyle">@style/Widget.Shikor.Chip</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Shikor.MaterialAlertDialog</item>
     </style>
 </resources>

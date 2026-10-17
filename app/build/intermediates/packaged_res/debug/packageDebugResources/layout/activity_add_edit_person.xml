@@ -15,11 +15,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorSurface"
             app:navigationIcon="@android:drawable/ic_menu_revert"
-            app:navigationIconTint="?attr/colorOnPrimary"
+            app:navigationIconTint="?attr/colorOnSurface"
             app:title="Add Family Member"
-            app:titleTextColor="?attr/colorOnPrimary" />
+            app:titleTextColor="?attr/colorOnSurface" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -255,7 +255,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:text="Family Relationships"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
-                android:textColor="@color/primary"
+                android:textColor="?attr/colorPrimary"
                 android:textStyle="bold" />
 
             <!-- Child Option: Link new person as a parent to an existing member -->
@@ -265,7 +265,7 @@
                 android:layout_marginTop="@dimen/spacing_small"
                 android:text="This person is the Parent of (Child):"
                 android:textAppearance="?attr/textAppearanceLabelMedium"
-                android:textColor="@color/secondary" />
+                android:textColor="?attr/colorSecondary" />
 
             <Spinner
                 android:id="@+id/spinnerChild"
@@ -280,7 +280,7 @@
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="Parents of this person (if known):"
                 android:textAppearance="?attr/textAppearanceLabelMedium"
-                android:textColor="@color/primary" />
+                android:textColor="?attr/colorPrimary" />
 
             <!-- Father Spinner -->
             <TextView
@@ -354,7 +354,7 @@
                 android:layout_marginBottom="@dimen/spacing_xlarge"
                 android:minHeight="@dimen/min_touch_target"
                 android:text="Save Relative"
-                app:cornerRadius="@dimen/card_corner_radius" />
+                app:cornerRadius="@dimen/button_corner_radius" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

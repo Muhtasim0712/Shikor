@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CONCEPT: Night mode layer-list window background with deep green-black gradient and subtle botanical accent -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Base dawn dark gradient: deep moss/green-black -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="@color/window_gradient_start"
+                android:centerColor="@color/window_gradient_center"
+                android:endColor="@color/window_gradient_end"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- Faint organic botanical motif at bottom-right edge -->
+    <item
+        android:width="220dp"
+        android:height="220dp"
+        android:gravity="bottom|end"
+        android:drawable="@drawable/ic_dawn_botanical_accent" />
+</layer-list>

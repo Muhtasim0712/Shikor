@@ -91,13 +91,17 @@ public class AvatarView extends View {
         textPaint.setColor(ContextCompat.getColor(context, R.color.on_primary_container));
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setFakeBoldText(true);
+        try {
+            android.graphics.Typeface tf = androidx.core.content.res.ResourcesCompat.getFont(context, R.font.noto_sans_bengali_bold);
+            if (tf != null) textPaint.setTypeface(tf);
+        } catch (Exception ignored) {}
 
         deceasedDotPaint.setStyle(Paint.Style.FILL);
         deceasedDotPaint.setColor(ContextCompat.getColor(context, R.color.deceased_indicator));
 
         deceasedBorderPaint.setStyle(Paint.Style.STROKE);
         deceasedBorderPaint.setStrokeWidth(3f);
-        deceasedBorderPaint.setColor(Color.WHITE);
+        deceasedBorderPaint.setColor(ContextCompat.getColor(context, R.color.surface));
     }
 
     @Override
@@ -184,16 +188,16 @@ public class AvatarView extends View {
     public void setGender(String gender) {
         if ("female".equalsIgnoreCase(gender)) {
             ringColor = ContextCompat.getColor(getContext(), R.color.gender_female);
-            backgroundPaint.setColor(Color.parseColor("#F7D6E6"));
-            textPaint.setColor(Color.parseColor("#5A133A"));
+            backgroundPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_female_bg));
+            textPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_female_text));
         } else if ("male".equalsIgnoreCase(gender)) {
             ringColor = ContextCompat.getColor(getContext(), R.color.gender_male);
-            backgroundPaint.setColor(Color.parseColor("#D4E7F5"));
-            textPaint.setColor(Color.parseColor("#0F3C59"));
+            backgroundPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_male_bg));
+            textPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_male_text));
         } else {
             ringColor = ContextCompat.getColor(getContext(), R.color.gender_other);
-            backgroundPaint.setColor(Color.parseColor("#E4DCEB"));
-            textPaint.setColor(Color.parseColor("#3D2949"));
+            backgroundPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_other_bg));
+            textPaint.setColor(ContextCompat.getColor(getContext(), R.color.gender_other_text));
         }
         invalidate();
     }
