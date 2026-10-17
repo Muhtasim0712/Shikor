@@ -1,24 +1,59 @@
 package com.shikor.app.ui.main;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import android.net.Uri;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.shikor.app.R;
 import com.shikor.app.data.repository.FamilyRepository;
 import com.shikor.app.databinding.ActivityMainBinding;
 import com.shikor.app.ui.base.BaseActivity;
+import com.shikor.app.ui.tools.ExportActivity;
+import com.shikor.app.util.AlarmScheduler;
+import com.shikor.app.util.AppExecutors;
+import com.shikor.app.util.FamilyImporter;
+import com.shikor.app.util.NotificationHelper;
 import com.shikor.app.util.Prefs;
 
 /**
  * MainActivity - Primary container activity for Shikor.
  * Holds BottomNavigationView and manages Fragments (Tree, Members, Timeline, Settings).
+ * Handles Android 13 notification permissions, starts daily reminder alarms, and supports contact export/import.
  *
- * CONCEPT: BottomNavigationView with Fragment switching, View Binding, and lifecycle logging.
+ * CONCEPT: Android 13 POST_NOTIFICATIONS flow, AlarmScheduler daily scheduling, and Fragment switching.
  */
 public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
+
+    private final ActivityResultLauncher<String> notificationPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                NotificationHelper.createNotificationChannels(this);
+                if (isGranted) {
+                    AlarmScheduler.scheduleDailyReminder(this);
+                }
+            });
+
+    private final ActivityResultLauncher<String[]> mainImportLauncher =
+            registerForActivityResult(new ActivityResultContracts.OpenDocument(), uri -> {
+                if (uri != null) {
+                    importMembers(uri);
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +75,29 @@ public class MainActivity extends BaseActivity {
             FamilyRepository.getInstance(this).syncDownFamilyData(familyId, null);
         }
 
+        // Initialize Notification Channels & Android 13 Permission Flow
+        NotificationHelper.createNotificationChannels(this);
+        checkNotificationPermissionAndSchedule();
+
         setupBottomNavigation();
 
         // Default screen is MembersFragment (or TreeFragment)
         if (savedInstanceState == null) {
             loadFragment(new MembersFragment());
             binding.bottomNavigation.setSelectedItemId(R.id.nav_members);
+        }
+    }
+
+    private void checkNotificationPermissionAndSchedule() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            } else {
+                AlarmScheduler.scheduleDailyReminder(this);
+            }
+        } else {
+            AlarmScheduler.scheduleDailyReminder(this);
         }
     }
 
@@ -71,7 +123,7 @@ public class MainActivity extends BaseActivity {
                 loadFragment(new TimelineFragment());
                 return true;
             } else if (itemId == R.id.nav_settings) {
-                // Future phase will load SettingsFragment
+                loadFragment(new SettingsFragment());
                 return true;
             }
             return false;
@@ -83,5 +135,48 @@ public class MainActivity extends BaseActivity {
                 .beginTransaction()
                 .replace(R.id.navHostContainer, fragment)
                 .commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_export_contacts) {
+            startActivity(new Intent(this, ExportActivity.class));
+            return true;
+        } else if (id == R.id.action_import_members) {
+            mainImportLauncher.launch(new String[]{
+                    "text/*",
+                    "text/csv",
+                    "text/comma-separated-values",
+                    "text/vcard",
+                    "text/x-vcard",
+                    "*/*"
+            });
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void importMembers(Uri uri) {
+        Toast.makeText(this, "Importing family members from file...", Toast.LENGTH_SHORT).show();
+
+        AppExecutors.getInstance().diskIO().execute(() -> {
+            FamilyImporter.ImportResult result = FamilyImporter.importFromUri(this, uri);
+
+            AppExecutors.getInstance().mainThread().execute(() -> {
+                new MaterialAlertDialogBuilder(this)
+                        .setTitle(result.success ? "Import Complete" : "Import Failed")
+                        .setMessage(result.message)
+                        .setPositiveButton("OK", null)
+                        .setIcon(result.success ? android.R.drawable.ic_dialog_info : android.R.drawable.ic_dialog_alert)
+                        .show();
+            });
+        });
     }
 }

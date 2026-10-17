@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_export_contacts"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="Export Contacts"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_import_members"
+        android:icon="@android:drawable/stat_sys_download"
+        android:title="Import Members"
+        app:showAsAction="never" />
+</menu>
