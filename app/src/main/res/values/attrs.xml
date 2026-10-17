@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CONCEPT: Custom View attributes for AvatarView -->
+    <declare-styleable name="AvatarView">
+        <attr name="ringColor" format="color" />
+        <attr name="ringWidth" format="dimension" />
+        <attr name="initials" format="string" />
+        <attr name="isDeceased" format="boolean" />
+    </declare-styleable>
+</resources>

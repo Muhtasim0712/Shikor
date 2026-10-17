@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#9CD493</item>
+        <item name="colorOnPrimary">#063908</item>
+        <item name="colorPrimaryContainer">#1E511D</item>
+        <item name="colorOnPrimaryContainer">#B7F1AE</item>
+
+        <item name="colorSecondary">#FFB59C</item>
+        <item name="colorOnSecondary">#54210D</item>
+        <item name="colorSecondaryContainer">#70351F</item>
+        <item name="colorOnSecondaryContainer">#FFDBCF</item>
+
+        <item name="android:colorBackground">#111411</item>
+        <item name="colorOnBackground">#E2E3DE</item>
+        <item name="colorSurface">#191C19</item>
+        <item name="colorOnSurface">#E2E3DE</item>
+        <item name="colorSurfaceVariant">#424940</item>
+        <item name="colorOnSurfaceVariant">#C2C9BD</item>
+
+        <item name="colorError">#FFB4AB</item>
+        <item name="colorOnError">#690005</item>
+
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

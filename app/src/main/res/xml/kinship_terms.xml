@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CONCEPT: XML parsing bundle for Kinship terms in English & Bangla -->
+<kinship_terms>
+    <term key="father" english="Father" bangla="বাবা" />
+    <term key="mother" english="Mother" bangla="মা" />
+    <term key="son" english="Son" bangla="ছেলে" />
+    <term key="daughter" english="Daughter" bangla="মেয়ে" />
+    <term key="brother" english="Brother" bangla="ভাই" />
+    <term key="sister" english="Sister" bangla="বোন" />
+    <term key="elder_brother" english="Elder Brother" bangla="বড় ভাই" />
+    <term key="younger_brother" english="Younger Brother" bangla="ছোট ভাই" />
+    <term key="elder_sister" english="Elder Sister" bangla="বড় আপা" />
+    <term key="younger_sister" english="Younger Sister" bangla="ছোট বোন" />
+
+    <term key="husband" english="Husband" bangla="স্বামী" />
+    <term key="wife" english="Wife" bangla="স্ত্রী" />
+
+    <!-- Grandparents & Grandchildren -->
+    <term key="paternal_grandfather" english="Paternal Grandfather" bangla="দাদা" />
+    <term key="paternal_grandmother" english="Paternal Grandmother" bangla="দাদী" />
+    <term key="maternal_grandfather" english="Maternal Grandfather" bangla="নানা" />
+    <term key="maternal_grandmother" english="Maternal Grandmother" bangla="নানী" />
+    <term key="grandson" english="Grandson" bangla="নাতি" />
+    <term key="granddaughter" english="Granddaughter" bangla="নাতনী" />
+
+    <!-- Uncles & Aunts -->
+    <term key="father_elder_brother" english="Paternal Elder Uncle" bangla="জেঠা" />
+    <term key="father_elder_brother_wife" english="Paternal Elder Aunt" bangla="জেঠী" />
+    <term key="father_younger_brother" english="Paternal Younger Uncle" bangla="চাচা" />
+    <term key="father_younger_brother_wife" english="Paternal Younger Aunt" bangla="চাচী" />
+    <term key="father_sister" english="Paternal Aunt" bangla="ফুফু" />
+    <term key="father_sister_husband" english="Paternal Uncle-in-law" bangla="ফুপা" />
+    <term key="mother_brother" english="Maternal Uncle" bangla="মামা" />
+    <term key="mother_brother_wife" english="Maternal Aunt-in-law" bangla="মামী" />
+    <term key="mother_sister" english="Maternal Aunt" bangla="খালা" />
+    <term key="mother_sister_husband" english="Maternal Uncle-in-law" bangla="খালু" />
+
+    <!-- Cousins -->
+    <term key="cousin_paternal_uncle" english="Cousin (Chachato)" bangla="চাচাতো ভাই/বোন" />
+    <term key="cousin_paternal_aunt" english="Cousin (Fufato)" bangla="ফুফাতো ভাই/বোন" />
+    <term key="cousin_maternal_uncle" english="Cousin (Mamato)" bangla="মামাতো ভাই/বোন" />
+    <term key="cousin_maternal_aunt" english="Cousin (Khalato)" bangla="খালাতো ভাই/বোন" />
+</kinship_terms>

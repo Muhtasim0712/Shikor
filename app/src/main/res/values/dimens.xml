@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CONCEPT: 48dp touch targets and accessible layout sizing -->
+    <dimen name="min_touch_target">48dp</dimen>
+
+    <!-- Standard Margins and Spacings -->
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="spacing_huge">48dp</dimen>
+
+    <!-- Text Sizes - Large readable fonts for elders -->
+    <dimen name="text_size_caption">13sp</dimen>
+    <dimen name="text_size_body">16sp</dimen>
+    <dimen name="text_size_subtitle">18sp</dimen>
+    <dimen name="text_size_title">22sp</dimen>
+    <dimen name="text_size_headline">28sp</dimen>
+    <dimen name="text_size_display">34sp</dimen>
+
+    <!-- Avatar Sizing -->
+    <dimen name="avatar_size_small">40dp</dimen>
+    <dimen name="avatar_size_medium">56dp</dimen>
+    <dimen name="avatar_size_large">96dp</dimen>
+    <dimen name="avatar_ring_width_default">3dp</dimen>
+
+    <!-- Card & Elevation -->
+    <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+</resources>

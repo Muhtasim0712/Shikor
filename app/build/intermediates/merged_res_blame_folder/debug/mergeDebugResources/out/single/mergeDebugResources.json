@@ -1,0 +1,102 @@
+[
+    {
+        "merged": "com.shikor.app-debug-48:/layout_activity_family_setup.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_family_setup.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_activity_register.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/xml_kinship_terms.xml.flat",
+        "source": "com.shikor.app-main-50:/xml/kinship_terms.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_activity_splash.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_layout_loading.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/layout_loading.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.shikor.app-main-50:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_activity_login.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/drawable_bg_code_box.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/bg_code_box.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_layout_empty_state.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/layout_empty_state.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/xml_file_paths.xml.flat",
+        "source": "com.shikor.app-main-50:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/drawable_ic_shikor_logo.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/ic_shikor_logo.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_activity_main.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.shikor.app-main-50:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    }
+]

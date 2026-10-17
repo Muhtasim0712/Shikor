@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Brand Colors (Forest/Heritage Green & Accents) -->
+    <color name="primary">#2D5A27</color>
+    <color name="primary_variant">#1E3F1A</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_container">#D4E8D0</color>
+    <color name="on_primary_container">#0A2008</color>
+
+    <!-- Secondary (Warm Terracotta / Clay) -->
+    <color name="secondary">#8C4A2F</color>
+    <color name="secondary_variant">#68321D</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="secondary_container">#F8DBD1</color>
+    <color name="on_secondary_container">#351004</color>
+
+    <!-- Background and Surface -->
+    <color name="background">#FBFDF7</color>
+    <color name="on_background">#1A1C19</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#1A1C19</color>
+    <color name="surface_variant">#DEE5D9</color>
+    <color name="on_surface_variant">#424940</color>
+
+    <!-- Semantic / Status Colors -->
+    <color name="error">#BA1A1A</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="success">#2E7D32</color>
+    <color name="outline">#72796F</color>
+
+    <!-- Gender Palette for Avatars & Tree Nodes -->
+    <color name="gender_male">#2A6F97</color>
+    <color name="gender_female">#A23B72</color>
+    <color name="gender_other">#70577D</color>
+    <color name="deceased_indicator">#2B2B2B</color>
+
+    <!-- Tree connector line -->
+    <color name="tree_connector">#5C645A</color>
+
+    <!-- Base shades -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+</resources>

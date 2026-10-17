@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="already_have_account">ইতিমধ্যে অ্যাকাউন্ট আছে? লগ ইন করুন</string>
+    <string name="app_name">শিকড়</string>
+    <string name="app_tagline">পারিবারিক স্মৃতি, ঐতিহ্য ও ইতিহাস সংরক্ষণে</string>
+    <string name="cancel">বাতিল</string>
+    <string name="confirm_password_label">পাসওয়ার্ড নিশ্চিত করুন</string>
+    <string name="create_family_btn">পরিবার তৈরি করুন</string>
+    <string name="create_family_desc">একটি নতুন পারিবারিক অ্যালবাম শুরু করুন এবং আত্মীয়দের আমন্ত্রণ জানাতে ৬ অক্ষরের কোড পান।</string>
+    <string name="create_family_title">নতুন পরিবার তৈরি করুন</string>
+    <string name="dont_have_account">অ্যাকাউন্ট নেই? রেজিস্টার করুন</string>
+    <string name="email_label">ইমেইল ঠিকানা</string>
+    <string name="error_auth_failed">প্রবেশ ব্যর্থ হয়েছে: %s</string>
+    <string name="error_empty_field">এই ঘরটি পূরণ করুন</string>
+    <string name="error_family_not_found">ফ্যামিলি কোডটি খুঁজে পাওয়া যায়নি।</string>
+    <string name="error_invalid_code">ফ্যামিলি কোড ঠিক ৬ অক্ষরের হতে হবে</string>
+    <string name="error_invalid_email">সঠিক ইমেইল লিখুন</string>
+    <string name="error_password_mismatch">পাসওয়ার্ড দুটি মিলছে না</string>
+    <string name="error_short_password">পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে</string>
+    <string name="family_code_invite_message">শিকড় অ্যাপে আমাদের পরিবারে যুক্ত হোন! আমাদের কোড: %s</string>
+    <string name="family_code_label">৬ অক্ষরের ফ্যামিলি কোড</string>
+    <string name="family_name_label">পরিবারের নাম (যেমন: চৌধুরী পরিবার)</string>
+    <string name="family_setup_subtitle">নতুন পরিবার শুরু করুন অথবা যুক্ত হোন</string>
+    <string name="family_setup_title">পারিবারিক স্পেস</string>
+    <string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
+    <string name="join_family_btn">যুক্ত হোন</string>
+    <string name="join_family_desc">আত্মীয়দের পাঠানো ৬ অক্ষরের পারিবারিক কোডটি দিন।</string>
+    <string name="join_family_title">পরিবারে যুক্ত হোন</string>
+    <string name="loading">লোড হচ্ছে…</string>
+    <string name="login_button">লগ ইন</string>
+    <string name="login_subtitle">আপনার পারিবারিক আর্কাইভে প্রবেশ করুন</string>
+    <string name="login_title">স্বাগতম</string>
+    <string name="logout">লগ আউট</string>
+    <string name="name_label">সম্পূর্ণ নাম</string>
+    <string name="nav_members">সদস্যবৃন্দ</string>
+    <string name="nav_settings">সেটিংস</string>
+    <string name="nav_timeline">টাইমলাইন</string>
+    <string name="nav_tree">বংশলতিকা</string>
+    <string name="password_label">পাসওয়ার্ড</string>
+    <string name="register_button">অ্যাকাউন্ট তৈরি করুন</string>
+    <string name="register_subtitle">আপনার ডিজিটাল বংশলতিকা তৈরি শুরু করুন</string>
+    <string name="register_title">শিকড়ে যোগ দিন</string>
+    <string name="reset_password_sent">পাসওয়ার্ড রিসেট ইমেইল পাঠানো হয়েছে</string>
+    <string name="save">সংরক্ষণ</string>
+    <string name="share_family_code">ফ্যামিলি কোড শেয়ার করুন</string>
+</resources>

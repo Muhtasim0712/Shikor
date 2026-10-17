@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Shikor</string>
+    <string name="app_tagline">Preserving family roots, memories &amp; stories</string>
+
+    <!-- Auth & Splash -->
+    <string name="login_title">Welcome Back</string>
+    <string name="login_subtitle">Sign in to access your family archive</string>
+    <string name="register_title">Join Shikor</string>
+    <string name="register_subtitle">Start your digital family legacy</string>
+    <string name="email_label">Email Address</string>
+    <string name="password_label">Password</string>
+    <string name="confirm_password_label">Confirm Password</string>
+    <string name="name_label">Full Name</string>
+    <string name="login_button">Sign In</string>
+    <string name="register_button">Create Account</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="dont_have_account">Don\'t have an account? Register</string>
+    <string name="already_have_account">Already have an account? Sign In</string>
+    <string name="reset_password_sent">Password reset email sent</string>
+
+    <!-- Family Setup -->
+    <string name="family_setup_title">Family Space</string>
+    <string name="family_setup_subtitle">Create a new family space or join an existing one</string>
+    <string name="create_family_title">Create New Family</string>
+    <string name="create_family_desc">Start a brand new family archive and receive a 6-character code to invite relatives.</string>
+    <string name="family_name_label">Family Name (e.g. Chowdhury Family)</string>
+    <string name="create_family_btn">Create Family</string>
+    <string name="join_family_title">Join Existing Family</string>
+    <string name="join_family_desc">Enter the 6-character family code provided by an existing family member.</string>
+    <string name="family_code_label">6-Character Family Code</string>
+    <string name="join_family_btn">Join Family</string>
+    <string name="share_family_code">Share Family Code</string>
+    <string name="family_code_invite_message">Join our family archive on Shikor! Our family code is: %s</string>
+
+    <!-- Validation -->
+    <string name="error_empty_field">This field cannot be empty</string>
+    <string name="error_invalid_email">Enter a valid email address</string>
+    <string name="error_short_password">Password must be at least 6 characters</string>
+    <string name="error_password_mismatch">Passwords do not match</string>
+    <string name="error_invalid_code">Family code must be exactly 6 characters</string>
+    <string name="error_auth_failed">Authentication failed: %s</string>
+    <string name="error_family_not_found">Family code not found. Please verify with your family admin.</string>
+
+    <!-- Main Navigation -->
+    <string name="nav_tree">Family Tree</string>
+    <string name="nav_members">Members</string>
+    <string name="nav_timeline">Timeline</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- General -->
+    <string name="loading">Loading…</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="logout">Log Out</string>
+</resources>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#FBFDF7</color>
+    <color name="black">#000000</color>
+    <color name="deceased_indicator">#2B2B2B</color>
+    <color name="error">#BA1A1A</color>
+    <color name="gender_female">#A23B72</color>
+    <color name="gender_male">#2A6F97</color>
+    <color name="gender_other">#70577D</color>
+    <color name="on_background">#1A1C19</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_primary_container">#0A2008</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="on_secondary_container">#351004</color>
+    <color name="on_surface">#1A1C19</color>
+    <color name="on_surface_variant">#424940</color>
+    <color name="outline">#72796F</color>
+    <color name="primary">#2D5A27</color>
+    <color name="primary_container">#D4E8D0</color>
+    <color name="primary_variant">#1E3F1A</color>
+    <color name="secondary">#8C4A2F</color>
+    <color name="secondary_container">#F8DBD1</color>
+    <color name="secondary_variant">#68321D</color>
+    <color name="success">#2E7D32</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#DEE5D9</color>
+    <color name="transparent">#00000000</color>
+    <color name="tree_connector">#5C645A</color>
+    <color name="white">#FFFFFF</color>
+    <dimen name="avatar_ring_width_default">3dp</dimen>
+    <dimen name="avatar_size_large">96dp</dimen>
+    <dimen name="avatar_size_medium">56dp</dimen>
+    <dimen name="avatar_size_small">40dp</dimen>
+    <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="min_touch_target">48dp</dimen>
+    <dimen name="spacing_huge">48dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="text_size_body">16sp</dimen>
+    <dimen name="text_size_caption">13sp</dimen>
+    <dimen name="text_size_display">34sp</dimen>
+    <dimen name="text_size_headline">28sp</dimen>
+    <dimen name="text_size_subtitle">18sp</dimen>
+    <dimen name="text_size_title">22sp</dimen>
+    <string name="already_have_account">Already have an account? Sign In</string>
+    <string name="app_name">Shikor</string>
+    <string name="app_tagline">Preserving family roots, memories &amp; stories</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm_password_label">Confirm Password</string>
+    <string name="create_family_btn">Create Family</string>
+    <string name="create_family_desc">Start a brand new family archive and receive a 6-character code to invite relatives.</string>
+    <string name="create_family_title">Create New Family</string>
+    <string name="dont_have_account">Don\'t have an account? Register</string>
+    <string name="email_label">Email Address</string>
+    <string name="error_auth_failed">Authentication failed: %s</string>
+    <string name="error_empty_field">This field cannot be empty</string>
+    <string name="error_family_not_found">Family code not found. Please verify with your family admin.</string>
+    <string name="error_invalid_code">Family code must be exactly 6 characters</string>
+    <string name="error_invalid_email">Enter a valid email address</string>
+    <string name="error_password_mismatch">Passwords do not match</string>
+    <string name="error_short_password">Password must be at least 6 characters</string>
+    <string name="family_code_invite_message">Join our family archive on Shikor! Our family code is: %s</string>
+    <string name="family_code_label">6-Character Family Code</string>
+    <string name="family_name_label">Family Name (e.g. Chowdhury Family)</string>
+    <string name="family_setup_subtitle">Create a new family space or join an existing one</string>
+    <string name="family_setup_title">Family Space</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="gcm_defaultSenderId" translatable="false">633789903240</string>
+    <string name="google_api_key" translatable="false">AIzaSyAU2hCyArCSlXJOr7teRfJIsORTShA1tio</string>
+    <string name="google_app_id" translatable="false">1:633789903240:android:b1f8ca375a233fb5450a3d</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAU2hCyArCSlXJOr7teRfJIsORTShA1tio</string>
+    <string name="google_storage_bucket" translatable="false">shikor-app.firebasestorage.app</string>
+    <string name="join_family_btn">Join Family</string>
+    <string name="join_family_desc">Enter the 6-character family code provided by an existing family member.</string>
+    <string name="join_family_title">Join Existing Family</string>
+    <string name="loading">Loading…</string>
+    <string name="login_button">Sign In</string>
+    <string name="login_subtitle">Sign in to access your family archive</string>
+    <string name="login_title">Welcome Back</string>
+    <string name="logout">Log Out</string>
+    <string name="name_label">Full Name</string>
+    <string name="nav_members">Members</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_timeline">Timeline</string>
+    <string name="nav_tree">Family Tree</string>
+    <string name="password_label">Password</string>
+    <string name="project_id" translatable="false">shikor-app</string>
+    <string name="register_button">Create Account</string>
+    <string name="register_subtitle">Start your digital family legacy</string>
+    <string name="register_title">Join Shikor</string>
+    <string name="reset_password_sent">Password reset email sent</string>
+    <string name="save">Save</string>
+    <string name="share_family_code">Share Family Code</string>
+    <style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+
+        
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+    <style name="Theme.Shikor" parent="Base.Theme.Shikor"/>
+    <declare-styleable name="AvatarView">
+        <attr format="color" name="ringColor"/>
+        <attr format="dimension" name="ringWidth"/>
+        <attr format="string" name="initials"/>
+        <attr format="boolean" name="isDeceased"/>
+    </declare-styleable>
+</resources>

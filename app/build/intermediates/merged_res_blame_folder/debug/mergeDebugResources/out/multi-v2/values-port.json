@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.shikor.app-mergeDebugResources-46:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\6927b01944df7a04040d515b75a6d8fd\\transformed\\appcompat-1.7.0\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

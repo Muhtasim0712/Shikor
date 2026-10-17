@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_main.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_register.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_splash.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_family_setup.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_family_setup.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_login.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/layout_empty_state.xml",
+        "source": "com.shikor.app-main-50:/layout/layout_empty_state.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/layout_loading.xml",
+        "source": "com.shikor.app-main-50:/layout/layout_loading.xml"
+    }
+]
