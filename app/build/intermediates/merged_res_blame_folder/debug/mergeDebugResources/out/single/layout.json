@@ -1,30 +1,50 @@
 [
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_main.xml",
-        "source": "com.shikor.app-main-50:/layout/activity_main.xml"
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_family_setup.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_family_setup.xml"
     },
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_register.xml",
-        "source": "com.shikor.app-main-50:/layout/activity_register.xml"
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_person_detail.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_person_detail.xml"
     },
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_splash.xml",
-        "source": "com.shikor.app-main-50:/layout/activity_splash.xml"
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_splash.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_splash.xml"
     },
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_family_setup.xml",
-        "source": "com.shikor.app-main-50:/layout/activity_family_setup.xml"
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_add_edit_person.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_add_edit_person.xml"
     },
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_login.xml",
-        "source": "com.shikor.app-main-50:/layout/activity_login.xml"
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\fragment_members.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\fragment_members.xml"
     },
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/layout_empty_state.xml",
-        "source": "com.shikor.app-main-50:/layout/layout_empty_state.xml"
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_add_edit_person.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_add_edit_person.xml"
     },
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/layout_loading.xml",
-        "source": "com.shikor.app-main-50:/layout/layout_loading.xml"
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\layout_loading.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\layout_loading.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\layout_empty_state.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\layout_empty_state.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_register.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\item_member.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_member.xml"
     }
 ]

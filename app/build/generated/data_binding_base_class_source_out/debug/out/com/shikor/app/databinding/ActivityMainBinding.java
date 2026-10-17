@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.shikor.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -22,6 +22,9 @@ public final class ActivityMainBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
+  public final BottomNavigationView bottomNavigation;
+
+  @NonNull
   public final ConstraintLayout mainRoot;
 
   @NonNull
@@ -30,17 +33,14 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final MaterialToolbar toolbar;
 
-  @NonNull
-  public final TextView tvWelcomeMain;
-
   private ActivityMainBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ConstraintLayout mainRoot, @NonNull FrameLayout navHostContainer,
-      @NonNull MaterialToolbar toolbar, @NonNull TextView tvWelcomeMain) {
+      @NonNull BottomNavigationView bottomNavigation, @NonNull ConstraintLayout mainRoot,
+      @NonNull FrameLayout navHostContainer, @NonNull MaterialToolbar toolbar) {
     this.rootView = rootView;
+    this.bottomNavigation = bottomNavigation;
     this.mainRoot = mainRoot;
     this.navHostContainer = navHostContainer;
     this.toolbar = toolbar;
-    this.tvWelcomeMain = tvWelcomeMain;
   }
 
   @Override
@@ -70,6 +70,12 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.bottomNavigation;
+      BottomNavigationView bottomNavigation = ViewBindings.findChildViewById(rootView, id);
+      if (bottomNavigation == null) {
+        break missingId;
+      }
+
       ConstraintLayout mainRoot = (ConstraintLayout) rootView;
 
       id = R.id.navHostContainer;
@@ -84,14 +90,8 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tvWelcomeMain;
-      TextView tvWelcomeMain = ViewBindings.findChildViewById(rootView, id);
-      if (tvWelcomeMain == null) {
-        break missingId;
-      }
-
-      return new ActivityMainBinding((ConstraintLayout) rootView, mainRoot, navHostContainer,
-          toolbar, tvWelcomeMain);
+      return new ActivityMainBinding((ConstraintLayout) rootView, bottomNavigation, mainRoot,
+          navHostContainer, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
