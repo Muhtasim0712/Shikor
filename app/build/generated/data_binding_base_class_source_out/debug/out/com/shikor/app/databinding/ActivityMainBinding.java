@@ -11,7 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.chip.Chip;
 import com.shikor.app.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -22,7 +22,10 @@ public final class ActivityMainBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final BottomNavigationView bottomNavigation;
+  public final View bottomNavigation;
+
+  @NonNull
+  public final Chip chipSyncStatus;
 
   @NonNull
   public final ConstraintLayout mainRoot;
@@ -33,11 +36,12 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final MaterialToolbar toolbar;
 
-  private ActivityMainBinding(@NonNull ConstraintLayout rootView,
-      @NonNull BottomNavigationView bottomNavigation, @NonNull ConstraintLayout mainRoot,
+  private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull View bottomNavigation,
+      @NonNull Chip chipSyncStatus, @NonNull ConstraintLayout mainRoot,
       @NonNull FrameLayout navHostContainer, @NonNull MaterialToolbar toolbar) {
     this.rootView = rootView;
     this.bottomNavigation = bottomNavigation;
+    this.chipSyncStatus = chipSyncStatus;
     this.mainRoot = mainRoot;
     this.navHostContainer = navHostContainer;
     this.toolbar = toolbar;
@@ -71,8 +75,14 @@ public final class ActivityMainBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.bottomNavigation;
-      BottomNavigationView bottomNavigation = ViewBindings.findChildViewById(rootView, id);
+      View bottomNavigation = ViewBindings.findChildViewById(rootView, id);
       if (bottomNavigation == null) {
+        break missingId;
+      }
+
+      id = R.id.chipSyncStatus;
+      Chip chipSyncStatus = ViewBindings.findChildViewById(rootView, id);
+      if (chipSyncStatus == null) {
         break missingId;
       }
 
@@ -90,8 +100,8 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, bottomNavigation, mainRoot,
-          navHostContainer, toolbar);
+      return new ActivityMainBinding((ConstraintLayout) rootView, bottomNavigation, chipSyncStatus,
+          mainRoot, navHostContainer, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

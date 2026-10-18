@@ -181,8 +181,8 @@ public class MembersFragment extends Fragment {
         // CONCEPT: Empty state handling with layout_empty_state
         if (filtered.isEmpty()) {
             binding.emptyState.emptyStateLayout.setVisibility(View.VISIBLE);
-            binding.emptyState.tvEmptyTitle.setText("No relatives found");
-            binding.emptyState.tvEmptySubtitle.setText("Add family members using the + button below");
+            binding.emptyState.tvEmptyTitle.setText(R.string.empty_members_title);
+            binding.emptyState.tvEmptySubtitle.setText(R.string.empty_members_subtitle);
         } else {
             binding.emptyState.emptyStateLayout.setVisibility(View.GONE);
         }

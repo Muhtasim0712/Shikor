@@ -14,7 +14,7 @@
         android:id="@+id/ivEmptyIcon"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:contentDescription="@string/app_name"
+        android:importantForAccessibility="no"
         android:src="@android:drawable/ic_menu_gallery"
         app:tint="?attr/colorPrimary" />
 

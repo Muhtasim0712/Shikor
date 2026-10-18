@@ -22,6 +22,16 @@ public class ShikorApp extends Application {
 
         // CONCEPT: Notification channels created once at application start
         NotificationHelper.createNotificationChannels(this);
+
+        // CONCEPT: Restore user selected Theme (System, Light, Dark)
+        String themeMode = com.shikor.app.util.Prefs.getInstance(this).getThemeMode();
+        if (com.shikor.app.util.Prefs.THEME_LIGHT.equals(themeMode)) {
+            androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO);
+        } else if (com.shikor.app.util.Prefs.THEME_DARK.equals(themeMode)) {
+            androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }
     }
 
     public static ShikorApp getInstance() {

@@ -16,7 +16,22 @@
         app:titleTextColor="?attr/colorOnSurface"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipSyncStatus"
+            style="@style/Widget.Material3.Chip.Assist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:text="Synced"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            app:chipIcon="@android:drawable/stat_sys_upload_done"
+            app:chipIconSize="16dp"
+            app:chipMinHeight="32dp" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <FrameLayout
         android:id="@+id/navHostContainer"

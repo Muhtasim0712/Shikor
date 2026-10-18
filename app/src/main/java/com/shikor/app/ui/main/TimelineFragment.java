@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.shikor.app.R;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.shikor.app.adapter.TimelineAdapter;
@@ -125,8 +126,8 @@ public class TimelineFragment extends Fragment {
             } else {
                 binding.timelineEmptyState.emptyStateLayout.setVisibility(View.VISIBLE);
                 binding.rvTimeline.setVisibility(View.GONE);
-                binding.timelineEmptyState.tvEmptyTitle.setText("No Photos in Timeline");
-                binding.timelineEmptyState.tvEmptySubtitle.setText("Add milestone photos with years to see your family timeline unfold!");
+                binding.timelineEmptyState.tvEmptyTitle.setText(R.string.empty_timeline_title);
+                binding.timelineEmptyState.tvEmptySubtitle.setText(R.string.empty_timeline_subtitle);
             }
         });
     }

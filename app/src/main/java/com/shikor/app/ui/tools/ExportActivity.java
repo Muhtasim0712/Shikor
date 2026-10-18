@@ -21,9 +21,15 @@ import com.shikor.app.databinding.ActivityExportBinding;
 import com.shikor.app.databinding.ItemExportContactBinding;
 import com.shikor.app.provider.FamilyProvider;
 import com.shikor.app.ui.base.BaseActivity;
+import com.shikor.app.R;
 import com.shikor.app.util.AppExecutors;
 import com.shikor.app.util.FamilyImporter;
-
+import android.graphics.Bitmap;
+import com.shikor.app.data.local.AppDatabase;
+import com.shikor.app.data.local.entities.PersonEntity;
+import com.shikor.app.util.Prefs;
+import com.shikor.app.util.TreeExporter;
+import com.shikor.app.view.FamilyTreeView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -108,6 +114,8 @@ public class ExportActivity extends BaseActivity {
     }
 
     private void setupClickListeners() {
+        binding.btnExportPdf.setOnClickListener(v -> exportPdfArchive());
+        binding.btnExportPng.setOnClickListener(v -> exportPngArchive());
         binding.btnExportVcf.setOnClickListener(v -> exportVCard());
         binding.btnExportCsv.setOnClickListener(v -> exportCsv());
         binding.btnImportContacts.setOnClickListener(v -> {
@@ -118,6 +126,54 @@ public class ExportActivity extends BaseActivity {
                     "text/vcard",
                     "text/x-vcard",
                     "*/*"
+            });
+        });
+    }
+
+    private void exportPdfArchive() {
+        String familyId = Prefs.getInstance(this).getFamilyId();
+        String familyName = Prefs.getInstance(this).getFamilyName();
+
+        AppExecutors.getInstance().diskIO().execute(() -> {
+            List<PersonEntity> people = AppDatabase.getInstance(this).personDao().getAllPeopleSync(familyId);
+            if (people == null || people.isEmpty()) {
+                AppExecutors.getInstance().mainThread().execute(() ->
+                        Toast.makeText(this, "No family members found to export.", Toast.LENGTH_SHORT).show()
+                );
+                return;
+            }
+
+            AppExecutors.getInstance().mainThread().execute(() -> {
+                FamilyTreeView tempTreeView = new FamilyTreeView(this);
+                tempTreeView.setPeople(people);
+                tempTreeView.postDelayed(() -> {
+                    Bitmap bmp = tempTreeView.exportFullTreeBitmap();
+                    TreeExporter.exportTreeAsPdf(this, bmp, familyName, people);
+                }, 350);
+            });
+        });
+    }
+
+    private void exportPngArchive() {
+        String familyId = Prefs.getInstance(this).getFamilyId();
+        String familyName = Prefs.getInstance(this).getFamilyName();
+
+        AppExecutors.getInstance().diskIO().execute(() -> {
+            List<PersonEntity> people = AppDatabase.getInstance(this).personDao().getAllPeopleSync(familyId);
+            if (people == null || people.isEmpty()) {
+                AppExecutors.getInstance().mainThread().execute(() ->
+                        Toast.makeText(this, "No family members found to export.", Toast.LENGTH_SHORT).show()
+                );
+                return;
+            }
+
+            AppExecutors.getInstance().mainThread().execute(() -> {
+                FamilyTreeView tempTreeView = new FamilyTreeView(this);
+                tempTreeView.setPeople(people);
+                tempTreeView.postDelayed(() -> {
+                    Bitmap bmp = tempTreeView.exportFullTreeBitmap();
+                    TreeExporter.exportTreeAsPng(this, bmp, familyName);
+                }, 350);
             });
         });
     }
@@ -192,6 +248,7 @@ public class ExportActivity extends BaseActivity {
                 }
 
                 binding.tvContactCountBadge.setText(totalCount + " Relatives (" + withPhoneCount + " with phone numbers)");
+                binding.tvEmptyContacts.setText(R.string.empty_contacts_title);
                 binding.tvEmptyContacts.setVisibility(totalCount == 0 ? View.VISIBLE : View.GONE);
             });
         });

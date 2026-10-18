@@ -67,6 +67,7 @@
     <dimen name="text_size_headline">28sp</dimen>
     <dimen name="text_size_subtitle">18sp</dimen>
     <dimen name="text_size_title">22sp</dimen>
+    <string name="action_export">Export</string>
     <string name="action_fit_tree">Fit whole tree</string>
     <string name="action_recenter">Re-center</string>
     <string name="already_have_account">Already have an account? Sign In</string>
@@ -79,6 +80,13 @@
     <string name="create_family_title">Create New Family</string>
     <string name="dont_have_account">Don\'t have an account? Register</string>
     <string name="email_label">Email Address</string>
+    <string name="empty_contacts_title">No family contacts found</string>
+    <string name="empty_members_subtitle">Add family members using the + button below</string>
+    <string name="empty_members_title">No relatives found</string>
+    <string name="empty_timeline_subtitle">Add milestone photos with years to see your family timeline unfold!</string>
+    <string name="empty_timeline_title">No Photos in Timeline</string>
+    <string name="empty_tree_subtitle">Add your family members to see your tree grow!</string>
+    <string name="empty_tree_title">Family Tree is Empty</string>
     <string name="error_auth_failed">Authentication failed: %s</string>
     <string name="error_empty_field">This field cannot be empty</string>
     <string name="error_family_not_found">Family code not found. Please verify with your family admin.</string>
@@ -86,6 +94,10 @@
     <string name="error_invalid_email">Enter a valid email address</string>
     <string name="error_password_mismatch">Passwords do not match</string>
     <string name="error_short_password">Password must be at least 6 characters</string>
+    <string name="export_contacts_csv">Export CSV (.csv)</string>
+    <string name="export_contacts_vcard">Export vCard (.vcf)</string>
+    <string name="export_tree_pdf">Export Tree as PDF</string>
+    <string name="export_tree_png">Export Tree as PNG</string>
     <string name="family_code_invite_message">Join our family archive on Shikor! Our family code is: %s</string>
     <string name="family_code_label">6-Character Family Code</string>
     <string name="family_name_label">Family Name (e.g. Chowdhury Family)</string>
@@ -97,9 +109,12 @@
     <string name="google_app_id" translatable="false">1:633789903240:android:b1f8ca375a233fb5450a3d</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAU2hCyArCSlXJOr7teRfJIsORTShA1tio</string>
     <string name="google_storage_bucket" translatable="false">shikor-app.firebasestorage.app</string>
+    <string name="import_contacts">Import Family Members</string>
     <string name="join_family_btn">Join Family</string>
     <string name="join_family_desc">Enter the 6-character family code provided by an existing family member.</string>
     <string name="join_family_title">Join Existing Family</string>
+    <string name="language_bn">বাংলা (Bengali)</string>
+    <string name="language_en">English</string>
     <string name="loading">Loading…</string>
     <string name="login_button">Sign In</string>
     <string name="login_subtitle">Sign in to access your family archive</string>
@@ -115,9 +130,30 @@
     <string name="register_button">Create Account</string>
     <string name="register_subtitle">Start your digital family legacy</string>
     <string name="register_title">Join Shikor</string>
+    <string name="relationship_calc_btn">Find Relationship</string>
+    <string name="relationship_degree">Degree of Separation</string>
+    <string name="relationship_finder_title">Relationship Finder</string>
+    <string name="relationship_path">Lineage Path</string>
     <string name="reset_password_sent">Password reset email sent</string>
     <string name="save">Save</string>
+    <string name="select_person_1">Select First Relative</string>
+    <string name="select_person_2">Select Second Relative</string>
+    <string name="settings_account_title">Account &amp; App Info</string>
+    <string name="settings_appearance_title">Appearance &amp; Preferences</string>
+    <string name="settings_language_label">Language</string>
+    <string name="settings_logout_label">Log Out of Family Space</string>
+    <string name="settings_reminders_title">Family Reminders &amp; Alarms</string>
+    <string name="settings_theme_label">App Theme</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_tools_title">Data &amp; Export Tools</string>
     <string name="share_family_code">Share Family Code</string>
+    <string name="sync_offline">Offline</string>
+    <string name="sync_pending">%d Pending</string>
+    <string name="sync_synced">Synced</string>
+    <string name="sync_syncing">Syncing…</string>
+    <string name="theme_dark">Dark Theme</string>
+    <string name="theme_light">Light Theme</string>
+    <string name="theme_system">System Default</string>
     <string name="tree_view_chart">Chart view</string>
     <string name="tree_view_natural">Tree view</string>
     <style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">

@@ -14,10 +14,12 @@ import com.google.android.material.chip.Chip;
 import com.shikor.app.adapter.StoryAdapter;
 import com.shikor.app.data.local.entities.PersonEntity;
 import com.shikor.app.databinding.ActivityPersonDetailBinding;
+import com.shikor.app.network.HijriHelper;
 import com.shikor.app.ui.base.BaseActivity;
 import com.shikor.app.ui.story.AddStoryActivity;
 import com.shikor.app.ui.story.StoryDetailActivity;
 import com.shikor.app.ui.story.StoryViewModel;
+import com.shikor.app.ui.tools.RelationshipFinderActivity;
 
 import java.util.List;
 
@@ -142,6 +144,13 @@ public class PersonDetailActivity extends BaseActivity {
             intent.putExtra(AddEditPersonActivity.EXTRA_PERSON_ID, personId);
             startActivity(intent);
         });
+
+        // Calculate Relationship with another relative
+        binding.btnFindRelationship.setOnClickListener(v -> {
+            Intent intent = new Intent(PersonDetailActivity.this, RelationshipFinderActivity.class);
+            intent.putExtra(RelationshipFinderActivity.EXTRA_INITIAL_PERSON_ID, personId);
+            startActivity(intent);
+        });
     }
 
     private void observePerson() {
@@ -199,6 +208,22 @@ public class PersonDetailActivity extends BaseActivity {
             binding.cardBiography.setVisibility(View.VISIBLE);
         } else {
             binding.cardBiography.setVisibility(View.GONE);
+        }
+
+        // Hijri Date Resolution via AladhanClient + HijriCache
+        if (!TextUtils.isEmpty(person.getBirthDate())) {
+            HijriHelper.resolveHijriDate(this, person.getBirthDate(), entity -> {
+                if (!isFinishing() && !isDestroyed()) {
+                    if (entity != null) {
+                        binding.tvFactHijriDate.setText("🌙 Hijri: " + entity.getFormatted());
+                        binding.tvFactHijriDate.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.tvFactHijriDate.setVisibility(View.GONE);
+                    }
+                }
+            });
+        } else {
+            binding.tvFactHijriDate.setVisibility(View.GONE);
         }
     }
 

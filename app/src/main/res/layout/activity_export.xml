@@ -74,11 +74,43 @@
                         android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold" />
 
-                    <!-- Action Buttons -->
+                    <!-- PDF and PNG Export Buttons -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnExportPdf"
+                            style="@style/Widget.Material3.Button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_tiny"
+                            android:layout_weight="1"
+                            android:minHeight="@dimen/min_touch_target"
+                            android:text="Export PDF Document"
+                            app:cornerRadius="@dimen/button_corner_radius"
+                            app:icon="@android:drawable/ic_menu_agenda" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnExportPng"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_tiny"
+                            android:layout_weight="1"
+                            android:minHeight="@dimen/min_touch_target"
+                            android:text="Export PNG Image"
+                            app:cornerRadius="@dimen/button_corner_radius"
+                            app:icon="@android:drawable/ic_menu_gallery" />
+                    </LinearLayout>
+
+                    <!-- Action Buttons -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
                         android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton

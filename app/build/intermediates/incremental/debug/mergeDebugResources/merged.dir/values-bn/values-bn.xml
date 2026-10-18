@@ -31,6 +31,7 @@
     <string msgid="8875138169939072951" name="abc_shareactionprovider_share_with">"শেয়ার করুন"</string>
     <string msgid="9055268688411532828" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g>-এর সাথে শেয়ার করুন"</string>
     <string msgid="1656852541809559762" name="abc_toolbar_collapse_description">"সঙ্কুচিত করুন"</string>
+    <string name="action_export">রপ্তানি</string>
     <string name="action_fit_tree">সম্পূর্ণ গাছ দেখুন</string>
     <string name="action_recenter">পুনরায় কেন্দ্র</string>
     <string name="already_have_account">ইতিমধ্যে অ্যাকাউন্ট আছে? লগ ইন করুন</string>
@@ -79,15 +80,26 @@
     <string name="create_family_title">নতুন পরিবার তৈরি করুন</string>
     <string name="dont_have_account">অ্যাকাউন্ট নেই? রেজিস্টার করুন</string>
     <string name="email_label">ইমেইল ঠিকানা</string>
+    <string name="empty_contacts_title">রপ্তানি করার মতো কোনো যোগাযোগ পাওয়া যায়নি</string>
+    <string name="empty_members_subtitle">নিচের + বাটনে চাপ দিয়ে পরিবারের সদস্য যোগ করুন</string>
+    <string name="empty_members_title">কোন আত্মীয় পাওয়া যায়নি</string>
+    <string name="empty_timeline_subtitle">পারিবারিক মাইলফলকের ছবি ও বছর যুক্ত করে স্মৃতি ধরে রাখুন!</string>
+    <string name="empty_timeline_title">টাইমলাইনে ছবি নেই</string>
+    <string name="empty_tree_subtitle">গাছের শাখা দেখতে আত্মীয়দের তথ্য যুক্ত করুন!</string>
+    <string name="empty_tree_title">বংশলতিকা এখনও খালি</string>
     <string name="error_a11y_label">সমস্যা: সঠিক নয়</string>
     <string name="error_auth_failed">প্রবেশ ব্যর্থ হয়েছে: %s</string>
     <string name="error_empty_field">এই ঘরটি পূরণ করুন</string>
-    <string name="error_family_not_found">ফ্যামিলি কোডটি খুঁজে পাওয়া যায়নি।</string>
+    <string name="error_family_not_found">ফ্যামিলি কোডটি খুঁজে পাওয়া যায়নি। আপনার পরিবারের অ্যাডমিনের সাথে যোগাযোগ করুন।</string>
     <string name="error_icon_content_description">সমস্যা</string>
     <string name="error_invalid_code">ফ্যামিলি কোড ঠিক ৬ অক্ষরের হতে হবে</string>
     <string name="error_invalid_email">সঠিক ইমেইল লিখুন</string>
     <string name="error_password_mismatch">পাসওয়ার্ড দুটি মিলছে না</string>
     <string name="error_short_password">পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে</string>
+    <string name="export_contacts_csv">ডিরেক্টরি রপ্তানি (.csv)</string>
+    <string name="export_contacts_vcard">যোগাযোগ রপ্তানি (.vcf)</string>
+    <string name="export_tree_pdf">পিডিএফ হিসেবে গাছ রপ্তানি</string>
+    <string name="export_tree_png">ছবি (PNG) হিসেবে গাছ রপ্তানি</string>
     <string name="exposed_dropdown_menu_content_description">ড্রপ-ডাউন মেনু দেখুন</string>
     <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"লিঙ্ক কপি করুন"</string>
     <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"ব্রাউজারে খুলুন"</string>
@@ -99,10 +111,13 @@
     <string name="family_setup_title">পারিবারিক স্পেস</string>
     <string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
     <string name="icon_content_description">ডায়ালগ আইকন</string>
+    <string name="import_contacts">আত্মীয়দের তথ্য আমদানি</string>
     <string name="item_view_role_description">ট্যাব</string>
     <string name="join_family_btn">যুক্ত হোন</string>
     <string name="join_family_desc">আত্মীয়দের পাঠানো ৬ অক্ষরের পারিবারিক কোডটি দিন।</string>
     <string name="join_family_title">পরিবারে যুক্ত হোন</string>
+    <string name="language_bn">বাংলা (Bengali)</string>
+    <string name="language_en">English (ইংরেজি)</string>
     <string name="loading">লোড হচ্ছে…</string>
     <string name="login_button">লগ ইন</string>
     <string name="login_subtitle">আপনার পারিবারিক আর্কাইভে প্রবেশ করুন</string>
@@ -176,14 +191,35 @@
     <string name="register_button">অ্যাকাউন্ট তৈরি করুন</string>
     <string name="register_subtitle">আপনার ডিজিটাল বংশলতিকা তৈরি শুরু করুন</string>
     <string name="register_title">শিকড়ে যোগ দিন</string>
+    <string name="relationship_calc_btn">সম্পর্ক বের করুন</string>
+    <string name="relationship_degree">সম্পর্কের দূরত্ব</string>
+    <string name="relationship_finder_title">সম্পর্ক অনুসন্ধান</string>
+    <string name="relationship_path">বংশলতিকার সংযোগ পথ</string>
     <string name="reset_password_sent">পাসওয়ার্ড রিসেট ইমেইল পাঠানো হয়েছে</string>
     <string name="save">সংরক্ষণ</string>
     <string msgid="6264217191555673260" name="search_menu_title">"সার্চ করুন"</string>
     <string name="searchview_clear_text_content_description">টেক্সট মুছুন</string>
     <string name="searchview_navigation_content_description">ফিরে যান</string>
+    <string name="select_person_1">প্রথম আত্মীয় নির্বাচন করুন</string>
+    <string name="select_person_2">দ্বিতীয় আত্মীয় নির্বাচন করুন</string>
+    <string name="settings_account_title">অ্যাকাউন্ট ও তথ্য</string>
+    <string name="settings_appearance_title">চেহারা ও পছন্দসমূহ</string>
+    <string name="settings_language_label">ভাষা</string>
+    <string name="settings_logout_label">পরিবার থেকে লগ আউট</string>
+    <string name="settings_reminders_title">পারিবারিক স্মরণ ও অ্যালার্ম</string>
+    <string name="settings_theme_label">অ্যাপের থিম</string>
+    <string name="settings_title">সেটিংস</string>
+    <string name="settings_tools_title">ডাটা ও রপ্তানি সরঞ্জাম</string>
     <string name="share_family_code">ফ্যামিলি কোড শেয়ার করুন</string>
     <string name="side_sheet_accessibility_pane_title">সাইড শিট</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"৯৯৯+"</string>
+    <string name="sync_offline">অফলাইন</string>
+    <string name="sync_pending">%dটি অপেক্ষমাণ</string>
+    <string name="sync_synced">সিঙ্ক হয়েছে</string>
+    <string name="sync_syncing">সিঙ্ক হচ্ছে…</string>
+    <string name="theme_dark">অন্ধকার থিম (ডার্ক / নাইট)</string>
+    <string name="theme_light">উজ্জ্বল থিম (লাইট)</string>
+    <string name="theme_system">সিস্টেম ডিফল্ট</string>
     <string name="tree_view_chart">চার্ট রূপ</string>
     <string name="tree_view_natural">বৃক্ষ রূপ</string>
 </resources>

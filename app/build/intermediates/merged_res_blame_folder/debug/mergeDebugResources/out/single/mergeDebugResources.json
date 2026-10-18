@@ -20,6 +20,10 @@
         "source": "com.shikor.app-main-50:/layout/fragment_members.xml"
     },
     {
+        "merged": "com.shikor.app-debug-48:/layout-sw600dp_activity_export.xml.flat",
+        "source": "com.shikor.app-main-50:/layout-sw600dp/activity_export.xml"
+    },
+    {
         "merged": "com.shikor.app-debug-48:/xml_kinship_terms.xml.flat",
         "source": "com.shikor.app-main-50:/xml/kinship_terms.xml"
     },
@@ -92,6 +96,10 @@
         "source": "com.shikor.app-main-50:/layout/item_story_photo.xml"
     },
     {
+        "merged": "com.shikor.app-debug-48:/drawable_bg_indicator_active.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/bg_indicator_active.xml"
+    },
+    {
         "merged": "com.shikor.app-debug-48:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
         "source": "com.shikor.app-main-50:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
@@ -100,8 +108,16 @@
         "source": "com.shikor.app-main-50:/color/chip_background_selector.xml"
     },
     {
+        "merged": "com.shikor.app-debug-48:/layout-sw600dp_activity_main.xml.flat",
+        "source": "com.shikor.app-main-50:/layout-sw600dp/activity_main.xml"
+    },
+    {
         "merged": "com.shikor.app-debug-48:/drawable_ic_fit_screen.xml.flat",
         "source": "com.shikor.app-main-50:/drawable/ic_fit_screen.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout-sw600dp_fragment_settings.xml.flat",
+        "source": "com.shikor.app-main-50:/layout-sw600dp/fragment_settings.xml"
     },
     {
         "merged": "com.shikor.app-debug-48:/xml_file_paths.xml.flat",
@@ -138,6 +154,10 @@
     {
         "merged": "com.shikor.app-debug-48:/layout_fragment_settings.xml.flat",
         "source": "com.shikor.app-main-50:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout-sw600dp_activity_relationship_finder.xml.flat",
+        "source": "com.shikor.app-main-50:/layout-sw600dp/activity_relationship_finder.xml"
     },
     {
         "merged": "com.shikor.app-debug-48:/anim_fade_out_subtle.xml.flat",
@@ -182,6 +202,14 @@
     {
         "merged": "com.shikor.app-debug-48:/layout_fragment_tree.xml.flat",
         "source": "com.shikor.app-main-50:/layout/fragment_tree.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_activity_relationship_finder.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_relationship_finder.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_item_relationship_step.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/item_relationship_step.xml"
     },
     {
         "merged": "com.shikor.app-debug-48:/mipmap-xhdpi_ic_launcher.webp.flat",

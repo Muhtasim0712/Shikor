@@ -21,6 +21,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.shikor.app.R;
 import com.shikor.app.data.repository.FamilyRepository;
 import com.shikor.app.databinding.ActivityMainBinding;
+import com.shikor.app.sync.SyncManager;
 import com.shikor.app.ui.base.BaseActivity;
 import com.shikor.app.ui.tools.ExportActivity;
 import com.shikor.app.util.AlarmScheduler;
@@ -28,6 +29,10 @@ import com.shikor.app.util.AppExecutors;
 import com.shikor.app.util.FamilyImporter;
 import com.shikor.app.util.NotificationHelper;
 import com.shikor.app.util.Prefs;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * MainActivity - Primary container activity for Shikor.
@@ -79,13 +84,84 @@ public class MainActivity extends BaseActivity {
         NotificationHelper.createNotificationChannels(this);
         checkNotificationPermissionAndSchedule();
 
+        // Setup real-time Cloud Sync & Status Chip monitoring
+        setupSyncMonitoring();
+
         setupBottomNavigation();
 
         // Default screen is MembersFragment (or TreeFragment)
         if (savedInstanceState == null) {
             loadFragment(new MembersFragment());
-            binding.bottomNavigation.setSelectedItemId(R.id.nav_members);
+            ((com.google.android.material.navigation.NavigationBarView) binding.bottomNavigation).setSelectedItemId(R.id.nav_members);
         }
+    }
+
+    private void setupSyncMonitoring() {
+        SyncManager syncManager = SyncManager.getInstance(this);
+        String familyId = Prefs.getInstance(this).getFamilyId();
+        if (familyId != null && !familyId.isEmpty()) {
+            syncManager.attachSnapshotListeners(familyId);
+        }
+
+        syncManager.getSyncStatusLiveData().observe(this, this::updateSyncChip);
+        binding.chipSyncStatus.setOnClickListener(v -> showSyncDetailsDialog());
+    }
+
+    private void updateSyncChip(SyncManager.SyncStatus status) {
+        if (status == null || binding == null) return;
+
+        switch (status.state) {
+            case SYNCED:
+                binding.chipSyncStatus.setText("Synced");
+                binding.chipSyncStatus.setChipIconResource(android.R.drawable.stat_sys_upload_done);
+                binding.chipSyncStatus.setChipIconTint(ContextCompat.getColorStateList(this, R.color.primary));
+                break;
+            case SYNCING:
+                binding.chipSyncStatus.setText("Syncing...");
+                binding.chipSyncStatus.setChipIconResource(android.R.drawable.stat_notify_sync);
+                binding.chipSyncStatus.setChipIconTint(ContextCompat.getColorStateList(this, R.color.tertiary));
+                break;
+            case PENDING_CHANGES:
+                binding.chipSyncStatus.setText(status.pendingCount + " Pending");
+                binding.chipSyncStatus.setChipIconResource(android.R.drawable.stat_sys_upload);
+                binding.chipSyncStatus.setChipIconTint(ContextCompat.getColorStateList(this, R.color.tertiary));
+                break;
+            case OFFLINE:
+                binding.chipSyncStatus.setText("Offline");
+                binding.chipSyncStatus.setChipIconResource(android.R.drawable.stat_sys_warning);
+                binding.chipSyncStatus.setChipIconTint(ContextCompat.getColorStateList(this, R.color.outline));
+                break;
+            case ERROR:
+                binding.chipSyncStatus.setText("Sync Issue");
+                binding.chipSyncStatus.setChipIconResource(android.R.drawable.stat_notify_error);
+                binding.chipSyncStatus.setChipIconTint(ContextCompat.getColorStateList(this, R.color.error));
+                break;
+        }
+    }
+
+    private void showSyncDetailsDialog() {
+        SyncManager syncManager = SyncManager.getInstance(this);
+        SyncManager.SyncStatus status = syncManager.getSyncStatusLiveData().getValue();
+        String stateName = status != null ? status.state.name() : "UNKNOWN";
+        String message = status != null ? status.statusMessage : "Checking sync status...";
+        String timeStr = (status != null && status.lastSyncedTimestamp > 0) ?
+                new SimpleDateFormat("hh:mm a, dd MMM", Locale.getDefault()).format(new Date(status.lastSyncedTimestamp)) :
+                "Pending initial sync";
+
+        String body = "Connection: " + (syncManager.isNetworkOnline() ? "Online 🟢" : "Offline ⚪") + "\n\n" +
+                "Cloud State: " + stateName + "\n" +
+                "Details: " + message + "\n" +
+                "Last Synced: " + timeStr;
+
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Cloud Synchronization")
+                .setMessage(body)
+                .setPositiveButton("Sync Now", (dialog, which) -> {
+                    syncManager.triggerManualSync();
+                    Toast.makeText(this, "Manual cloud sync triggered", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Close", null)
+                .show();
     }
 
     private void checkNotificationPermissionAndSchedule() {
@@ -106,12 +182,13 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         String familyId = Prefs.getInstance(this).getFamilyId();
         if (familyId != null && !familyId.isEmpty()) {
+            SyncManager.getInstance(this).attachSnapshotListeners(familyId);
             FamilyRepository.getInstance(this).syncDownFamilyData(familyId, null);
         }
     }
 
     private void setupBottomNavigation() {
-        binding.bottomNavigation.setOnItemSelectedListener(item -> {
+        ((com.google.android.material.navigation.NavigationBarView) binding.bottomNavigation).setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_members) {
                 loadFragment(new MembersFragment());

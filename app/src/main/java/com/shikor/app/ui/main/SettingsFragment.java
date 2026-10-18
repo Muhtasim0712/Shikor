@@ -25,11 +25,22 @@ import com.google.android.material.timepicker.TimeFormat;
 import com.shikor.app.R;
 import com.shikor.app.databinding.FragmentSettingsBinding;
 import com.shikor.app.ui.tools.ExportActivity;
+import com.shikor.app.ui.tools.RelationshipFinderActivity;
 import com.shikor.app.util.AlarmScheduler;
 import com.shikor.app.util.AppExecutors;
 import com.shikor.app.util.FamilyImporter;
 import com.shikor.app.util.NotificationHelper;
 import com.shikor.app.util.Prefs;
+import com.shikor.app.util.TreeExporter;
+import com.shikor.app.view.FamilyTreeView;
+import com.shikor.app.data.local.AppDatabase;
+import com.shikor.app.data.local.entities.PersonEntity;
+import com.shikor.app.ui.auth.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat;
+import android.graphics.Bitmap;
+import java.util.List;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -85,6 +96,8 @@ public class SettingsFragment extends Fragment {
         populateFamilyInfo();
         setupRemindersSection();
         setupToolsSection();
+        setupPreferencesSection();
+        setupAccountSection();
     }
 
     private void populateFamilyInfo() {
@@ -257,6 +270,142 @@ public class SettingsFragment extends Fragment {
                     "text/x-vcard",
                     "*/*"
             });
+        });
+
+        // Open Relationship Finder
+        binding.layoutRelationshipFinder.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), RelationshipFinderActivity.class);
+            startActivity(intent);
+        });
+
+        // Export Family Tree (PDF & PNG)
+        binding.layoutExportTree.setOnClickListener(v -> showExportTreeDialog());
+    }
+
+    private void showExportTreeDialog() {
+        String[] options = {"Export PDF Document (Archive)", "Export PNG Image (Diagram)"};
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Export Family Tree")
+                .setItems(options, (dialog, which) -> {
+                    String familyId = prefs.getFamilyId();
+                    String familyName = prefs.getFamilyName();
+
+                    AppExecutors.getInstance().diskIO().execute(() -> {
+                        List<PersonEntity> people = AppDatabase.getInstance(requireContext()).personDao().getAllPeopleSync(familyId);
+                        if (people == null || people.isEmpty()) {
+                            AppExecutors.getInstance().mainThread().execute(() ->
+                                    Toast.makeText(requireContext(), "No relatives found to export.", Toast.LENGTH_SHORT).show()
+                            );
+                            return;
+                        }
+
+                        AppExecutors.getInstance().mainThread().execute(() -> {
+                            if (!isAdded()) return;
+                            FamilyTreeView tempTreeView = new FamilyTreeView(requireContext());
+                            tempTreeView.setPeople(people);
+                            tempTreeView.postDelayed(() -> {
+                                if (!isAdded()) return;
+                                Bitmap bmp = tempTreeView.exportFullTreeBitmap();
+                                if (which == 0) {
+                                    TreeExporter.exportTreeAsPdf(requireContext(), bmp, familyName, people);
+                                } else {
+                                    TreeExporter.exportTreeAsPng(requireContext(), bmp, familyName);
+                                }
+                            }, 350);
+                        });
+                    });
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void setupPreferencesSection() {
+        updateThemeDisplay();
+        updateLanguageDisplay();
+
+        binding.layoutThemeSetting.setOnClickListener(v -> showThemeDialog());
+        binding.layoutLanguageSetting.setOnClickListener(v -> showLanguageDialog());
+    }
+
+    private void updateThemeDisplay() {
+        String mode = prefs.getThemeMode();
+        if (Prefs.THEME_LIGHT.equals(mode)) {
+            binding.tvCurrentThemeValue.setText("Light Theme (উজ্জ্বল)");
+        } else if (Prefs.THEME_DARK.equals(mode)) {
+            binding.tvCurrentThemeValue.setText("Dark Theme (অন্ধকার / নাইট)");
+        } else {
+            binding.tvCurrentThemeValue.setText("System Default (সিস্টেম ডিফল্ট)");
+        }
+    }
+
+    private void showThemeDialog() {
+        String[] options = {"System Default", "Light Theme", "Dark Theme"};
+        int currentIdx = 0;
+        String mode = prefs.getThemeMode();
+        if (Prefs.THEME_LIGHT.equals(mode)) currentIdx = 1;
+        else if (Prefs.THEME_DARK.equals(mode)) currentIdx = 2;
+
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Select App Theme")
+                .setSingleChoiceItems(options, currentIdx, (dialog, which) -> {
+                    dialog.dismiss();
+                    if (which == 1) {
+                        prefs.setThemeMode(Prefs.THEME_LIGHT);
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    } else if (which == 2) {
+                        prefs.setThemeMode(Prefs.THEME_DARK);
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    } else {
+                        prefs.setThemeMode(Prefs.THEME_SYSTEM);
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                    }
+                    updateThemeDisplay();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void updateLanguageDisplay() {
+        String lang = prefs.getLanguage();
+        if ("bn".equals(lang)) {
+            binding.tvCurrentLanguageValue.setText("বাংলা (Bengali)");
+        } else {
+            binding.tvCurrentLanguageValue.setText("English (ইংরেজি)");
+        }
+    }
+
+    private void showLanguageDialog() {
+        String[] options = {"English", "বাংলা (Bengali)"};
+        int currentIdx = "bn".equals(prefs.getLanguage()) ? 1 : 0;
+
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Select Language")
+                .setSingleChoiceItems(options, currentIdx, (dialog, which) -> {
+                    dialog.dismiss();
+                    String langTag = which == 1 ? "bn" : "en";
+                    prefs.setLanguage(langTag);
+                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(langTag));
+                    updateLanguageDisplay();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void setupAccountSection() {
+        binding.btnSettingsLogout.setOnClickListener(v -> {
+            new MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Log Out")
+                    .setMessage("Are you sure you want to log out of your family space? You can log back in with your email and password at any time.")
+                    .setPositiveButton("Log Out", (dialog, which) -> {
+                        FirebaseAuth.getInstance().signOut();
+                        prefs.clearSession();
+                        Intent intent = new Intent(requireContext(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        requireActivity().finish();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
         });
     }
 

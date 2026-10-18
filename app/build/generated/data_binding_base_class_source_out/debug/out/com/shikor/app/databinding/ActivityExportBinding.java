@@ -26,6 +26,12 @@ public final class ActivityExportBinding implements ViewBinding {
   public final MaterialButton btnExportCsv;
 
   @NonNull
+  public final MaterialButton btnExportPdf;
+
+  @NonNull
+  public final MaterialButton btnExportPng;
+
+  @NonNull
   public final MaterialButton btnExportVcf;
 
   @NonNull
@@ -47,12 +53,15 @@ public final class ActivityExportBinding implements ViewBinding {
   public final TextView tvExportSubtitle;
 
   private ActivityExportBinding(@NonNull LinearLayout rootView,
-      @NonNull MaterialButton btnExportCsv, @NonNull MaterialButton btnExportVcf,
+      @NonNull MaterialButton btnExportCsv, @NonNull MaterialButton btnExportPdf,
+      @NonNull MaterialButton btnExportPng, @NonNull MaterialButton btnExportVcf,
       @NonNull MaterialButton btnImportContacts, @NonNull RecyclerView rvExportContacts,
       @NonNull MaterialToolbar toolbar, @NonNull TextView tvContactCountBadge,
       @NonNull TextView tvEmptyContacts, @NonNull TextView tvExportSubtitle) {
     this.rootView = rootView;
     this.btnExportCsv = btnExportCsv;
+    this.btnExportPdf = btnExportPdf;
+    this.btnExportPng = btnExportPng;
     this.btnExportVcf = btnExportVcf;
     this.btnImportContacts = btnImportContacts;
     this.rvExportContacts = rvExportContacts;
@@ -92,6 +101,18 @@ public final class ActivityExportBinding implements ViewBinding {
       id = R.id.btnExportCsv;
       MaterialButton btnExportCsv = ViewBindings.findChildViewById(rootView, id);
       if (btnExportCsv == null) {
+        break missingId;
+      }
+
+      id = R.id.btnExportPdf;
+      MaterialButton btnExportPdf = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportPdf == null) {
+        break missingId;
+      }
+
+      id = R.id.btnExportPng;
+      MaterialButton btnExportPng = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportPng == null) {
         break missingId;
       }
 
@@ -137,9 +158,9 @@ public final class ActivityExportBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityExportBinding((LinearLayout) rootView, btnExportCsv, btnExportVcf,
-          btnImportContacts, rvExportContacts, toolbar, tvContactCountBadge, tvEmptyContacts,
-          tvExportSubtitle);
+      return new ActivityExportBinding((LinearLayout) rootView, btnExportCsv, btnExportPdf,
+          btnExportPng, btnExportVcf, btnImportContacts, rvExportContacts, toolbar,
+          tvContactCountBadge, tvEmptyContacts, tvExportSubtitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

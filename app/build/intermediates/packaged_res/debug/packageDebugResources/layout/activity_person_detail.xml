@@ -118,9 +118,20 @@
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_small"
                             android:minHeight="@dimen/min_touch_target"
                             android:text="Share"
                             app:icon="@android:drawable/ic_menu_share" />
+
+                        <!-- Find Relationship -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnFindRelationship"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/min_touch_target"
+                            android:text="Kinship"
+                            app:icon="@android:drawable/ic_menu_search" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

@@ -1,7 +1,9 @@
 package com.shikor.app.ui.main;
 
+import android.graphics.Bitmap;
 import android.content.Intent;
 import android.os.Bundle;
+import com.shikor.app.util.TreeExporter;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -135,6 +137,20 @@ public class TreeFragment extends Fragment {
                     menuItem.setChecked(true);
                     setTreeMode(Prefs.VIEW_MODE_CLASSIC_CHART);
                     return true;
+                } else if (itemId == R.id.menu_export_tree_png) {
+                    if (binding != null) {
+                        Bitmap bmp = binding.familyTreeView.exportFullTreeBitmap();
+                        String familyName = Prefs.getInstance(requireContext()).getFamilyName();
+                        TreeExporter.exportTreeAsPng(requireContext(), bmp, familyName);
+                    }
+                    return true;
+                } else if (itemId == R.id.menu_export_tree_pdf) {
+                    if (binding != null) {
+                        Bitmap bmp = binding.familyTreeView.exportFullTreeBitmap();
+                        String familyName = Prefs.getInstance(requireContext()).getFamilyName();
+                        TreeExporter.exportTreeAsPdf(requireContext(), bmp, familyName, membersList);
+                    }
+                    return true;
                 }
                 return false;
             }
@@ -180,8 +196,8 @@ public class TreeFragment extends Fragment {
             } else {
                 binding.treeEmptyState.emptyStateLayout.setVisibility(View.VISIBLE);
                 binding.familyTreeView.setVisibility(View.GONE);
-                binding.treeEmptyState.tvEmptyTitle.setText("Family Tree is Empty");
-                binding.treeEmptyState.tvEmptySubtitle.setText("Add your family members from the Members tab to see your tree grow!");
+                binding.treeEmptyState.tvEmptyTitle.setText(R.string.empty_tree_title);
+                binding.treeEmptyState.tvEmptySubtitle.setText(R.string.empty_tree_subtitle);
             }
         });
     }

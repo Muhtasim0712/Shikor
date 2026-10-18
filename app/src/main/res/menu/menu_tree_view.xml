@@ -25,4 +25,19 @@
         </menu>
     </item>
 
+    <item
+        android:id="@+id/action_export_tree"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/action_export"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/menu_export_tree_pdf"
+                android:title="@string/export_tree_pdf" />
+            <item
+                android:id="@+id/menu_export_tree_png"
+                android:title="@string/export_tree_png" />
+        </menu>
+    </item>
+
 </menu>

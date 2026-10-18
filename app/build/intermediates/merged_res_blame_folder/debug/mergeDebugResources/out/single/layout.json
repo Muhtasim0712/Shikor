@@ -1,13 +1,5 @@
 [
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_main.xml",
-        "source": "com.shikor.app-main-50:/layout/activity_main.xml"
-    },
-    {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/item_timeline_year_header.xml",
-        "source": "com.shikor.app-main-50:/layout/item_timeline_year_header.xml"
-    },
-    {
         "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_export.xml",
         "source": "com.shikor.app-main-50:/layout/activity_export.xml"
     },
@@ -16,20 +8,12 @@
         "source": "com.shikor.app-main-50:/layout/activity_family_setup.xml"
     },
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_add_edit_person.xml",
-        "source": "com.shikor.app-main-50:/layout/activity_add_edit_person.xml"
-    },
-    {
         "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_story_detail.xml",
         "source": "com.shikor.app-main-50:/layout/activity_story_detail.xml"
     },
     {
         "merged": "com.shikor.app-mergeDebugResources-47:/layout/dialog_add_timeline_photo.xml",
         "source": "com.shikor.app-main-50:/layout/dialog_add_timeline_photo.xml"
-    },
-    {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_person_detail.xml",
-        "source": "com.shikor.app-main-50:/layout/activity_person_detail.xml"
     },
     {
         "merged": "com.shikor.app-mergeDebugResources-47:/layout/fragment_tree.xml",
@@ -56,16 +40,48 @@
         "source": "com.shikor.app-main-50:/layout/item_timeline_photo.xml"
     },
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_splash.xml",
-        "source": "com.shikor.app-main-50:/layout/activity_splash.xml"
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/item_story_photo.xml",
+        "source": "com.shikor.app-main-50:/layout/item_story_photo.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_relationship_finder.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_relationship_finder.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/layout_loading.xml",
+        "source": "com.shikor.app-main-50:/layout/layout_loading.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/item_export_contact.xml",
+        "source": "com.shikor.app-main-50:/layout/item_export_contact.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/item_relationship_step.xml",
+        "source": "com.shikor.app-main-50:/layout/item_relationship_step.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_main.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/item_timeline_year_header.xml",
+        "source": "com.shikor.app-main-50:/layout/item_timeline_year_header.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_add_edit_person.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_add_edit_person.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_person_detail.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_person_detail.xml"
     },
     {
         "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_add_story.xml",
         "source": "com.shikor.app-main-50:/layout/activity_add_story.xml"
     },
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/item_story_photo.xml",
-        "source": "com.shikor.app-main-50:/layout/item_story_photo.xml"
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_splash.xml",
+        "source": "com.shikor.app-main-50:/layout/activity_splash.xml"
     },
     {
         "merged": "com.shikor.app-mergeDebugResources-47:/layout/activity_login.xml",
@@ -76,19 +92,11 @@
         "source": "com.shikor.app-main-50:/layout/layout_empty_state.xml"
     },
     {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/layout_loading.xml",
-        "source": "com.shikor.app-main-50:/layout/layout_loading.xml"
-    },
-    {
         "merged": "com.shikor.app-mergeDebugResources-47:/layout/item_member.xml",
         "source": "com.shikor.app-main-50:/layout/item_member.xml"
     },
     {
         "merged": "com.shikor.app-mergeDebugResources-47:/layout/fragment_settings.xml",
         "source": "com.shikor.app-main-50:/layout/fragment_settings.xml"
-    },
-    {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/item_export_contact.xml",
-        "source": "com.shikor.app-main-50:/layout/item_export_contact.xml"
     }
 ]

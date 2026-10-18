@@ -118,6 +118,19 @@ public class Prefs {
         preferences.edit().putString(KEY_TREE_VIEW_MODE, mode).apply();
     }
 
+    private static final String KEY_THEME_MODE = "key_theme_mode";
+    public static final String THEME_SYSTEM = "system";
+    public static final String THEME_LIGHT = "light";
+    public static final String THEME_DARK = "dark";
+
+    public String getThemeMode() {
+        return preferences.getString(KEY_THEME_MODE, THEME_SYSTEM);
+    }
+
+    public void setThemeMode(String theme) {
+        preferences.edit().putString(KEY_THEME_MODE, theme).apply();
+    }
+
     public void clearSession() {
         preferences.edit().clear().apply();
     }

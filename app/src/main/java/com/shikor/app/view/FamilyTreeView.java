@@ -591,4 +591,61 @@ public class FamilyTreeView extends View {
             super.onRestoreInstanceState(state);
         }
     }
+
+    /**
+     * Captures and renders the entire family tree canvas into a high-resolution Bitmap.
+     * Perfect for PNG and PDF archival document exports.
+     */
+    public Bitmap exportFullTreeBitmap() {
+        if (layoutResult == null || layoutResult.allUnits.isEmpty() || layoutResult.bounds.isEmpty()) {
+            return null;
+        }
+
+        RectF bounds = new RectF(layoutResult.bounds);
+        float padding = 80f * density;
+        bounds.inset(-padding, -padding);
+
+        float w = bounds.width();
+        float h = bounds.height();
+        if (w <= 0 || h <= 0) return null;
+
+        float maxDim = 3200f;
+        float scale = Math.min(1.0f, Math.min(maxDim / w, maxDim / h));
+        int bmpW = Math.max(300, (int) (w * scale));
+        int bmpH = Math.max(300, (int) (h * scale));
+
+        Bitmap bitmap = Bitmap.createBitmap(bmpW, bmpH, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+
+        final boolean natural = isNaturalTreeMode();
+        final boolean night = isNightMode();
+
+        Matrix m = new Matrix();
+        RectF destRect = new RectF(0, 0, bmpW, bmpH);
+        m.setRectToRect(bounds, destRect, Matrix.ScaleToFit.CENTER);
+
+        canvas.save();
+        canvas.concat(m);
+
+        if (natural) {
+            treePainter.drawBackground(canvas, layoutResult, night);
+        } else {
+            canvas.drawColor(night ? 0xFF121A15 : 0xFFFBF9F3);
+        }
+
+        if (staticLayerPicture != null) {
+            staticLayerPicture.draw(canvas);
+        }
+
+        for (TreeUnit unit : layoutResult.allUnits) {
+            treePainter.drawPersonNode(canvas, unit.primary, unit.primaryRect, photoCache, null, natural);
+            if (unit.spouse != null) {
+                treePainter.drawPersonNode(canvas, unit.spouse, unit.spouseRect, photoCache, null, natural);
+            }
+        }
+
+        canvas.restore();
+        return bitmap;
+    }
 }
+

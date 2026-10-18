@@ -29,6 +29,9 @@ public final class FragmentSettingsBinding implements ViewBinding {
   public final MaterialButton btnGrantExactAlarm;
 
   @NonNull
+  public final MaterialButton btnSettingsLogout;
+
+  @NonNull
   public final MaterialButton btnTestReminder;
 
   @NonNull
@@ -38,13 +41,34 @@ public final class FragmentSettingsBinding implements ViewBinding {
   public final LinearLayout layoutExportContacts;
 
   @NonNull
+  public final LinearLayout layoutExportTree;
+
+  @NonNull
   public final LinearLayout layoutImportMembers;
+
+  @NonNull
+  public final LinearLayout layoutLanguageSetting;
+
+  @NonNull
+  public final LinearLayout layoutRelationshipFinder;
 
   @NonNull
   public final LinearLayout layoutReminderTime;
 
   @NonNull
+  public final LinearLayout layoutThemeSetting;
+
+  @NonNull
   public final MaterialSwitch switchDailyReminders;
+
+  @NonNull
+  public final TextView tvAppInfo;
+
+  @NonNull
+  public final TextView tvCurrentLanguageValue;
+
+  @NonNull
+  public final TextView tvCurrentThemeValue;
 
   @NonNull
   public final TextView tvNextAlertStatus;
@@ -63,21 +87,33 @@ public final class FragmentSettingsBinding implements ViewBinding {
 
   private FragmentSettingsBinding(@NonNull NestedScrollView rootView,
       @NonNull MaterialButton btnCopyCode, @NonNull MaterialButton btnGrantExactAlarm,
-      @NonNull MaterialButton btnTestReminder, @NonNull LinearLayout layoutExactAlarmWarning,
-      @NonNull LinearLayout layoutExportContacts, @NonNull LinearLayout layoutImportMembers,
-      @NonNull LinearLayout layoutReminderTime, @NonNull MaterialSwitch switchDailyReminders,
+      @NonNull MaterialButton btnSettingsLogout, @NonNull MaterialButton btnTestReminder,
+      @NonNull LinearLayout layoutExactAlarmWarning, @NonNull LinearLayout layoutExportContacts,
+      @NonNull LinearLayout layoutExportTree, @NonNull LinearLayout layoutImportMembers,
+      @NonNull LinearLayout layoutLanguageSetting, @NonNull LinearLayout layoutRelationshipFinder,
+      @NonNull LinearLayout layoutReminderTime, @NonNull LinearLayout layoutThemeSetting,
+      @NonNull MaterialSwitch switchDailyReminders, @NonNull TextView tvAppInfo,
+      @NonNull TextView tvCurrentLanguageValue, @NonNull TextView tvCurrentThemeValue,
       @NonNull TextView tvNextAlertStatus, @NonNull TextView tvReminderTimeValue,
       @NonNull TextView tvSettingsFamilyCode, @NonNull TextView tvSettingsFamilyName,
       @NonNull TextView tvSettingsUserEmail) {
     this.rootView = rootView;
     this.btnCopyCode = btnCopyCode;
     this.btnGrantExactAlarm = btnGrantExactAlarm;
+    this.btnSettingsLogout = btnSettingsLogout;
     this.btnTestReminder = btnTestReminder;
     this.layoutExactAlarmWarning = layoutExactAlarmWarning;
     this.layoutExportContacts = layoutExportContacts;
+    this.layoutExportTree = layoutExportTree;
     this.layoutImportMembers = layoutImportMembers;
+    this.layoutLanguageSetting = layoutLanguageSetting;
+    this.layoutRelationshipFinder = layoutRelationshipFinder;
     this.layoutReminderTime = layoutReminderTime;
+    this.layoutThemeSetting = layoutThemeSetting;
     this.switchDailyReminders = switchDailyReminders;
+    this.tvAppInfo = tvAppInfo;
+    this.tvCurrentLanguageValue = tvCurrentLanguageValue;
+    this.tvCurrentThemeValue = tvCurrentThemeValue;
     this.tvNextAlertStatus = tvNextAlertStatus;
     this.tvReminderTimeValue = tvReminderTimeValue;
     this.tvSettingsFamilyCode = tvSettingsFamilyCode;
@@ -124,6 +160,12 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnSettingsLogout;
+      MaterialButton btnSettingsLogout = ViewBindings.findChildViewById(rootView, id);
+      if (btnSettingsLogout == null) {
+        break missingId;
+      }
+
       id = R.id.btnTestReminder;
       MaterialButton btnTestReminder = ViewBindings.findChildViewById(rootView, id);
       if (btnTestReminder == null) {
@@ -142,9 +184,27 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.layoutExportTree;
+      LinearLayout layoutExportTree = ViewBindings.findChildViewById(rootView, id);
+      if (layoutExportTree == null) {
+        break missingId;
+      }
+
       id = R.id.layoutImportMembers;
       LinearLayout layoutImportMembers = ViewBindings.findChildViewById(rootView, id);
       if (layoutImportMembers == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutLanguageSetting;
+      LinearLayout layoutLanguageSetting = ViewBindings.findChildViewById(rootView, id);
+      if (layoutLanguageSetting == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutRelationshipFinder;
+      LinearLayout layoutRelationshipFinder = ViewBindings.findChildViewById(rootView, id);
+      if (layoutRelationshipFinder == null) {
         break missingId;
       }
 
@@ -154,9 +214,33 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.layoutThemeSetting;
+      LinearLayout layoutThemeSetting = ViewBindings.findChildViewById(rootView, id);
+      if (layoutThemeSetting == null) {
+        break missingId;
+      }
+
       id = R.id.switchDailyReminders;
       MaterialSwitch switchDailyReminders = ViewBindings.findChildViewById(rootView, id);
       if (switchDailyReminders == null) {
+        break missingId;
+      }
+
+      id = R.id.tvAppInfo;
+      TextView tvAppInfo = ViewBindings.findChildViewById(rootView, id);
+      if (tvAppInfo == null) {
+        break missingId;
+      }
+
+      id = R.id.tvCurrentLanguageValue;
+      TextView tvCurrentLanguageValue = ViewBindings.findChildViewById(rootView, id);
+      if (tvCurrentLanguageValue == null) {
+        break missingId;
+      }
+
+      id = R.id.tvCurrentThemeValue;
+      TextView tvCurrentThemeValue = ViewBindings.findChildViewById(rootView, id);
+      if (tvCurrentThemeValue == null) {
         break missingId;
       }
 
@@ -191,8 +275,10 @@ public final class FragmentSettingsBinding implements ViewBinding {
       }
 
       return new FragmentSettingsBinding((NestedScrollView) rootView, btnCopyCode,
-          btnGrantExactAlarm, btnTestReminder, layoutExactAlarmWarning, layoutExportContacts,
-          layoutImportMembers, layoutReminderTime, switchDailyReminders, tvNextAlertStatus,
+          btnGrantExactAlarm, btnSettingsLogout, btnTestReminder, layoutExactAlarmWarning,
+          layoutExportContacts, layoutExportTree, layoutImportMembers, layoutLanguageSetting,
+          layoutRelationshipFinder, layoutReminderTime, layoutThemeSetting, switchDailyReminders,
+          tvAppInfo, tvCurrentLanguageValue, tvCurrentThemeValue, tvNextAlertStatus,
           tvReminderTimeValue, tvSettingsFamilyCode, tvSettingsFamilyName, tvSettingsUserEmail);
     }
     String missingId = rootView.getResources().getResourceName(id);
