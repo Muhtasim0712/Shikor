@@ -154,6 +154,9 @@ public class SyncManager {
                     Log.d(TAG, "Network became available");
                     isOnline.set(true);
 
+                    // Post Syncing state immediately so user visibly sees reconnection transition
+                    updateStatus(SyncState.SYNCING, 0, "Connected. Syncing data...");
+
                     // Re-attach real-time listeners and push local pending changes
                     String familyId = prefs.getFamilyId();
                     if (familyId != null && !familyId.isEmpty()) {
@@ -304,6 +307,9 @@ public class SyncManager {
 
         executors.diskIO().execute(() -> {
             try {
+                // Ensure the "Syncing..." state is visible to user
+                try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+
                 List<PersonEntity> pendingPeople = personDao.getPendingSyncPeople(PersonEntity.SYNC_STATE_PENDING);
                 List<StoryEntity> pendingStories = storyDao.getPendingSyncStories(StoryEntity.SYNC_STATE_PENDING);
                 List<PhotoEntity> pendingPhotos = photoDao.getPendingSyncPhotos(PhotoEntity.SYNC_STATE_PENDING);
@@ -360,6 +366,7 @@ public class SyncManager {
                             }));
                 }
 
+                try { Thread.sleep(800); } catch (InterruptedException ignored) {}
                 lastSyncedTimestamp = System.currentTimeMillis();
                 isSyncing.set(false);
                 updateStatus(SyncState.SYNCED, 0, "All changes saved to cloud");
@@ -368,6 +375,32 @@ public class SyncManager {
                 Log.e(TAG, "Error pushing pending sync: " + e.getMessage(), e);
                 isSyncing.set(false);
                 updateStatus(SyncState.ERROR, 0, "Sync encountered an issue: " + e.getLocalizedMessage());
+            }
+        });
+    }
+
+    /**
+     * Called whenever local data changes (insert/update/delete) to immediately update sync chip
+     * to show pending count (e.g. "1 Pending") when offline or trigger cloud sync when online.
+     */
+    public void notifyDataChanged() {
+        executors.diskIO().execute(() -> {
+            int pending = personDao.getPendingSyncPeople(PersonEntity.SYNC_STATE_PENDING).size()
+                    + storyDao.getPendingSyncStories(StoryEntity.SYNC_STATE_PENDING).size()
+                    + photoDao.getPendingSyncPhotos(PhotoEntity.SYNC_STATE_PENDING).size();
+
+            if (!isOnline.get()) {
+                if (pending > 0) {
+                    updateStatus(SyncState.PENDING_CHANGES, pending, pending + " change(s) waiting for connection");
+                } else {
+                    updateStatus(SyncState.OFFLINE, 0, "Offline (Local mode)");
+                }
+            } else {
+                if (pending > 0) {
+                    syncPendingChanges();
+                } else {
+                    updateStatus(SyncState.SYNCED, 0, "All changes saved to cloud");
+                }
             }
         });
     }
@@ -427,6 +460,18 @@ public class SyncManager {
         map.put("phoneNumber", p.getPhoneNumber());
         map.put("biography", p.getBiography());
         map.put("photoPath", p.getPhotoPath());
+
+        // Attach Base64 thumbnail to preserve photos across devices and logins
+        if (p.getPhotoPath() != null) {
+            java.io.File photoFile = new java.io.File(p.getPhotoPath());
+            if (photoFile.exists()) {
+                String base64 = com.shikor.app.util.ImageUtils.fileToBase64Thumbnail(photoFile, 256, 75);
+                if (base64 != null) {
+                    map.put("photoBase64", base64);
+                }
+            }
+        }
+
         map.put("fatherId", p.getFatherId());
         map.put("motherId", p.getMotherId());
         map.put("spouseId", p.getSpouseId());
@@ -483,6 +528,19 @@ public class SyncManager {
             String phoneNumber = doc.getString("phoneNumber");
             String biography = doc.getString("biography");
             String photoPath = doc.getString("photoPath");
+            String photoBase64 = doc.getString("photoBase64");
+            if (photoBase64 != null && !photoBase64.trim().isEmpty()) {
+                boolean fileExists = photoPath != null && new java.io.File(photoPath).exists();
+                if (!fileExists) {
+                    java.io.File photosDir = new java.io.File(appContext.getFilesDir(), "photos");
+                    if (!photosDir.exists()) photosDir.mkdirs();
+                    java.io.File destFile = new java.io.File(photosDir, "person_" + id + ".jpg");
+                    if (com.shikor.app.util.ImageUtils.base64ToFile(photoBase64, destFile)) {
+                        photoPath = destFile.getAbsolutePath();
+                    }
+                }
+            }
+
             String fatherId = doc.getString("fatherId");
             String motherId = doc.getString("motherId");
             String spouseId = doc.getString("spouseId");

@@ -98,12 +98,16 @@
                             <!-- Swap Button -->
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnSwap"
-                                style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                                style="@style/Widget.Material3.Button.TonalButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="@dimen/spacing_small"
+                                android:minWidth="@dimen/min_touch_target"
                                 android:minHeight="@dimen/min_touch_target"
-                                app:icon="@android:drawable/ic_menu_sort_by_size" />
+                                android:text=" ⇌ "
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                android:contentDescription="Swap Relatives" />
 
                             <!-- Person B Dropdown -->
                             <com.google.android.material.textfield.TextInputLayout

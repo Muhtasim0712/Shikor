@@ -141,27 +141,48 @@ public class MainActivity extends BaseActivity {
 
     private void showSyncDetailsDialog() {
         SyncManager syncManager = SyncManager.getInstance(this);
-        SyncManager.SyncStatus status = syncManager.getSyncStatusLiveData().getValue();
+
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+                .setTitle("Cloud Synchronization")
+                .setMessage(formatSyncDialogBody(syncManager, syncManager.getSyncStatusLiveData().getValue()))
+                .setPositiveButton("Sync Now", null)
+                .setNegativeButton("Close", null)
+                .create();
+
+        androidx.lifecycle.Observer<SyncManager.SyncStatus> statusObserver = status -> {
+            if (dialog.isShowing()) {
+                dialog.setMessage(formatSyncDialogBody(syncManager, status));
+            }
+        };
+
+        syncManager.getSyncStatusLiveData().observe(this, statusObserver);
+        dialog.setOnDismissListener(d -> syncManager.getSyncStatusLiveData().removeObserver(statusObserver));
+
+        dialog.show();
+
+        // Custom click listener on "Sync Now" to show error if offline
+        dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            if (!syncManager.isNetworkOnline()) {
+                Toast.makeText(this, "Cannot sync while offline. Please connect to the internet.", Toast.LENGTH_LONG).show();
+            } else {
+                syncManager.triggerManualSync();
+                Toast.makeText(this, "Manual cloud sync triggered", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private String formatSyncDialogBody(SyncManager syncManager, SyncManager.SyncStatus status) {
         String stateName = status != null ? status.state.name() : "UNKNOWN";
         String message = status != null ? status.statusMessage : "Checking sync status...";
         String timeStr = (status != null && status.lastSyncedTimestamp > 0) ?
                 new SimpleDateFormat("hh:mm a, dd MMM", Locale.getDefault()).format(new Date(status.lastSyncedTimestamp)) :
                 "Pending initial sync";
 
-        String body = "Connection: " + (syncManager.isNetworkOnline() ? "Online 🟢" : "Offline ⚪") + "\n\n" +
+        return "Connection: " + (syncManager.isNetworkOnline() ? "Online 🟢" : "Offline ⚪ (Airplane mode)") + "\n\n" +
                 "Cloud State: " + stateName + "\n" +
                 "Details: " + message + "\n" +
                 "Last Synced: " + timeStr;
-
-        new MaterialAlertDialogBuilder(this)
-                .setTitle("Cloud Synchronization")
-                .setMessage(body)
-                .setPositiveButton("Sync Now", (dialog, which) -> {
-                    syncManager.triggerManualSync();
-                    Toast.makeText(this, "Manual cloud sync triggered", Toast.LENGTH_SHORT).show();
-                })
-                .setNegativeButton("Close", null)
-                .show();
     }
 
     private void checkNotificationPermissionAndSchedule() {

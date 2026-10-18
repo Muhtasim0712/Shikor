@@ -141,7 +141,7 @@ public class TreeFragment extends Fragment {
                     if (binding != null) {
                         Bitmap bmp = binding.familyTreeView.exportFullTreeBitmap();
                         String familyName = Prefs.getInstance(requireContext()).getFamilyName();
-                        TreeExporter.exportTreeAsPng(requireContext(), bmp, familyName);
+                        TreeExporter.exportTreeAsPng(requireContext(), bmp, familyName, membersList);
                     }
                     return true;
                 } else if (itemId == R.id.menu_export_tree_pdf) {

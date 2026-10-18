@@ -33,7 +33,7 @@ public class FamilyRepository {
 
     private static final String TAG = "FamilyRepository";
     private static FamilyRepository sInstance;
-
+    private final Context context;
     private final AppDatabase database;
     private final PersonDao personDao;
     private final StoryDao storyDao;
@@ -48,6 +48,7 @@ public class FamilyRepository {
     }
 
     private FamilyRepository(Context context) {
+        this.context = context.getApplicationContext();
         this.database = AppDatabase.getInstance(context);
         this.personDao = database.personDao();
         this.storyDao = database.storyDao();
@@ -106,6 +107,9 @@ public class FamilyRepository {
             person.setSyncState(PersonEntity.SYNC_STATE_PENDING);
             personDao.insert(person);
 
+            // Notify SyncManager immediately so offline queueing chip updates
+            com.shikor.app.sync.SyncManager.getInstance(context).notifyDataChanged();
+
             // Sync to Firestore in background
             syncPersonToFirestore(person);
 
@@ -121,6 +125,9 @@ public class FamilyRepository {
             person.setSyncState(PersonEntity.SYNC_STATE_PENDING);
             personDao.update(person);
 
+            // Notify SyncManager immediately
+            com.shikor.app.sync.SyncManager.getInstance(context).notifyDataChanged();
+
             // Sync to Firestore
             syncPersonToFirestore(person);
 
@@ -133,6 +140,9 @@ public class FamilyRepository {
     public void deletePerson(PersonEntity person, RepositoryCallback<Void> callback) {
         executors.diskIO().execute(() -> {
             personDao.delete(person);
+
+            // Notify SyncManager immediately
+            com.shikor.app.sync.SyncManager.getInstance(context).notifyDataChanged();
 
             // Delete from Firestore
             firestore.collection("families")
@@ -163,6 +173,18 @@ public class FamilyRepository {
         map.put("phoneNumber", person.getPhoneNumber());
         map.put("biography", person.getBiography());
         map.put("photoPath", person.getPhotoPath());
+
+        // Attach Base64 thumbnail to preserve photos across devices and logins
+        if (person.getPhotoPath() != null) {
+            java.io.File photoFile = new java.io.File(person.getPhotoPath());
+            if (photoFile.exists()) {
+                String base64 = com.shikor.app.util.ImageUtils.fileToBase64Thumbnail(photoFile, 256, 75);
+                if (base64 != null) {
+                    map.put("photoBase64", base64);
+                }
+            }
+        }
+
         map.put("fatherId", person.getFatherId());
         map.put("motherId", person.getMotherId());
         map.put("spouseId", person.getSpouseId());
@@ -179,6 +201,7 @@ public class FamilyRepository {
                 .addOnSuccessListener(aVoid -> executors.diskIO().execute(() -> {
                     person.setSyncState(PersonEntity.SYNC_STATE_SYNCED);
                     personDao.update(person);
+                    com.shikor.app.sync.SyncManager.getInstance(context).notifyDataChanged();
                 }))
                 .addOnFailureListener(e -> Log.w(TAG, "Person sync to Firestore postponed (offline): " + e.getMessage()));
     }
@@ -438,6 +461,19 @@ public class FamilyRepository {
             String phoneNumber = doc.getString("phoneNumber");
             String biography = doc.getString("biography");
             String photoPath = doc.getString("photoPath");
+            String photoBase64 = doc.getString("photoBase64");
+            if (photoBase64 != null && !photoBase64.trim().isEmpty()) {
+                boolean fileExists = photoPath != null && new java.io.File(photoPath).exists();
+                if (!fileExists) {
+                    java.io.File photosDir = new java.io.File(context.getFilesDir(), "photos");
+                    if (!photosDir.exists()) photosDir.mkdirs();
+                    java.io.File destFile = new java.io.File(photosDir, "person_" + id + ".jpg");
+                    if (com.shikor.app.util.ImageUtils.base64ToFile(photoBase64, destFile)) {
+                        photoPath = destFile.getAbsolutePath();
+                    }
+                }
+            }
+
             String fatherId = doc.getString("fatherId");
             String motherId = doc.getString("motherId");
             String spouseId = doc.getString("spouseId");

@@ -307,6 +307,8 @@ int id tvEmptyContacts 0x0
 int id tvEmptySubtitle 0x0
 int id tvEmptyTitle 0x0
 int id tvExportSubtitle 0x0
+int id tvFactBirthDate 0x0
+int id tvFactDeathDate 0x0
 int id tvFactHijriDate 0x0
 int id tvFactHometown 0x0
 int id tvFactOccupation 0x0

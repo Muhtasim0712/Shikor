@@ -86,6 +86,12 @@ public final class ActivityPersonDetailBinding implements ViewBinding {
   public final TextView tvDetailNickName;
 
   @NonNull
+  public final TextView tvFactBirthDate;
+
+  @NonNull
+  public final TextView tvFactDeathDate;
+
+  @NonNull
   public final TextView tvFactHijriDate;
 
   @NonNull
@@ -117,6 +123,7 @@ public final class ActivityPersonDetailBinding implements ViewBinding {
       @NonNull MaterialToolbar toolbar, @NonNull TextView tvChildrenLabel,
       @NonNull TextView tvDetailBiography, @NonNull TextView tvDetailFullName,
       @NonNull TextView tvDetailLifespan, @NonNull TextView tvDetailNickName,
+      @NonNull TextView tvFactBirthDate, @NonNull TextView tvFactDeathDate,
       @NonNull TextView tvFactHijriDate, @NonNull TextView tvFactHometown,
       @NonNull TextView tvFactOccupation, @NonNull TextView tvNoStories,
       @NonNull TextView tvParentsLabel, @NonNull TextView tvSiblingsLabel,
@@ -142,6 +149,8 @@ public final class ActivityPersonDetailBinding implements ViewBinding {
     this.tvDetailFullName = tvDetailFullName;
     this.tvDetailLifespan = tvDetailLifespan;
     this.tvDetailNickName = tvDetailNickName;
+    this.tvFactBirthDate = tvFactBirthDate;
+    this.tvFactDeathDate = tvFactDeathDate;
     this.tvFactHijriDate = tvFactHijriDate;
     this.tvFactHometown = tvFactHometown;
     this.tvFactOccupation = tvFactOccupation;
@@ -294,6 +303,18 @@ public final class ActivityPersonDetailBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvFactBirthDate;
+      TextView tvFactBirthDate = ViewBindings.findChildViewById(rootView, id);
+      if (tvFactBirthDate == null) {
+        break missingId;
+      }
+
+      id = R.id.tvFactDeathDate;
+      TextView tvFactDeathDate = ViewBindings.findChildViewById(rootView, id);
+      if (tvFactDeathDate == null) {
+        break missingId;
+      }
+
       id = R.id.tvFactHijriDate;
       TextView tvFactHijriDate = ViewBindings.findChildViewById(rootView, id);
       if (tvFactHijriDate == null) {
@@ -340,8 +361,9 @@ public final class ActivityPersonDetailBinding implements ViewBinding {
           btnEditPerson, btnFindRelationship, btnMaps, btnShare, cardBiography, chipGroupChildren,
           chipGroupParents, chipGroupSiblings, chipGroupSpouse, detailAvatar, personDetailRoot,
           rvPersonStories, toolbar, tvChildrenLabel, tvDetailBiography, tvDetailFullName,
-          tvDetailLifespan, tvDetailNickName, tvFactHijriDate, tvFactHometown, tvFactOccupation,
-          tvNoStories, tvParentsLabel, tvSiblingsLabel, tvSpouseLabel);
+          tvDetailLifespan, tvDetailNickName, tvFactBirthDate, tvFactDeathDate, tvFactHijriDate,
+          tvFactHometown, tvFactOccupation, tvNoStories, tvParentsLabel, tvSiblingsLabel,
+          tvSpouseLabel);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

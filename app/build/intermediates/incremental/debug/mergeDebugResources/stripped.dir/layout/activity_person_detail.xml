@@ -94,9 +94,10 @@
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnCall"
                             style="@style/Widget.Material3.Button.TonalButton"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/spacing_small"
+                            android:layout_weight="1"
                             android:minHeight="@dimen/min_touch_target"
                             android:text="Call"
                             app:icon="@android:drawable/ic_menu_call" />
@@ -105,34 +106,36 @@
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnMaps"
                             style="@style/Widget.Material3.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/spacing_small"
+                            android:layout_weight="1"
                             android:minHeight="@dimen/min_touch_target"
-                            android:text="Hometown"
+                            android:text="Maps"
                             app:icon="@android:drawable/ic_dialog_map" />
 
                         <!-- Share profile via ACTION_SEND -->
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnShare"
                             style="@style/Widget.Material3.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_small"
+                            android:layout_weight="1"
                             android:minHeight="@dimen/min_touch_target"
                             android:text="Share"
                             app:icon="@android:drawable/ic_menu_share" />
-
-                        <!-- Find Relationship -->
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnFindRelationship"
-                            style="@style/Widget.Material3.Button.TonalButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:minHeight="@dimen/min_touch_target"
-                            android:text="Kinship"
-                            app:icon="@android:drawable/ic_menu_search" />
                     </LinearLayout>
+
+                    <!-- Dedicated Prominent Find Relationship Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFindRelationship"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:minHeight="@dimen/min_touch_target"
+                        android:text="Find Relationship (আত্মীয়তার সম্পর্ক নির্ণয়)"
+                        app:icon="@android:drawable/ic_menu_search" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -160,11 +163,42 @@
                         android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
 
+                    <!-- Full Birth Date -->
+                    <TextView
+                        android:id="@+id/tvFactBirthDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textStyle="bold" />
+
+                    <!-- Hijri Date directly under Birth Date -->
+                    <TextView
+                        android:id="@+id/tvFactHijriDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorSecondary"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <!-- Death Date if deceased -->
+                    <TextView
+                        android:id="@+id/tvFactDeathDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:visibility="gone" />
+
                     <TextView
                         android:id="@+id/tvFactOccupation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginTop="4dp"
                         android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                     <TextView
@@ -173,15 +207,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:textAppearance="?attr/textAppearanceBodyMedium" />
-
-                    <TextView
-                        android:id="@+id/tvFactHijriDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?attr/colorSecondary"
-                        android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

@@ -182,16 +182,34 @@ public class PersonDetailActivity extends BaseActivity {
         binding.detailAvatar.setInitials(person.getInitials());
         binding.detailAvatar.setPhotoPath(person.getPhotoPath());
 
-        // Facts
+        // Facts: Birth Date
+        if (!TextUtils.isEmpty(person.getBirthDate())) {
+            String friendlyBirth = formatFriendlyDate(person.getBirthDate());
+            binding.tvFactBirthDate.setText("📅 Born: " + friendlyBirth);
+            binding.tvFactBirthDate.setVisibility(View.VISIBLE);
+        } else {
+            binding.tvFactBirthDate.setVisibility(View.GONE);
+        }
+
+        // Facts: Death Date
+        if (person.isDeceased() && !TextUtils.isEmpty(person.getDeathDate())) {
+            String friendlyDeath = formatFriendlyDate(person.getDeathDate());
+            binding.tvFactDeathDate.setText("🕊️ Passed: " + friendlyDeath);
+            binding.tvFactDeathDate.setVisibility(View.VISIBLE);
+        } else {
+            binding.tvFactDeathDate.setVisibility(View.GONE);
+        }
+
+        // Facts: Occupation & Hometown
         if (!TextUtils.isEmpty(person.getOccupation())) {
-            binding.tvFactOccupation.setText("Occupation: " + person.getOccupation());
+            binding.tvFactOccupation.setText("💼 Occupation: " + person.getOccupation());
             binding.tvFactOccupation.setVisibility(View.VISIBLE);
         } else {
             binding.tvFactOccupation.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(person.getHometown())) {
-            binding.tvFactHometown.setText("Hometown: " + person.getHometown());
+            binding.tvFactHometown.setText("📍 Hometown: " + person.getHometown());
             binding.tvFactHometown.setVisibility(View.VISIBLE);
             binding.btnMaps.setVisibility(View.VISIBLE);
         } else {
@@ -210,7 +228,7 @@ public class PersonDetailActivity extends BaseActivity {
             binding.cardBiography.setVisibility(View.GONE);
         }
 
-        // Hijri Date Resolution via AladhanClient + HijriCache
+        // Hijri Date Resolution directly under Birth Date via AladhanClient + HijriCache
         if (!TextUtils.isEmpty(person.getBirthDate())) {
             HijriHelper.resolveHijriDate(this, person.getBirthDate(), entity -> {
                 if (!isFinishing() && !isDestroyed()) {
@@ -225,6 +243,30 @@ public class PersonDetailActivity extends BaseActivity {
         } else {
             binding.tvFactHijriDate.setVisibility(View.GONE);
         }
+    }
+
+    private String formatFriendlyDate(String dateStr) {
+        if (dateStr == null || dateStr.trim().isEmpty()) return "";
+        try {
+            String[] parts = dateStr.trim().split("[-/.]");
+            if (parts.length == 3) {
+                int y, m, d;
+                if (parts[0].length() == 4) {
+                    y = Integer.parseInt(parts[0]);
+                    m = Integer.parseInt(parts[1]);
+                    d = Integer.parseInt(parts[2]);
+                } else {
+                    d = Integer.parseInt(parts[0]);
+                    m = Integer.parseInt(parts[1]);
+                    y = Integer.parseInt(parts[2]);
+                }
+                java.util.Calendar cal = java.util.Calendar.getInstance();
+                cal.set(y, m - 1, d);
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd MMMM yyyy", java.util.Locale.getDefault());
+                return sdf.format(cal.getTime());
+            }
+        } catch (Exception ignored) {}
+        return dateStr;
     }
 
     private void observeRelatives(PersonEntity person) {

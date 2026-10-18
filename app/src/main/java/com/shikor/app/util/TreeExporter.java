@@ -5,17 +5,22 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
 import com.shikor.app.data.local.entities.PersonEntity;
+import com.shikor.app.view.TreeLayoutEngine;
+import com.shikor.app.view.TreePainter;
+import com.shikor.app.view.TreeUnit;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,21 +37,37 @@ import java.util.Locale;
  */
 public class TreeExporter {
 
+    private static final String TAG = "TreeExporter";
     private static final String FILE_PROVIDER_AUTHORITY = "com.shikor.app.fileprovider";
 
     /**
      * Exports a family tree bitmap as a high-quality PNG image and opens the system share sheet.
      */
     public static void exportTreeAsPng(Context context, Bitmap treeBitmap, String familyName) {
-        if (treeBitmap == null) {
-            Toast.makeText(context, "No tree data to export. Please ensure family members are added.", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        exportTreeAsPng(context, treeBitmap, familyName, null);
+    }
 
+    /**
+     * Exports a family tree bitmap as a high-quality PNG image and opens the system share sheet.
+     * If treeBitmap is null, automatically renders it headlessly from members list.
+     */
+    public static void exportTreeAsPng(Context context, Bitmap treeBitmap, String familyName, List<PersonEntity> members) {
         Toast.makeText(context, "Generating PNG export...", Toast.LENGTH_SHORT).show();
 
         AppExecutors.getInstance().diskIO().execute(() -> {
             try {
+                Bitmap bmp = treeBitmap;
+                if (bmp == null && members != null && !members.isEmpty()) {
+                    bmp = renderTreeBitmapHeadless(context, members, true, false);
+                }
+
+                if (bmp == null) {
+                    AppExecutors.getInstance().mainThread().execute(() -> {
+                        Toast.makeText(context, "No tree data to export. Please ensure family members are added.", Toast.LENGTH_SHORT).show();
+                    });
+                    return;
+                }
+
                 File exportDir = new File(context.getCacheDir(), "exports");
                 if (!exportDir.exists()) exportDir.mkdirs();
 
@@ -55,7 +76,7 @@ public class TreeExporter {
                 File pngFile = new File(exportDir, "shikor_" + safeName + "_tree_" + timeStamp + ".png");
 
                 try (FileOutputStream fos = new FileOutputStream(pngFile)) {
-                    treeBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
                     fos.flush();
                 }
 
@@ -81,6 +102,11 @@ public class TreeExporter {
         AppExecutors.getInstance().diskIO().execute(() -> {
             PdfDocument document = null;
             try {
+                Bitmap bmp = treeBitmap;
+                if (bmp == null && members != null && !members.isEmpty()) {
+                    bmp = renderTreeBitmapHeadless(context, members, true, false);
+                }
+
                 document = new PdfDocument();
 
                 // Standard A4 dimensions in PostScript points: 842 pt width x 595 pt height (Landscape for tree)
@@ -92,7 +118,7 @@ public class TreeExporter {
                 PdfDocument.Page page1 = document.startPage(pageInfo1);
                 Canvas canvas1 = page1.getCanvas();
 
-                drawPdfTreePage(canvas1, treeBitmap, familyName, PAGE_WIDTH, PAGE_HEIGHT, members != null ? members.size() : 0);
+                drawPdfTreePage(canvas1, bmp, familyName, PAGE_WIDTH, PAGE_HEIGHT, members != null ? members.size() : 0);
                 document.finishPage(page1);
 
                 // --- PAGE 2+: FAMILY DIRECTORY REGISTRY ---
@@ -140,6 +166,79 @@ public class TreeExporter {
                 }
             }
         });
+    }
+
+    /**
+     * Renders complete graphical family tree into a high-resolution Bitmap headlessly
+     * without requiring an attached View or main thread execution.
+     */
+    public static Bitmap renderTreeBitmapHeadless(Context context, List<PersonEntity> people, boolean natural, boolean nightMode) {
+        if (people == null || people.isEmpty()) return null;
+
+        try {
+            TreePainter treePainter = new TreePainter(context);
+            float density = context.getResources().getDisplayMetrics().density;
+
+            TreeLayoutEngine.LayoutResult layout = TreeLayoutEngine.calculateLayout(
+                    people,
+                    null,
+                    natural,
+                    treePainter.NODE_WIDTH,
+                    treePainter.NODE_HEIGHT,
+                    treePainter.COUPLE_GAP,
+                    treePainter.SIBLING_GAP,
+                    treePainter.LEVEL_GAP,
+                    density
+            );
+
+            if (layout == null || layout.allUnits.isEmpty() || layout.bounds.isEmpty()) {
+                return null;
+            }
+
+            RectF bounds = new RectF(layout.bounds);
+            float padding = 80f * density;
+            bounds.inset(-padding, -padding);
+
+            float w = bounds.width();
+            float h = bounds.height();
+            if (w <= 0 || h <= 0) return null;
+
+            float maxDim = 2400f;
+            float scale = Math.min(1.0f, Math.min(maxDim / w, maxDim / h));
+            int bmpW = Math.max(400, (int) (w * scale));
+            int bmpH = Math.max(400, (int) (h * scale));
+
+            Bitmap bitmap = Bitmap.createBitmap(bmpW, bmpH, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+
+            Matrix m = new Matrix();
+            RectF destRect = new RectF(0, 0, bmpW, bmpH);
+            m.setRectToRect(bounds, destRect, Matrix.ScaleToFit.CENTER);
+
+            canvas.save();
+            canvas.concat(m);
+
+            if (natural) {
+                treePainter.drawBackground(canvas, layout, nightMode);
+                treePainter.drawNaturalTreeStaticStructure(canvas, layout, nightMode);
+            } else {
+                canvas.drawColor(nightMode ? 0xFF121A15 : 0xFFFBF9F3);
+                treePainter.drawClassicChartStaticLayers(canvas, layout);
+            }
+
+            for (TreeUnit unit : layout.allUnits) {
+                treePainter.drawPersonNode(canvas, unit.primary, unit.primaryRect, null, null, natural);
+                if (unit.spouse != null) {
+                    treePainter.drawPersonNode(canvas, unit.spouse, unit.spouseRect, null, null, natural);
+                }
+            }
+
+            canvas.restore();
+            return bitmap;
+        } catch (Exception e) {
+            Log.e(TAG, "Error in renderTreeBitmapHeadless: " + e.getMessage(), e);
+            return null;
+        }
     }
 
     private static void drawPdfTreePage(Canvas canvas, Bitmap treeBitmap, String familyName, int width, int height, int totalMembers) {

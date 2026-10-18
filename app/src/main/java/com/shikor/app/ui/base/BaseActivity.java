@@ -26,6 +26,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected final String TAG = getClass().getSimpleName();
 
     @Override
+    protected void attachBaseContext(android.content.Context newBase) {
+        String lang = com.shikor.app.util.Prefs.getInstance(newBase).getLanguage();
+        super.attachBaseContext(com.shikor.app.util.LocaleHelper.wrap(newBase, lang));
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         // Edge-to-edge support for Android 15+
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);

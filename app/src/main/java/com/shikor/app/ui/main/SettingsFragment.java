@@ -185,42 +185,42 @@ public class SettingsFragment extends Fragment {
     }
 
     private void showTimePicker() {
-        MaterialTimePicker picker = new MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_12H)
-                .setHour(prefs.getReminderHour())
-                .setMinute(prefs.getReminderMinute())
-                .setTitleText("Select Daily Reminder Time")
-                .build();
+        int currentHour = prefs.getReminderHour();
+        int currentMinute = prefs.getReminderMinute();
 
-        picker.addOnPositiveButtonClickListener(v -> {
-            int hour = picker.getHour();
-            int minute = picker.getMinute();
-            prefs.setReminderTime(hour, minute);
+        android.app.TimePickerDialog timePickerDialog = new android.app.TimePickerDialog(
+                requireContext(),
+                (view, hourOfDay, minute) -> {
+                    prefs.setReminderTime(hourOfDay, minute);
 
-            if (prefs.isNotificationsEnabled()) {
-                AlarmScheduler.scheduleDailyReminder(requireContext());
-            }
+                    if (prefs.isNotificationsEnabled()) {
+                        AlarmScheduler.scheduleDailyReminder(requireContext());
+                    }
 
-            updateTimeDisplay(hour, minute);
+                    updateTimeDisplay(hourOfDay, minute);
 
-            long nextMillis = AlarmScheduler.getNextDailyReminderMillis(requireContext());
-            Calendar now = Calendar.getInstance();
-            Calendar target = Calendar.getInstance();
-            target.setTimeInMillis(nextMillis);
-            boolean isToday = now.get(Calendar.YEAR) == target.get(Calendar.YEAR) &&
-                    now.get(Calendar.DAY_OF_YEAR) == target.get(Calendar.DAY_OF_YEAR);
-            long diffMin = Math.max(0, (nextMillis - System.currentTimeMillis()) / 60000);
+                    long nextMillis = AlarmScheduler.getNextDailyReminderMillis(requireContext());
+                    Calendar now = Calendar.getInstance();
+                    Calendar target = Calendar.getInstance();
+                    target.setTimeInMillis(nextMillis);
+                    boolean isToday = now.get(Calendar.YEAR) == target.get(Calendar.YEAR) &&
+                            now.get(Calendar.DAY_OF_YEAR) == target.get(Calendar.DAY_OF_YEAR);
+                    long diffMin = Math.max(0, (nextMillis - System.currentTimeMillis()) / 60000);
 
-            String scheduledInfo;
-            if (isToday) {
-                scheduledInfo = "Reminder set! Scheduled for today at " + formatTime(hour, minute) + " (in " + diffMin + " min)";
-            } else {
-                scheduledInfo = "Scheduled for tomorrow at " + formatTime(hour, minute) + ". (Tip: to test today, pick a minute ahead of your clock)";
-            }
-            Toast.makeText(requireContext(), scheduledInfo, Toast.LENGTH_LONG).show();
-        });
-
-        picker.show(getParentFragmentManager(), "reminder_time_picker");
+                    String scheduledInfo;
+                    if (isToday) {
+                        scheduledInfo = "Reminder set for today at " + formatTime(hourOfDay, minute) + " (in " + diffMin + " min)";
+                    } else {
+                        scheduledInfo = "Scheduled for tomorrow at " + formatTime(hourOfDay, minute) + ". (Tip: to test today, pick a minute ahead of your clock)";
+                    }
+                    Toast.makeText(requireContext(), scheduledInfo, Toast.LENGTH_LONG).show();
+                },
+                currentHour,
+                currentMinute,
+                false
+        );
+        timePickerDialog.setTitle("Select Daily Reminder Time");
+        timePickerDialog.show();
     }
 
     private void updateTimeDisplay(int hour, int minute) {
@@ -299,20 +299,11 @@ public class SettingsFragment extends Fragment {
                             return;
                         }
 
-                        AppExecutors.getInstance().mainThread().execute(() -> {
-                            if (!isAdded()) return;
-                            FamilyTreeView tempTreeView = new FamilyTreeView(requireContext());
-                            tempTreeView.setPeople(people);
-                            tempTreeView.postDelayed(() -> {
-                                if (!isAdded()) return;
-                                Bitmap bmp = tempTreeView.exportFullTreeBitmap();
-                                if (which == 0) {
-                                    TreeExporter.exportTreeAsPdf(requireContext(), bmp, familyName, people);
-                                } else {
-                                    TreeExporter.exportTreeAsPng(requireContext(), bmp, familyName);
-                                }
-                            }, 350);
-                        });
+                        if (which == 0) {
+                            TreeExporter.exportTreeAsPdf(requireContext(), null, familyName, people);
+                        } else {
+                            TreeExporter.exportTreeAsPng(requireContext(), null, familyName, people);
+                        }
                     });
                 })
                 .setNegativeButton("Cancel", null)
@@ -386,6 +377,9 @@ public class SettingsFragment extends Fragment {
                     prefs.setLanguage(langTag);
                     AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(langTag));
                     updateLanguageDisplay();
+                    if (isAdded()) {
+                        requireActivity().recreate();
+                    }
                 })
                 .setNegativeButton("Cancel", null)
                 .show();

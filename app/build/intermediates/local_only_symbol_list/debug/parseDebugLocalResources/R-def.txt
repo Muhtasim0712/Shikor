@@ -309,6 +309,8 @@ id tvEmptyContacts
 id tvEmptySubtitle
 id tvEmptyTitle
 id tvExportSubtitle
+id tvFactBirthDate
+id tvFactDeathDate
 id tvFactHijriDate
 id tvFactHometown
 id tvFactOccupation
