@@ -112,27 +112,27 @@ public class MainActivity extends BaseActivity {
 
         switch (status.state) {
             case SYNCED:
-                binding.chipSyncStatus.setText("Synced");
+                binding.chipSyncStatus.setText(R.string.sync_synced);
                 binding.chipSyncStatus.setChipIconResource(android.R.drawable.stat_sys_upload_done);
                 binding.chipSyncStatus.setChipIconTint(ContextCompat.getColorStateList(this, R.color.primary));
                 break;
             case SYNCING:
-                binding.chipSyncStatus.setText("Syncing...");
+                binding.chipSyncStatus.setText(R.string.sync_syncing);
                 binding.chipSyncStatus.setChipIconResource(android.R.drawable.stat_notify_sync);
                 binding.chipSyncStatus.setChipIconTint(ContextCompat.getColorStateList(this, R.color.tertiary));
                 break;
             case PENDING_CHANGES:
-                binding.chipSyncStatus.setText(status.pendingCount + " Pending");
+                binding.chipSyncStatus.setText(getString(R.string.sync_pending, status.pendingCount));
                 binding.chipSyncStatus.setChipIconResource(android.R.drawable.stat_sys_upload);
                 binding.chipSyncStatus.setChipIconTint(ContextCompat.getColorStateList(this, R.color.tertiary));
                 break;
             case OFFLINE:
-                binding.chipSyncStatus.setText("Offline");
+                binding.chipSyncStatus.setText(R.string.sync_offline);
                 binding.chipSyncStatus.setChipIconResource(android.R.drawable.stat_sys_warning);
                 binding.chipSyncStatus.setChipIconTint(ContextCompat.getColorStateList(this, R.color.outline));
                 break;
             case ERROR:
-                binding.chipSyncStatus.setText("Sync Issue");
+                binding.chipSyncStatus.setText(R.string.sync_issue);
                 binding.chipSyncStatus.setChipIconResource(android.R.drawable.stat_notify_error);
                 binding.chipSyncStatus.setChipIconTint(ContextCompat.getColorStateList(this, R.color.error));
                 break;
@@ -143,10 +143,10 @@ public class MainActivity extends BaseActivity {
         SyncManager syncManager = SyncManager.getInstance(this);
 
         androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Cloud Synchronization")
+                .setTitle(R.string.sync_dialog_title)
                 .setMessage(formatSyncDialogBody(syncManager, syncManager.getSyncStatusLiveData().getValue()))
-                .setPositiveButton("Sync Now", null)
-                .setNegativeButton("Close", null)
+                .setPositiveButton(R.string.sync_dialog_btn_sync, null)
+                .setNegativeButton(R.string.sync_dialog_btn_close, null)
                 .create();
 
         androidx.lifecycle.Observer<SyncManager.SyncStatus> statusObserver = status -> {
@@ -163,10 +163,10 @@ public class MainActivity extends BaseActivity {
         // Custom click listener on "Sync Now" to show error if offline
         dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
             if (!syncManager.isNetworkOnline()) {
-                Toast.makeText(this, "Cannot sync while offline. Please connect to the internet.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.sync_offline_error), Toast.LENGTH_LONG).show();
             } else {
                 syncManager.triggerManualSync();
-                Toast.makeText(this, "Manual cloud sync triggered", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.sync_manual_triggered), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -174,15 +174,19 @@ public class MainActivity extends BaseActivity {
 
     private String formatSyncDialogBody(SyncManager syncManager, SyncManager.SyncStatus status) {
         String stateName = status != null ? status.state.name() : "UNKNOWN";
-        String message = status != null ? status.statusMessage : "Checking sync status...";
+        String message = status != null ? status.statusMessage : getString(R.string.loading);
         String timeStr = (status != null && status.lastSyncedTimestamp > 0) ?
                 new SimpleDateFormat("hh:mm a, dd MMM", Locale.getDefault()).format(new Date(status.lastSyncedTimestamp)) :
-                "Pending initial sync";
+                getString(R.string.sync_dialog_pending_initial);
 
-        return "Connection: " + (syncManager.isNetworkOnline() ? "Online 🟢" : "Offline ⚪ (Airplane mode)") + "\n\n" +
-                "Cloud State: " + stateName + "\n" +
-                "Details: " + message + "\n" +
-                "Last Synced: " + timeStr;
+        String connStatus = syncManager.isNetworkOnline() ?
+                getString(R.string.sync_dialog_online) :
+                getString(R.string.sync_dialog_offline);
+
+        return getString(R.string.sync_dialog_connection, connStatus) + "\n\n" +
+                getString(R.string.sync_dialog_cloud_state, stateName) + "\n" +
+                getString(R.string.sync_dialog_details, message) + "\n" +
+                getString(R.string.sync_dialog_last_synced, timeStr);
     }
 
     private void checkNotificationPermissionAndSchedule() {

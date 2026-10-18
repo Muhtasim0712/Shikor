@@ -46,7 +46,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Family Address Book"
+                        android:text="@string/export_address_book_title"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
@@ -56,7 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_tiny"
-                        android:text="Queried securely via FamilyProvider. Export contacts to your phone's address book or generate a digital backup."
+                        android:text="@string/export_address_book_desc"
                         android:textAppearance="?attr/textAppearanceBodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -69,7 +69,7 @@
                         android:backgroundTint="?attr/colorSurfaceVariant"
                         android:paddingHorizontal="@dimen/spacing_small"
                         android:paddingVertical="@dimen/spacing_tiny"
-                        android:text="Loading contacts..."
+                        android:text="@string/export_loading_contacts"
                         android:textAppearance="?attr/textAppearanceLabelMedium"
                         android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold" />
@@ -89,7 +89,7 @@
                             android:layout_marginEnd="@dimen/spacing_tiny"
                             android:layout_weight="1"
                             android:minHeight="@dimen/min_touch_target"
-                            android:text="Export PDF Document"
+                            android:text="@string/export_btn_pdf"
                             app:cornerRadius="@dimen/button_corner_radius"
                             app:icon="@android:drawable/ic_menu_agenda" />
 
@@ -101,7 +101,7 @@
                             android:layout_marginStart="@dimen/spacing_tiny"
                             android:layout_weight="1"
                             android:minHeight="@dimen/min_touch_target"
-                            android:text="Export PNG Image"
+                            android:text="@string/export_btn_png"
                             app:cornerRadius="@dimen/button_corner_radius"
                             app:icon="@android:drawable/ic_menu_gallery" />
                     </LinearLayout>
@@ -121,7 +121,7 @@
                             android:layout_marginEnd="@dimen/spacing_tiny"
                             android:layout_weight="1"
                             android:minHeight="@dimen/min_touch_target"
-                            android:text="Export vCard (.vcf)"
+                            android:text="@string/export_btn_vcf"
                             app:cornerRadius="@dimen/button_corner_radius"
                             app:icon="@android:drawable/ic_menu_share" />
 
@@ -133,7 +133,7 @@
                             android:layout_marginStart="@dimen/spacing_tiny"
                             android:layout_weight="1"
                             android:minHeight="@dimen/min_touch_target"
-                            android:text="Export CSV (.csv)"
+                            android:text="@string/export_btn_csv"
                             app:cornerRadius="@dimen/button_corner_radius"
                             app:icon="@android:drawable/ic_menu_save" />
                     </LinearLayout>
@@ -145,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:minHeight="@dimen/min_touch_target"
-                        android:text="Import Family Members (.vcf / .csv)"
+                        android:text="@string/export_import_btn"
                         app:cornerRadius="@dimen/button_corner_radius"
                         app:icon="@android:drawable/stat_sys_download" />
                 </LinearLayout>
@@ -158,7 +158,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:layout_marginBottom="@dimen/spacing_tiny"
-                android:text="Directory Preview:"
+                android:text="@string/export_directory_preview"
                 android:textAppearance="?attr/textAppearanceLabelLarge"
                 android:textColor="?attr/colorOnSurface"
                 android:textStyle="bold" />
@@ -170,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_large"
                 android:gravity="center"
-                android:text="No family contacts found. Add phone numbers to relatives to export them!"
+                android:text="@string/export_no_contacts"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:visibility="gone" />

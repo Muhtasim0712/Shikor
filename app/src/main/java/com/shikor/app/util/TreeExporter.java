@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
+import com.shikor.app.data.local.AppDatabase;
 import com.shikor.app.data.local.entities.PersonEntity;
 import com.shikor.app.view.TreeLayoutEngine;
 import com.shikor.app.view.TreePainter;
@@ -52,23 +53,31 @@ public class TreeExporter {
      * If treeBitmap is null, automatically renders it headlessly from members list.
      */
     public static void exportTreeAsPng(Context context, Bitmap treeBitmap, String familyName, List<PersonEntity> members) {
-        Toast.makeText(context, "Generating PNG export...", Toast.LENGTH_SHORT).show();
+        final Context appContext = context.getApplicationContext();
+        AppExecutors.getInstance().mainThread().execute(() -> {
+            Toast.makeText(appContext, "Generating PNG export...", Toast.LENGTH_SHORT).show();
+        });
 
         AppExecutors.getInstance().diskIO().execute(() -> {
             try {
+                List<PersonEntity> personList = members;
+                if ((personList == null || personList.isEmpty()) && treeBitmap == null) {
+                    personList = AppDatabase.getInstance(appContext).personDao().getAllPeopleGlobalSync();
+                }
+
                 Bitmap bmp = treeBitmap;
-                if (bmp == null && members != null && !members.isEmpty()) {
-                    bmp = renderTreeBitmapHeadless(context, members, true, false);
+                if (bmp == null && personList != null && !personList.isEmpty()) {
+                    bmp = renderTreeBitmapHeadless(appContext, personList, true, false);
                 }
 
                 if (bmp == null) {
                     AppExecutors.getInstance().mainThread().execute(() -> {
-                        Toast.makeText(context, "No tree data to export. Please ensure family members are added.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(appContext, "No tree data to export. Please ensure family members are added.", Toast.LENGTH_SHORT).show();
                     });
                     return;
                 }
 
-                File exportDir = new File(context.getCacheDir(), "exports");
+                File exportDir = new File(appContext.getCacheDir(), "exports");
                 if (!exportDir.exists()) exportDir.mkdirs();
 
                 String safeName = sanitizeFileName(familyName != null && !familyName.isEmpty() ? familyName : "family");
@@ -81,11 +90,12 @@ public class TreeExporter {
                 }
 
                 AppExecutors.getInstance().mainThread().execute(() -> {
-                    shareFile(context, pngFile, "image/png", "Share Family Tree Image (PNG)");
+                    shareFile(appContext, pngFile, "image/png", "Share Family Tree Image (PNG)");
                 });
             } catch (Exception e) {
+                Log.e(TAG, "Failed to export PNG", e);
                 AppExecutors.getInstance().mainThread().execute(() -> {
-                    Toast.makeText(context, "Failed to export PNG: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(appContext, "Failed to export PNG: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             }
         });
@@ -97,14 +107,22 @@ public class TreeExporter {
      * - Page 2+: Family Lineage & Contact Directory
      */
     public static void exportTreeAsPdf(Context context, Bitmap treeBitmap, String familyName, List<PersonEntity> members) {
-        Toast.makeText(context, "Generating PDF archive...", Toast.LENGTH_SHORT).show();
+        final Context appContext = context.getApplicationContext();
+        AppExecutors.getInstance().mainThread().execute(() -> {
+            Toast.makeText(appContext, "Generating PDF archive...", Toast.LENGTH_SHORT).show();
+        });
 
         AppExecutors.getInstance().diskIO().execute(() -> {
             PdfDocument document = null;
             try {
+                List<PersonEntity> personList = members;
+                if ((personList == null || personList.isEmpty()) && treeBitmap == null) {
+                    personList = AppDatabase.getInstance(appContext).personDao().getAllPeopleGlobalSync();
+                }
+
                 Bitmap bmp = treeBitmap;
-                if (bmp == null && members != null && !members.isEmpty()) {
-                    bmp = renderTreeBitmapHeadless(context, members, true, false);
+                if (bmp == null && personList != null && !personList.isEmpty()) {
+                    bmp = renderTreeBitmapHeadless(appContext, personList, true, false);
                 }
 
                 document = new PdfDocument();
@@ -118,13 +136,13 @@ public class TreeExporter {
                 PdfDocument.Page page1 = document.startPage(pageInfo1);
                 Canvas canvas1 = page1.getCanvas();
 
-                drawPdfTreePage(canvas1, bmp, familyName, PAGE_WIDTH, PAGE_HEIGHT, members != null ? members.size() : 0);
+                drawPdfTreePage(canvas1, bmp, familyName, PAGE_WIDTH, PAGE_HEIGHT, personList != null ? personList.size() : 0);
                 document.finishPage(page1);
 
                 // --- PAGE 2+: FAMILY DIRECTORY REGISTRY ---
-                if (members != null && !members.isEmpty()) {
+                if (personList != null && !personList.isEmpty()) {
                     final int ROWS_PER_PAGE = 12;
-                    int totalPages = (int) Math.ceil((double) members.size() / ROWS_PER_PAGE);
+                    int totalPages = (int) Math.ceil((double) personList.size() / ROWS_PER_PAGE);
 
                     for (int p = 0; p < totalPages; p++) {
                         int pageNum = 2 + p;
@@ -133,8 +151,8 @@ public class TreeExporter {
                         Canvas canvasDir = pageDir.getCanvas();
 
                         int startIdx = p * ROWS_PER_PAGE;
-                        int endIdx = Math.min(startIdx + ROWS_PER_PAGE, members.size());
-                        List<PersonEntity> subList = members.subList(startIdx, endIdx);
+                        int endIdx = Math.min(startIdx + ROWS_PER_PAGE, personList.size());
+                        List<PersonEntity> subList = personList.subList(startIdx, endIdx);
 
                         drawPdfDirectoryPage(canvasDir, subList, familyName, PAGE_WIDTH, PAGE_HEIGHT, startIdx, pageNum, 1 + totalPages);
                         document.finishPage(pageDir);
@@ -142,7 +160,7 @@ public class TreeExporter {
                 }
 
                 // Write PDF to cache
-                File exportDir = new File(context.getCacheDir(), "exports");
+                File exportDir = new File(appContext.getCacheDir(), "exports");
                 if (!exportDir.exists()) exportDir.mkdirs();
 
                 String safeName = sanitizeFileName(familyName != null && !familyName.isEmpty() ? familyName : "family");
@@ -154,15 +172,18 @@ public class TreeExporter {
                 }
 
                 AppExecutors.getInstance().mainThread().execute(() -> {
-                    shareFile(context, pdfFile, "application/pdf", "Share Family Archive Document (PDF)");
+                    shareFile(appContext, pdfFile, "application/pdf", "Share Family Archive Document (PDF)");
                 });
             } catch (Exception e) {
+                Log.e(TAG, "Failed to export PDF", e);
                 AppExecutors.getInstance().mainThread().execute(() -> {
-                    Toast.makeText(context, "Failed to export PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(appContext, "Failed to export PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             } finally {
                 if (document != null) {
-                    document.close();
+                    try {
+                        document.close();
+                    } catch (Exception ignored) {}
                 }
             }
         });
@@ -389,15 +410,34 @@ public class TreeExporter {
     }
 
     private static void shareFile(Context context, File file, String mimeType, String chooserTitle) {
-        Uri contentUri = FileProvider.getUriForFile(context, FILE_PROVIDER_AUTHORITY, file);
+        try {
+            Uri contentUri = FileProvider.getUriForFile(context, FILE_PROVIDER_AUTHORITY, file);
 
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType(mimeType);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Shikor Family Archive Export");
-        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType(mimeType);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Shikor Family Archive Export");
+            shareIntent.setClipData(android.content.ClipData.newRawUri("", contentUri));
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-        context.startActivity(Intent.createChooser(shareIntent, chooserTitle));
+            Intent chooser = Intent.createChooser(shareIntent, chooserTitle);
+            chooser.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            List<android.content.pm.ResolveInfo> resInfoList = context.getPackageManager()
+                    .queryIntentActivities(chooser, android.content.pm.PackageManager.MATCH_DEFAULT_ONLY);
+            for (android.content.pm.ResolveInfo resolveInfo : resInfoList) {
+                String packageName = resolveInfo.activityInfo.packageName;
+                context.grantUriPermission(packageName, contentUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            }
+
+            context.startActivity(chooser);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to share export file", e);
+            AppExecutors.getInstance().mainThread().execute(() -> {
+                Toast.makeText(context, "Could not open share menu: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
+        }
     }
 
     private static String sanitizeFileName(String input) {

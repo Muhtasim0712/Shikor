@@ -43,6 +43,9 @@ public interface PersonDao {
     @Query("SELECT * FROM people WHERE familyId = :familyId ORDER BY generation ASC, birthDate ASC")
     List<PersonEntity> getAllPeopleSync(String familyId);
 
+    @Query("SELECT * FROM people ORDER BY generation ASC, birthDate ASC")
+    List<PersonEntity> getAllPeopleGlobalSync();
+
     @Query("SELECT * FROM people WHERE id = :personId LIMIT 1")
     LiveData<PersonEntity> getPersonById(String personId);
 

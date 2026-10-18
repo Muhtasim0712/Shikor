@@ -1,22 +1,18 @@
 [
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout-sw600dp-v13\\activity_relationship_finder.xml",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout-sw600dp\\activity_relationship_finder.xml"
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout-sw600dp-v13/activity_main.xml",
+        "source": "com.shikor.app-main-50:/layout-sw600dp/activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout-sw600dp-v13\\activity_main.xml",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout-sw600dp\\activity_main.xml"
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout-sw600dp-v13/fragment_settings.xml",
+        "source": "com.shikor.app-main-50:/layout-sw600dp/fragment_settings.xml"
     },
     {
         "merged": "com.shikor.app-mergeDebugResources-47:/layout-sw600dp-v13/activity_relationship_finder.xml",
         "source": "com.shikor.app-main-50:/layout-sw600dp/activity_relationship_finder.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout-sw600dp-v13\\fragment_settings.xml",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout-sw600dp\\fragment_settings.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout-sw600dp-v13\\activity_export.xml",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout-sw600dp\\activity_export.xml"
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout-sw600dp-v13/activity_export.xml",
+        "source": "com.shikor.app-main-50:/layout-sw600dp/activity_export.xml"
     }
 ]

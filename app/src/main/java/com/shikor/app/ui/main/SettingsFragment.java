@@ -18,7 +18,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.widget.NumberPicker;
+import android.widget.TextView;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.color.MaterialColors;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
@@ -188,16 +194,88 @@ public class SettingsFragment extends Fragment {
         int currentHour = prefs.getReminderHour();
         int currentMinute = prefs.getReminderMinute();
 
-        android.app.TimePickerDialog timePickerDialog = new android.app.TimePickerDialog(
-                requireContext(),
-                (view, hourOfDay, minute) -> {
-                    prefs.setReminderTime(hourOfDay, minute);
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_time_picker, null);
+        NumberPicker pickerHour = dialogView.findViewById(R.id.pickerHour);
+        NumberPicker pickerMinute = dialogView.findViewById(R.id.pickerMinute);
+        MaterialButton btnAm = dialogView.findViewById(R.id.btnAm);
+        MaterialButton btnPm = dialogView.findViewById(R.id.btnPm);
+        TextView tvLivePreview = dialogView.findViewById(R.id.tvLivePreview);
+
+        final boolean[] isAm = { currentHour < 12 };
+        int displayHour = currentHour % 12;
+        if (displayHour == 0) displayHour = 12;
+
+        pickerHour.setMinValue(1);
+        pickerHour.setMaxValue(12);
+        pickerHour.setValue(displayHour);
+
+        pickerMinute.setMinValue(0);
+        pickerMinute.setMaxValue(59);
+        pickerMinute.setValue(currentMinute);
+        pickerMinute.setFormatter(val -> String.format(Locale.getDefault(), "%02d", val));
+
+        Runnable updateVisuals = () -> {
+            int primaryColor = MaterialColors.getColor(dialogView, com.google.android.material.R.attr.colorPrimary);
+            int onPrimaryColor = MaterialColors.getColor(dialogView, com.google.android.material.R.attr.colorOnPrimary);
+            int onSurfaceVar = MaterialColors.getColor(dialogView, com.google.android.material.R.attr.colorOnSurfaceVariant);
+            int outlineColor = MaterialColors.getColor(dialogView, com.google.android.material.R.attr.colorOutline);
+
+            int strokePx = (int) (1.5f * getResources().getDisplayMetrics().density);
+            if (isAm[0]) {
+                btnAm.setBackgroundTintList(ColorStateList.valueOf(primaryColor));
+                btnAm.setTextColor(onPrimaryColor);
+                btnAm.setStrokeWidth(0);
+
+                btnPm.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                btnPm.setTextColor(onSurfaceVar);
+                btnPm.setStrokeColor(ColorStateList.valueOf(outlineColor));
+                btnPm.setStrokeWidth(strokePx);
+            } else {
+                btnPm.setBackgroundTintList(ColorStateList.valueOf(primaryColor));
+                btnPm.setTextColor(onPrimaryColor);
+                btnPm.setStrokeWidth(0);
+
+                btnAm.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                btnAm.setTextColor(onSurfaceVar);
+                btnAm.setStrokeColor(ColorStateList.valueOf(outlineColor));
+                btnAm.setStrokeWidth(strokePx);
+            }
+
+            int h = pickerHour.getValue();
+            int m = pickerMinute.getValue();
+            String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d %s", h, m, isAm[0] ? "AM" : "PM");
+            tvLivePreview.setText(getString(R.string.settings_time_selected_fmt, timeFormatted));
+        };
+
+        btnAm.setOnClickListener(v -> {
+            isAm[0] = true;
+            updateVisuals.run();
+        });
+
+        btnPm.setOnClickListener(v -> {
+            isAm[0] = false;
+            updateVisuals.run();
+        });
+
+        pickerHour.setOnValueChangedListener((picker, oldVal, newVal) -> updateVisuals.run());
+        pickerMinute.setOnValueChangedListener((picker, oldVal, newVal) -> updateVisuals.run());
+
+        updateVisuals.run();
+
+        new MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .setPositiveButton(R.string.save, (dialog, which) -> {
+                    int selH12 = pickerHour.getValue();
+                    int selM = pickerMinute.getValue();
+                    int finalHour24 = isAm[0] ? (selH12 == 12 ? 0 : selH12) : (selH12 == 12 ? 12 : selH12 + 12);
+
+                    prefs.setReminderTime(finalHour24, selM);
 
                     if (prefs.isNotificationsEnabled()) {
                         AlarmScheduler.scheduleDailyReminder(requireContext());
                     }
 
-                    updateTimeDisplay(hourOfDay, minute);
+                    updateTimeDisplay(finalHour24, selM);
 
                     long nextMillis = AlarmScheduler.getNextDailyReminderMillis(requireContext());
                     Calendar now = Calendar.getInstance();
@@ -209,25 +287,21 @@ public class SettingsFragment extends Fragment {
 
                     String scheduledInfo;
                     if (isToday) {
-                        scheduledInfo = "Reminder set for today at " + formatTime(hourOfDay, minute) + " (in " + diffMin + " min)";
+                        scheduledInfo = getString(R.string.settings_alert_set_today_fmt, formatTime(finalHour24, selM), (int) diffMin);
                     } else {
-                        scheduledInfo = "Scheduled for tomorrow at " + formatTime(hourOfDay, minute) + ". (Tip: to test today, pick a minute ahead of your clock)";
+                        scheduledInfo = getString(R.string.settings_alert_set_tomorrow_fmt, formatTime(finalHour24, selM));
                     }
                     Toast.makeText(requireContext(), scheduledInfo, Toast.LENGTH_LONG).show();
-                },
-                currentHour,
-                currentMinute,
-                false
-        );
-        timePickerDialog.setTitle("Select Daily Reminder Time");
-        timePickerDialog.show();
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     private void updateTimeDisplay(int hour, int minute) {
         binding.tvReminderTimeValue.setText(formatTime(hour, minute));
 
         if (!prefs.isNotificationsEnabled()) {
-            binding.tvNextAlertStatus.setText("Daily reminders are currently paused");
+            binding.tvNextAlertStatus.setText(getString(R.string.settings_alert_paused));
             return;
         }
 
@@ -240,9 +314,9 @@ public class SettingsFragment extends Fragment {
         long diffMin = Math.max(0, (nextMillis - System.currentTimeMillis()) / 60000);
 
         if (isToday) {
-            binding.tvNextAlertStatus.setText("Next alert: Today at " + formatTime(hour, minute) + " (in " + diffMin + "m)");
+            binding.tvNextAlertStatus.setText(getString(R.string.settings_alert_today_fmt, formatTime(hour, minute), (int) diffMin));
         } else {
-            binding.tvNextAlertStatus.setText("Next alert: Tomorrow at " + formatTime(hour, minute));
+            binding.tvNextAlertStatus.setText(getString(R.string.settings_alert_tomorrow_fmt, formatTime(hour, minute)));
         }
     }
 
@@ -283,30 +357,38 @@ public class SettingsFragment extends Fragment {
     }
 
     private void showExportTreeDialog() {
-        String[] options = {"Export PDF Document (Archive)", "Export PNG Image (Diagram)"};
+        String[] options = {
+                getString(R.string.settings_export_pdf_option),
+                getString(R.string.settings_export_png_option)
+        };
         new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Export Family Tree")
+                .setTitle(getString(R.string.settings_export_tree_title))
                 .setItems(options, (dialog, which) -> {
+                    final Context appContext = requireContext().getApplicationContext();
                     String familyId = prefs.getFamilyId();
                     String familyName = prefs.getFamilyName();
 
                     AppExecutors.getInstance().diskIO().execute(() -> {
-                        List<PersonEntity> people = AppDatabase.getInstance(requireContext()).personDao().getAllPeopleSync(familyId);
+                        List<PersonEntity> people = AppDatabase.getInstance(appContext).personDao().getAllPeopleSync(familyId);
+                        if (people == null || people.isEmpty()) {
+                            people = AppDatabase.getInstance(appContext).personDao().getAllPeopleGlobalSync();
+                        }
+
                         if (people == null || people.isEmpty()) {
                             AppExecutors.getInstance().mainThread().execute(() ->
-                                    Toast.makeText(requireContext(), "No relatives found to export.", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(appContext, getString(R.string.settings_export_no_relatives), Toast.LENGTH_SHORT).show()
                             );
                             return;
                         }
 
                         if (which == 0) {
-                            TreeExporter.exportTreeAsPdf(requireContext(), null, familyName, people);
+                            TreeExporter.exportTreeAsPdf(appContext, null, familyName, people);
                         } else {
-                            TreeExporter.exportTreeAsPng(requireContext(), null, familyName, people);
+                            TreeExporter.exportTreeAsPng(appContext, null, familyName, people);
                         }
                     });
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
@@ -321,23 +403,27 @@ public class SettingsFragment extends Fragment {
     private void updateThemeDisplay() {
         String mode = prefs.getThemeMode();
         if (Prefs.THEME_LIGHT.equals(mode)) {
-            binding.tvCurrentThemeValue.setText("Light Theme (উজ্জ্বল)");
+            binding.tvCurrentThemeValue.setText(getString(R.string.settings_theme_light));
         } else if (Prefs.THEME_DARK.equals(mode)) {
-            binding.tvCurrentThemeValue.setText("Dark Theme (অন্ধকার / নাইট)");
+            binding.tvCurrentThemeValue.setText(getString(R.string.settings_theme_dark));
         } else {
-            binding.tvCurrentThemeValue.setText("System Default (সিস্টেম ডিফল্ট)");
+            binding.tvCurrentThemeValue.setText(getString(R.string.settings_theme_system));
         }
     }
 
     private void showThemeDialog() {
-        String[] options = {"System Default", "Light Theme", "Dark Theme"};
+        String[] options = {
+                getString(R.string.settings_theme_system),
+                getString(R.string.settings_theme_light),
+                getString(R.string.settings_theme_dark)
+        };
         int currentIdx = 0;
         String mode = prefs.getThemeMode();
         if (Prefs.THEME_LIGHT.equals(mode)) currentIdx = 1;
         else if (Prefs.THEME_DARK.equals(mode)) currentIdx = 2;
 
         new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Select App Theme")
+                .setTitle(getString(R.string.settings_theme_title))
                 .setSingleChoiceItems(options, currentIdx, (dialog, which) -> {
                     dialog.dismiss();
                     if (which == 1) {
@@ -352,25 +438,28 @@ public class SettingsFragment extends Fragment {
                     }
                     updateThemeDisplay();
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
     private void updateLanguageDisplay() {
         String lang = prefs.getLanguage();
         if ("bn".equals(lang)) {
-            binding.tvCurrentLanguageValue.setText("বাংলা (Bengali)");
+            binding.tvCurrentLanguageValue.setText(getString(R.string.language_bn));
         } else {
-            binding.tvCurrentLanguageValue.setText("English (ইংরেজি)");
+            binding.tvCurrentLanguageValue.setText(getString(R.string.language_en));
         }
     }
 
     private void showLanguageDialog() {
-        String[] options = {"English", "বাংলা (Bengali)"};
+        String[] options = {
+                getString(R.string.language_en),
+                getString(R.string.language_bn)
+        };
         int currentIdx = "bn".equals(prefs.getLanguage()) ? 1 : 0;
 
         new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Select Language")
+                .setTitle(getString(R.string.settings_language_title))
                 .setSingleChoiceItems(options, currentIdx, (dialog, which) -> {
                     dialog.dismiss();
                     String langTag = which == 1 ? "bn" : "en";
@@ -381,16 +470,16 @@ public class SettingsFragment extends Fragment {
                         requireActivity().recreate();
                     }
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
     private void setupAccountSection() {
         binding.btnSettingsLogout.setOnClickListener(v -> {
             new MaterialAlertDialogBuilder(requireContext())
-                    .setTitle("Log Out")
-                    .setMessage("Are you sure you want to log out of your family space? You can log back in with your email and password at any time.")
-                    .setPositiveButton("Log Out", (dialog, which) -> {
+                    .setTitle(getString(R.string.settings_logout_confirm_title))
+                    .setMessage(getString(R.string.settings_logout_confirm_msg))
+                    .setPositiveButton(getString(R.string.logout), (dialog, which) -> {
                         FirebaseAuth.getInstance().signOut();
                         prefs.clearSession();
                         Intent intent = new Intent(requireContext(), LoginActivity.class);
@@ -398,7 +487,7 @@ public class SettingsFragment extends Fragment {
                         startActivity(intent);
                         requireActivity().finish();
                     })
-                    .setNegativeButton("Cancel", null)
+                    .setNegativeButton(R.string.cancel, null)
                     .show();
         });
     }

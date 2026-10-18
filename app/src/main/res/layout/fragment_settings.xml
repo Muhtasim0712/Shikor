@@ -63,7 +63,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Family Invite Code"
+                            android:text="@string/settings_family_code_title"
                             android:textAppearance="?attr/textAppearanceLabelSmall"
                             android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -83,7 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/min_touch_target"
-                        android:text="Share"
+                        android:text="@string/settings_share_code"
                         app:cornerRadius="@dimen/button_corner_radius"
                         app:icon="@android:drawable/ic_menu_share" />
                 </LinearLayout>
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_small"
-            android:text="Family Reminders &amp; Alarms"
+            android:text="@string/settings_reminders_title"
             android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textColor="?attr/colorPrimary"
             android:textStyle="bold" />
@@ -132,7 +132,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Daily Reminder Notifications"
+                            android:text="@string/settings_daily_reminders"
                             android:textAppearance="?attr/textAppearanceTitleMedium"
                             android:textColor="?attr/colorOnSurface" />
 
@@ -140,7 +140,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Birthdays, anniversaries, and remembrance days"
+                            android:text="@string/settings_daily_reminders_desc"
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
@@ -179,7 +179,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Preferred Alert Time"
+                            android:text="@string/settings_preferred_alert_time"
                             android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textColor="?attr/colorOnSurface" />
 
@@ -188,7 +188,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Next alert: Tomorrow at 09:00 AM"
+                            android:text="@string/settings_alert_tomorrow_fmt"
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorPrimary"
                             android:textStyle="bold" />
@@ -223,7 +223,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Exact alarm permission is required for on-time alerts."
+                        android:text="@string/settings_exact_alarm_warning"
                         android:textAppearance="?attr/textAppearanceBodySmall"
                         android:textColor="?attr/colorOnErrorContainer" />
 
@@ -233,7 +233,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/min_touch_target"
-                        android:text="Enable" />
+                        android:text="@string/settings_btn_enable" />
                 </LinearLayout>
 
                 <View
@@ -253,7 +253,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/min_touch_target"
-                        android:text="Send Test Reminder Notification Now"
+                        android:text="@string/settings_btn_test_reminder"
                         app:cornerRadius="@dimen/button_corner_radius"
                         app:icon="@android:drawable/ic_popup_reminder" />
                 </LinearLayout>
@@ -266,7 +266,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_small"
-            android:text="Data &amp; Export Tools"
+            android:text="@string/settings_tools_title"
             android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textColor="?attr/colorPrimary"
             android:textStyle="bold" />
@@ -314,7 +314,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Export Family Contacts"
+                            android:text="@string/settings_export_contacts"
                             android:textAppearance="?attr/textAppearanceTitleMedium"
                             android:textColor="?attr/colorOnSurface" />
 
@@ -322,7 +322,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Export via FamilyProvider as vCard (.vcf) or CSV"
+                            android:text="@string/settings_export_contacts_desc"
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
@@ -368,7 +368,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Import Family Members"
+                            android:text="@string/settings_import_members"
                             android:textAppearance="?attr/textAppearanceTitleMedium"
                             android:textColor="?attr/colorOnSurface" />
 
@@ -376,7 +376,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Import relatives from CSV or vCard (.vcf) files"
+                            android:text="@string/settings_import_members_desc"
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
@@ -422,7 +422,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Relationship Finder (সম্পর্ক অনুসন্ধান)"
+                            android:text="@string/settings_relationship_finder"
                             android:textAppearance="?attr/textAppearanceTitleMedium"
                             android:textColor="?attr/colorOnSurface" />
 
@@ -430,7 +430,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Find exact kinship terms and connection paths between relatives"
+                            android:text="@string/settings_relationship_finder_desc"
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
@@ -478,7 +478,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Export Family Tree (PDF &amp; PNG)"
+                            android:text="@string/settings_export_tree"
                             android:textAppearance="?attr/textAppearanceTitleMedium"
                             android:textColor="?attr/colorOnSurface" />
 
@@ -486,7 +486,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Save archival PDF document or high-resolution PNG tree image"
+                            android:text="@string/settings_export_tree_desc"
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
@@ -507,7 +507,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_small"
-            android:text="Appearance &amp; Preferences"
+            android:text="@string/settings_appearance_title"
             android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textColor="?attr/colorPrimary"
             android:textStyle="bold" />
@@ -556,7 +556,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="App Theme (থিম)"
+                            android:text="@string/settings_theme_label"
                             android:textAppearance="?attr/textAppearanceTitleMedium"
                             android:textColor="?attr/colorOnSurface" />
 
@@ -565,7 +565,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="System Default (Dawn &amp; Moss)"
+                            android:text="@string/settings_theme_system"
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
@@ -613,7 +613,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Language (ভাষা)"
+                            android:text="@string/settings_language_label"
                             android:textAppearance="?attr/textAppearanceTitleMedium"
                             android:textColor="?attr/colorOnSurface" />
 
@@ -622,7 +622,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="English / বাংলা"
+                            android:text="@string/settings_language_title"
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
@@ -646,7 +646,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium"
             android:minHeight="@dimen/min_touch_target"
-            android:text="Log Out of Family Space"
+            android:text="@string/settings_logout_label"
             android:textColor="?attr/colorError"
             app:cornerRadius="@dimen/button_corner_radius"
             app:icon="@android:drawable/ic_lock_power_off"
@@ -659,7 +659,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_large"
             android:gravity="center"
-            android:text="Shikor v1.0 • Built with 100% Java &amp; Material 3\nPreserving family roots, memories &amp; stories"
+            android:text="@string/settings_app_footer"
             android:textAppearance="?attr/textAppearanceLabelSmall"
             android:textColor="?attr/colorOnSurfaceVariant" />
 

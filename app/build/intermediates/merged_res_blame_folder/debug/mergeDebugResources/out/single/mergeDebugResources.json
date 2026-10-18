@@ -1,282 +1,274 @@
 [
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-hdpi\\ic_launcher_round.webp"
+        "merged": "com.shikor.app-debug-48:/layout_activity_family_setup.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_family_setup.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_family_setup.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_family_setup.xml"
+        "merged": "com.shikor.app-debug-48:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\font_noto_sans_bengali.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\font\\noto_sans_bengali.xml"
+        "merged": "com.shikor.app-debug-48:/drawable_ic_nature_tree.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/ic_nature_tree.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_splash.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_splash.xml"
+        "merged": "com.shikor.app-debug-48:/layout_dialog_time_picker.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/dialog_time_picker.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_ic_nature_tree.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\ic_nature_tree.xml"
+        "merged": "com.shikor.app-debug-48:/layout_dialog_add_timeline_photo.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/dialog_add_timeline_photo.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_item_relationship_step.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_relationship_step.xml"
+        "merged": "com.shikor.app-debug-48:/layout_fragment_members.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/fragment_members.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_export.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_export.xml"
+        "merged": "com.shikor.app-debug-48:/layout-sw600dp_activity_export.xml.flat",
+        "source": "com.shikor.app-main-50:/layout-sw600dp/activity_export.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_story_detail.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_story_detail.xml"
+        "merged": "com.shikor.app-debug-48:/xml_kinship_terms.xml.flat",
+        "source": "com.shikor.app-main-50:/xml/kinship_terms.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_ic_dawn_botanical_accent.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\ic_dawn_botanical_accent.xml"
+        "merged": "com.shikor.app-debug-48:/layout_activity_splash.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_splash.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\font_noto_sans_bengali_bold.ttf.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\font\\noto_sans_bengali_bold.ttf"
+        "merged": "com.shikor.app-debug-48:/color_chip_stroke_selector.xml.flat",
+        "source": "com.shikor.app-main-50:/color/chip_stroke_selector.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_fragment_members.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\fragment_members.xml"
+        "merged": "com.shikor.app-debug-48:/layout_item_timeline_photo.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/item_timeline_photo.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\color_bottom_nav_item_tint.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\color\\bottom_nav_item_tint.xml"
+        "merged": "com.shikor.app-debug-48:/drawable-night_bg_window_dawn.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable-night/bg_window_dawn.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_item_story_photo.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_story_photo.xml"
+        "merged": "com.shikor.app-debug-48:/layout_activity_export.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_export.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_bg_indicator_active.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\bg_indicator_active.xml"
+        "merged": "com.shikor.app-debug-48:/menu_menu_main_toolbar.xml.flat",
+        "source": "com.shikor.app-main-50:/menu/menu_main_toolbar.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_fragment_timeline.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\fragment_timeline.xml"
+        "merged": "com.shikor.app-debug-48:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout-sw600dp_activity_export.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout-sw600dp\\activity_export.xml"
+        "merged": "com.shikor.app-debug-48:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.shikor.app-main-50:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-hdpi\\ic_launcher.webp"
+        "merged": "com.shikor.app-debug-48:/font_noto_sans_bengali.xml.flat",
+        "source": "com.shikor.app-main-50:/font/noto_sans_bengali.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_fragment_settings.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\fragment_settings.xml"
+        "merged": "com.shikor.app-debug-48:/drawable_bg_code_box.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/bg_code_box.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_person_detail.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_person_detail.xml"
+        "merged": "com.shikor.app-debug-48:/font_noto_sans_bengali_regular.ttf.flat",
+        "source": "com.shikor.app-main-50:/font/noto_sans_bengali_regular.ttf"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\color_chip_stroke_selector.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\color\\chip_stroke_selector.xml"
+        "merged": "com.shikor.app-debug-48:/color_chip_text_selector.xml.flat",
+        "source": "com.shikor.app-main-50:/color/chip_text_selector.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+        "merged": "com.shikor.app-debug-48:/layout_layout_empty_state.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/layout_empty_state.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_dialog_add_timeline_photo.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\dialog_add_timeline_photo.xml"
+        "merged": "com.shikor.app-debug-48:/color_text_input_box_stroke.xml.flat",
+        "source": "com.shikor.app-main-50:/color/text_input_box_stroke.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-xxxhdpi\\ic_launcher.webp"
+        "merged": "com.shikor.app-debug-48:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.shikor.app-main-50:/menu/bottom_nav_menu.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.shikor.app-debug-48:/layout_fragment_timeline.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/fragment_timeline.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_item_story_photo.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/item_story_photo.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/drawable_bg_indicator_active.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/bg_indicator_active.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/color_chip_background_selector.xml.flat",
+        "source": "com.shikor.app-main-50:/color/chip_background_selector.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout-sw600dp_activity_main.xml.flat",
+        "source": "com.shikor.app-main-50:/layout-sw600dp/activity_main.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/drawable_ic_fit_screen.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/ic_fit_screen.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout-sw600dp_fragment_settings.xml.flat",
+        "source": "com.shikor.app-main-50:/layout-sw600dp/fragment_settings.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/xml_file_paths.xml.flat",
+        "source": "com.shikor.app-main-50:/xml/file_paths.xml"
     },
     {
         "merged": "com.shikor.app-debug-48:/layout_activity_person_detail.xml.flat",
         "source": "com.shikor.app-main-50:/layout/activity_person_detail.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-xhdpi\\ic_launcher.webp"
+        "merged": "com.shikor.app-debug-48:/drawable_ic_shikor_logo.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/ic_shikor_logo.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\font_noto_sans_bengali_regular.ttf.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\font\\noto_sans_bengali_regular.ttf"
+        "merged": "com.shikor.app-debug-48:/menu_menu_tree_view.xml.flat",
+        "source": "com.shikor.app-main-50:/menu/menu_tree_view.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-mdpi\\ic_launcher_round.webp"
+        "merged": "com.shikor.app-debug-48:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-xhdpi\\ic_launcher_round.webp"
+        "merged": "com.shikor.app-debug-48:/layout_activity_story_detail.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_story_detail.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\color_text_input_box_stroke.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\color\\text_input_box_stroke.xml"
+        "merged": "com.shikor.app-debug-48:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_login.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_login.xml"
+        "merged": "com.shikor.app-debug-48:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_fragment_settings.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/fragment_settings.xml"
     },
     {
         "merged": "com.shikor.app-debug-48:/layout-sw600dp_activity_relationship_finder.xml.flat",
         "source": "com.shikor.app-main-50:/layout-sw600dp/activity_relationship_finder.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_main.xml"
+        "merged": "com.shikor.app-debug-48:/anim_fade_out_subtle.xml.flat",
+        "source": "com.shikor.app-main-50:/anim/fade_out_subtle.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_bg_window_dawn.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\bg_window_dawn.xml"
+        "merged": "com.shikor.app-debug-48:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.shikor.app-main-50:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_add_story.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_add_story.xml"
+        "merged": "com.shikor.app-debug-48:/drawable_bg_window_dawn.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/bg_window_dawn.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_fragment_tree.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\fragment_tree.xml"
+        "merged": "com.shikor.app-debug-48:/layout_activity_register.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_register.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable-night_bg_window_dawn.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable-night\\bg_window_dawn.xml"
+        "merged": "com.shikor.app-debug-48:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\ic_launcher_background.xml"
+        "merged": "com.shikor.app-debug-48:/drawable_ic_dawn_botanical_accent.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/ic_dawn_botanical_accent.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_ic_chart_view.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\ic_chart_view.xml"
+        "merged": "com.shikor.app-debug-48:/drawable_ic_chart_view.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/ic_chart_view.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_item_timeline_year_header.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_timeline_year_header.xml"
+        "merged": "com.shikor.app-debug-48:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_item_story_text_audio.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_story_text_audio.xml"
+        "merged": "com.shikor.app-debug-48:/layout_layout_loading.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/layout_loading.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_item_member.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_member.xml"
+        "merged": "com.shikor.app-debug-48:/color_bottom_nav_item_tint.xml.flat",
+        "source": "com.shikor.app-main-50:/color/bottom_nav_item_tint.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\anim_fade_in_subtle.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\anim\\fade_in_subtle.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\color_chip_text_selector.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\color\\chip_text_selector.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\menu_menu_tree_view.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\menu\\menu_tree_view.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "com.shikor.app-debug-48:/layout_fragment_tree.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/fragment_tree.xml"
     },
     {
         "merged": "com.shikor.app-debug-48:/layout_activity_relationship_finder.xml.flat",
         "source": "com.shikor.app-main-50:/layout/activity_relationship_finder.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\xml_kinship_terms.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\xml\\kinship_terms.xml"
+        "merged": "com.shikor.app-debug-48:/layout_item_relationship_step.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/item_relationship_step.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout-sw600dp_activity_relationship_finder.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout-sw600dp\\activity_relationship_finder.xml"
+        "merged": "com.shikor.app-debug-48:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_ic_shikor_logo.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\ic_shikor_logo.xml"
+        "merged": "com.shikor.app-debug-48:/layout_item_story_text_audio.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/item_story_text_audio.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-mdpi\\ic_launcher.webp"
+        "merged": "com.shikor.app-debug-48:/layout_activity_login.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_login.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-xxhdpi\\ic_launcher.webp"
+        "merged": "com.shikor.app-debug-48:/layout_item_export_contact.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/item_export_contact.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_layout_empty_state.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\layout_empty_state.xml"
+        "merged": "com.shikor.app-debug-48:/font_noto_sans_bengali_bold.ttf.flat",
+        "source": "com.shikor.app-main-50:/font/noto_sans_bengali_bold.ttf"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+        "merged": "com.shikor.app-debug-48:/layout_item_member.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/item_member.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_layout_loading.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\layout_loading.xml"
+        "merged": "com.shikor.app-debug-48:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_bg_code_box.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\bg_code_box.xml"
+        "merged": "com.shikor.app-debug-48:/layout_activity_add_edit_person.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_add_edit_person.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\menu_bottom_nav_menu.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\menu\\bottom_nav_menu.xml"
+        "merged": "com.shikor.app-debug-48:/anim_fade_in_subtle.xml.flat",
+        "source": "com.shikor.app-main-50:/anim/fade_in_subtle.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_item_export_contact.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_export_contact.xml"
+        "merged": "com.shikor.app-debug-48:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.shikor.app-main-50:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\xml_file_paths.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\xml\\file_paths.xml"
+        "merged": "com.shikor.app-debug-48:/layout_activity_add_story.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_add_story.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\anim_fade_out_subtle.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\anim\\fade_out_subtle.xml"
+        "merged": "com.shikor.app-debug-48:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.shikor.app-main-50:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\menu_menu_main_toolbar.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\menu\\menu_main_toolbar.xml"
+        "merged": "com.shikor.app-debug-48:/layout_item_timeline_year_header.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/item_timeline_year_header.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout-sw600dp_fragment_settings.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout-sw600dp\\fragment_settings.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_relationship_finder.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_relationship_finder.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\ic_launcher_foreground.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\color_chip_background_selector.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\color\\chip_background_selector.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_add_edit_person.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_add_edit_person.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_item_timeline_photo.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_timeline_photo.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_register.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_register.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_ic_fit_screen.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\ic_fit_screen.xml"
-    },
-    {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout-sw600dp_activity_main.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout-sw600dp\\activity_main.xml"
+        "merged": "com.shikor.app-debug-48:/layout_activity_main.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_main.xml"
     }
 ]

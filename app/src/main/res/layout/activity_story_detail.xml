@@ -139,7 +139,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/spacing_small"
                             android:layout_weight="1"
-                            android:text="Oral History Recording"
+                            android:text="@string/story_detail_oral"
                             android:textAppearance="?attr/textAppearanceTitleMedium"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:textStyle="bold" />
@@ -259,7 +259,7 @@
                     android:layout_marginEnd="@dimen/spacing_small"
                     android:layout_weight="1"
                     android:minHeight="@dimen/min_touch_target"
-                    android:text="Share Story"
+                    android:text="@string/story_share"
                     app:icon="@android:drawable/ic_menu_share" />
 
                 <com.google.android.material.button.MaterialButton
@@ -268,7 +268,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/min_touch_target"
-                    android:text="Delete"
+                    android:text="@string/story_delete"
                     android:textColor="?attr/colorError"
                     app:icon="@android:drawable/ic_menu_delete"
                     app:iconTint="?attr/colorError"

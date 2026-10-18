@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#F6F3EA</color>
+    <color name="black">#2B2F2A</color>
+    <color name="deceased_indicator">#434842</color>
+    <color name="error">#B3473F</color>
+    <color name="error_container">#FAD9D7</color>
+    <color name="gender_female">#A05D6D</color>
+    <color name="gender_female_bg">#F5E4E8</color>
+    <color name="gender_female_text">#491B26</color>
+    <color name="gender_male">#4B7B8D</color>
+    <color name="gender_male_bg">#DFECF1</color>
+    <color name="gender_male_text">#183A46</color>
+    <color name="gender_other">#7E6E8E</color>
+    <color name="gender_other_bg">#EBE5F2</color>
+    <color name="gender_other_text">#352943</color>
+    <color name="on_background">#2B2F2A</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="on_error_container">#420F0C</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_primary_container">#0C2614</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="on_secondary_container">#2F1F10</color>
+    <color name="on_surface">#2B2F2A</color>
+    <color name="on_surface_variant">#525850</color>
+    <color name="on_tertiary">#FFFFFF</color>
+    <color name="on_tertiary_container">#332302</color>
+    <color name="outline">#B9B5A6</color>
+    <color name="outline_variant">#D4D0C2</color>
+    <color name="overlay_scrim">#402B2F2A</color>
+    <color name="primary">#3F6B4F</color>
+    <color name="primary_container">#D7E8D5</color>
+    <color name="primary_variant">#2E533B</color>
+    <color name="secondary">#8A6A4B</color>
+    <color name="secondary_container">#EBDDCB</color>
+    <color name="secondary_variant">#6E5136</color>
+    <color name="surface">#FBF9F3</color>
+    <color name="surface_variant">#ECE7D8</color>
+    <color name="tertiary">#C9A24B</color>
+    <color name="tertiary_container">#F8E8C7</color>
+    <color name="transparent">#00000000</color>
+    <color name="tree_connector">#82887E</color>
+    <color name="white">#FFFFFF</color>
+    <color name="window_gradient_center">#F6F3EA</color>
+    <color name="window_gradient_end">#EEF3E9</color>
+    <color name="window_gradient_start">#FBF9F3</color>
+    <dimen name="avatar_ring_width_default">3dp</dimen>
+    <dimen name="avatar_size_large">96dp</dimen>
+    <dimen name="avatar_size_medium">56dp</dimen>
+    <dimen name="avatar_size_small">40dp</dimen>
+    <dimen name="button_corner_radius">24dp</dimen>
+    <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="card_elevation">1dp</dimen>
+    <dimen name="chip_corner_radius">24dp</dimen>
+    <dimen name="dialog_corner_radius">16dp</dimen>
+    <dimen name="input_corner_radius">16dp</dimen>
+    <dimen name="min_touch_target">48dp</dimen>
+    <dimen name="spacing_huge">48dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="text_size_body">16sp</dimen>
+    <dimen name="text_size_caption">13sp</dimen>
+    <dimen name="text_size_display">34sp</dimen>
+    <dimen name="text_size_headline">28sp</dimen>
+    <dimen name="text_size_subtitle">18sp</dimen>
+    <dimen name="text_size_title">22sp</dimen>
+    <string name="action_call">Call</string>
+    <string name="action_export">Export</string>
+    <string name="action_fit_tree">Fit whole tree</string>
+    <string name="action_maps">Maps</string>
+    <string name="action_recenter">Re-center</string>
+    <string name="action_share">Share</string>
+    <string name="already_have_account">Already have an account? Sign In</string>
+    <string name="app_name">Shikor</string>
+    <string name="app_tagline">Preserving family roots, memories &amp; stories</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm_password_label">Confirm Password</string>
+    <string name="create_family_btn">Create Family</string>
+    <string name="create_family_desc">Start a brand new family archive and receive a 6-character code to invite relatives.</string>
+    <string name="create_family_title">Create New Family</string>
+    <string name="dont_have_account">Don\'t have an account? Register</string>
+    <string name="email_label">Email Address</string>
+    <string name="empty_contacts_title">No family contacts found</string>
+    <string name="empty_members_subtitle">Add family members using the + button below</string>
+    <string name="empty_members_title">No relatives found</string>
+    <string name="empty_timeline_subtitle">Add milestone photos with years to see your family timeline unfold!</string>
+    <string name="empty_timeline_title">No Photos in Timeline</string>
+    <string name="empty_tree_subtitle">Add your family members to see your tree grow!</string>
+    <string name="empty_tree_title">Family Tree is Empty</string>
+    <string name="error_auth_failed">Authentication failed: %s</string>
+    <string name="error_empty_field">This field cannot be empty</string>
+    <string name="error_family_not_found">Family code not found. Please verify with your family admin.</string>
+    <string name="error_invalid_code">Family code must be exactly 6 characters</string>
+    <string name="error_invalid_email">Enter a valid email address</string>
+    <string name="error_password_mismatch">Passwords do not match</string>
+    <string name="error_short_password">Password must be at least 6 characters</string>
+    <string name="export_address_book_desc">Queried securely via FamilyProvider. Export contacts to your phone\'s address book or generate a digital backup.</string>
+    <string name="export_address_book_title">Family Address Book</string>
+    <string name="export_btn_csv">Export CSV (.csv)</string>
+    <string name="export_btn_pdf">Export PDF Document</string>
+    <string name="export_btn_png">Export PNG Image</string>
+    <string name="export_btn_vcf">Export vCard (.vcf)</string>
+    <string name="export_contacts_csv">Export CSV (.csv)</string>
+    <string name="export_contacts_screen_title">Export Family Contacts</string>
+    <string name="export_contacts_vcard">Export vCard (.vcf)</string>
+    <string name="export_directory_preview">Directory Preview:</string>
+    <string name="export_import_btn">Import Family Members (.vcf / .csv)</string>
+    <string name="export_loading_contacts">Loading contacts…</string>
+    <string name="export_no_contacts">No family contacts found. Add phone numbers to relatives to export them!</string>
+    <string name="export_tree_pdf">Export Tree as PDF</string>
+    <string name="export_tree_png">Export Tree as PNG</string>
+    <string name="fact_born">📅 Born: %s</string>
+    <string name="fact_hijri">🌙 Hijri: %s</string>
+    <string name="fact_hometown">📍 Hometown: %s</string>
+    <string name="fact_occupation">💼 Occupation: %s</string>
+    <string name="fact_passed">🕊️ Passed: %s</string>
+    <string name="family_code_invite_message">Join our family archive on Shikor! Our family code is: %s</string>
+    <string name="family_code_label">6-Character Family Code</string>
+    <string name="family_name_label">Family Name (e.g. Chowdhury Family)</string>
+    <string name="family_setup_subtitle">Create a new family space or join an existing one</string>
+    <string name="family_setup_title">Family Space</string>
+    <string name="find_relationship">Find Family Relationship</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="gcm_defaultSenderId" translatable="false">633789903240</string>
+    <string name="google_api_key" translatable="false">AIzaSyAU2hCyArCSlXJOr7teRfJIsORTShA1tio</string>
+    <string name="google_app_id" translatable="false">1:633789903240:android:b1f8ca375a233fb5450a3d</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAU2hCyArCSlXJOr7teRfJIsORTShA1tio</string>
+    <string name="google_storage_bucket" translatable="false">shikor-app.firebasestorage.app</string>
+    <string name="import_contacts">Import Family Members</string>
+    <string name="join_family_btn">Join Family</string>
+    <string name="join_family_desc">Enter the 6-character family code provided by an existing family member.</string>
+    <string name="join_family_title">Join Existing Family</string>
+    <string name="language_bn">বাংলা (Bengali)</string>
+    <string name="language_en">English</string>
+    <string name="loading">Loading…</string>
+    <string name="login_button">Sign In</string>
+    <string name="login_subtitle">Sign in to access your family archive</string>
+    <string name="login_title">Welcome Back</string>
+    <string name="logout">Log Out</string>
+    <string name="members_fab_add">Add Relative</string>
+    <string name="members_filter_all">All Members</string>
+    <string name="members_filter_deceased">Late (Deceased)</string>
+    <string name="members_filter_living">Living</string>
+    <string name="members_search_hint">Search relatives by name, nickname or hometown…</string>
+    <string name="name_label">Full Name</string>
+    <string name="nav_members">Members</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_timeline">Timeline</string>
+    <string name="nav_tree">Family Tree</string>
+    <string name="password_label">Password</string>
+    <string name="person_biography_hint">Biography &amp; Life Memories</string>
+    <string name="person_biography_title">Biography &amp; Life Story</string>
+    <string name="person_birth_date_hint">Birth Date (YYYY-MM-DD) *</string>
+    <string name="person_btn_edit">Edit Relative Details</string>
+    <string name="person_children_label">Children:</string>
+    <string name="person_choose_photo">Choose Photo</string>
+    <string name="person_death_date_hint">Death Date / Remembrance Day (YYYY-MM-DD)</string>
+    <string name="person_family_relationships">Family Relationships</string>
+    <string name="person_father_label">Father of this person</string>
+    <string name="person_full_name_hint">Full Name *</string>
+    <string name="person_gender_female">Female</string>
+    <string name="person_gender_label">Gender</string>
+    <string name="person_gender_male">Male</string>
+    <string name="person_gender_other">Other</string>
+    <string name="person_hometown_hint">Hometown / Ancestral Village (e.g. Sylhet, Bogura)</string>
+    <string name="person_is_deceased">Person is deceased</string>
+    <string name="person_is_parent_of">This person is the Parent of (Child):</string>
+    <string name="person_key_facts">Key Facts</string>
+    <string name="person_mother_label">Mother of this person</string>
+    <string name="person_nickname_hint">Nickname / Daknaam (optional)</string>
+    <string name="person_no_stories">No stories recorded yet. Tap \'+ Add Story\' to record an oral memory or write a story.</string>
+    <string name="person_occupation_hint">Occupation / Title</string>
+    <string name="person_parents_known">Parents of this person (if known):</string>
+    <string name="person_parents_label">Parents:</string>
+    <string name="person_phone_hint">Phone Number (for direct calling)</string>
+    <string name="person_relatives_title">Immediate Relatives</string>
+    <string name="person_save_button">Save Relative</string>
+    <string name="person_siblings_label">Siblings:</string>
+    <string name="person_spouse_form_label">Spouse of this person</string>
+    <string name="person_spouse_label">Spouse:</string>
+    <string name="person_stories_title">Stories &amp; Oral Memories</string>
+    <string name="person_take_photo">Take Photo</string>
+    <string name="project_id" translatable="false">shikor-app</string>
+    <string name="register_button">Create Account</string>
+    <string name="register_subtitle">Start your digital family legacy</string>
+    <string name="register_title">Join Shikor</string>
+    <string name="relationship_calc_btn">Find Relationship</string>
+    <string name="relationship_degree">Degree of Separation</string>
+    <string name="relationship_finder_title">Relationship Finder</string>
+    <string name="relationship_path">Lineage Path</string>
+    <string name="relative_father_prefix">Father: </string>
+    <string name="relative_mother_prefix">Mother: </string>
+    <string name="relative_spouse_prefix">Spouse: </string>
+    <string name="reset_password_sent">Password reset email sent</string>
+    <string name="rf_calc_button">Find Relationship</string>
+    <string name="rf_connection_path_label">Connection Path:</string>
+    <string name="rf_header_subtitle">Discover how two members of your tree are related in Bengali and English.</string>
+    <string name="rf_header_title">Choose Relatives to Connect</string>
+    <string name="rf_kinship_title_label">Kinship Title &amp; Relation:</string>
+    <string name="rf_path_step_format">↳ %s of previous</string>
+    <string name="rf_person1_label">First Relative (Person 1)</string>
+    <string name="rf_person2_label">Second Relative (Person 2)</string>
+    <string name="rf_start_relative">Start Relative</string>
+    <string name="save">Save</string>
+    <string name="select_person_1">Select First Relative</string>
+    <string name="select_person_2">Select Second Relative</string>
+    <string name="settings_account_title">Account &amp; App Info</string>
+    <string name="settings_alert_paused">Daily reminders are currently paused</string>
+    <string name="settings_alert_set_today_fmt">Reminder set for today at %1$s (in %2$d min)</string>
+    <string name="settings_alert_set_tomorrow_fmt">Scheduled for tomorrow at %1$s</string>
+    <string name="settings_alert_status_today">Next alert: Today at %1$s (in %2$d min)</string>
+    <string name="settings_alert_status_tomorrow">Next alert: Tomorrow at %1$s</string>
+    <string name="settings_alert_today_fmt">Next alert: Today at %1$s (in %2$dm)</string>
+    <string name="settings_alert_tomorrow_fmt">Next alert: Tomorrow at %1$s</string>
+    <string name="settings_app_footer">Shikor v1.0 • Built with 100% Java &amp; Material 3\nPreserving family roots, memories &amp; stories</string>
+    <string name="settings_appearance_title">Appearance &amp; Preferences</string>
+    <string name="settings_btn_enable">Enable</string>
+    <string name="settings_btn_test_reminder">Send Test Reminder Notification Now</string>
+    <string name="settings_daily_reminders">Daily Reminder Notifications</string>
+    <string name="settings_daily_reminders_desc">Birthdays, anniversaries, and remembrance days</string>
+    <string name="settings_exact_alarm_warning">Exact alarm permission is required for on-time alerts.</string>
+    <string name="settings_export_contacts">Export Family Contacts</string>
+    <string name="settings_export_contacts_desc">Export via FamilyProvider as vCard (.vcf) or CSV</string>
+    <string name="settings_export_no_relatives">No relatives found to export.</string>
+    <string name="settings_export_pdf_option">Export PDF Document (Archive)</string>
+    <string name="settings_export_png_option">Export PNG Image (Diagram)</string>
+    <string name="settings_export_tree">Export Family Tree (PDF &amp; PNG)</string>
+    <string name="settings_export_tree_desc">Save archival PDF document or high-resolution PNG tree image</string>
+    <string name="settings_export_tree_pdf_opt">Export PDF Document (Archive)</string>
+    <string name="settings_export_tree_png_opt">Export PNG Image (Diagram)</string>
+    <string name="settings_export_tree_title">Export Family Tree</string>
+    <string name="settings_family_code_title">Family Invite Code</string>
+    <string name="settings_import_members">Import Family Members</string>
+    <string name="settings_import_members_desc">Import relatives from CSV or vCard (.vcf) files</string>
+    <string name="settings_language_label">Language</string>
+    <string name="settings_language_title">Select Language</string>
+    <string name="settings_logout_confirm_msg">Are you sure you want to log out of your family space? You can log back in with your email and password at any time.</string>
+    <string name="settings_logout_confirm_title">Log Out</string>
+    <string name="settings_logout_dialog_msg">Are you sure you want to log out of your family space? You can log back in with your email and password at any time.</string>
+    <string name="settings_logout_dialog_title">Log Out</string>
+    <string name="settings_logout_label">Log Out of Family Space</string>
+    <string name="settings_preferred_alert_time">Preferred Alert Time</string>
+    <string name="settings_relationship_finder">Relationship Finder</string>
+    <string name="settings_relationship_finder_desc">Find exact kinship terms and connection paths between relatives</string>
+    <string name="settings_reminders_paused">Daily reminders are currently paused</string>
+    <string name="settings_reminders_title">Family Reminders &amp; Alarms</string>
+    <string name="settings_share_code">Share</string>
+    <string name="settings_theme_dark">Dark Theme</string>
+    <string name="settings_theme_label">App Theme</string>
+    <string name="settings_theme_light">Light Theme</string>
+    <string name="settings_theme_system">System Default</string>
+    <string name="settings_theme_title">Select App Theme</string>
+    <string name="settings_time_picker_hint">Alert will trigger daily at this time</string>
+    <string name="settings_time_selected_fmt">Selected: %s</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_tools_title">Data &amp; Export Tools</string>
+    <string name="share_family_code">Share Family Code</string>
+    <string name="story_attach_photo">Attach Photo</string>
+    <string name="story_body_hint">Story &amp; Memories</string>
+    <string name="story_delete">Delete</string>
+    <string name="story_detail_oral">Oral History Recording</string>
+    <string name="story_oral_recording">Oral Voice Recording</string>
+    <string name="story_photo_memory">Photo Memory</string>
+    <string name="story_record_btn">Record Voice</string>
+    <string name="story_recorded_label">Audio Recorded</string>
+    <string name="story_recording_desc">Capture their voice, dialect, and words with foreground audio recording.</string>
+    <string name="story_recording_timer">Recording: %s</string>
+    <string name="story_save_btn">Save Story</string>
+    <string name="story_select_member">Select Family Member</string>
+    <string name="story_share">Share Story</string>
+    <string name="story_stop_btn">Stop</string>
+    <string name="story_title_hint">Story Title *</string>
+    <string name="sync_dialog_btn_close">Close</string>
+    <string name="sync_dialog_btn_sync">Sync Now</string>
+    <string name="sync_dialog_cloud_state">Cloud State: %s</string>
+    <string name="sync_dialog_connection">Connection: %s</string>
+    <string name="sync_dialog_details">Details: %s</string>
+    <string name="sync_dialog_last_synced">Last Synced: %s</string>
+    <string name="sync_dialog_offline">Offline ⚪ (Airplane mode)</string>
+    <string name="sync_dialog_online">Online 🟢</string>
+    <string name="sync_dialog_pending_initial">Pending initial sync</string>
+    <string name="sync_dialog_title">Cloud Synchronization</string>
+    <string name="sync_issue">Sync Issue</string>
+    <string name="sync_manual_triggered">Manual cloud sync triggered</string>
+    <string name="sync_offline">Offline</string>
+    <string name="sync_offline_error">Cannot sync while offline. Please connect to the internet.</string>
+    <string name="sync_pending">%d Pending</string>
+    <string name="sync_synced">Synced</string>
+    <string name="sync_syncing">Syncing…</string>
+    <string name="theme_dark">Dark Theme</string>
+    <string name="theme_light">Light Theme</string>
+    <string name="theme_system">System Default</string>
+    <string name="timeline_add_photo">Add Memory</string>
+    <string name="timeline_caption_hint">Caption / Description</string>
+    <string name="timeline_choose_photo">Tap to Choose Photo</string>
+    <string name="timeline_fab_add">Add Memory</string>
+    <string name="timeline_tag_relatives">Tag Family Members:</string>
+    <string name="timeline_tag_subtitle">Select all relatives who appear in this photo:</string>
+    <string name="timeline_year_hint">Year of Memory (e.g. 1971) *</string>
+    <string name="tree_root_label">Root: </string>
+    <string name="tree_view_chart">Chart view</string>
+    <string name="tree_view_natural">Tree view</string>
+    <style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+
+        
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+
+        
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
+
+        
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+
+        
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+        <item name="colorErrorContainer">@color/error_container</item>
+        <item name="colorOnErrorContainer">@color/on_error_container</item>
+
+        
+        <item name="android:windowBackground">@drawable/bg_window_dawn</item>
+
+        
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        
+        <item name="android:windowAnimationStyle">@style/ShikorWindowAnimation</item>
+
+        
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Shikor.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Shikor.BodyMedium</item>
+
+        
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Shikor.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Shikor.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Shikor.Large</item>
+
+        
+        <item name="toolbarStyle">@style/Widget.Shikor.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Widget.Shikor.BottomNavigationView</item>
+        <item name="floatingActionButtonStyle">@style/Widget.Shikor.FloatingActionButton</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.Shikor.ExtendedFloatingActionButton</item>
+        <item name="textInputStyle">@style/Widget.Shikor.TextInputLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.Shikor.CardView</item>
+        <item name="materialButtonStyle">@style/Widget.Shikor.Button</item>
+        <item name="chipStyle">@style/Widget.Shikor.Chip</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Shikor.MaterialAlertDialog</item>
+    </style>
+    <style name="ShapeAppearance.Shikor.Large" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSize">@dimen/button_corner_radius</item>
+    </style>
+    <style name="ShapeAppearance.Shikor.Medium" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">@dimen/card_corner_radius</item>
+    </style>
+    <style name="ShapeAppearance.Shikor.Small" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="ShikorWindowAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in_subtle</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out_subtle</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in_subtle</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out_subtle</item>
+    </style>
+    <style name="TextAppearance.Shikor.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:lineHeight">24sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="TextAppearance.Shikor.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:fontFamily">@font/noto_sans_bengali</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:lineHeight">24sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="Theme.Shikor" parent="Base.Theme.Shikor"/>
+    <style name="ThemeOverlay.Shikor.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Shikor.Medium</item>
+        <item name="colorSurface">@color/surface</item>
+    </style>
+    <style name="Widget.Shikor.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="itemIconTint">@color/bottom_nav_item_tint</item>
+        <item name="itemTextColor">@color/bottom_nav_item_tint</item>
+        <item name="elevation">2dp</item>
+    </style>
+    <style name="Widget.Shikor.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+    </style>
+    <style name="Widget.Shikor.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+        <item name="strokeColor">@color/outline</item>
+    </style>
+    <style name="Widget.Shikor.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+    </style>
+    <style name="Widget.Shikor.CardView" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+        <item name="strokeColor">@color/outline</item>
+        <item name="strokeWidth">0.5dp</item>
+    </style>
+    <style name="Widget.Shikor.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_background_selector</item>
+        <item name="android:textColor">@color/chip_text_selector</item>
+        <item name="chipStrokeColor">@color/chip_stroke_selector</item>
+        <item name="chipStrokeWidth">0.5dp</item>
+        <item name="chipCornerRadius">@dimen/chip_corner_radius</item>
+        <item name="android:minHeight">@dimen/min_touch_target</item>
+    </style>
+    <style name="Widget.Shikor.ExtendedFloatingActionButton" parent="Widget.Material3.ExtendedFloatingActionButton.Primary">
+        <item name="backgroundTint">@color/primary_container</item>
+        <item name="android:textColor">@color/on_primary_container</item>
+        <item name="iconTint">@color/on_primary_container</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="elevation">2dp</item>
+    </style>
+    <style name="Widget.Shikor.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">@color/primary_container</item>
+        <item name="tint">@color/on_primary_container</item>
+        <item name="elevation">2dp</item>
+    </style>
+    <style name="Widget.Shikor.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/input_corner_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/input_corner_radius</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+    </style>
+    <style name="Widget.Shikor.Toolbar" parent="Widget.Material3.Toolbar.Surface">
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="titleTextColor">?attr/colorOnSurface</item>
+        <item name="subtitleTextColor">?attr/colorOnSurfaceVariant</item>
+        <item name="navigationIconTint">?attr/colorOnSurface</item>
+    </style>
+    <declare-styleable name="AvatarView">
+        <attr format="color" name="ringColor"/>
+        <attr format="dimension" name="ringWidth"/>
+        <attr format="string" name="initials"/>
+        <attr format="boolean" name="isDeceased"/>
+    </declare-styleable>
+</resources>

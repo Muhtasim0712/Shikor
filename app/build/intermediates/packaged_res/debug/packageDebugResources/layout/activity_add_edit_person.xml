@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/spacing_small"
                         android:minHeight="@dimen/min_touch_target"
-                        android:text="Choose Photo" />
+                        android:text="@string/person_choose_photo" />
 
                     <!-- CONCEPT: Implicit Intent trigger for Camera Capture -->
                     <com.google.android.material.button.MaterialButton
@@ -70,7 +70,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/min_touch_target"
-                        android:text="Take Photo" />
+                        android:text="@string/person_take_photo" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -80,7 +80,7 @@
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Full Name *"
+                android:hint="@string/person_full_name_hint"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:hint="Nickname / Daknaam (optional)">
+                android:hint="@string/person_nickname_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNickName"
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:text="Gender"
+                android:text="@string/person_gender_label"
                 android:textAppearance="?attr/textAppearanceLabelLarge" />
 
             <RadioGroup
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:minHeight="@dimen/min_touch_target"
-                    android:text="Male" />
+                    android:text="@string/person_gender_male" />
 
                 <RadioButton
                     android:id="@+id/rbFemale"
@@ -136,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_medium"
                     android:minHeight="@dimen/min_touch_target"
-                    android:text="Female" />
+                    android:text="@string/person_gender_female" />
 
                 <RadioButton
                     android:id="@+id/rbOther"
@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_medium"
                     android:minHeight="@dimen/min_touch_target"
-                    android:text="Other" />
+                    android:text="@string/person_gender_other" />
             </RadioGroup>
 
             <!-- Birth Date & Death Date -->
@@ -154,7 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:hint="Birth Date (YYYY-MM-DD) *"
+                android:hint="@string/person_birth_date_hint"
                 app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
                 app:endIconMode="custom"
                 app:errorEnabled="true">
@@ -175,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:minHeight="@dimen/min_touch_target"
-                android:text="Person is deceased"
+                android:text="@string/person_is_deceased"
                 android:textAppearance="?attr/textAppearanceBodyMedium" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -184,7 +184,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_tiny"
-                android:hint="Death Date / Remembrance Day (YYYY-MM-DD)"
+                android:hint="@string/person_death_date_hint"
                 android:visibility="gone"
                 app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
                 app:endIconMode="custom"
@@ -206,7 +206,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:hint="Hometown / Ancestral Village (e.g. Sylhet, Bogura)">
+                android:hint="@string/person_hometown_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etHometown"
@@ -222,7 +222,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:hint="Phone Number (for direct calling)">
+                android:hint="@string/person_phone_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPhoneNumber"
@@ -238,7 +238,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:hint="Occupation / Title">
+                android:hint="@string/person_occupation_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etOccupation"
@@ -253,7 +253,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_large"
-                android:text="Family Relationships"
+                android:text="@string/person_family_relationships"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="?attr/colorPrimary"
                 android:textStyle="bold" />
@@ -263,7 +263,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:text="This person is the Parent of (Child):"
+                android:text="@string/person_is_parent_of"
                 android:textAppearance="?attr/textAppearanceLabelMedium"
                 android:textColor="?attr/colorSecondary" />
 
@@ -278,7 +278,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:text="Parents of this person (if known):"
+                android:text="@string/person_parents_known"
                 android:textAppearance="?attr/textAppearanceLabelMedium"
                 android:textColor="?attr/colorPrimary" />
 
@@ -287,7 +287,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_tiny"
-                android:text="Father of this person"
+                android:text="@string/person_father_label"
                 android:textAppearance="?attr/textAppearanceLabelSmall" />
 
             <Spinner
@@ -302,7 +302,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_tiny"
-                android:text="Mother of this person"
+                android:text="@string/person_mother_label"
                 android:textAppearance="?attr/textAppearanceLabelSmall" />
 
             <Spinner
@@ -317,7 +317,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:text="Spouse of this person"
+                android:text="@string/person_spouse_form_label"
                 android:textAppearance="?attr/textAppearanceLabelMedium" />
 
             <Spinner
@@ -334,7 +334,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:hint="Biography &amp; Life Memories">
+                android:hint="@string/person_biography_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etBiography"
@@ -353,7 +353,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_xlarge"
                 android:minHeight="@dimen/min_touch_target"
-                android:text="Save Relative"
+                android:text="@string/person_save_button"
                 app:cornerRadius="@dimen/button_corner_radius" />
 
         </LinearLayout>

@@ -674,6 +674,159 @@ public final class PersonDao_Impl implements PersonDao {
   }
 
   @Override
+  public List<PersonEntity> getAllPeopleGlobalSync() {
+    final String _sql = "SELECT * FROM people ORDER BY generation ASC, birthDate ASC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+      final int _cursorIndexOfFamilyId = CursorUtil.getColumnIndexOrThrow(_cursor, "familyId");
+      final int _cursorIndexOfFullName = CursorUtil.getColumnIndexOrThrow(_cursor, "fullName");
+      final int _cursorIndexOfNickName = CursorUtil.getColumnIndexOrThrow(_cursor, "nickName");
+      final int _cursorIndexOfGender = CursorUtil.getColumnIndexOrThrow(_cursor, "gender");
+      final int _cursorIndexOfBirthDate = CursorUtil.getColumnIndexOrThrow(_cursor, "birthDate");
+      final int _cursorIndexOfDeathDate = CursorUtil.getColumnIndexOrThrow(_cursor, "deathDate");
+      final int _cursorIndexOfIsDeceased = CursorUtil.getColumnIndexOrThrow(_cursor, "isDeceased");
+      final int _cursorIndexOfHometown = CursorUtil.getColumnIndexOrThrow(_cursor, "hometown");
+      final int _cursorIndexOfOccupation = CursorUtil.getColumnIndexOrThrow(_cursor, "occupation");
+      final int _cursorIndexOfPhoneNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "phoneNumber");
+      final int _cursorIndexOfBiography = CursorUtil.getColumnIndexOrThrow(_cursor, "biography");
+      final int _cursorIndexOfPhotoPath = CursorUtil.getColumnIndexOrThrow(_cursor, "photoPath");
+      final int _cursorIndexOfFatherId = CursorUtil.getColumnIndexOrThrow(_cursor, "fatherId");
+      final int _cursorIndexOfMotherId = CursorUtil.getColumnIndexOrThrow(_cursor, "motherId");
+      final int _cursorIndexOfSpouseId = CursorUtil.getColumnIndexOrThrow(_cursor, "spouseId");
+      final int _cursorIndexOfMarriageDate = CursorUtil.getColumnIndexOrThrow(_cursor, "marriageDate");
+      final int _cursorIndexOfCreatedByUid = CursorUtil.getColumnIndexOrThrow(_cursor, "createdByUid");
+      final int _cursorIndexOfGeneration = CursorUtil.getColumnIndexOrThrow(_cursor, "generation");
+      final int _cursorIndexOfUpdatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "updatedAt");
+      final int _cursorIndexOfSyncState = CursorUtil.getColumnIndexOrThrow(_cursor, "syncState");
+      final List<PersonEntity> _result = new ArrayList<PersonEntity>(_cursor.getCount());
+      while (_cursor.moveToNext()) {
+        final PersonEntity _item;
+        final String _tmpId;
+        if (_cursor.isNull(_cursorIndexOfId)) {
+          _tmpId = null;
+        } else {
+          _tmpId = _cursor.getString(_cursorIndexOfId);
+        }
+        final String _tmpFamilyId;
+        if (_cursor.isNull(_cursorIndexOfFamilyId)) {
+          _tmpFamilyId = null;
+        } else {
+          _tmpFamilyId = _cursor.getString(_cursorIndexOfFamilyId);
+        }
+        final String _tmpFullName;
+        if (_cursor.isNull(_cursorIndexOfFullName)) {
+          _tmpFullName = null;
+        } else {
+          _tmpFullName = _cursor.getString(_cursorIndexOfFullName);
+        }
+        final String _tmpNickName;
+        if (_cursor.isNull(_cursorIndexOfNickName)) {
+          _tmpNickName = null;
+        } else {
+          _tmpNickName = _cursor.getString(_cursorIndexOfNickName);
+        }
+        final String _tmpGender;
+        if (_cursor.isNull(_cursorIndexOfGender)) {
+          _tmpGender = null;
+        } else {
+          _tmpGender = _cursor.getString(_cursorIndexOfGender);
+        }
+        final String _tmpBirthDate;
+        if (_cursor.isNull(_cursorIndexOfBirthDate)) {
+          _tmpBirthDate = null;
+        } else {
+          _tmpBirthDate = _cursor.getString(_cursorIndexOfBirthDate);
+        }
+        final String _tmpDeathDate;
+        if (_cursor.isNull(_cursorIndexOfDeathDate)) {
+          _tmpDeathDate = null;
+        } else {
+          _tmpDeathDate = _cursor.getString(_cursorIndexOfDeathDate);
+        }
+        final boolean _tmpIsDeceased;
+        final int _tmp;
+        _tmp = _cursor.getInt(_cursorIndexOfIsDeceased);
+        _tmpIsDeceased = _tmp != 0;
+        final String _tmpHometown;
+        if (_cursor.isNull(_cursorIndexOfHometown)) {
+          _tmpHometown = null;
+        } else {
+          _tmpHometown = _cursor.getString(_cursorIndexOfHometown);
+        }
+        final String _tmpOccupation;
+        if (_cursor.isNull(_cursorIndexOfOccupation)) {
+          _tmpOccupation = null;
+        } else {
+          _tmpOccupation = _cursor.getString(_cursorIndexOfOccupation);
+        }
+        final String _tmpPhoneNumber;
+        if (_cursor.isNull(_cursorIndexOfPhoneNumber)) {
+          _tmpPhoneNumber = null;
+        } else {
+          _tmpPhoneNumber = _cursor.getString(_cursorIndexOfPhoneNumber);
+        }
+        final String _tmpBiography;
+        if (_cursor.isNull(_cursorIndexOfBiography)) {
+          _tmpBiography = null;
+        } else {
+          _tmpBiography = _cursor.getString(_cursorIndexOfBiography);
+        }
+        final String _tmpPhotoPath;
+        if (_cursor.isNull(_cursorIndexOfPhotoPath)) {
+          _tmpPhotoPath = null;
+        } else {
+          _tmpPhotoPath = _cursor.getString(_cursorIndexOfPhotoPath);
+        }
+        final String _tmpFatherId;
+        if (_cursor.isNull(_cursorIndexOfFatherId)) {
+          _tmpFatherId = null;
+        } else {
+          _tmpFatherId = _cursor.getString(_cursorIndexOfFatherId);
+        }
+        final String _tmpMotherId;
+        if (_cursor.isNull(_cursorIndexOfMotherId)) {
+          _tmpMotherId = null;
+        } else {
+          _tmpMotherId = _cursor.getString(_cursorIndexOfMotherId);
+        }
+        final String _tmpSpouseId;
+        if (_cursor.isNull(_cursorIndexOfSpouseId)) {
+          _tmpSpouseId = null;
+        } else {
+          _tmpSpouseId = _cursor.getString(_cursorIndexOfSpouseId);
+        }
+        final String _tmpMarriageDate;
+        if (_cursor.isNull(_cursorIndexOfMarriageDate)) {
+          _tmpMarriageDate = null;
+        } else {
+          _tmpMarriageDate = _cursor.getString(_cursorIndexOfMarriageDate);
+        }
+        final String _tmpCreatedByUid;
+        if (_cursor.isNull(_cursorIndexOfCreatedByUid)) {
+          _tmpCreatedByUid = null;
+        } else {
+          _tmpCreatedByUid = _cursor.getString(_cursorIndexOfCreatedByUid);
+        }
+        final int _tmpGeneration;
+        _tmpGeneration = _cursor.getInt(_cursorIndexOfGeneration);
+        final long _tmpUpdatedAt;
+        _tmpUpdatedAt = _cursor.getLong(_cursorIndexOfUpdatedAt);
+        final int _tmpSyncState;
+        _tmpSyncState = _cursor.getInt(_cursorIndexOfSyncState);
+        _item = new PersonEntity(_tmpId,_tmpFamilyId,_tmpFullName,_tmpNickName,_tmpGender,_tmpBirthDate,_tmpDeathDate,_tmpIsDeceased,_tmpHometown,_tmpOccupation,_tmpPhoneNumber,_tmpBiography,_tmpPhotoPath,_tmpFatherId,_tmpMotherId,_tmpSpouseId,_tmpMarriageDate,_tmpCreatedByUid,_tmpGeneration,_tmpUpdatedAt,_tmpSyncState);
+        _result.add(_item);
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
+  }
+
+  @Override
   public LiveData<PersonEntity> getPersonById(final String personId) {
     final String _sql = "SELECT * FROM people WHERE id = ? LIMIT 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);

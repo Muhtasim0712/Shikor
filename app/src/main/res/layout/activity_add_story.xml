@@ -35,7 +35,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Family Member"
+                android:text="@string/story_select_member"
                 android:textAppearance="?attr/textAppearanceLabelMedium"
                 android:textColor="?attr/colorPrimary"
                 android:textStyle="bold" />
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium"
-                android:hint="Story Title *">
+                android:hint="@string/story_title_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etTitle"
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_large"
-                android:hint="Story &amp; Memories">
+                android:hint="@string/story_body_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etBody"
@@ -88,7 +88,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Photo Memory"
+                android:text="@string/story_photo_memory"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="?attr/colorPrimary"
                 android:textStyle="bold" />
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:minHeight="@dimen/min_touch_target"
-                android:text="Attach Photo"
+                android:text="@string/story_attach_photo"
                 app:icon="@android:drawable/ic_menu_camera" />
 
             <!-- Photo Preview Card -->
@@ -143,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:text="Oral Voice Recording"
+                android:text="@string/story_oral_recording"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="?attr/colorPrimary"
                 android:textStyle="bold" />
@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_tiny"
-                android:text="Capture their voice, dialect, and words with foreground audio recording."
+                android:text="@string/story_recording_desc"
                 android:textAppearance="?attr/textAppearanceBodySmall"
                 android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -164,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:minHeight="@dimen/min_touch_target"
-                android:text="Record Voice"
+                android:text="@string/story_record_btn"
                 app:icon="@android:drawable/ic_btn_speak_now" />
 
             <!-- Recording In-Progress Card -->
@@ -210,7 +210,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/min_touch_target"
-                        android:text="Stop"
+                        android:text="@string/story_stop_btn"
                         app:backgroundTint="?attr/colorError"
                         app:icon="@android:drawable/ic_media_pause" />
                 </LinearLayout>
@@ -252,7 +252,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Audio Recorded"
+                            android:text="@string/story_recorded_label"
                             android:textAppearance="?attr/textAppearanceLabelMedium"
                             android:textColor="?attr/colorOnPrimaryContainer"
                             android:textStyle="bold" />
@@ -285,7 +285,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_large"
                 android:minHeight="@dimen/min_touch_target"
-                android:text="Save Story"
+                android:text="@string/story_save_btn"
                 app:cornerRadius="@dimen/button_corner_radius"
                 app:icon="@android:drawable/ic_menu_save" />
 

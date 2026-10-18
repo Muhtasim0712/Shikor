@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.chip.Chip;
+import com.shikor.app.R;
 import com.shikor.app.adapter.StoryAdapter;
 import com.shikor.app.data.local.entities.PersonEntity;
 import com.shikor.app.databinding.ActivityPersonDetailBinding;
@@ -185,7 +186,7 @@ public class PersonDetailActivity extends BaseActivity {
         // Facts: Birth Date
         if (!TextUtils.isEmpty(person.getBirthDate())) {
             String friendlyBirth = formatFriendlyDate(person.getBirthDate());
-            binding.tvFactBirthDate.setText("📅 Born: " + friendlyBirth);
+            binding.tvFactBirthDate.setText(getString(R.string.fact_born, friendlyBirth));
             binding.tvFactBirthDate.setVisibility(View.VISIBLE);
         } else {
             binding.tvFactBirthDate.setVisibility(View.GONE);
@@ -194,7 +195,7 @@ public class PersonDetailActivity extends BaseActivity {
         // Facts: Death Date
         if (person.isDeceased() && !TextUtils.isEmpty(person.getDeathDate())) {
             String friendlyDeath = formatFriendlyDate(person.getDeathDate());
-            binding.tvFactDeathDate.setText("🕊️ Passed: " + friendlyDeath);
+            binding.tvFactDeathDate.setText(getString(R.string.fact_passed, friendlyDeath));
             binding.tvFactDeathDate.setVisibility(View.VISIBLE);
         } else {
             binding.tvFactDeathDate.setVisibility(View.GONE);
@@ -202,14 +203,14 @@ public class PersonDetailActivity extends BaseActivity {
 
         // Facts: Occupation & Hometown
         if (!TextUtils.isEmpty(person.getOccupation())) {
-            binding.tvFactOccupation.setText("💼 Occupation: " + person.getOccupation());
+            binding.tvFactOccupation.setText(getString(R.string.fact_occupation, person.getOccupation()));
             binding.tvFactOccupation.setVisibility(View.VISIBLE);
         } else {
             binding.tvFactOccupation.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(person.getHometown())) {
-            binding.tvFactHometown.setText("📍 Hometown: " + person.getHometown());
+            binding.tvFactHometown.setText(getString(R.string.fact_hometown, person.getHometown()));
             binding.tvFactHometown.setVisibility(View.VISIBLE);
             binding.btnMaps.setVisibility(View.VISIBLE);
         } else {
@@ -233,7 +234,7 @@ public class PersonDetailActivity extends BaseActivity {
             HijriHelper.resolveHijriDate(this, person.getBirthDate(), entity -> {
                 if (!isFinishing() && !isDestroyed()) {
                     if (entity != null) {
-                        binding.tvFactHijriDate.setText("🌙 Hijri: " + entity.getFormatted());
+                        binding.tvFactHijriDate.setText(getString(R.string.fact_hijri, entity.getFormatted()));
                         binding.tvFactHijriDate.setVisibility(View.VISIBLE);
                     } else {
                         binding.tvFactHijriDate.setVisibility(View.GONE);
@@ -286,13 +287,15 @@ public class PersonDetailActivity extends BaseActivity {
                 // Father & Mother
                 if (p.getId().equals(person.getFatherId()) || p.getId().equals(person.getMotherId())) {
                     hasParents = true;
-                    addRelativeChip(binding.chipGroupParents, p, p.getId().equals(person.getFatherId()) ? "Father: " : "Mother: ");
+                    String prefix = p.getId().equals(person.getFatherId()) ?
+                            getString(R.string.relative_father_prefix) : getString(R.string.relative_mother_prefix);
+                    addRelativeChip(binding.chipGroupParents, p, prefix);
                 }
 
                 // Spouse
                 if (p.getId().equals(person.getSpouseId()) || (p.getSpouseId() != null && p.getSpouseId().equals(person.getId()))) {
                     hasSpouse = true;
-                    addRelativeChip(binding.chipGroupSpouse, p, "Spouse: ");
+                    addRelativeChip(binding.chipGroupSpouse, p, getString(R.string.relative_spouse_prefix));
                 }
             }
 

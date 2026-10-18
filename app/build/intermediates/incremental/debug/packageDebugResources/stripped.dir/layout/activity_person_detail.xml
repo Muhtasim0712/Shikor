@@ -87,7 +87,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <!-- Call relative via ACTION_DIAL -->
@@ -96,11 +96,23 @@
                             style="@style/Widget.Material3.Button.TonalButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_small"
+                            android:layout_marginEnd="6dp"
                             android:layout_weight="1"
-                            android:minHeight="@dimen/min_touch_target"
-                            android:text="Call"
-                            app:icon="@android:drawable/ic_menu_call" />
+                            android:minHeight="42dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:paddingHorizontal="4dp"
+                            android:paddingVertical="4dp"
+                            android:text="@string/action_call"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            app:cornerRadius="12dp"
+                            app:icon="@android:drawable/ic_menu_call"
+                            app:iconSize="18dp"
+                            app:iconPadding="4dp"
+                            app:iconGravity="textStart" />
 
                         <!-- Open hometown via ACTION_VIEW geo: -->
                         <com.google.android.material.button.MaterialButton
@@ -108,11 +120,23 @@
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_small"
+                            android:layout_marginEnd="6dp"
                             android:layout_weight="1"
-                            android:minHeight="@dimen/min_touch_target"
-                            android:text="Maps"
-                            app:icon="@android:drawable/ic_dialog_map" />
+                            android:minHeight="42dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:paddingHorizontal="4dp"
+                            android:paddingVertical="4dp"
+                            android:text="@string/action_maps"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            app:cornerRadius="12dp"
+                            app:icon="@android:drawable/ic_dialog_map"
+                            app:iconSize="18dp"
+                            app:iconPadding="4dp"
+                            app:iconGravity="textStart" />
 
                         <!-- Share profile via ACTION_SEND -->
                         <com.google.android.material.button.MaterialButton
@@ -121,9 +145,21 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:minHeight="@dimen/min_touch_target"
-                            android:text="Share"
-                            app:icon="@android:drawable/ic_menu_share" />
+                            android:minHeight="42dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:paddingHorizontal="4dp"
+                            android:paddingVertical="4dp"
+                            android:text="@string/action_share"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            app:cornerRadius="12dp"
+                            app:icon="@android:drawable/ic_menu_share"
+                            app:iconSize="18dp"
+                            app:iconPadding="4dp"
+                            app:iconGravity="textStart" />
                     </LinearLayout>
 
                     <!-- Dedicated Prominent Find Relationship Button -->
@@ -134,8 +170,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:minHeight="@dimen/min_touch_target"
-                        android:text="Find Relationship (আত্মীয়তার সম্পর্ক নির্ণয়)"
-                        app:icon="@android:drawable/ic_menu_search" />
+                        android:text="@string/find_relationship"
+                        app:cornerRadius="12dp"
+                        app:icon="@android:drawable/ic_menu_search"
+                        app:iconSize="20dp"
+                        app:iconPadding="8dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -158,7 +197,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Key Facts"
+                        android:text="@string/person_key_facts"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
@@ -229,7 +268,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Immediate Relatives"
+                        android:text="@string/person_relatives_title"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
@@ -239,7 +278,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_small"
-                        android:text="Parents:"
+                        android:text="@string/person_parents_label"
                         android:textAppearance="?attr/textAppearanceLabelMedium" />
 
                     <com.google.android.material.chip.ChipGroup
@@ -252,7 +291,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_small"
-                        android:text="Spouse:"
+                        android:text="@string/person_spouse_label"
                         android:textAppearance="?attr/textAppearanceLabelMedium" />
 
                     <com.google.android.material.chip.ChipGroup
@@ -265,7 +304,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_small"
-                        android:text="Children:"
+                        android:text="@string/person_children_label"
                         android:textAppearance="?attr/textAppearanceLabelMedium" />
 
                     <com.google.android.material.chip.ChipGroup
@@ -278,7 +317,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_small"
-                        android:text="Siblings:"
+                        android:text="@string/person_siblings_label"
                         android:textAppearance="?attr/textAppearanceLabelMedium" />
 
                     <com.google.android.material.chip.ChipGroup
@@ -308,7 +347,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Biography &amp; Life Story"
+                        android:text="@string/person_biography_title"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
@@ -336,7 +375,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Stories &amp; Oral Memories"
+                    android:text="@string/person_stories_title"
                     android:textAppearance="?attr/textAppearanceTitleMedium"
                     android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
@@ -364,7 +403,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:text="No stories recorded yet. Tap '+ Add Story' to record an oral memory or write a story."
+                android:text="@string/person_no_stories"
                 android:textAppearance="?attr/textAppearanceBodySmall"
                 android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -377,7 +416,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_large"
                 android:minHeight="@dimen/min_touch_target"
-                android:text="Edit Relative Details"
+                android:text="@string/person_btn_edit"
                 app:cornerRadius="@dimen/button_corner_radius"
                 app:icon="@android:drawable/ic_menu_edit" />
 

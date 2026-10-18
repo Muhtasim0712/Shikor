@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CONCEPT: Fragment layout for Family Tree with controls overlay and empty state -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/treeFragmentRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <!-- Interactive Custom View 1: FamilyTreeView -->
+    <com.shikor.app.view.FamilyTreeView
+        android:id="@+id/familyTreeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Top Floating Controls: Root Selector & Action Buttons -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:strokeColor="?attr/colorOutline"
+        app:strokeWidth="0.5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:paddingVertical="@dimen/spacing_tiny">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tree_root_label"
+                android:textAppearance="?attr/textAppearanceLabelMedium"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinnerTreeRoot"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@android:drawable/btn_dropdown"
+                android:minHeight="@dimen/min_touch_target" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnToggleMode"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/tree_view_chart"
+                app:icon="@drawable/ic_chart_view"
+                app:iconTint="?attr/colorPrimary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFitTree"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/action_fit_tree"
+                app:icon="@drawable/ic_fit_screen"
+                app:iconTint="?attr/colorPrimary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReCenter"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/action_recenter"
+                app:icon="@android:drawable/ic_menu_rotate"
+                app:iconTint="?attr/colorPrimary" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Empty State -->
+    <include
+        android:id="@+id/treeEmptyState"
+        layout="@layout/layout_empty_state" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

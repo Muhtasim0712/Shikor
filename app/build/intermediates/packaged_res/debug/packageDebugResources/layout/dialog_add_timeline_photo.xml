@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_tiny"
-                    android:text="Tap to Choose Photo"
+                    android:text="@string/timeline_choose_photo"
                     android:textAppearance="?attr/textAppearanceLabelMedium"
                     android:textColor="?attr/colorPrimary" />
             </LinearLayout>
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:hint="Year of Memory (e.g. 1971) *">
+            android:hint="@string/timeline_year_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etYear"
@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
-            android:hint="Caption / Description">
+            android:hint="@string/timeline_caption_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etCaption"
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:text="Tag Family Members:"
+            android:text="@string/timeline_tag_relatives"
             android:textAppearance="?attr/textAppearanceLabelMedium"
             android:textColor="?attr/colorPrimary"
             android:textStyle="bold" />
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="Select all relatives who appear in this photo:"
+            android:text="@string/timeline_tag_subtitle"
             android:textAppearance="?attr/textAppearanceBodySmall"
             android:textColor="?attr/colorOnSurfaceVariant" />
 

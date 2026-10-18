@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Timeline photo card layout -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_medium"
+    android:layout_marginVertical="@dimen/spacing_small"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation"
+    app:strokeColor="?attr/colorOutline"
+    app:strokeWidth="0.5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp">
+
+            <ImageView
+                android:id="@+id/ivTimelinePhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Timeline photo"
+                android:scaleType="centerCrop" />
+
+            <!-- Year Badge in corner -->
+            <TextView
+                android:id="@+id/tvBadgeYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@drawable/bg_code_box"
+                android:backgroundTint="?attr/colorSurface"
+                android:paddingHorizontal="@dimen/spacing_small"
+                android:paddingVertical="@dimen/spacing_tiny"
+                android:textAppearance="?attr/textAppearanceLabelSmall"
+                android:textColor="?attr/colorOnSurface"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium">
+
+            <TextView
+                android:id="@+id/tvTimelineCaption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2dp"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?attr/colorOnSurface" />
+
+            <!-- Tagged relatives ChipGroup (Supports multiple tagged relatives) -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupTimelineTaggedPersons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                app:chipSpacingHorizontal="@dimen/spacing_tiny"
+                app:chipSpacingVertical="@dimen/spacing_tiny"
+                app:singleSelection="false"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

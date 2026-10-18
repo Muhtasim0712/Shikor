@@ -47,7 +47,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Choose Relatives to Connect"
+                        android:text="@string/rf_header_title"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="@dimen/spacing_medium"
-                        android:text="Discover how two members of your tree are related in Bengali and English."
+                        android:text="@string/rf_header_subtitle"
                         android:textAppearance="?attr/textAppearanceBodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -67,7 +67,7 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Person A (Starting Relative)">
+                        android:hint="@string/rf_person1_label">
 
                         <AutoCompleteTextView
                             android:id="@+id/actvPersonA"
@@ -103,7 +103,7 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Person B (Target Relative)">
+                        android:hint="@string/rf_person2_label">
 
                         <AutoCompleteTextView
                             android:id="@+id/actvPersonB"
@@ -121,7 +121,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
                         android:minHeight="@dimen/min_touch_target"
-                        android:text="Find Relationship (সম্পর্ক খুঁজুন)"
+                        android:text="@string/rf_calc_button"
                         app:cornerRadius="@dimen/button_corner_radius"
                         app:icon="@android:drawable/ic_menu_search" />
                 </LinearLayout>
@@ -147,7 +147,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kinship Title (সম্পর্কের নাম):"
+                        android:text="@string/rf_kinship_title_label"
                         android:textAppearance="?attr/textAppearanceLabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -191,7 +191,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Connection Path:"
+                        android:text="@string/rf_connection_path_label"
                         android:textAppearance="?attr/textAppearanceLabelLarge"
                         android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold" />

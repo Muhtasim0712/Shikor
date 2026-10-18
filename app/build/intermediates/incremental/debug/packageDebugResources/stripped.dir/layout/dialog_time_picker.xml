@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_preferred_alert_time"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        android:textColor="?attr/colorPrimary"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvDialogSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/settings_daily_reminders_desc"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textColor="?attr/colorOnSurfaceVariant" />
+
+    <!-- Pickers and AM/PM row -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Hour Picker (1 to 12) -->
+        <NumberPicker
+            android:id="@+id/pickerHour"
+            android:layout_width="70dp"
+            android:layout_height="140dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="6dp"
+            android:text=":"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold" />
+
+        <!-- Minute Picker (00 to 59) -->
+        <NumberPicker
+            android:id="@+id/pickerMinute"
+            android:layout_width="70dp"
+            android:layout_height="140dp" />
+
+        <!-- AM / PM Segmented Buttons -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <!-- AM Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAm"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:layout_marginBottom="6dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="AM"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+
+            <!-- PM Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPm"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="68dp"
+                android:layout_height="46dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="PM"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Real-time Selected Preview Box -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_code_box"
+        android:backgroundTint="?attr/colorSurfaceVariant"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:id="@+id/tvLivePreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selected: 09:00 AM"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvLiveScheduleHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/settings_time_picker_hint"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?attr/colorOnSurfaceVariant" />
+    </LinearLayout>
+
+</LinearLayout>

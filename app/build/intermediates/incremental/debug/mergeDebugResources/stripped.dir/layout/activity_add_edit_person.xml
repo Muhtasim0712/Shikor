@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CONCEPT: ConstraintLayout, ScrollView, Nested Forms and Material Design for Add/Edit -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/addEditRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorSurface"
+            app:navigationIcon="@android:drawable/ic_menu_revert"
+            app:navigationIconTint="?attr/colorOnSurface"
+            app:title="Add Family Member"
+            app:titleTextColor="?attr/colorOnSurface" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium">
+
+            <!-- Photo & Avatar Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="@dimen/spacing_medium">
+
+                <com.shikor.app.view.AvatarView
+                    android:id="@+id/avatarPreview"
+                    android:layout_width="@dimen/avatar_size_large"
+                    android:layout_height="@dimen/avatar_size_large"
+                    app:ringWidth="4dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:orientation="horizontal">
+
+                    <!-- CONCEPT: Implicit Intent trigger for Gallery Photo Picker -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPickPhoto"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        android:minHeight="@dimen/min_touch_target"
+                        android:text="@string/person_choose_photo" />
+
+                    <!-- CONCEPT: Implicit Intent trigger for Camera Capture -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnTakePhoto"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/min_touch_target"
+                        android:text="@string/person_take_photo" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Name Details -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilFullName"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/person_full_name_hint"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNickName"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:hint="@string/person_nickname_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNickName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Gender Selector -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/person_gender_label"
+                android:textAppearance="?attr/textAppearanceLabelLarge" />
+
+            <RadioGroup
+                android:id="@+id/rgGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:minHeight="@dimen/min_touch_target"
+                    android:text="@string/person_gender_male" />
+
+                <RadioButton
+                    android:id="@+id/rbFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:minHeight="@dimen/min_touch_target"
+                    android:text="@string/person_gender_female" />
+
+                <RadioButton
+                    android:id="@+id/rbOther"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:minHeight="@dimen/min_touch_target"
+                    android:text="@string/person_gender_other" />
+            </RadioGroup>
+
+            <!-- Birth Date & Death Date -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilBirthDate"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:hint="@string/person_birth_date_hint"
+                app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+                app:endIconMode="custom"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBirthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Deceased Switch -->
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchDeceased"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:minHeight="@dimen/min_touch_target"
+                android:text="@string/person_is_deceased"
+                android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDeathDate"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:hint="@string/person_death_date_hint"
+                android:visibility="gone"
+                app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+                app:endIconMode="custom"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDeathDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Contact & Hometown -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilHometown"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:hint="@string/person_hometown_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etHometown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPhoneNumber"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:hint="@string/person_phone_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilOccupation"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:hint="@string/person_occupation_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etOccupation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Relationships Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/person_family_relationships"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold" />
+
+            <!-- Child Option: Link new person as a parent to an existing member -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@string/person_is_parent_of"
+                android:textAppearance="?attr/textAppearanceLabelMedium"
+                android:textColor="?attr/colorSecondary" />
+
+            <Spinner
+                android:id="@+id/spinnerChild"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:minHeight="@dimen/min_touch_target" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/person_parents_known"
+                android:textAppearance="?attr/textAppearanceLabelMedium"
+                android:textColor="?attr/colorPrimary" />
+
+            <!-- Father Spinner -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:text="@string/person_father_label"
+                android:textAppearance="?attr/textAppearanceLabelSmall" />
+
+            <Spinner
+                android:id="@+id/spinnerFather"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:minHeight="@dimen/min_touch_target" />
+
+            <!-- Mother Spinner -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:text="@string/person_mother_label"
+                android:textAppearance="?attr/textAppearanceLabelSmall" />
+
+            <Spinner
+                android:id="@+id/spinnerMother"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:minHeight="@dimen/min_touch_target" />
+
+            <!-- Spouse Spinner -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="@string/person_spouse_form_label"
+                android:textAppearance="?attr/textAppearanceLabelMedium" />
+
+            <Spinner
+                android:id="@+id/spinnerSpouse"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:minHeight="@dimen/min_touch_target" />
+
+            <!-- Biography -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilBiography"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:hint="@string/person_biography_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBiography"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:lines="4" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Save Action Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSavePerson"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_xlarge"
+                android:minHeight="@dimen/min_touch_target"
+                android:text="@string/person_save_button"
+                app:cornerRadius="@dimen/button_corner_radius" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
