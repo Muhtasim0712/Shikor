@@ -55,14 +55,20 @@ public class TreeExporter {
     public static void exportTreeAsPng(Context context, Bitmap treeBitmap, String familyName, List<PersonEntity> members) {
         final Context appContext = context.getApplicationContext();
         AppExecutors.getInstance().mainThread().execute(() -> {
-            Toast.makeText(appContext, "Generating PNG export...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Generating PNG export...", Toast.LENGTH_SHORT).show();
         });
 
         AppExecutors.getInstance().diskIO().execute(() -> {
             try {
                 List<PersonEntity> personList = members;
                 if ((personList == null || personList.isEmpty()) && treeBitmap == null) {
-                    personList = AppDatabase.getInstance(appContext).personDao().getAllPeopleGlobalSync();
+                    String familyId = Prefs.getInstance(appContext).getFamilyId();
+                    if (familyId != null && !familyId.isEmpty()) {
+                        personList = AppDatabase.getInstance(appContext).personDao().getAllPeopleSync(familyId);
+                    }
+                    if (personList == null || personList.isEmpty()) {
+                        personList = AppDatabase.getInstance(appContext).personDao().getAllPeopleGlobalSync();
+                    }
                 }
 
                 Bitmap bmp = treeBitmap;
@@ -72,7 +78,7 @@ public class TreeExporter {
 
                 if (bmp == null) {
                     AppExecutors.getInstance().mainThread().execute(() -> {
-                        Toast.makeText(appContext, "No tree data to export. Please ensure family members are added.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "No tree data to export. Please ensure family members are added.", Toast.LENGTH_SHORT).show();
                     });
                     return;
                 }
@@ -90,12 +96,12 @@ public class TreeExporter {
                 }
 
                 AppExecutors.getInstance().mainThread().execute(() -> {
-                    shareFile(appContext, pngFile, "image/png", "Share Family Tree Image (PNG)");
+                    shareFile(context, pngFile, "image/png", "Share Family Tree Image (PNG)");
                 });
             } catch (Exception e) {
                 Log.e(TAG, "Failed to export PNG", e);
                 AppExecutors.getInstance().mainThread().execute(() -> {
-                    Toast.makeText(appContext, "Failed to export PNG: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Failed to export PNG: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             }
         });
@@ -109,7 +115,7 @@ public class TreeExporter {
     public static void exportTreeAsPdf(Context context, Bitmap treeBitmap, String familyName, List<PersonEntity> members) {
         final Context appContext = context.getApplicationContext();
         AppExecutors.getInstance().mainThread().execute(() -> {
-            Toast.makeText(appContext, "Generating PDF archive...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Generating PDF archive...", Toast.LENGTH_SHORT).show();
         });
 
         AppExecutors.getInstance().diskIO().execute(() -> {
@@ -117,7 +123,13 @@ public class TreeExporter {
             try {
                 List<PersonEntity> personList = members;
                 if ((personList == null || personList.isEmpty()) && treeBitmap == null) {
-                    personList = AppDatabase.getInstance(appContext).personDao().getAllPeopleGlobalSync();
+                    String familyId = Prefs.getInstance(appContext).getFamilyId();
+                    if (familyId != null && !familyId.isEmpty()) {
+                        personList = AppDatabase.getInstance(appContext).personDao().getAllPeopleSync(familyId);
+                    }
+                    if (personList == null || personList.isEmpty()) {
+                        personList = AppDatabase.getInstance(appContext).personDao().getAllPeopleGlobalSync();
+                    }
                 }
 
                 Bitmap bmp = treeBitmap;
@@ -172,12 +184,12 @@ public class TreeExporter {
                 }
 
                 AppExecutors.getInstance().mainThread().execute(() -> {
-                    shareFile(appContext, pdfFile, "application/pdf", "Share Family Archive Document (PDF)");
+                    shareFile(context, pdfFile, "application/pdf", "Share Family Archive Document (PDF)");
                 });
             } catch (Exception e) {
                 Log.e(TAG, "Failed to export PDF", e);
                 AppExecutors.getInstance().mainThread().execute(() -> {
-                    Toast.makeText(appContext, "Failed to export PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Failed to export PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             } finally {
                 if (document != null) {
@@ -212,8 +224,12 @@ public class TreeExporter {
                     density
             );
 
-            if (layout == null || layout.allUnits.isEmpty() || layout.bounds.isEmpty()) {
+            if (layout == null || layout.allUnits.isEmpty()) {
                 return null;
+            }
+
+            if (layout.bounds.isEmpty() || layout.bounds.width() <= 0 || layout.bounds.height() <= 0) {
+                layout.bounds.set(0, 0, 800 * density, 600 * density);
             }
 
             RectF bounds = new RectF(layout.bounds);
@@ -240,17 +256,36 @@ public class TreeExporter {
             canvas.concat(m);
 
             if (natural) {
-                treePainter.drawBackground(canvas, layout, nightMode);
-                treePainter.drawNaturalTreeStaticStructure(canvas, layout, nightMode);
+                TreePainter.DiurnalPhase phase = nightMode ? TreePainter.DiurnalPhase.NIGHT : TreePainter.DiurnalPhase.fromCurrentTime();
+                treePainter.drawBackground(canvas, layout, phase);
+                treePainter.drawNaturalTreeStaticStructure(canvas, layout, phase);
             } else {
                 canvas.drawColor(nightMode ? 0xFF121A15 : 0xFFFBF9F3);
                 treePainter.drawClassicChartStaticLayers(canvas, layout);
             }
 
+            // Load photos from disk for headless rendering if available
+            java.util.Map<String, Bitmap> photoCache = new java.util.HashMap<>();
+            for (PersonEntity p : people) {
+                if (p.getPhotoPath() != null && !p.getPhotoPath().isEmpty()) {
+                    try {
+                        File imgFile = new File(p.getPhotoPath());
+                        if (imgFile.exists()) {
+                            android.graphics.BitmapFactory.Options opts = new android.graphics.BitmapFactory.Options();
+                            opts.inSampleSize = 4;
+                            Bitmap photoBmp = android.graphics.BitmapFactory.decodeFile(imgFile.getAbsolutePath(), opts);
+                            if (photoBmp != null) {
+                                photoCache.put(p.getId(), photoBmp);
+                            }
+                        }
+                    } catch (Exception ignored) {}
+                }
+            }
+
             for (TreeUnit unit : layout.allUnits) {
-                treePainter.drawPersonNode(canvas, unit.primary, unit.primaryRect, null, null, natural);
+                treePainter.drawPersonNode(canvas, unit.primary, unit.primaryRect, photoCache, null, natural);
                 if (unit.spouse != null) {
-                    treePainter.drawPersonNode(canvas, unit.spouse, unit.spouseRect, null, null, natural);
+                    treePainter.drawPersonNode(canvas, unit.spouse, unit.spouseRect, photoCache, null, natural);
                 }
             }
 
@@ -409,7 +444,7 @@ public class TreeExporter {
         canvas.drawText("Page " + pageNum + " of " + totalPages, width - 120, height - 20, paint);
     }
 
-    private static void shareFile(Context context, File file, String mimeType, String chooserTitle) {
+    public static void shareFile(Context context, File file, String mimeType, String chooserTitle) {
         try {
             Uri contentUri = FileProvider.getUriForFile(context, FILE_PROVIDER_AUTHORITY, file);
 
@@ -422,14 +457,21 @@ public class TreeExporter {
 
             Intent chooser = Intent.createChooser(shareIntent, chooserTitle);
             chooser.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            List<android.content.pm.ResolveInfo> resInfoList = context.getPackageManager()
-                    .queryIntentActivities(chooser, android.content.pm.PackageManager.MATCH_DEFAULT_ONLY);
-            for (android.content.pm.ResolveInfo resolveInfo : resInfoList) {
-                String packageName = resolveInfo.activityInfo.packageName;
-                context.grantUriPermission(packageName, contentUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            if (!(context instanceof android.app.Activity)) {
+                chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
+
+            try {
+                List<android.content.pm.ResolveInfo> resInfoList = context.getPackageManager()
+                        .queryIntentActivities(shareIntent, android.content.pm.PackageManager.MATCH_DEFAULT_ONLY);
+                for (android.content.pm.ResolveInfo resolveInfo : resInfoList) {
+                    if (resolveInfo != null && resolveInfo.activityInfo != null) {
+                        context.grantUriPermission(resolveInfo.activityInfo.packageName, contentUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    }
+                }
+            } catch (Exception ignored) {}
 
             context.startActivity(chooser);
         } catch (Exception e) {

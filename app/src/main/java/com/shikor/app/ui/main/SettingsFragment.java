@@ -357,6 +357,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void showExportTreeDialog() {
+        if (!isAdded() || getContext() == null) return;
         String[] options = {
                 getString(R.string.settings_export_pdf_option),
                 getString(R.string.settings_export_png_option)
@@ -364,28 +365,38 @@ public class SettingsFragment extends Fragment {
         new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(getString(R.string.settings_export_tree_title))
                 .setItems(options, (dialog, which) -> {
-                    final Context appContext = requireContext().getApplicationContext();
+                    if (!isAdded() || getActivity() == null) return;
+                    final androidx.fragment.app.FragmentActivity activity = requireActivity();
                     String familyId = prefs.getFamilyId();
                     String familyName = prefs.getFamilyName();
 
                     AppExecutors.getInstance().diskIO().execute(() -> {
-                        List<PersonEntity> people = AppDatabase.getInstance(appContext).personDao().getAllPeopleSync(familyId);
+                        List<PersonEntity> people = null;
+                        if (familyId != null && !familyId.isEmpty()) {
+                            people = AppDatabase.getInstance(activity).personDao().getAllPeopleSync(familyId);
+                        }
                         if (people == null || people.isEmpty()) {
-                            people = AppDatabase.getInstance(appContext).personDao().getAllPeopleGlobalSync();
+                            people = AppDatabase.getInstance(activity).personDao().getAllPeopleGlobalSync();
                         }
 
                         if (people == null || people.isEmpty()) {
-                            AppExecutors.getInstance().mainThread().execute(() ->
-                                    Toast.makeText(appContext, getString(R.string.settings_export_no_relatives), Toast.LENGTH_SHORT).show()
-                            );
+                            AppExecutors.getInstance().mainThread().execute(() -> {
+                                if (isAdded()) {
+                                    Toast.makeText(activity, getString(R.string.settings_export_no_relatives), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             return;
                         }
 
-                        if (which == 0) {
-                            TreeExporter.exportTreeAsPdf(appContext, null, familyName, people);
-                        } else {
-                            TreeExporter.exportTreeAsPng(appContext, null, familyName, people);
-                        }
+                        final List<PersonEntity> finalPeople = people;
+                        AppExecutors.getInstance().mainThread().execute(() -> {
+                            if (!isAdded() || getActivity() == null) return;
+                            if (which == 0) {
+                                TreeExporter.exportTreeAsPdf(activity, null, familyName, finalPeople);
+                            } else {
+                                TreeExporter.exportTreeAsPng(activity, null, familyName, finalPeople);
+                            }
+                        });
                     });
                 })
                 .setNegativeButton(R.string.cancel, null)

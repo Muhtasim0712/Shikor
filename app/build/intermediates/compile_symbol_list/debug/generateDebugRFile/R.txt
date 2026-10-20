@@ -81,6 +81,7 @@ int drawable bg_indicator_active 0x0
 int drawable bg_window_dawn 0x0
 int drawable ic_chart_view 0x0
 int drawable ic_dawn_botanical_accent 0x0
+int drawable ic_diurnal_weather 0x0
 int drawable ic_fit_screen 0x0
 int drawable ic_launcher_background 0x0
 int drawable ic_launcher_foreground 0x0
@@ -114,6 +115,7 @@ int id btnCopyCode 0x0
 int id btnCreateFamily 0x0
 int id btnDeleteAudio 0x0
 int id btnDeleteStory 0x0
+int id btnDiurnalPhase 0x0
 int id btnEditPerson 0x0
 int id btnEmptyAction 0x0
 int id btnExportCsv 0x0
@@ -398,6 +400,12 @@ int string confirm_password_label 0x0
 int string create_family_btn 0x0
 int string create_family_desc 0x0
 int string create_family_title 0x0
+int string diurnal_afternoon_opt 0x0
+int string diurnal_applied_fmt 0x0
+int string diurnal_auto_opt 0x0
+int string diurnal_day_opt 0x0
+int string diurnal_evening_opt 0x0
+int string diurnal_night_opt 0x0
 int string dont_have_account 0x0
 int string email_label 0x0
 int string empty_contacts_title 0x0
@@ -617,6 +625,7 @@ int string timeline_fab_add 0x0
 int string timeline_tag_relatives 0x0
 int string timeline_tag_subtitle 0x0
 int string timeline_year_hint 0x0
+int string tree_diurnal_weather 0x0
 int string tree_root_label 0x0
 int string tree_view_chart 0x0
 int string tree_view_natural 0x0

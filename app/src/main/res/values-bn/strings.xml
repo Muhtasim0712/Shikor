@@ -265,4 +265,13 @@
     <string name="save">সংরক্ষণ</string>
     <string name="cancel">বাতিল</string>
     <string name="logout">লগ আউট</string>
+
+    <!-- Diurnal Atmosphere -->
+    <string name="tree_diurnal_weather">পরিবেশ ও সময়কাল</string>
+    <string name="diurnal_auto_opt">স্বয়ংক্রিয় (ফোনের ঘড়ি: %s)</string>
+    <string name="diurnal_day_opt">☀️ সকাল / দুপুর (সূর্য ও মেঘ)</string>
+    <string name="diurnal_afternoon_opt">🌤️ বিকেল (সোনালী রোদ)</string>
+    <string name="diurnal_evening_opt">🌅 সূর্যাস্ত / গোধূলি (রক্তিম আকাশ ও শুকতারা)</string>
+    <string name="diurnal_night_opt">🌙 তারাময় রাত (চাঁদ ও তারা)</string>
+    <string name="diurnal_applied_fmt">পরিবেশ পরিবর্তন করা হয়েছে: %s</string>
 </resources>

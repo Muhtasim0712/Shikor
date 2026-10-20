@@ -371,7 +371,7 @@ public class AddEditPersonActivity extends BaseActivity {
             personId = UUID.randomUUID().toString();
         }
 
-        // Calculate generation level relative to parents or child
+        // Calculate generation level relative to parents, child, or spouse
         int generation = 0;
         if (fatherId != null) {
             for (PersonEntity p : existingMembers) {
@@ -389,6 +389,8 @@ public class AddEditPersonActivity extends BaseActivity {
             }
         } else if (selectedChild != null) {
             generation = selectedChild.getGeneration() - 1;
+        } else if (selectedSpouse != null) {
+            generation = selectedSpouse.getGeneration();
         }
 
         PersonEntity person = new PersonEntity(
@@ -435,6 +437,12 @@ public class AddEditPersonActivity extends BaseActivity {
 
         if (selectedSpouse != null) {
             selectedSpouse.setSpouseId(person.getId());
+            if (generation != 0 && selectedSpouse.getGeneration() == 0) {
+                selectedSpouse.setGeneration(generation);
+            } else if (generation == 0 && selectedSpouse.getGeneration() != 0) {
+                person.setGeneration(selectedSpouse.getGeneration());
+                personViewModel.updatePerson(person);
+            }
             personViewModel.updatePerson(selectedSpouse);
         }
 

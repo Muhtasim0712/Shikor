@@ -22,6 +22,9 @@ public final class FragmentTreeBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final MaterialButton btnDiurnalPhase;
+
+  @NonNull
   public final MaterialButton btnFitTree;
 
   @NonNull
@@ -43,11 +46,13 @@ public final class FragmentTreeBinding implements ViewBinding {
   public final CoordinatorLayout treeFragmentRoot;
 
   private FragmentTreeBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull MaterialButton btnFitTree, @NonNull MaterialButton btnReCenter,
-      @NonNull MaterialButton btnToggleMode, @NonNull FamilyTreeView familyTreeView,
-      @NonNull Spinner spinnerTreeRoot, @NonNull LayoutEmptyStateBinding treeEmptyState,
+      @NonNull MaterialButton btnDiurnalPhase, @NonNull MaterialButton btnFitTree,
+      @NonNull MaterialButton btnReCenter, @NonNull MaterialButton btnToggleMode,
+      @NonNull FamilyTreeView familyTreeView, @NonNull Spinner spinnerTreeRoot,
+      @NonNull LayoutEmptyStateBinding treeEmptyState,
       @NonNull CoordinatorLayout treeFragmentRoot) {
     this.rootView = rootView;
+    this.btnDiurnalPhase = btnDiurnalPhase;
     this.btnFitTree = btnFitTree;
     this.btnReCenter = btnReCenter;
     this.btnToggleMode = btnToggleMode;
@@ -84,6 +89,12 @@ public final class FragmentTreeBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btnDiurnalPhase;
+      MaterialButton btnDiurnalPhase = ViewBindings.findChildViewById(rootView, id);
+      if (btnDiurnalPhase == null) {
+        break missingId;
+      }
+
       id = R.id.btnFitTree;
       MaterialButton btnFitTree = ViewBindings.findChildViewById(rootView, id);
       if (btnFitTree == null) {
@@ -123,8 +134,9 @@ public final class FragmentTreeBinding implements ViewBinding {
 
       CoordinatorLayout treeFragmentRoot = (CoordinatorLayout) rootView;
 
-      return new FragmentTreeBinding((CoordinatorLayout) rootView, btnFitTree, btnReCenter,
-          btnToggleMode, familyTreeView, spinnerTreeRoot, binding_treeEmptyState, treeFragmentRoot);
+      return new FragmentTreeBinding((CoordinatorLayout) rootView, btnDiurnalPhase, btnFitTree,
+          btnReCenter, btnToggleMode, familyTreeView, spinnerTreeRoot, binding_treeEmptyState,
+          treeFragmentRoot);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

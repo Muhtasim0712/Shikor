@@ -93,6 +93,9 @@ public class FamilyTreeView extends View {
     private ValueAnimator swayAnimator;
     private float currentSwayAngle = 0f;
 
+    // Diurnal Atmosphere
+    private TreePainter.DiurnalPhase diurnalPhaseOverride = null;
+
     public FamilyTreeView(Context context) {
         super(context);
         init(context);
@@ -251,6 +254,23 @@ public class FamilyTreeView extends View {
         calculateTreeLayout(true);
     }
 
+    public TreePainter.DiurnalPhase getCurrentDiurnalPhase() {
+        if (diurnalPhaseOverride != null) {
+            return diurnalPhaseOverride;
+        }
+        return isNightMode() ? TreePainter.DiurnalPhase.NIGHT : TreePainter.DiurnalPhase.fromCurrentTime();
+    }
+
+    public void setDiurnalPhaseOverride(@Nullable TreePainter.DiurnalPhase phase) {
+        this.diurnalPhaseOverride = phase;
+        calculateTreeLayout(false);
+    }
+
+    @Nullable
+    public TreePainter.DiurnalPhase getDiurnalPhaseOverride() {
+        return diurnalPhaseOverride;
+    }
+
     /**
      * Calculates the non-overlapping layout off the UI thread and pre-records static display-lists.
      */
@@ -313,7 +333,7 @@ public class FamilyTreeView extends View {
 
         Canvas picCanvas = picture.beginRecording(recW, recH);
         if (natural) {
-            treePainter.drawNaturalTreeStaticStructure(picCanvas, layout, nightMode);
+            treePainter.drawNaturalTreeStaticStructure(picCanvas, layout, getCurrentDiurnalPhase());
         } else {
             treePainter.drawClassicChartStaticLayers(picCanvas, layout);
         }
@@ -492,9 +512,9 @@ public class FamilyTreeView extends View {
         visibleViewport.set(0, 0, getWidth(), getHeight());
         inverseMatrix.mapRect(visibleViewport);
 
-        // 2. Stationary Natural Background (Sky Gradient, Stars, Earth, Grass Line)
+        // 2. Stationary Diurnal Natural Background (Sky Gradient, Sun, Clouds, Sunset, Moon, Stars, Earth, Grass Line)
         if (natural) {
-            treePainter.drawBackground(canvas, layoutResult, night);
+            treePainter.drawBackground(canvas, layoutResult, getCurrentDiurnalPhase());
         }
 
         // 3. Tree Sway Transform
@@ -628,7 +648,7 @@ public class FamilyTreeView extends View {
         canvas.concat(m);
 
         if (natural) {
-            treePainter.drawBackground(canvas, layoutResult, night);
+            treePainter.drawBackground(canvas, layoutResult, getCurrentDiurnalPhase());
         } else {
             canvas.drawColor(night ? 0xFF121A15 : 0xFFFBF9F3);
         }

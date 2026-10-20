@@ -12,8 +12,8 @@ import java.util.List;
  * Holds layout boundaries, generation level, parent-child links, and dimensions.
  */
 public class TreeUnit {
-    public final PersonEntity primary;
-    public final PersonEntity spouse;
+    public PersonEntity primary;
+    public PersonEntity spouse;
     public TreeUnit parentUnit;
     public final List<TreeUnit> childrenUnits = new ArrayList<>();
 

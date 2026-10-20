@@ -50,6 +50,15 @@
                 android:minHeight="@dimen/min_touch_target" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDiurnalPhase"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/tree_diurnal_weather"
+                app:icon="@drawable/ic_diurnal_weather"
+                app:iconTint="?attr/colorPrimary" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnToggleMode"
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="48dp"

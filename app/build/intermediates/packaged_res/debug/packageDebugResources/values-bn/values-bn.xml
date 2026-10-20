@@ -14,6 +14,12 @@
     <string name="create_family_btn">পরিবার তৈরি করুন</string>
     <string name="create_family_desc">একটি নতুন পারিবারিক অ্যালবাম শুরু করুন এবং আত্মীয়দের আমন্ত্রণ জানাতে ৬ অক্ষরের কোড পান।</string>
     <string name="create_family_title">নতুন পরিবার তৈরি করুন</string>
+    <string name="diurnal_afternoon_opt">🌤️ বিকেল (সোনালী রোদ)</string>
+    <string name="diurnal_applied_fmt">পরিবেশ পরিবর্তন করা হয়েছে: %s</string>
+    <string name="diurnal_auto_opt">স্বয়ংক্রিয় (ফোনের ঘড়ি: %s)</string>
+    <string name="diurnal_day_opt">☀️ সকাল / দুপুর (সূর্য ও মেঘ)</string>
+    <string name="diurnal_evening_opt">🌅 সূর্যাস্ত / গোধূলি (রক্তিম আকাশ ও শুকতারা)</string>
+    <string name="diurnal_night_opt">🌙 তারাময় রাত (চাঁদ ও তারা)</string>
     <string name="dont_have_account">অ্যাকাউন্ট নেই? রেজিস্টার করুন</string>
     <string name="email_label">ইমেইল ঠিকানা</string>
     <string name="empty_contacts_title">রপ্তানি করার মতো কোনো যোগাযোগ পাওয়া যায়নি</string>
@@ -227,6 +233,7 @@
     <string name="timeline_tag_relatives">আত্মীয়দের ট্যাগ করুন:</string>
     <string name="timeline_tag_subtitle">ছবিতে উপস্থিত সকল আত্মীয়কে নির্বাচন করুন:</string>
     <string name="timeline_year_hint">স্মৃতির বছর (যেমন: ১৯৭১) *</string>
+    <string name="tree_diurnal_weather">পরিবেশ ও সময়কাল</string>
     <string name="tree_root_label">মূল পূর্বপুরুষ: </string>
     <string name="tree_view_chart">চার্ট রূপ</string>
     <string name="tree_view_natural">বৃক্ষ রূপ</string>

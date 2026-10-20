@@ -76,11 +76,26 @@ public class TreeLayoutEngine {
             }
             visited.put(p.getId(), true);
 
-            TreeUnit unit = new TreeUnit(p, spouse);
+            PersonEntity primary = p;
+            PersonEntity partner = spouse;
+            if (partner != null) {
+                // If partner has parents in active tree but p does not, prioritize the blood descendant as primary!
+                boolean pHasParents = (p.getFatherId() != null && activeIds.contains(p.getFatherId()))
+                        || (p.getMotherId() != null && activeIds.contains(p.getMotherId()));
+                boolean partnerHasParents = (partner.getFatherId() != null && activeIds.contains(partner.getFatherId()))
+                        || (partner.getMotherId() != null && activeIds.contains(partner.getMotherId()));
+
+                if (!pHasParents && partnerHasParents) {
+                    primary = partner;
+                    partner = p;
+                }
+            }
+
+            TreeUnit unit = new TreeUnit(primary, partner);
             result.allUnits.add(unit);
-            unitMap.put(p.getId(), unit);
-            if (spouse != null) {
-                unitMap.put(spouse.getId(), unit);
+            unitMap.put(primary.getId(), unit);
+            if (partner != null) {
+                unitMap.put(partner.getId(), unit);
             }
         }
 
@@ -94,6 +109,25 @@ public class TreeLayoutEngine {
                 parentUnit = unitMap.get(fId);
             } else if (mId != null && unitMap.containsKey(mId)) {
                 parentUnit = unitMap.get(mId);
+            }
+
+            // Fallback: If primary's parents were not found in the tree, check spouse's parents!
+            if (parentUnit == null && unit.spouse != null) {
+                String sfId = unit.spouse.getFatherId();
+                String smId = unit.spouse.getMotherId();
+                if (sfId != null && unitMap.containsKey(sfId)) {
+                    parentUnit = unitMap.get(sfId);
+                    // Swap so the blood child in the family lineage is primary
+                    PersonEntity temp = unit.primary;
+                    unit.primary = unit.spouse;
+                    unit.spouse = temp;
+                } else if (smId != null && unitMap.containsKey(smId)) {
+                    parentUnit = unitMap.get(smId);
+                    // Swap so the blood child in the family lineage is primary
+                    PersonEntity temp = unit.primary;
+                    unit.primary = unit.spouse;
+                    unit.spouse = temp;
+                }
             }
 
             if (parentUnit != null && parentUnit != unit) {
@@ -251,12 +285,15 @@ public class TreeLayoutEngine {
         collected.add(personId);
 
         PersonEntity person = personMap.get(personId);
-        if (person != null && person.getSpouseId() != null) {
-            collected.add(person.getSpouseId());
+        String spouseId = person != null ? person.getSpouseId() : null;
+        if (spouseId != null) {
+            collected.add(spouseId);
         }
 
         for (PersonEntity p : allPeople) {
-            if (personId.equals(p.getFatherId()) || personId.equals(p.getMotherId())) {
+            boolean isChildOfPerson = personId.equals(p.getFatherId()) || personId.equals(p.getMotherId());
+            boolean isChildOfSpouse = spouseId != null && (spouseId.equals(p.getFatherId()) || spouseId.equals(p.getMotherId()));
+            if (isChildOfPerson || isChildOfSpouse) {
                 collectDescendants(p.getId(), personMap, allPeople, collected);
             }
         }

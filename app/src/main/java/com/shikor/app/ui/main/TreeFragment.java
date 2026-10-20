@@ -24,9 +24,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.shikor.app.R;
 import com.shikor.app.data.local.entities.PersonEntity;
 import com.shikor.app.databinding.FragmentTreeBinding;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.shikor.app.ui.person.PersonDetailActivity;
 import com.shikor.app.ui.person.PersonViewModel;
 import com.shikor.app.util.Prefs;
+import com.shikor.app.view.TreePainter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +76,7 @@ public class TreeFragment extends Fragment {
 
         binding.btnReCenter.setOnClickListener(v -> binding.familyTreeView.reCenterTree());
         binding.btnFitTree.setOnClickListener(v -> binding.familyTreeView.fitWholeTree());
+        binding.btnDiurnalPhase.setOnClickListener(v -> showDiurnalAtmosphereDialog());
 
         updateToggleButtonIcon(binding.familyTreeView.getViewMode());
         binding.btnToggleMode.setOnClickListener(v -> {
@@ -95,10 +99,60 @@ public class TreeFragment extends Fragment {
         if (Prefs.VIEW_MODE_NATURAL_TREE.equals(mode)) {
             binding.btnToggleMode.setIconResource(R.drawable.ic_chart_view);
             binding.btnToggleMode.setContentDescription(getString(R.string.tree_view_chart));
+            binding.btnDiurnalPhase.setVisibility(View.VISIBLE);
         } else {
             binding.btnToggleMode.setIconResource(R.drawable.ic_nature_tree);
             binding.btnToggleMode.setContentDescription(getString(R.string.tree_view_natural));
+            binding.btnDiurnalPhase.setVisibility(View.GONE);
         }
+    }
+
+    private void showDiurnalAtmosphereDialog() {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("hh:mm a", java.util.Locale.getDefault());
+        String currentTimeStr = sdf.format(new java.util.Date());
+        TreePainter.DiurnalPhase currentAutoPhase = TreePainter.DiurnalPhase.fromCurrentTime();
+
+        String autoLabel = getString(R.string.diurnal_auto_opt, currentTimeStr + " (" + currentAutoPhase.displayName + ")");
+        String[] options = new String[]{
+                autoLabel,
+                getString(R.string.diurnal_day_opt),
+                getString(R.string.diurnal_afternoon_opt),
+                getString(R.string.diurnal_evening_opt),
+                getString(R.string.diurnal_night_opt)
+        };
+
+        TreePainter.DiurnalPhase currentOverride = binding.familyTreeView.getDiurnalPhaseOverride();
+        int selectedIndex = 0;
+        if (currentOverride == TreePainter.DiurnalPhase.DAY) selectedIndex = 1;
+        else if (currentOverride == TreePainter.DiurnalPhase.AFTERNOON) selectedIndex = 2;
+        else if (currentOverride == TreePainter.DiurnalPhase.EVENING) selectedIndex = 3;
+        else if (currentOverride == TreePainter.DiurnalPhase.NIGHT) selectedIndex = 4;
+
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.tree_diurnal_weather)
+                .setSingleChoiceItems(options, selectedIndex, (dialog, which) -> {
+                    TreePainter.DiurnalPhase chosenPhase = null;
+                    String chosenName = autoLabel;
+                    if (which == 1) {
+                        chosenPhase = TreePainter.DiurnalPhase.DAY;
+                        chosenName = getString(R.string.diurnal_day_opt);
+                    } else if (which == 2) {
+                        chosenPhase = TreePainter.DiurnalPhase.AFTERNOON;
+                        chosenName = getString(R.string.diurnal_afternoon_opt);
+                    } else if (which == 3) {
+                        chosenPhase = TreePainter.DiurnalPhase.EVENING;
+                        chosenName = getString(R.string.diurnal_evening_opt);
+                    } else if (which == 4) {
+                        chosenPhase = TreePainter.DiurnalPhase.NIGHT;
+                        chosenName = getString(R.string.diurnal_night_opt);
+                    }
+
+                    binding.familyTreeView.setDiurnalPhaseOverride(chosenPhase);
+                    Toast.makeText(requireContext(), getString(R.string.diurnal_applied_fmt, chosenName), Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     private void setupToolbarMenu() {
@@ -137,24 +191,49 @@ public class TreeFragment extends Fragment {
                     menuItem.setChecked(true);
                     setTreeMode(Prefs.VIEW_MODE_CLASSIC_CHART);
                     return true;
+                } else if (itemId == R.id.action_export_tree) {
+                    showExportTreeDialog();
+                    return true;
                 } else if (itemId == R.id.menu_export_tree_png) {
                     if (binding != null) {
                         Bitmap bmp = binding.familyTreeView.exportFullTreeBitmap();
                         String familyName = Prefs.getInstance(requireContext()).getFamilyName();
-                        TreeExporter.exportTreeAsPng(requireContext(), bmp, familyName, membersList);
+                        TreeExporter.exportTreeAsPng(requireActivity(), bmp, familyName, membersList);
                     }
                     return true;
                 } else if (itemId == R.id.menu_export_tree_pdf) {
                     if (binding != null) {
                         Bitmap bmp = binding.familyTreeView.exportFullTreeBitmap();
                         String familyName = Prefs.getInstance(requireContext()).getFamilyName();
-                        TreeExporter.exportTreeAsPdf(requireContext(), bmp, familyName, membersList);
+                        TreeExporter.exportTreeAsPdf(requireActivity(), bmp, familyName, membersList);
                     }
                     return true;
                 }
                 return false;
             }
         }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
+    }
+
+    private void showExportTreeDialog() {
+        if (!isAdded() || getContext() == null) return;
+        String[] options = {
+                getString(R.string.export_tree_pdf),
+                getString(R.string.export_tree_png)
+        };
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.action_export))
+                .setItems(options, (dialog, which) -> {
+                    if (binding == null || !isAdded()) return;
+                    Bitmap bmp = binding.familyTreeView.exportFullTreeBitmap();
+                    String familyName = Prefs.getInstance(requireContext()).getFamilyName();
+                    if (which == 0) {
+                        TreeExporter.exportTreeAsPdf(requireActivity(), bmp, familyName, membersList);
+                    } else {
+                        TreeExporter.exportTreeAsPng(requireActivity(), bmp, familyName, membersList);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     private void setupControls() {

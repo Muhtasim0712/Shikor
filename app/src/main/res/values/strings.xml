@@ -265,4 +265,13 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="logout">Log Out</string>
+
+    <!-- Diurnal Atmosphere -->
+    <string name="tree_diurnal_weather">Atmosphere &amp; Time of Day</string>
+    <string name="diurnal_auto_opt">Auto (System Clock: %s)</string>
+    <string name="diurnal_day_opt">☀️ Morning / Day (Sun &amp; Clouds)</string>
+    <string name="diurnal_afternoon_opt">🌤️ Afternoon (Warm Golden Sun)</string>
+    <string name="diurnal_evening_opt">🌅 Sunset / Godhuli (Fiery Twilight &amp; Evening Star)</string>
+    <string name="diurnal_night_opt">🌙 Starry Night (Crescent Moon &amp; Stars)</string>
+    <string name="diurnal_applied_fmt">Atmosphere set to: %s</string>
 </resources>

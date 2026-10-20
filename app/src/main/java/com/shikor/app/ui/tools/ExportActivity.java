@@ -135,7 +135,13 @@ public class ExportActivity extends BaseActivity {
         String familyName = Prefs.getInstance(this).getFamilyName();
 
         AppExecutors.getInstance().diskIO().execute(() -> {
-            List<PersonEntity> people = AppDatabase.getInstance(this).personDao().getAllPeopleSync(familyId);
+            List<PersonEntity> people = null;
+            if (familyId != null && !familyId.isEmpty()) {
+                people = AppDatabase.getInstance(this).personDao().getAllPeopleSync(familyId);
+            }
+            if (people == null || people.isEmpty()) {
+                people = AppDatabase.getInstance(this).personDao().getAllPeopleGlobalSync();
+            }
             if (people == null || people.isEmpty()) {
                 AppExecutors.getInstance().mainThread().execute(() ->
                         Toast.makeText(this, "No family members found to export.", Toast.LENGTH_SHORT).show()
@@ -143,13 +149,9 @@ public class ExportActivity extends BaseActivity {
                 return;
             }
 
+            final List<PersonEntity> finalPeople = people;
             AppExecutors.getInstance().mainThread().execute(() -> {
-                FamilyTreeView tempTreeView = new FamilyTreeView(this);
-                tempTreeView.setPeople(people);
-                tempTreeView.postDelayed(() -> {
-                    Bitmap bmp = tempTreeView.exportFullTreeBitmap();
-                    TreeExporter.exportTreeAsPdf(this, bmp, familyName, people);
-                }, 350);
+                TreeExporter.exportTreeAsPdf(this, null, familyName, finalPeople);
             });
         });
     }
@@ -159,7 +161,13 @@ public class ExportActivity extends BaseActivity {
         String familyName = Prefs.getInstance(this).getFamilyName();
 
         AppExecutors.getInstance().diskIO().execute(() -> {
-            List<PersonEntity> people = AppDatabase.getInstance(this).personDao().getAllPeopleSync(familyId);
+            List<PersonEntity> people = null;
+            if (familyId != null && !familyId.isEmpty()) {
+                people = AppDatabase.getInstance(this).personDao().getAllPeopleSync(familyId);
+            }
+            if (people == null || people.isEmpty()) {
+                people = AppDatabase.getInstance(this).personDao().getAllPeopleGlobalSync();
+            }
             if (people == null || people.isEmpty()) {
                 AppExecutors.getInstance().mainThread().execute(() ->
                         Toast.makeText(this, "No family members found to export.", Toast.LENGTH_SHORT).show()
@@ -167,13 +175,9 @@ public class ExportActivity extends BaseActivity {
                 return;
             }
 
+            final List<PersonEntity> finalPeople = people;
             AppExecutors.getInstance().mainThread().execute(() -> {
-                FamilyTreeView tempTreeView = new FamilyTreeView(this);
-                tempTreeView.setPeople(people);
-                tempTreeView.postDelayed(() -> {
-                    Bitmap bmp = tempTreeView.exportFullTreeBitmap();
-                    TreeExporter.exportTreeAsPng(this, bmp, familyName);
-                }, 350);
+                TreeExporter.exportTreeAsPng(this, null, familyName, finalPeople);
             });
         });
     }

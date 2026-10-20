@@ -81,6 +81,12 @@
     <string name="create_family_btn">Create Family</string>
     <string name="create_family_desc">Start a brand new family archive and receive a 6-character code to invite relatives.</string>
     <string name="create_family_title">Create New Family</string>
+    <string name="diurnal_afternoon_opt">🌤️ Afternoon (Warm Golden Sun)</string>
+    <string name="diurnal_applied_fmt">Atmosphere set to: %s</string>
+    <string name="diurnal_auto_opt">Auto (System Clock: %s)</string>
+    <string name="diurnal_day_opt">☀️ Morning / Day (Sun &amp; Clouds)</string>
+    <string name="diurnal_evening_opt">🌅 Sunset / Godhuli (Fiery Twilight &amp; Evening Star)</string>
+    <string name="diurnal_night_opt">🌙 Starry Night (Crescent Moon &amp; Stars)</string>
     <string name="dont_have_account">Don\'t have an account? Register</string>
     <string name="email_label">Email Address</string>
     <string name="empty_contacts_title">No family contacts found</string>
@@ -300,6 +306,7 @@
     <string name="timeline_tag_relatives">Tag Family Members:</string>
     <string name="timeline_tag_subtitle">Select all relatives who appear in this photo:</string>
     <string name="timeline_year_hint">Year of Memory (e.g. 1971) *</string>
+    <string name="tree_diurnal_weather">Atmosphere &amp; Time of Day</string>
     <string name="tree_root_label">Root: </string>
     <string name="tree_view_chart">Chart view</string>
     <string name="tree_view_natural">Tree view</string>

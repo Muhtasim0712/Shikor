@@ -82,6 +82,7 @@ drawable bg_indicator_active
 drawable bg_window_dawn
 drawable ic_chart_view
 drawable ic_dawn_botanical_accent
+drawable ic_diurnal_weather
 drawable ic_fit_screen
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -115,6 +116,7 @@ id btnCopyCode
 id btnCreateFamily
 id btnDeleteAudio
 id btnDeleteStory
+id btnDiurnalPhase
 id btnEditPerson
 id btnEmptyAction
 id btnExportCsv
@@ -399,6 +401,12 @@ string confirm_password_label
 string create_family_btn
 string create_family_desc
 string create_family_title
+string diurnal_afternoon_opt
+string diurnal_applied_fmt
+string diurnal_auto_opt
+string diurnal_day_opt
+string diurnal_evening_opt
+string diurnal_night_opt
 string dont_have_account
 string email_label
 string empty_contacts_title
@@ -618,6 +626,7 @@ string timeline_fab_add
 string timeline_tag_relatives
 string timeline_tag_subtitle
 string timeline_year_hint
+string tree_diurnal_weather
 string tree_root_label
 string tree_view_chart
 string tree_view_natural
