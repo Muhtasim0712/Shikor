@@ -113,6 +113,29 @@
     <string name="widget_placeholder_details">Upcoming Event</string>
     <string name="widget_no_events">No upcoming events</string>
     <string name="widget_signed_out">Open Shikor to sign in</string>
+    <string name="widget_reload">Reload events</string>
+
+    <!-- Family Statistics Strings -->
+    <string name="action_stats">Family Statistics</string>
+    <string name="stats_screen_title">Family Statistics</string>
+    <string name="stats_empty_state">Add family members to see statistics</string>
+    <string name="stats_section_summary">Summary Overview</string>
+    <string name="stats_total_members">Total Members</string>
+    <string name="stats_living">Living</string>
+    <string name="stats_deceased">Deceased</string>
+    <string name="stats_generations">Generations</string>
+    <string name="stats_avg_lifespan">Avg Lifespan</string>
+    <string name="stats_oldest_member">Oldest Member</string>
+    <string name="stats_youngest_member">Youngest Member</string>
+    <string name="stats_stories">Stories</string>
+    <string name="stats_audio_mins">Audio Mins</string>
+    <string name="stats_photos">Photos</string>
+    <string name="stats_section_charts">Analytical Charts</string>
+    <string name="stats_chart_birthdays">Birthdays per Month</string>
+    <string name="stats_chart_gender">Gender Distribution</string>
+    <string name="stats_chart_hometowns">Top Hometowns</string>
+    <string name="stats_hometown_row_fmt">%s: %d member(s)</string>
+    <string name="stats_no_hometown">No hometown data available</string>
 
     <!-- Person / Member Detail Screen -->
     <string name="action_call">Call</string>

@@ -461,6 +461,188 @@ public final class StoryDao_Impl implements StoryDao {
   }
 
   @Override
+  public List<StoryEntity> getAllStoriesForFamilySync(final String familyId) {
+    final String _sql = "SELECT * FROM stories WHERE familyId = ? ORDER BY createdAt DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    if (familyId == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, familyId);
+    }
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+      final int _cursorIndexOfPersonId = CursorUtil.getColumnIndexOrThrow(_cursor, "personId");
+      final int _cursorIndexOfFamilyId = CursorUtil.getColumnIndexOrThrow(_cursor, "familyId");
+      final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+      final int _cursorIndexOfBody = CursorUtil.getColumnIndexOrThrow(_cursor, "body");
+      final int _cursorIndexOfAudioPath = CursorUtil.getColumnIndexOrThrow(_cursor, "audioPath");
+      final int _cursorIndexOfAudioDurationMs = CursorUtil.getColumnIndexOrThrow(_cursor, "audioDurationMs");
+      final int _cursorIndexOfPhotoPath = CursorUtil.getColumnIndexOrThrow(_cursor, "photoPath");
+      final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
+      final int _cursorIndexOfAuthorUid = CursorUtil.getColumnIndexOrThrow(_cursor, "authorUid");
+      final int _cursorIndexOfUpdatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "updatedAt");
+      final int _cursorIndexOfSyncState = CursorUtil.getColumnIndexOrThrow(_cursor, "syncState");
+      final List<StoryEntity> _result = new ArrayList<StoryEntity>(_cursor.getCount());
+      while (_cursor.moveToNext()) {
+        final StoryEntity _item;
+        final String _tmpId;
+        if (_cursor.isNull(_cursorIndexOfId)) {
+          _tmpId = null;
+        } else {
+          _tmpId = _cursor.getString(_cursorIndexOfId);
+        }
+        final String _tmpPersonId;
+        if (_cursor.isNull(_cursorIndexOfPersonId)) {
+          _tmpPersonId = null;
+        } else {
+          _tmpPersonId = _cursor.getString(_cursorIndexOfPersonId);
+        }
+        final String _tmpFamilyId;
+        if (_cursor.isNull(_cursorIndexOfFamilyId)) {
+          _tmpFamilyId = null;
+        } else {
+          _tmpFamilyId = _cursor.getString(_cursorIndexOfFamilyId);
+        }
+        final String _tmpTitle;
+        if (_cursor.isNull(_cursorIndexOfTitle)) {
+          _tmpTitle = null;
+        } else {
+          _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+        }
+        final String _tmpBody;
+        if (_cursor.isNull(_cursorIndexOfBody)) {
+          _tmpBody = null;
+        } else {
+          _tmpBody = _cursor.getString(_cursorIndexOfBody);
+        }
+        final String _tmpAudioPath;
+        if (_cursor.isNull(_cursorIndexOfAudioPath)) {
+          _tmpAudioPath = null;
+        } else {
+          _tmpAudioPath = _cursor.getString(_cursorIndexOfAudioPath);
+        }
+        final long _tmpAudioDurationMs;
+        _tmpAudioDurationMs = _cursor.getLong(_cursorIndexOfAudioDurationMs);
+        final String _tmpPhotoPath;
+        if (_cursor.isNull(_cursorIndexOfPhotoPath)) {
+          _tmpPhotoPath = null;
+        } else {
+          _tmpPhotoPath = _cursor.getString(_cursorIndexOfPhotoPath);
+        }
+        final long _tmpCreatedAt;
+        _tmpCreatedAt = _cursor.getLong(_cursorIndexOfCreatedAt);
+        final String _tmpAuthorUid;
+        if (_cursor.isNull(_cursorIndexOfAuthorUid)) {
+          _tmpAuthorUid = null;
+        } else {
+          _tmpAuthorUid = _cursor.getString(_cursorIndexOfAuthorUid);
+        }
+        final long _tmpUpdatedAt;
+        _tmpUpdatedAt = _cursor.getLong(_cursorIndexOfUpdatedAt);
+        final int _tmpSyncState;
+        _tmpSyncState = _cursor.getInt(_cursorIndexOfSyncState);
+        _item = new StoryEntity(_tmpId,_tmpPersonId,_tmpFamilyId,_tmpTitle,_tmpBody,_tmpAudioPath,_tmpAudioDurationMs,_tmpPhotoPath,_tmpCreatedAt,_tmpAuthorUid,_tmpUpdatedAt,_tmpSyncState);
+        _result.add(_item);
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
+  }
+
+  @Override
+  public List<StoryEntity> getAllStoriesGlobalSync() {
+    final String _sql = "SELECT * FROM stories ORDER BY createdAt DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+      final int _cursorIndexOfPersonId = CursorUtil.getColumnIndexOrThrow(_cursor, "personId");
+      final int _cursorIndexOfFamilyId = CursorUtil.getColumnIndexOrThrow(_cursor, "familyId");
+      final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+      final int _cursorIndexOfBody = CursorUtil.getColumnIndexOrThrow(_cursor, "body");
+      final int _cursorIndexOfAudioPath = CursorUtil.getColumnIndexOrThrow(_cursor, "audioPath");
+      final int _cursorIndexOfAudioDurationMs = CursorUtil.getColumnIndexOrThrow(_cursor, "audioDurationMs");
+      final int _cursorIndexOfPhotoPath = CursorUtil.getColumnIndexOrThrow(_cursor, "photoPath");
+      final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
+      final int _cursorIndexOfAuthorUid = CursorUtil.getColumnIndexOrThrow(_cursor, "authorUid");
+      final int _cursorIndexOfUpdatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "updatedAt");
+      final int _cursorIndexOfSyncState = CursorUtil.getColumnIndexOrThrow(_cursor, "syncState");
+      final List<StoryEntity> _result = new ArrayList<StoryEntity>(_cursor.getCount());
+      while (_cursor.moveToNext()) {
+        final StoryEntity _item;
+        final String _tmpId;
+        if (_cursor.isNull(_cursorIndexOfId)) {
+          _tmpId = null;
+        } else {
+          _tmpId = _cursor.getString(_cursorIndexOfId);
+        }
+        final String _tmpPersonId;
+        if (_cursor.isNull(_cursorIndexOfPersonId)) {
+          _tmpPersonId = null;
+        } else {
+          _tmpPersonId = _cursor.getString(_cursorIndexOfPersonId);
+        }
+        final String _tmpFamilyId;
+        if (_cursor.isNull(_cursorIndexOfFamilyId)) {
+          _tmpFamilyId = null;
+        } else {
+          _tmpFamilyId = _cursor.getString(_cursorIndexOfFamilyId);
+        }
+        final String _tmpTitle;
+        if (_cursor.isNull(_cursorIndexOfTitle)) {
+          _tmpTitle = null;
+        } else {
+          _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+        }
+        final String _tmpBody;
+        if (_cursor.isNull(_cursorIndexOfBody)) {
+          _tmpBody = null;
+        } else {
+          _tmpBody = _cursor.getString(_cursorIndexOfBody);
+        }
+        final String _tmpAudioPath;
+        if (_cursor.isNull(_cursorIndexOfAudioPath)) {
+          _tmpAudioPath = null;
+        } else {
+          _tmpAudioPath = _cursor.getString(_cursorIndexOfAudioPath);
+        }
+        final long _tmpAudioDurationMs;
+        _tmpAudioDurationMs = _cursor.getLong(_cursorIndexOfAudioDurationMs);
+        final String _tmpPhotoPath;
+        if (_cursor.isNull(_cursorIndexOfPhotoPath)) {
+          _tmpPhotoPath = null;
+        } else {
+          _tmpPhotoPath = _cursor.getString(_cursorIndexOfPhotoPath);
+        }
+        final long _tmpCreatedAt;
+        _tmpCreatedAt = _cursor.getLong(_cursorIndexOfCreatedAt);
+        final String _tmpAuthorUid;
+        if (_cursor.isNull(_cursorIndexOfAuthorUid)) {
+          _tmpAuthorUid = null;
+        } else {
+          _tmpAuthorUid = _cursor.getString(_cursorIndexOfAuthorUid);
+        }
+        final long _tmpUpdatedAt;
+        _tmpUpdatedAt = _cursor.getLong(_cursorIndexOfUpdatedAt);
+        final int _tmpSyncState;
+        _tmpSyncState = _cursor.getInt(_cursorIndexOfSyncState);
+        _item = new StoryEntity(_tmpId,_tmpPersonId,_tmpFamilyId,_tmpTitle,_tmpBody,_tmpAudioPath,_tmpAudioDurationMs,_tmpPhotoPath,_tmpCreatedAt,_tmpAuthorUid,_tmpUpdatedAt,_tmpSyncState);
+        _result.add(_item);
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
+  }
+
+  @Override
   public LiveData<StoryEntity> getStoryById(final String storyId) {
     final String _sql = "SELECT * FROM stories WHERE id = ? LIMIT 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);

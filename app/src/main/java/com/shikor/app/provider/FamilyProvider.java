@@ -63,7 +63,6 @@ public class FamilyProvider extends ContentProvider {
 
         switch (match) {
             case CODE_PEOPLE:
-            case CODE_EVENTS_UPCOMING:
                 String familyId = null;
                 if (getContext() != null) {
                     familyId = Prefs.getInstance(getContext()).getFamilyId();
@@ -73,6 +72,10 @@ public class FamilyProvider extends ContentProvider {
                 } else {
                     cursor = database.personDao().getAllPeopleCursor();
                 }
+                break;
+
+            case CODE_EVENTS_UPCOMING:
+                cursor = database.personDao().getAllPeopleCursor();
                 break;
 
             case CODE_PERSON_ID:

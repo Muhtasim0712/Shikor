@@ -8,16 +8,16 @@
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_family_setup.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_dialog_time_picker.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\dialog_time_picker.xml"
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\font_noto_sans_bengali.xml.flat",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\font\\noto_sans_bengali.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_splash.xml.flat",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_splash.xml"
     },
     {
-        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\font_noto_sans_bengali.xml.flat",
-        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\font\\noto_sans_bengali.xml"
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_dialog_time_picker.xml.flat",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\dialog_time_picker.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_ic_nature_tree.xml.flat",
@@ -72,6 +72,10 @@
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout-sw600dp\\activity_export.xml"
     },
     {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_widget_item_event.xml.flat",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\widget_item_event.xml"
+    },
+    {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-hdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-hdpi\\ic_launcher.webp"
     },
@@ -82,6 +86,14 @@
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_person_detail.xml.flat",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_person_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_stats.xml.flat",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_stats.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_widget_next_event.xml.flat",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\widget_next_event.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\color_chip_stroke_selector.xml.flat",
@@ -122,6 +134,10 @@
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\font_noto_sans_bengali_regular.ttf.flat",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\font\\noto_sans_bengali_regular.ttf"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\xml_next_event_widget_info.xml.flat",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\xml\\next_event_widget_info.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-mdpi_ic_launcher_round.webp.flat",
@@ -186,10 +202,6 @@
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\anim_fade_in_subtle.xml.flat",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\anim\\fade_in_subtle.xml"
-    },
-    {
-        "merged": "com.shikor.app-debug-48:/xml_next_event_widget_info.xml.flat",
-        "source": "com.shikor.app-main-50:/xml/next_event_widget_info.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\menu_menu_tree_view.xml.flat",

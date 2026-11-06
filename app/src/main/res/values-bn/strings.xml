@@ -113,6 +113,29 @@
     <string name="widget_placeholder_details">আসন্ন অনুষ্ঠান</string>
     <string name="widget_no_events">কোনো আসন্ন অনুষ্ঠান নেই</string>
     <string name="widget_signed_out">সাইন ইন করতে শিকড় খুলুন</string>
+    <string name="widget_reload">রিফ্রেশ করুন</string>
+
+    <!-- Family Statistics Strings -->
+    <string name="action_stats">পারিবারিক পরিসংখ্যান</string>
+    <string name="stats_screen_title">পারিবারিক পরিসংখ্যান</string>
+    <string name="stats_empty_state">পরিসংখ্যান দেখতে পরিবারের সদস্য যুক্ত করুন</string>
+    <string name="stats_section_summary">সারসংক্ষেপ</string>
+    <string name="stats_total_members">মোট সদস্য</string>
+    <string name="stats_living">জীবিত</string>
+    <string name="stats_deceased">প্রয়াত</string>
+    <string name="stats_generations">বংশপ্রজন্ম</string>
+    <string name="stats_avg_lifespan">গড় আয়ু</string>
+    <string name="stats_oldest_member">প্রবীণতম সদস্য</string>
+    <string name="stats_youngest_member">কনিষ্ঠতম সদস্য</string>
+    <string name="stats_stories">গল্পসমূহ</string>
+    <string name="stats_audio_mins">অডিও মিনিট</string>
+    <string name="stats_photos">ছবিসমূহ</string>
+    <string name="stats_section_charts">বিশ্লেষণমূলক চার্ট</string>
+    <string name="stats_chart_birthdays">মাসে জন্মতারিখ</string>
+    <string name="stats_chart_gender">লিঙ্গ বিন্যাস</string>
+    <string name="stats_chart_hometowns">প্রধান আদি নিবাস</string>
+    <string name="stats_hometown_row_fmt">%s: %d জন সদস্য</string>
+    <string name="stats_no_hometown">কোনো আদি নিবাসের তথ্য নেই</string>
 
     <!-- Person / Member Detail Screen -->
     <string name="action_call">কল</string>

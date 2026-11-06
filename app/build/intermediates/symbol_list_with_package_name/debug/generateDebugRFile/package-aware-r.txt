@@ -1,6 +1,9 @@
 com.shikor.app
 anim fade_in_subtle
 anim fade_out_subtle
+attr barColor
+attr barSelectedColor
+attr donutWidth
 attr initials
 attr isDeceased
 attr ringColor
@@ -101,6 +104,7 @@ id action_export_contacts
 id action_export_tree
 id action_fit_tree
 id action_import_members
+id action_stats
 id action_view_mode
 id actvPersonA
 id actvPersonB
@@ -109,6 +113,7 @@ id avatarContact
 id avatarPerson
 id avatarPreview
 id avatarView
+id barChartView
 id bottomNavigation
 id btnAddPhoto
 id btnAddStory
@@ -185,6 +190,7 @@ id chipGroupTaggedMembers
 id chipGroupTimelineTaggedPersons
 id chipSyncStatus
 id detailAvatar
+id donutChartView
 id emptyState
 id emptyStateLayout
 id etBiography
@@ -217,6 +223,7 @@ id ivArrow
 id ivDialogPhotoPreview
 id ivDropdownArrow
 id ivEmptyIcon
+id ivItemAvatar
 id ivLoginLogo
 id ivLogo
 id ivPhotoPreview
@@ -225,13 +232,13 @@ id ivSelectedCheck
 id ivSelectedRootIcon
 id ivStoryPhoto
 id ivTimelinePhoto
-id ivWidgetAvatar1
-id ivWidgetAvatar2
+id ivWidgetReload
 id layoutAudioBadge
 id layoutAudioCapsule
 id layoutExactAlarmWarning
 id layoutExportContacts
 id layoutExportTree
+id layoutHometownsContainer
 id layoutImportMembers
 id layoutLanguageSetting
 id layoutPathSteps
@@ -239,9 +246,8 @@ id layoutPhotoPicker
 id layoutPickPrompt
 id layoutRelationshipFinder
 id layoutReminderTime
+id layoutStatsContent
 id layoutThemeSetting
-id layoutWidgetEvent1
-id layoutWidgetEvent2
 id loadingLayout
 id loadingOverlay
 id loadingText
@@ -260,6 +266,7 @@ id personDetailRoot
 id pickerHour
 id pickerMinute
 id progressBar
+id progressStats
 id rbFemale
 id rbMale
 id rbOther
@@ -305,6 +312,7 @@ id tilYear
 id timelineEmptyState
 id timelineRoot
 id toolbar
+id toolbarStats
 id treeEmptyState
 id treeFragmentRoot
 id tvAppInfo
@@ -341,6 +349,8 @@ id tvFactHijriDate
 id tvFactHometown
 id tvFactOccupation
 id tvGenBadge
+id tvItemDetails
+id tvItemName
 id tvKinshipBangla
 id tvKinshipEnglish
 id tvKinshipExplanation
@@ -370,6 +380,17 @@ id tvSettingsFamilyName
 id tvSettingsUserEmail
 id tvSiblingsLabel
 id tvSpouseLabel
+id tvStatAudioMins
+id tvStatAvgLifespan
+id tvStatDeceased
+id tvStatGenerations
+id tvStatLiving
+id tvStatOldestName
+id tvStatPhotos
+id tvStatStories
+id tvStatTotalMembers
+id tvStatYoungestName
+id tvStatsEmpty
 id tvStepPersonName
 id tvStepRelation
 id tvStoryBody
@@ -382,13 +403,9 @@ id tvTimelineCaption
 id tvTimelineYear
 id tvTreeRootHeader
 id tvTreeRootSubtitle
-id tvWidgetCountdown
-id tvWidgetDetails1
-id tvWidgetDetails2
 id tvWidgetEmpty
-id tvWidgetName1
-id tvWidgetName2
 id viewRecordingIndicator
+id widgetListView
 layout activity_add_edit_person
 layout activity_add_story
 layout activity_export
@@ -399,6 +416,7 @@ layout activity_person_detail
 layout activity_register
 layout activity_relationship_finder
 layout activity_splash
+layout activity_stats
 layout activity_story_detail
 layout dialog_add_timeline_photo
 layout dialog_select_root_ancestor
@@ -417,6 +435,7 @@ layout item_timeline_photo
 layout item_timeline_year_header
 layout layout_empty_state
 layout layout_loading
+layout widget_item_event
 layout widget_next_event
 menu bottom_nav_menu
 menu menu_main_toolbar
@@ -429,6 +448,7 @@ string action_fit_tree
 string action_maps
 string action_recenter
 string action_share
+string action_stats
 string already_have_account
 string app_name
 string app_tagline
@@ -625,6 +645,25 @@ string settings_time_selected_fmt
 string settings_title
 string settings_tools_title
 string share_family_code
+string stats_audio_mins
+string stats_avg_lifespan
+string stats_chart_birthdays
+string stats_chart_gender
+string stats_chart_hometowns
+string stats_deceased
+string stats_empty_state
+string stats_generations
+string stats_hometown_row_fmt
+string stats_living
+string stats_no_hometown
+string stats_oldest_member
+string stats_photos
+string stats_screen_title
+string stats_section_charts
+string stats_section_summary
+string stats_stories
+string stats_total_members
+string stats_youngest_member
 string story_attach_photo
 string story_body_hint
 string story_delete
@@ -685,6 +724,7 @@ string tree_view_natural
 string widget_no_events
 string widget_placeholder_details
 string widget_placeholder_name
+string widget_reload
 string widget_signed_out
 string widget_title
 string widget_today
@@ -708,6 +748,8 @@ style Widget_Shikor_FloatingActionButton
 style Widget_Shikor_TextInputLayout
 style Widget_Shikor_Toolbar
 styleable AvatarView initials isDeceased ringColor ringWidth
+styleable BarChartView barColor barSelectedColor
+styleable DonutChartView donutWidth
 xml file_paths
 xml kinship_terms
 xml next_event_widget_info

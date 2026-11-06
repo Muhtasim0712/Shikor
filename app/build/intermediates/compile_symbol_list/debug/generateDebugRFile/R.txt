@@ -1,5 +1,8 @@
 int anim fade_in_subtle 0x0
 int anim fade_out_subtle 0x0
+int attr barColor 0x0
+int attr barSelectedColor 0x0
+int attr donutWidth 0x0
 int attr initials 0x0
 int attr isDeceased 0x0
 int attr ringColor 0x0
@@ -100,6 +103,7 @@ int id action_export_contacts 0x0
 int id action_export_tree 0x0
 int id action_fit_tree 0x0
 int id action_import_members 0x0
+int id action_stats 0x0
 int id action_view_mode 0x0
 int id actvPersonA 0x0
 int id actvPersonB 0x0
@@ -108,6 +112,7 @@ int id avatarContact 0x0
 int id avatarPerson 0x0
 int id avatarPreview 0x0
 int id avatarView 0x0
+int id barChartView 0x0
 int id bottomNavigation 0x0
 int id btnAddPhoto 0x0
 int id btnAddStory 0x0
@@ -184,6 +189,7 @@ int id chipGroupTaggedMembers 0x0
 int id chipGroupTimelineTaggedPersons 0x0
 int id chipSyncStatus 0x0
 int id detailAvatar 0x0
+int id donutChartView 0x0
 int id emptyState 0x0
 int id emptyStateLayout 0x0
 int id etBiography 0x0
@@ -216,6 +222,7 @@ int id ivArrow 0x0
 int id ivDialogPhotoPreview 0x0
 int id ivDropdownArrow 0x0
 int id ivEmptyIcon 0x0
+int id ivItemAvatar 0x0
 int id ivLoginLogo 0x0
 int id ivLogo 0x0
 int id ivPhotoPreview 0x0
@@ -224,13 +231,13 @@ int id ivSelectedCheck 0x0
 int id ivSelectedRootIcon 0x0
 int id ivStoryPhoto 0x0
 int id ivTimelinePhoto 0x0
-int id ivWidgetAvatar1 0x0
-int id ivWidgetAvatar2 0x0
+int id ivWidgetReload 0x0
 int id layoutAudioBadge 0x0
 int id layoutAudioCapsule 0x0
 int id layoutExactAlarmWarning 0x0
 int id layoutExportContacts 0x0
 int id layoutExportTree 0x0
+int id layoutHometownsContainer 0x0
 int id layoutImportMembers 0x0
 int id layoutLanguageSetting 0x0
 int id layoutPathSteps 0x0
@@ -238,9 +245,8 @@ int id layoutPhotoPicker 0x0
 int id layoutPickPrompt 0x0
 int id layoutRelationshipFinder 0x0
 int id layoutReminderTime 0x0
+int id layoutStatsContent 0x0
 int id layoutThemeSetting 0x0
-int id layoutWidgetEvent1 0x0
-int id layoutWidgetEvent2 0x0
 int id loadingLayout 0x0
 int id loadingOverlay 0x0
 int id loadingText 0x0
@@ -259,6 +265,7 @@ int id personDetailRoot 0x0
 int id pickerHour 0x0
 int id pickerMinute 0x0
 int id progressBar 0x0
+int id progressStats 0x0
 int id rbFemale 0x0
 int id rbMale 0x0
 int id rbOther 0x0
@@ -304,6 +311,7 @@ int id tilYear 0x0
 int id timelineEmptyState 0x0
 int id timelineRoot 0x0
 int id toolbar 0x0
+int id toolbarStats 0x0
 int id treeEmptyState 0x0
 int id treeFragmentRoot 0x0
 int id tvAppInfo 0x0
@@ -340,6 +348,8 @@ int id tvFactHijriDate 0x0
 int id tvFactHometown 0x0
 int id tvFactOccupation 0x0
 int id tvGenBadge 0x0
+int id tvItemDetails 0x0
+int id tvItemName 0x0
 int id tvKinshipBangla 0x0
 int id tvKinshipEnglish 0x0
 int id tvKinshipExplanation 0x0
@@ -369,6 +379,17 @@ int id tvSettingsFamilyName 0x0
 int id tvSettingsUserEmail 0x0
 int id tvSiblingsLabel 0x0
 int id tvSpouseLabel 0x0
+int id tvStatAudioMins 0x0
+int id tvStatAvgLifespan 0x0
+int id tvStatDeceased 0x0
+int id tvStatGenerations 0x0
+int id tvStatLiving 0x0
+int id tvStatOldestName 0x0
+int id tvStatPhotos 0x0
+int id tvStatStories 0x0
+int id tvStatTotalMembers 0x0
+int id tvStatYoungestName 0x0
+int id tvStatsEmpty 0x0
 int id tvStepPersonName 0x0
 int id tvStepRelation 0x0
 int id tvStoryBody 0x0
@@ -381,13 +402,9 @@ int id tvTimelineCaption 0x0
 int id tvTimelineYear 0x0
 int id tvTreeRootHeader 0x0
 int id tvTreeRootSubtitle 0x0
-int id tvWidgetCountdown 0x0
-int id tvWidgetDetails1 0x0
-int id tvWidgetDetails2 0x0
 int id tvWidgetEmpty 0x0
-int id tvWidgetName1 0x0
-int id tvWidgetName2 0x0
 int id viewRecordingIndicator 0x0
+int id widgetListView 0x0
 int layout activity_add_edit_person 0x0
 int layout activity_add_story 0x0
 int layout activity_export 0x0
@@ -398,6 +415,7 @@ int layout activity_person_detail 0x0
 int layout activity_register 0x0
 int layout activity_relationship_finder 0x0
 int layout activity_splash 0x0
+int layout activity_stats 0x0
 int layout activity_story_detail 0x0
 int layout dialog_add_timeline_photo 0x0
 int layout dialog_select_root_ancestor 0x0
@@ -416,6 +434,7 @@ int layout item_timeline_photo 0x0
 int layout item_timeline_year_header 0x0
 int layout layout_empty_state 0x0
 int layout layout_loading 0x0
+int layout widget_item_event 0x0
 int layout widget_next_event 0x0
 int menu bottom_nav_menu 0x0
 int menu menu_main_toolbar 0x0
@@ -428,6 +447,7 @@ int string action_fit_tree 0x0
 int string action_maps 0x0
 int string action_recenter 0x0
 int string action_share 0x0
+int string action_stats 0x0
 int string already_have_account 0x0
 int string app_name 0x0
 int string app_tagline 0x0
@@ -624,6 +644,25 @@ int string settings_time_selected_fmt 0x0
 int string settings_title 0x0
 int string settings_tools_title 0x0
 int string share_family_code 0x0
+int string stats_audio_mins 0x0
+int string stats_avg_lifespan 0x0
+int string stats_chart_birthdays 0x0
+int string stats_chart_gender 0x0
+int string stats_chart_hometowns 0x0
+int string stats_deceased 0x0
+int string stats_empty_state 0x0
+int string stats_generations 0x0
+int string stats_hometown_row_fmt 0x0
+int string stats_living 0x0
+int string stats_no_hometown 0x0
+int string stats_oldest_member 0x0
+int string stats_photos 0x0
+int string stats_screen_title 0x0
+int string stats_section_charts 0x0
+int string stats_section_summary 0x0
+int string stats_stories 0x0
+int string stats_total_members 0x0
+int string stats_youngest_member 0x0
 int string story_attach_photo 0x0
 int string story_body_hint 0x0
 int string story_delete 0x0
@@ -684,6 +723,7 @@ int string tree_view_natural 0x0
 int string widget_no_events 0x0
 int string widget_placeholder_details 0x0
 int string widget_placeholder_name 0x0
+int string widget_reload 0x0
 int string widget_signed_out 0x0
 int string widget_title 0x0
 int string widget_today 0x0
@@ -711,6 +751,11 @@ int styleable AvatarView_initials 0
 int styleable AvatarView_isDeceased 1
 int styleable AvatarView_ringColor 2
 int styleable AvatarView_ringWidth 3
+int[] styleable BarChartView { 0x0, 0x0 }
+int styleable BarChartView_barColor 0
+int styleable BarChartView_barSelectedColor 1
+int[] styleable DonutChartView { 0x0 }
+int styleable DonutChartView_donutWidth 0
 int xml file_paths 0x0
 int xml kinship_terms 0x0
 int xml next_event_widget_info 0x0

@@ -8,6 +8,10 @@
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\dialog_add_timeline_photo.xml"
     },
     {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_stats.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_stats.xml"
+    },
+    {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\item_root_ancestor.xml",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_root_ancestor.xml"
     },
@@ -102,6 +106,14 @@
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_main.xml",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\widget_item_event.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\widget_item_event.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\widget_next_event.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\widget_next_event.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_story_detail.xml",

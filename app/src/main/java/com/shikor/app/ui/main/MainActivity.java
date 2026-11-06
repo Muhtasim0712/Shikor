@@ -248,7 +248,10 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_export_contacts) {
+        if (id == R.id.action_stats) {
+            startActivity(new Intent(this, com.shikor.app.ui.tools.StatsActivity.class));
+            return true;
+        } else if (id == R.id.action_export_contacts) {
             startActivity(new Intent(this, ExportActivity.class));
             return true;
         } else if (id == R.id.action_import_members) {

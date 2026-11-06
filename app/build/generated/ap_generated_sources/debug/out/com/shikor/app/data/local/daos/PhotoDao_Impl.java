@@ -329,6 +329,164 @@ public final class PhotoDao_Impl implements PhotoDao {
   }
 
   @Override
+  public List<PhotoEntity> getAllPhotosForFamilySync(final String familyId) {
+    final String _sql = "SELECT * FROM photos WHERE familyId = ? ORDER BY year DESC, createdAt DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    if (familyId == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, familyId);
+    }
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+      final int _cursorIndexOfPersonId = CursorUtil.getColumnIndexOrThrow(_cursor, "personId");
+      final int _cursorIndexOfFamilyId = CursorUtil.getColumnIndexOrThrow(_cursor, "familyId");
+      final int _cursorIndexOfPath = CursorUtil.getColumnIndexOrThrow(_cursor, "path");
+      final int _cursorIndexOfCaption = CursorUtil.getColumnIndexOrThrow(_cursor, "caption");
+      final int _cursorIndexOfYear = CursorUtil.getColumnIndexOrThrow(_cursor, "year");
+      final int _cursorIndexOfTaggedPersonIds = CursorUtil.getColumnIndexOrThrow(_cursor, "taggedPersonIds");
+      final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
+      final int _cursorIndexOfUpdatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "updatedAt");
+      final int _cursorIndexOfSyncState = CursorUtil.getColumnIndexOrThrow(_cursor, "syncState");
+      final List<PhotoEntity> _result = new ArrayList<PhotoEntity>(_cursor.getCount());
+      while (_cursor.moveToNext()) {
+        final PhotoEntity _item;
+        final String _tmpId;
+        if (_cursor.isNull(_cursorIndexOfId)) {
+          _tmpId = null;
+        } else {
+          _tmpId = _cursor.getString(_cursorIndexOfId);
+        }
+        final String _tmpPersonId;
+        if (_cursor.isNull(_cursorIndexOfPersonId)) {
+          _tmpPersonId = null;
+        } else {
+          _tmpPersonId = _cursor.getString(_cursorIndexOfPersonId);
+        }
+        final String _tmpFamilyId;
+        if (_cursor.isNull(_cursorIndexOfFamilyId)) {
+          _tmpFamilyId = null;
+        } else {
+          _tmpFamilyId = _cursor.getString(_cursorIndexOfFamilyId);
+        }
+        final String _tmpPath;
+        if (_cursor.isNull(_cursorIndexOfPath)) {
+          _tmpPath = null;
+        } else {
+          _tmpPath = _cursor.getString(_cursorIndexOfPath);
+        }
+        final String _tmpCaption;
+        if (_cursor.isNull(_cursorIndexOfCaption)) {
+          _tmpCaption = null;
+        } else {
+          _tmpCaption = _cursor.getString(_cursorIndexOfCaption);
+        }
+        final int _tmpYear;
+        _tmpYear = _cursor.getInt(_cursorIndexOfYear);
+        final List<String> _tmpTaggedPersonIds;
+        final String _tmp;
+        if (_cursor.isNull(_cursorIndexOfTaggedPersonIds)) {
+          _tmp = null;
+        } else {
+          _tmp = _cursor.getString(_cursorIndexOfTaggedPersonIds);
+        }
+        _tmpTaggedPersonIds = StringListConverter.toList(_tmp);
+        final long _tmpCreatedAt;
+        _tmpCreatedAt = _cursor.getLong(_cursorIndexOfCreatedAt);
+        final long _tmpUpdatedAt;
+        _tmpUpdatedAt = _cursor.getLong(_cursorIndexOfUpdatedAt);
+        final int _tmpSyncState;
+        _tmpSyncState = _cursor.getInt(_cursorIndexOfSyncState);
+        _item = new PhotoEntity(_tmpId,_tmpPersonId,_tmpFamilyId,_tmpPath,_tmpCaption,_tmpYear,_tmpTaggedPersonIds,_tmpCreatedAt,_tmpUpdatedAt,_tmpSyncState);
+        _result.add(_item);
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
+  }
+
+  @Override
+  public List<PhotoEntity> getAllPhotosGlobalSync() {
+    final String _sql = "SELECT * FROM photos ORDER BY year DESC, createdAt DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+      final int _cursorIndexOfPersonId = CursorUtil.getColumnIndexOrThrow(_cursor, "personId");
+      final int _cursorIndexOfFamilyId = CursorUtil.getColumnIndexOrThrow(_cursor, "familyId");
+      final int _cursorIndexOfPath = CursorUtil.getColumnIndexOrThrow(_cursor, "path");
+      final int _cursorIndexOfCaption = CursorUtil.getColumnIndexOrThrow(_cursor, "caption");
+      final int _cursorIndexOfYear = CursorUtil.getColumnIndexOrThrow(_cursor, "year");
+      final int _cursorIndexOfTaggedPersonIds = CursorUtil.getColumnIndexOrThrow(_cursor, "taggedPersonIds");
+      final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
+      final int _cursorIndexOfUpdatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "updatedAt");
+      final int _cursorIndexOfSyncState = CursorUtil.getColumnIndexOrThrow(_cursor, "syncState");
+      final List<PhotoEntity> _result = new ArrayList<PhotoEntity>(_cursor.getCount());
+      while (_cursor.moveToNext()) {
+        final PhotoEntity _item;
+        final String _tmpId;
+        if (_cursor.isNull(_cursorIndexOfId)) {
+          _tmpId = null;
+        } else {
+          _tmpId = _cursor.getString(_cursorIndexOfId);
+        }
+        final String _tmpPersonId;
+        if (_cursor.isNull(_cursorIndexOfPersonId)) {
+          _tmpPersonId = null;
+        } else {
+          _tmpPersonId = _cursor.getString(_cursorIndexOfPersonId);
+        }
+        final String _tmpFamilyId;
+        if (_cursor.isNull(_cursorIndexOfFamilyId)) {
+          _tmpFamilyId = null;
+        } else {
+          _tmpFamilyId = _cursor.getString(_cursorIndexOfFamilyId);
+        }
+        final String _tmpPath;
+        if (_cursor.isNull(_cursorIndexOfPath)) {
+          _tmpPath = null;
+        } else {
+          _tmpPath = _cursor.getString(_cursorIndexOfPath);
+        }
+        final String _tmpCaption;
+        if (_cursor.isNull(_cursorIndexOfCaption)) {
+          _tmpCaption = null;
+        } else {
+          _tmpCaption = _cursor.getString(_cursorIndexOfCaption);
+        }
+        final int _tmpYear;
+        _tmpYear = _cursor.getInt(_cursorIndexOfYear);
+        final List<String> _tmpTaggedPersonIds;
+        final String _tmp;
+        if (_cursor.isNull(_cursorIndexOfTaggedPersonIds)) {
+          _tmp = null;
+        } else {
+          _tmp = _cursor.getString(_cursorIndexOfTaggedPersonIds);
+        }
+        _tmpTaggedPersonIds = StringListConverter.toList(_tmp);
+        final long _tmpCreatedAt;
+        _tmpCreatedAt = _cursor.getLong(_cursorIndexOfCreatedAt);
+        final long _tmpUpdatedAt;
+        _tmpUpdatedAt = _cursor.getLong(_cursorIndexOfUpdatedAt);
+        final int _tmpSyncState;
+        _tmpSyncState = _cursor.getInt(_cursorIndexOfSyncState);
+        _item = new PhotoEntity(_tmpId,_tmpPersonId,_tmpFamilyId,_tmpPath,_tmpCaption,_tmpYear,_tmpTaggedPersonIds,_tmpCreatedAt,_tmpUpdatedAt,_tmpSyncState);
+        _result.add(_item);
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
+  }
+
+  @Override
   public LiveData<List<PhotoEntity>> getPhotosForPerson(final String personId) {
     final String _sql = "SELECT * FROM photos WHERE personId = ? ORDER BY year DESC, createdAt DESC";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);

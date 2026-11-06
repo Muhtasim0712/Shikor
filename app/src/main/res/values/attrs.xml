@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="barColor" format="color" />
+    <attr name="barSelectedColor" format="color" />
+    <attr name="donutWidth" format="dimension" />
+
     <!-- CONCEPT: Custom View attributes for AvatarView -->
     <declare-styleable name="AvatarView">
         <attr name="ringColor" format="color" />
         <attr name="ringWidth" format="dimension" />
         <attr name="initials" format="string" />
         <attr name="isDeceased" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="BarChartView">
+        <attr name="barColor" />
+        <attr name="barSelectedColor" />
+    </declare-styleable>
+    <declare-styleable name="DonutChartView">
+        <attr name="donutWidth" />
     </declare-styleable>
 </resources>
