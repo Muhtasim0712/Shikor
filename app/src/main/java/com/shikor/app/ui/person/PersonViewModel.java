@@ -79,6 +79,7 @@ public class PersonViewModel extends AndroidViewModel {
         repository.insertPerson(person, new FamilyRepository.RepositoryCallback<Void>() {
             @Override
             public void onSuccess(Void result) {
+                com.shikor.app.widget.WidgetUpdater.requestUpdate(getApplication());
                 operationSuccess.setValue(true);
             }
 
@@ -93,6 +94,7 @@ public class PersonViewModel extends AndroidViewModel {
         repository.updatePerson(person, new FamilyRepository.RepositoryCallback<Void>() {
             @Override
             public void onSuccess(Void result) {
+                com.shikor.app.widget.WidgetUpdater.requestUpdate(getApplication());
                 operationSuccess.setValue(true);
             }
 
@@ -107,6 +109,7 @@ public class PersonViewModel extends AndroidViewModel {
         repository.deletePerson(person, new FamilyRepository.RepositoryCallback<Void>() {
             @Override
             public void onSuccess(Void result) {
+                com.shikor.app.widget.WidgetUpdater.requestUpdate(getApplication());
                 operationSuccess.setValue(true);
             }
 

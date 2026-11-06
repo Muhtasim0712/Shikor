@@ -25,15 +25,18 @@ public class FamilyProvider extends ContentProvider {
 
     public static final String AUTHORITY = "com.shikor.app.provider";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/people");
+    public static final Uri EVENTS_UPCOMING_URI = Uri.parse("content://" + AUTHORITY + "/events/upcoming");
 
     private static final int CODE_PEOPLE = 1;
     private static final int CODE_PERSON_ID = 2;
+    private static final int CODE_EVENTS_UPCOMING = 3;
 
     private static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
         URI_MATCHER.addURI(AUTHORITY, "people", CODE_PEOPLE);
         URI_MATCHER.addURI(AUTHORITY, "people/*", CODE_PERSON_ID);
+        URI_MATCHER.addURI(AUTHORITY, "events/upcoming", CODE_EVENTS_UPCOMING);
     }
 
     private AppDatabase database;
@@ -60,6 +63,7 @@ public class FamilyProvider extends ContentProvider {
 
         switch (match) {
             case CODE_PEOPLE:
+            case CODE_EVENTS_UPCOMING:
                 String familyId = null;
                 if (getContext() != null) {
                     familyId = Prefs.getInstance(getContext()).getFamilyId();
@@ -98,6 +102,7 @@ public class FamilyProvider extends ContentProvider {
         int match = URI_MATCHER.match(uri);
         switch (match) {
             case CODE_PEOPLE:
+            case CODE_EVENTS_UPCOMING:
                 return "vnd.android.cursor.dir/vnd.com.shikor.app.people";
             case CODE_PERSON_ID:
                 return "vnd.android.cursor.item/vnd.com.shikor.app.person";

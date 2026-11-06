@@ -106,6 +106,14 @@
     <string name="notification_on_this_day_more_fmt">+ আরও %dটি স্মৃতি</string>
     <string name="notification_action_open_family">পরিবার খুলুন</string>
 
+    <!-- Widget Strings -->
+    <string name="widget_title">পরবর্তী পারিবারিক অনুষ্ঠান</string>
+    <string name="widget_today">আজ</string>
+    <string name="widget_placeholder_name">পরিবারের সদস্য</string>
+    <string name="widget_placeholder_details">আসন্ন অনুষ্ঠান</string>
+    <string name="widget_no_events">কোনো আসন্ন অনুষ্ঠান নেই</string>
+    <string name="widget_signed_out">সাইন ইন করতে শিকড় খুলুন</string>
+
     <!-- Person / Member Detail Screen -->
     <string name="action_call">কল</string>
     <string name="action_maps">মানচিত্র</string>

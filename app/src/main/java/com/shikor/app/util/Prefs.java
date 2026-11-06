@@ -150,6 +150,16 @@ public class Prefs {
                 .apply();
     }
 
+    private static final String KEY_HIDE_NAMES_WIDGET_NOTIF = "key_hide_names_in_widget_and_notifications";
+
+    public boolean isHideNamesInWidgetAndNotifications() {
+        return preferences.getBoolean(KEY_HIDE_NAMES_WIDGET_NOTIF, false);
+    }
+
+    public void setHideNamesInWidgetAndNotifications(boolean hide) {
+        preferences.edit().putBoolean(KEY_HIDE_NAMES_WIDGET_NOTIF, hide).apply();
+    }
+
     public String getThemeMode() {
         return preferences.getString(KEY_THEME_MODE, THEME_SYSTEM);
     }

@@ -225,6 +225,8 @@ id ivSelectedCheck
 id ivSelectedRootIcon
 id ivStoryPhoto
 id ivTimelinePhoto
+id ivWidgetAvatar1
+id ivWidgetAvatar2
 id layoutAudioBadge
 id layoutAudioCapsule
 id layoutExactAlarmWarning
@@ -238,6 +240,8 @@ id layoutPickPrompt
 id layoutRelationshipFinder
 id layoutReminderTime
 id layoutThemeSetting
+id layoutWidgetEvent1
+id layoutWidgetEvent2
 id loadingLayout
 id loadingOverlay
 id loadingText
@@ -378,6 +382,12 @@ id tvTimelineCaption
 id tvTimelineYear
 id tvTreeRootHeader
 id tvTreeRootSubtitle
+id tvWidgetCountdown
+id tvWidgetDetails1
+id tvWidgetDetails2
+id tvWidgetEmpty
+id tvWidgetName1
+id tvWidgetName2
 id viewRecordingIndicator
 layout activity_add_edit_person
 layout activity_add_story
@@ -407,6 +417,7 @@ layout item_timeline_photo
 layout item_timeline_year_header
 layout layout_empty_state
 layout layout_loading
+layout widget_next_event
 menu bottom_nav_menu
 menu menu_main_toolbar
 menu menu_tree_view
@@ -671,6 +682,12 @@ string tree_root_label
 string tree_root_subtitle
 string tree_view_chart
 string tree_view_natural
+string widget_no_events
+string widget_placeholder_details
+string widget_placeholder_name
+string widget_signed_out
+string widget_title
+string widget_today
 style Base_Theme_Shikor
 style ShapeAppearance_Shikor_Large
 style ShapeAppearance_Shikor_Medium
@@ -693,3 +710,4 @@ style Widget_Shikor_Toolbar
 styleable AvatarView initials isDeceased ringColor ringWidth
 xml file_paths
 xml kinship_terms
+xml next_event_widget_info

@@ -27,6 +27,7 @@ public class BootReceiver extends BroadcastReceiver {
             if (Prefs.getInstance(context).isNotificationsEnabled()) {
                 AlarmScheduler.scheduleDailyReminder(context);
                 AlarmScheduler.scheduleOnThisDay(context);
+                com.shikor.app.widget.WidgetUpdater.scheduleDailyRefresh(context);
                 Log.d(TAG, "Reminders and On This Day rescheduled successfully after reboot.");
             }
         }

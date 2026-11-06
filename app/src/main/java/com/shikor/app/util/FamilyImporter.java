@@ -423,6 +423,7 @@ public class FamilyImporter {
         }
 
         String msg = "Imported " + insertedCount + " new relative(s) and updated " + updatedCount + " existing member(s).";
+        com.shikor.app.widget.WidgetUpdater.requestUpdate(context);
         return new ImportResult(true, parsedList.size(), insertedCount, updatedCount, msg);
     }
 }

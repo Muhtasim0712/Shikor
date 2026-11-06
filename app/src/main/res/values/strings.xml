@@ -106,6 +106,14 @@
     <string name="notification_on_this_day_more_fmt">+ %d more memories</string>
     <string name="notification_action_open_family">Open family</string>
 
+    <!-- Widget Strings -->
+    <string name="widget_title">Next Family Event</string>
+    <string name="widget_today">Today</string>
+    <string name="widget_placeholder_name">Family Member</string>
+    <string name="widget_placeholder_details">Upcoming Event</string>
+    <string name="widget_no_events">No upcoming events</string>
+    <string name="widget_signed_out">Open Shikor to sign in</string>
+
     <!-- Person / Member Detail Screen -->
     <string name="action_call">Call</string>
     <string name="action_maps">Maps</string>

@@ -327,6 +327,12 @@
     <string name="tree_root_subtitle">Filter tree starting from an ancestor</string>
     <string name="tree_view_chart">Chart view</string>
     <string name="tree_view_natural">Tree view</string>
+    <string name="widget_no_events">No upcoming events</string>
+    <string name="widget_placeholder_details">Upcoming Event</string>
+    <string name="widget_placeholder_name">Family Member</string>
+    <string name="widget_signed_out">Open Shikor to sign in</string>
+    <string name="widget_title">Next Family Event</string>
+    <string name="widget_today">Today</string>
     <style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">
         
         <item name="colorPrimary">@color/primary</item>

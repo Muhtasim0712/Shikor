@@ -224,6 +224,8 @@ int id ivSelectedCheck 0x0
 int id ivSelectedRootIcon 0x0
 int id ivStoryPhoto 0x0
 int id ivTimelinePhoto 0x0
+int id ivWidgetAvatar1 0x0
+int id ivWidgetAvatar2 0x0
 int id layoutAudioBadge 0x0
 int id layoutAudioCapsule 0x0
 int id layoutExactAlarmWarning 0x0
@@ -237,6 +239,8 @@ int id layoutPickPrompt 0x0
 int id layoutRelationshipFinder 0x0
 int id layoutReminderTime 0x0
 int id layoutThemeSetting 0x0
+int id layoutWidgetEvent1 0x0
+int id layoutWidgetEvent2 0x0
 int id loadingLayout 0x0
 int id loadingOverlay 0x0
 int id loadingText 0x0
@@ -377,6 +381,12 @@ int id tvTimelineCaption 0x0
 int id tvTimelineYear 0x0
 int id tvTreeRootHeader 0x0
 int id tvTreeRootSubtitle 0x0
+int id tvWidgetCountdown 0x0
+int id tvWidgetDetails1 0x0
+int id tvWidgetDetails2 0x0
+int id tvWidgetEmpty 0x0
+int id tvWidgetName1 0x0
+int id tvWidgetName2 0x0
 int id viewRecordingIndicator 0x0
 int layout activity_add_edit_person 0x0
 int layout activity_add_story 0x0
@@ -406,6 +416,7 @@ int layout item_timeline_photo 0x0
 int layout item_timeline_year_header 0x0
 int layout layout_empty_state 0x0
 int layout layout_loading 0x0
+int layout widget_next_event 0x0
 int menu bottom_nav_menu 0x0
 int menu menu_main_toolbar 0x0
 int menu menu_tree_view 0x0
@@ -670,6 +681,12 @@ int string tree_root_label 0x0
 int string tree_root_subtitle 0x0
 int string tree_view_chart 0x0
 int string tree_view_natural 0x0
+int string widget_no_events 0x0
+int string widget_placeholder_details 0x0
+int string widget_placeholder_name 0x0
+int string widget_signed_out 0x0
+int string widget_title 0x0
+int string widget_today 0x0
 int style Base_Theme_Shikor 0x0
 int style ShapeAppearance_Shikor_Large 0x0
 int style ShapeAppearance_Shikor_Medium 0x0
@@ -696,3 +713,4 @@ int styleable AvatarView_ringColor 2
 int styleable AvatarView_ringWidth 3
 int xml file_paths 0x0
 int xml kinship_terms 0x0
+int xml next_event_widget_info 0x0

@@ -321,6 +321,7 @@ public class SyncManager {
                     lastSyncedTimestamp = System.currentTimeMillis();
                     isSyncing.set(false);
                     updateStatus(SyncState.SYNCED, 0, "All changes saved to cloud");
+                    com.shikor.app.widget.WidgetUpdater.requestUpdate(appContext);
                     return;
                 }
 
@@ -370,6 +371,7 @@ public class SyncManager {
                 lastSyncedTimestamp = System.currentTimeMillis();
                 isSyncing.set(false);
                 updateStatus(SyncState.SYNCED, 0, "All changes saved to cloud");
+                com.shikor.app.widget.WidgetUpdater.requestUpdate(appContext);
 
             } catch (Exception e) {
                 Log.e(TAG, "Error pushing pending sync: " + e.getMessage(), e);

@@ -253,4 +253,10 @@
     <string name="tree_root_subtitle">নির্দিষ্ট পূর্বপুরুষের বংশধর ও শাখা দেখতে চাপুন</string>
     <string name="tree_view_chart">চার্ট রূপ</string>
     <string name="tree_view_natural">বৃক্ষ রূপ</string>
+    <string name="widget_no_events">কোনো আসন্ন অনুষ্ঠান নেই</string>
+    <string name="widget_placeholder_details">আসন্ন অনুষ্ঠান</string>
+    <string name="widget_placeholder_name">পরিবারের সদস্য</string>
+    <string name="widget_signed_out">সাইন ইন করতে শিকড় খুলুন</string>
+    <string name="widget_title">পরবর্তী পারিবারিক অনুষ্ঠান</string>
+    <string name="widget_today">আজ</string>
 </resources>
