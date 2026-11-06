@@ -31,6 +31,7 @@
     <color name="primary">#9CCB9F</color>
     <color name="primary_container">#2A4132</color>
     <color name="primary_variant">#7FA882</color>
+    <color name="root_button_bg">#202E24</color>
     <color name="secondary">#D3B08A</color>
     <color name="secondary_container">#4E3823</color>
     <color name="secondary_variant">#B5936F</color>

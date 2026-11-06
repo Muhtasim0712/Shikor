@@ -59,6 +59,9 @@
     <color name="deceased_indicator">#434842</color>
     <color name="tree_connector">#82887E</color>
 
+    <!-- Root Selector Container -->
+    <color name="root_button_bg">#EBF3EA</color>
+
     <!-- Base shades -->
     <color name="white">#FFFFFF</color>
     <color name="black">#2B2F2A</color>

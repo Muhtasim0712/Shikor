@@ -99,6 +99,13 @@
     <string name="language_en">English</string>
     <string name="language_bn">বাংলা (Bengali)</string>
 
+    <!-- On This Day Memories Strings -->
+    <string name="settings_on_this_day">On this day memories</string>
+    <string name="settings_on_this_day_desc">Resurface older family stories from this exact day in past years</string>
+    <string name="notification_on_this_day_title">On this day, %d years ago</string>
+    <string name="notification_on_this_day_more_fmt">+ %d more memories</string>
+    <string name="notification_action_open_family">Open family</string>
+
     <!-- Person / Member Detail Screen -->
     <string name="action_call">Call</string>
     <string name="action_maps">Maps</string>
@@ -234,6 +241,17 @@
     <string name="timeline_tag_relatives">Tag Family Members:</string>
     <string name="timeline_tag_subtitle">Select all relatives who appear in this photo:</string>
     <string name="tree_root_label">Root: </string>
+    <string name="tree_root_header">ROOT ANCESTOR</string>
+    <string name="tree_root_subtitle">Filter tree starting from an ancestor</string>
+    <string name="tree_root_all_generations">All Generations (Complete Tree)</string>
+    <string name="tree_root_all_subtitle">Displaying entire family tree across all lines</string>
+    <string name="tree_root_all_badge">ALL</string>
+    <string name="tree_root_dialog_title">Select Root Ancestor</string>
+    <string name="tree_root_dialog_subtitle">Choose a root ancestor to focus on their branch, or select All Generations to view the entire family tree.</string>
+    <string name="tree_root_descendant_summary">%1$s • %2$d Children • %3$d in branch</string>
+    <string name="tree_root_all_summary">Displaying all lineages • %d Relatives</string>
+    <string name="tree_root_gen_format">Gen %d</string>
+    <string name="tree_root_gen_zero_badge">Root Ancestor (Gen 0)</string>
     <string name="story_select_member">Select Family Member</string>
     <string name="story_title_hint">Story Title *</string>
     <string name="story_body_hint">Story &amp; Memories</string>

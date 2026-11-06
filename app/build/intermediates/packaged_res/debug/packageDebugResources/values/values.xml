@@ -31,6 +31,7 @@
     <color name="primary">#3F6B4F</color>
     <color name="primary_container">#D7E8D5</color>
     <color name="primary_variant">#2E533B</color>
+    <color name="root_button_bg">#EBF3EA</color>
     <color name="secondary">#8A6A4B</color>
     <color name="secondary_container">#EBDDCB</color>
     <color name="secondary_variant">#6E5136</color>
@@ -156,6 +157,9 @@
     <string name="nav_settings">Settings</string>
     <string name="nav_timeline">Timeline</string>
     <string name="nav_tree">Family Tree</string>
+    <string name="notification_action_open_family">Open family</string>
+    <string name="notification_on_this_day_more_fmt">+ %d more memories</string>
+    <string name="notification_on_this_day_title">On this day, %d years ago</string>
     <string name="password_label">Password</string>
     <string name="person_biography_hint">Biography &amp; Life Memories</string>
     <string name="person_biography_title">Biography &amp; Life Story</string>
@@ -248,6 +252,8 @@
     <string name="settings_logout_dialog_msg">Are you sure you want to log out of your family space? You can log back in with your email and password at any time.</string>
     <string name="settings_logout_dialog_title">Log Out</string>
     <string name="settings_logout_label">Log Out of Family Space</string>
+    <string name="settings_on_this_day">On this day memories</string>
+    <string name="settings_on_this_day_desc">Resurface older family stories from this exact day in past years</string>
     <string name="settings_preferred_alert_time">Preferred Alert Time</string>
     <string name="settings_relationship_finder">Relationship Finder</string>
     <string name="settings_relationship_finder_desc">Find exact kinship terms and connection paths between relatives</string>
@@ -307,7 +313,18 @@
     <string name="timeline_tag_subtitle">Select all relatives who appear in this photo:</string>
     <string name="timeline_year_hint">Year of Memory (e.g. 1971) *</string>
     <string name="tree_diurnal_weather">Atmosphere &amp; Time of Day</string>
+    <string name="tree_root_all_badge">ALL</string>
+    <string name="tree_root_all_generations">All Generations (Complete Tree)</string>
+    <string name="tree_root_all_subtitle">Displaying entire family tree across all lines</string>
+    <string name="tree_root_all_summary">Displaying all lineages • %d Relatives</string>
+    <string name="tree_root_descendant_summary">%1$s • %2$d Children • %3$d in branch</string>
+    <string name="tree_root_dialog_subtitle">Choose a root ancestor to focus on their branch, or select All Generations to view the entire family tree.</string>
+    <string name="tree_root_dialog_title">Select Root Ancestor</string>
+    <string name="tree_root_gen_format">Gen %d</string>
+    <string name="tree_root_gen_zero_badge">Root Ancestor (Gen 0)</string>
+    <string name="tree_root_header">ROOT ANCESTOR</string>
     <string name="tree_root_label">Root: </string>
+    <string name="tree_root_subtitle">Filter tree starting from an ancestor</string>
     <string name="tree_view_chart">Chart view</string>
     <string name="tree_view_natural">Tree view</string>
     <style name="Base.Theme.Shikor" parent="Theme.Material3.DayNight.NoActionBar">

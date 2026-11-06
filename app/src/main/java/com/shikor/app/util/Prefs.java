@@ -123,6 +123,33 @@ public class Prefs {
     public static final String THEME_LIGHT = "light";
     public static final String THEME_DARK = "dark";
 
+    private static final String KEY_ON_THIS_DAY_ENABLED = "key_on_this_day_enabled";
+    private static final String KEY_ON_THIS_DAY_HOUR = "key_on_this_day_hour";
+    private static final String KEY_ON_THIS_DAY_MINUTE = "key_on_this_day_minute";
+
+    public boolean isOnThisDayEnabled() {
+        return preferences.getBoolean(KEY_ON_THIS_DAY_ENABLED, true);
+    }
+
+    public void setOnThisDayEnabled(boolean enabled) {
+        preferences.edit().putBoolean(KEY_ON_THIS_DAY_ENABLED, enabled).apply();
+    }
+
+    public int getOnThisDayHour() {
+        return preferences.getInt(KEY_ON_THIS_DAY_HOUR, 8); // Default 8:00 AM
+    }
+
+    public int getOnThisDayMinute() {
+        return preferences.getInt(KEY_ON_THIS_DAY_MINUTE, 0);
+    }
+
+    public void setOnThisDayTime(int hour, int minute) {
+        preferences.edit()
+                .putInt(KEY_ON_THIS_DAY_HOUR, hour)
+                .putInt(KEY_ON_THIS_DAY_MINUTE, minute)
+                .apply();
+    }
+
     public String getThemeMode() {
         return preferences.getString(KEY_THEME_MODE, THEME_SYSTEM);
     }

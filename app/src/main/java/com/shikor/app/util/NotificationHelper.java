@@ -29,6 +29,7 @@ public class NotificationHelper {
 
     public static final String CHANNEL_REMINDERS_ID = "shikor_reminders";
     public static final String CHANNEL_RECORDING_ID = "shikor_audio_recording";
+    public static final String CHANNEL_MEMORIES_ID = "shikor_memories";
 
     /**
      * Creates required Notification Channels for Android 8.0 (API 26) and above.
@@ -62,6 +63,18 @@ public class NotificationHelper {
             recordingChannel.setDescription("Ongoing status notification while recording elder stories");
             recordingChannel.setShowBadge(false);
             manager.createNotificationChannel(recordingChannel);
+
+            // On This Day Memories Channel
+            NotificationChannel memoriesChannel = new NotificationChannel(
+                    CHANNEL_MEMORIES_ID,
+                    "Memory Reminders",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            memoriesChannel.setDescription("Notifications for On This Day family memories");
+            memoriesChannel.enableLights(true);
+            memoriesChannel.setLightColor(ContextCompat.getColor(context, R.color.tertiary));
+            memoriesChannel.enableVibration(true);
+            manager.createNotificationChannel(memoriesChannel);
 
             Log.d(TAG, "Notification channels registered successfully");
         }
@@ -137,6 +150,65 @@ public class NotificationHelper {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
         builder.addAction(android.R.drawable.ic_menu_close_clear_cancel, "Dismiss", dismissPendingIntent);
+
+        try {
+            NotificationManagerCompat.from(context).notify(notificationId, builder.build());
+        } catch (SecurityException e) {
+            Log.e(TAG, "Notification permission not granted: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Builds and shows an "On this day" memory notification with story details and Open family action.
+     */
+    public static void showOnThisDayNotification(Context context, com.shikor.app.data.local.entities.StoryEntity story,
+                                                 String personName, int yearsAgo, int extraCount, int notificationId) {
+        createNotificationChannels(context);
+
+        Intent contentIntent = new Intent(context, com.shikor.app.ui.story.StoryDetailActivity.class);
+        contentIntent.putExtra(com.shikor.app.ui.story.StoryDetailActivity.EXTRA_STORY_ID, story.getId());
+        contentIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent contentPendingIntent = PendingIntent.getActivity(
+                context,
+                notificationId,
+                contentIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        Intent mainIntent = new Intent(context, com.shikor.app.ui.main.MainActivity.class);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent mainPendingIntent = PendingIntent.getActivity(
+                context,
+                notificationId + 500,
+                mainIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        String title = context.getString(R.string.notification_on_this_day_title, yearsAgo);
+        String body = story.getBody() != null ? story.getBody() : "";
+        String firstLine = body.isEmpty() ? (story.getTitle() != null ? story.getTitle() : "") : body.split("\n")[0];
+        String contentText = firstLine + " (" + personName + ")";
+
+        StringBuilder bigText = new StringBuilder();
+        if (story.getTitle() != null && !story.getTitle().isEmpty()) {
+            bigText.append(story.getTitle()).append("\n\n");
+        }
+        bigText.append(body);
+        if (extraCount > 0) {
+            bigText.append("\n\n").append(context.getString(R.string.notification_on_this_day_more_fmt, extraCount));
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_MEMORIES_ID)
+                .setSmallIcon(android.R.drawable.ic_menu_recent_history)
+                .setContentTitle(title)
+                .setContentText(contentText)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(bigText.toString()))
+                .setColor(ContextCompat.getColor(context, R.color.primary))
+                .setContentIntent(contentPendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                .addAction(android.R.drawable.ic_menu_agenda, context.getString(R.string.notification_action_open_family), mainPendingIntent);
 
         try {
             NotificationManagerCompat.from(context).notify(notificationId, builder.build());

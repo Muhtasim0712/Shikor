@@ -4,13 +4,16 @@ package com.shikor.app.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.shikor.app.R;
 import com.shikor.app.view.FamilyTreeView;
 import java.lang.NullPointerException;
@@ -31,10 +34,19 @@ public final class FragmentTreeBinding implements ViewBinding {
   public final MaterialButton btnReCenter;
 
   @NonNull
+  public final MaterialCardView btnSelectRoot;
+
+  @NonNull
   public final MaterialButton btnToggleMode;
 
   @NonNull
   public final FamilyTreeView familyTreeView;
+
+  @NonNull
+  public final ImageView ivDropdownArrow;
+
+  @NonNull
+  public final ImageView ivSelectedRootIcon;
 
   @NonNull
   public final Spinner spinnerTreeRoot;
@@ -45,21 +57,47 @@ public final class FragmentTreeBinding implements ViewBinding {
   @NonNull
   public final CoordinatorLayout treeFragmentRoot;
 
+  @NonNull
+  public final TextView tvSelectedRootAvatar;
+
+  @NonNull
+  public final TextView tvSelectedRootDetail;
+
+  @NonNull
+  public final TextView tvSelectedRootName;
+
+  @NonNull
+  public final TextView tvTreeRootHeader;
+
+  @NonNull
+  public final TextView tvTreeRootSubtitle;
+
   private FragmentTreeBinding(@NonNull CoordinatorLayout rootView,
       @NonNull MaterialButton btnDiurnalPhase, @NonNull MaterialButton btnFitTree,
-      @NonNull MaterialButton btnReCenter, @NonNull MaterialButton btnToggleMode,
-      @NonNull FamilyTreeView familyTreeView, @NonNull Spinner spinnerTreeRoot,
-      @NonNull LayoutEmptyStateBinding treeEmptyState,
-      @NonNull CoordinatorLayout treeFragmentRoot) {
+      @NonNull MaterialButton btnReCenter, @NonNull MaterialCardView btnSelectRoot,
+      @NonNull MaterialButton btnToggleMode, @NonNull FamilyTreeView familyTreeView,
+      @NonNull ImageView ivDropdownArrow, @NonNull ImageView ivSelectedRootIcon,
+      @NonNull Spinner spinnerTreeRoot, @NonNull LayoutEmptyStateBinding treeEmptyState,
+      @NonNull CoordinatorLayout treeFragmentRoot, @NonNull TextView tvSelectedRootAvatar,
+      @NonNull TextView tvSelectedRootDetail, @NonNull TextView tvSelectedRootName,
+      @NonNull TextView tvTreeRootHeader, @NonNull TextView tvTreeRootSubtitle) {
     this.rootView = rootView;
     this.btnDiurnalPhase = btnDiurnalPhase;
     this.btnFitTree = btnFitTree;
     this.btnReCenter = btnReCenter;
+    this.btnSelectRoot = btnSelectRoot;
     this.btnToggleMode = btnToggleMode;
     this.familyTreeView = familyTreeView;
+    this.ivDropdownArrow = ivDropdownArrow;
+    this.ivSelectedRootIcon = ivSelectedRootIcon;
     this.spinnerTreeRoot = spinnerTreeRoot;
     this.treeEmptyState = treeEmptyState;
     this.treeFragmentRoot = treeFragmentRoot;
+    this.tvSelectedRootAvatar = tvSelectedRootAvatar;
+    this.tvSelectedRootDetail = tvSelectedRootDetail;
+    this.tvSelectedRootName = tvSelectedRootName;
+    this.tvTreeRootHeader = tvTreeRootHeader;
+    this.tvTreeRootSubtitle = tvTreeRootSubtitle;
   }
 
   @Override
@@ -107,6 +145,12 @@ public final class FragmentTreeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnSelectRoot;
+      MaterialCardView btnSelectRoot = ViewBindings.findChildViewById(rootView, id);
+      if (btnSelectRoot == null) {
+        break missingId;
+      }
+
       id = R.id.btnToggleMode;
       MaterialButton btnToggleMode = ViewBindings.findChildViewById(rootView, id);
       if (btnToggleMode == null) {
@@ -116,6 +160,18 @@ public final class FragmentTreeBinding implements ViewBinding {
       id = R.id.familyTreeView;
       FamilyTreeView familyTreeView = ViewBindings.findChildViewById(rootView, id);
       if (familyTreeView == null) {
+        break missingId;
+      }
+
+      id = R.id.ivDropdownArrow;
+      ImageView ivDropdownArrow = ViewBindings.findChildViewById(rootView, id);
+      if (ivDropdownArrow == null) {
+        break missingId;
+      }
+
+      id = R.id.ivSelectedRootIcon;
+      ImageView ivSelectedRootIcon = ViewBindings.findChildViewById(rootView, id);
+      if (ivSelectedRootIcon == null) {
         break missingId;
       }
 
@@ -134,9 +190,41 @@ public final class FragmentTreeBinding implements ViewBinding {
 
       CoordinatorLayout treeFragmentRoot = (CoordinatorLayout) rootView;
 
+      id = R.id.tvSelectedRootAvatar;
+      TextView tvSelectedRootAvatar = ViewBindings.findChildViewById(rootView, id);
+      if (tvSelectedRootAvatar == null) {
+        break missingId;
+      }
+
+      id = R.id.tvSelectedRootDetail;
+      TextView tvSelectedRootDetail = ViewBindings.findChildViewById(rootView, id);
+      if (tvSelectedRootDetail == null) {
+        break missingId;
+      }
+
+      id = R.id.tvSelectedRootName;
+      TextView tvSelectedRootName = ViewBindings.findChildViewById(rootView, id);
+      if (tvSelectedRootName == null) {
+        break missingId;
+      }
+
+      id = R.id.tvTreeRootHeader;
+      TextView tvTreeRootHeader = ViewBindings.findChildViewById(rootView, id);
+      if (tvTreeRootHeader == null) {
+        break missingId;
+      }
+
+      id = R.id.tvTreeRootSubtitle;
+      TextView tvTreeRootSubtitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvTreeRootSubtitle == null) {
+        break missingId;
+      }
+
       return new FragmentTreeBinding((CoordinatorLayout) rootView, btnDiurnalPhase, btnFitTree,
-          btnReCenter, btnToggleMode, familyTreeView, spinnerTreeRoot, binding_treeEmptyState,
-          treeFragmentRoot);
+          btnReCenter, btnSelectRoot, btnToggleMode, familyTreeView, ivDropdownArrow,
+          ivSelectedRootIcon, spinnerTreeRoot, binding_treeEmptyState, treeFragmentRoot,
+          tvSelectedRootAvatar, tvSelectedRootDetail, tvSelectedRootName, tvTreeRootHeader,
+          tvTreeRootSubtitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

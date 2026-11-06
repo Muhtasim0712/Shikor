@@ -50,6 +50,9 @@ public interface StoryDao {
     @Query("SELECT * FROM stories WHERE syncState = :pendingState")
     List<StoryEntity> getPendingSyncStories(int pendingState);
 
+    @Query("SELECT * FROM stories WHERE strftime('%m-%d', createdAt / 1000, 'unixepoch', 'localtime') = :monthDay AND createdAt < :startOfTodayMillis ORDER BY createdAt DESC")
+    List<StoryEntity> getStoriesOnThisDay(String monthDay, long startOfTodayMillis);
+
     // Cursor returning queries for FamilyProvider ContentProvider
     @Query("SELECT * FROM stories WHERE familyId = :familyId ORDER BY createdAt DESC")
     Cursor getStoriesCursor(String familyId);

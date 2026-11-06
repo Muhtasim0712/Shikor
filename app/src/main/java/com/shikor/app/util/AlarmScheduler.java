@@ -190,4 +190,85 @@ public class AlarmScheduler {
         intent.setAction(ReminderReceiver.ACTION_IMMEDIATE_TEST);
         context.sendBroadcast(intent);
     }
+
+    public static final int ON_THIS_DAY_REQUEST_CODE = 1003;
+
+    public static void scheduleOnThisDay(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager == null) return;
+
+        Prefs prefs = Prefs.getInstance(context);
+        if (!prefs.isNotificationsEnabled() || !prefs.isOnThisDayEnabled()) {
+            cancelOnThisDay(context);
+            Log.d(TAG, "On This Day memories disabled or notifications off, alarm cancelled.");
+            return;
+        }
+
+        int hour = prefs.getOnThisDayHour();
+        int minute = prefs.getOnThisDayMinute();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        if (calendar.getTimeInMillis() <= System.currentTimeMillis() + 5000) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        Intent intent = new Intent(context, com.shikor.app.receiver.OnThisDayReceiver.class);
+        intent.setAction(com.shikor.app.receiver.OnThisDayReceiver.ACTION_ON_THIS_DAY_CHECK);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context,
+                ON_THIS_DAY_REQUEST_CODE,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        long triggerAtMillis = calendar.getTimeInMillis();
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (alarmManager.canScheduleExactAlarms()) {
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+                } else {
+                    alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+                }
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+            } else {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+            }
+            Log.d(TAG, "On This Day memory reminder scheduled for: " + calendar.getTime());
+        } catch (SecurityException e) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+            } else {
+                alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+            }
+        }
+    }
+
+    public static void cancelOnThisDay(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager == null) return;
+
+        Intent intent = new Intent(context, com.shikor.app.receiver.OnThisDayReceiver.class);
+        intent.setAction(com.shikor.app.receiver.OnThisDayReceiver.ACTION_ON_THIS_DAY_CHECK);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context,
+                ON_THIS_DAY_REQUEST_CODE,
+                intent,
+                PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        if (pendingIntent != null) {
+            alarmManager.cancel(pendingIntent);
+            pendingIntent.cancel();
+            Log.d(TAG, "On This Day memory reminder alarm cancelled.");
+        }
+    }
 }

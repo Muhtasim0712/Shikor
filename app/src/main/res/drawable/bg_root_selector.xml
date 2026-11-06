@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Custom background for Root Selector button with themed tint, rounded corners, and primary border -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/root_button_bg" />
+            <stroke
+                android:width="1.2dp"
+                android:color="@color/primary" />
+            <corners android:radius="14dp" />
+        </shape>
+    </item>
+</ripple>

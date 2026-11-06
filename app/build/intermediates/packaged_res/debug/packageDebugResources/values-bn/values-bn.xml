@@ -84,6 +84,9 @@
     <string name="nav_settings">সেটিংস</string>
     <string name="nav_timeline">টাইমলাইন</string>
     <string name="nav_tree">বংশলতিকা</string>
+    <string name="notification_action_open_family">পরিবার খুলুন</string>
+    <string name="notification_on_this_day_more_fmt">+ আরও %dটি স্মৃতি</string>
+    <string name="notification_on_this_day_title">আজ থেকে %d বছর আগে</string>
     <string name="password_label">পাসওয়ার্ড</string>
     <string name="person_biography_hint">জীবনবৃত্তান্ত ও স্মৃতিচারণ</string>
     <string name="person_biography_title">জীবনবৃত্তান্ত ও আত্মজীবনী</string>
@@ -175,6 +178,8 @@
     <string name="settings_logout_dialog_msg">আপনি কি পরিবার থেকে লগ আউট করতে চান? আপনি যে কোনো সময় আপনার ইমেইল ও পাসওয়ার্ড দিয়ে পুনরায় লগ ইন করতে পারবেন।</string>
     <string name="settings_logout_dialog_title">লগ আউট</string>
     <string name="settings_logout_label">পরিবার থেকে লগ আউট</string>
+    <string name="settings_on_this_day">এই দিনের স্মৃতি</string>
+    <string name="settings_on_this_day_desc">গত বছরগুলোর আজকের দিনের পুরনো পারিবারিক স্মৃতিগুলো মনে করিয়ে দিন</string>
     <string name="settings_preferred_alert_time">পছন্দের সতর্কতার সময়</string>
     <string name="settings_relationship_finder">সম্পর্ক অনুসন্ধান</string>
     <string name="settings_relationship_finder_desc">দুই আত্মীয়ের মধ্যে বাংলা ও ইংরেজি পারিবারিক সম্পর্কের নাম বের করুন</string>
@@ -234,7 +239,18 @@
     <string name="timeline_tag_subtitle">ছবিতে উপস্থিত সকল আত্মীয়কে নির্বাচন করুন:</string>
     <string name="timeline_year_hint">স্মৃতির বছর (যেমন: ১৯৭১) *</string>
     <string name="tree_diurnal_weather">পরিবেশ ও সময়কাল</string>
+    <string name="tree_root_all_badge">সমগ্র</string>
+    <string name="tree_root_all_generations">সকল প্রজন্ম (সমগ্র পারিবারিক বৃক্ষ)</string>
+    <string name="tree_root_all_subtitle">বংশের সকল শাখা ও পূর্বপুরুষ একসাথে দৃশ্যমান</string>
+    <string name="tree_root_all_summary">সকল শাখা প্রদর্শিত • মোট %d জন আত্মীয়</string>
+    <string name="tree_root_descendant_summary">%1$s • %2$d জন সন্তান • শাখায় %3$d জন</string>
+    <string name="tree_root_dialog_subtitle">নির্দিষ্ট পূর্বপুরুষের শাখা ও বংশধর দেখতে নির্বাচন করুন, অথবা সমগ্র পারিবারিক বৃক্ষ দেখতে প্রথম অপশনটি বাছুন।</string>
+    <string name="tree_root_dialog_title">মূল পূর্বপুরুষ নির্বাচন করুন</string>
+    <string name="tree_root_gen_format">%dম প্রজন্ম</string>
+    <string name="tree_root_gen_zero_badge">মূল পূর্বপুরুষ (০ম প্রজন্ম)</string>
+    <string name="tree_root_header">মূল পূর্বপুরুষ ও শাখা</string>
     <string name="tree_root_label">মূল পূর্বপুরুষ: </string>
+    <string name="tree_root_subtitle">নির্দিষ্ট পূর্বপুরুষের বংশধর ও শাখা দেখতে চাপুন</string>
     <string name="tree_view_chart">চার্ট রূপ</string>
     <string name="tree_view_natural">বৃক্ষ রূপ</string>
 </resources>

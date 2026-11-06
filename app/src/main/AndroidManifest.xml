@@ -117,6 +117,12 @@
             android:enabled="true"
             android:exported="false" />
 
+        <!-- OnThisDayReceiver for resurfacing past family memories -->
+        <receiver
+            android:name=".receiver.OnThisDayReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
         <!-- BootReceiver to reschedule alarms on phone restart -->
         <receiver
             android:name=".receiver.BootReceiver"

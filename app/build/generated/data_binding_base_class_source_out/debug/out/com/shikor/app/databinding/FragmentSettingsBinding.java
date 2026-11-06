@@ -61,6 +61,22 @@ public final class FragmentSettingsBinding implements ViewBinding {
   @NonNull
   public final MaterialSwitch switchDailyReminders;
 
+  /**
+   * This binding is not available in all configurations.
+   * <p>
+   * Present:
+   * <ul>
+   *   <li>layout/</li>
+   * </ul>
+   *
+   * Absent:
+   * <ul>
+   *   <li>layout-sw600dp/</li>
+   * </ul>
+   */
+  @Nullable
+  public final MaterialSwitch switchOnThisDay;
+
   @NonNull
   public final TextView tvAppInfo;
 
@@ -92,11 +108,11 @@ public final class FragmentSettingsBinding implements ViewBinding {
       @NonNull LinearLayout layoutExportTree, @NonNull LinearLayout layoutImportMembers,
       @NonNull LinearLayout layoutLanguageSetting, @NonNull LinearLayout layoutRelationshipFinder,
       @NonNull LinearLayout layoutReminderTime, @NonNull LinearLayout layoutThemeSetting,
-      @NonNull MaterialSwitch switchDailyReminders, @NonNull TextView tvAppInfo,
-      @NonNull TextView tvCurrentLanguageValue, @NonNull TextView tvCurrentThemeValue,
-      @NonNull TextView tvNextAlertStatus, @NonNull TextView tvReminderTimeValue,
-      @NonNull TextView tvSettingsFamilyCode, @NonNull TextView tvSettingsFamilyName,
-      @NonNull TextView tvSettingsUserEmail) {
+      @NonNull MaterialSwitch switchDailyReminders, @Nullable MaterialSwitch switchOnThisDay,
+      @NonNull TextView tvAppInfo, @NonNull TextView tvCurrentLanguageValue,
+      @NonNull TextView tvCurrentThemeValue, @NonNull TextView tvNextAlertStatus,
+      @NonNull TextView tvReminderTimeValue, @NonNull TextView tvSettingsFamilyCode,
+      @NonNull TextView tvSettingsFamilyName, @NonNull TextView tvSettingsUserEmail) {
     this.rootView = rootView;
     this.btnCopyCode = btnCopyCode;
     this.btnGrantExactAlarm = btnGrantExactAlarm;
@@ -111,6 +127,7 @@ public final class FragmentSettingsBinding implements ViewBinding {
     this.layoutReminderTime = layoutReminderTime;
     this.layoutThemeSetting = layoutThemeSetting;
     this.switchDailyReminders = switchDailyReminders;
+    this.switchOnThisDay = switchOnThisDay;
     this.tvAppInfo = tvAppInfo;
     this.tvCurrentLanguageValue = tvCurrentLanguageValue;
     this.tvCurrentThemeValue = tvCurrentThemeValue;
@@ -226,6 +243,9 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.switchOnThisDay;
+      MaterialSwitch switchOnThisDay = ViewBindings.findChildViewById(rootView, id);
+
       id = R.id.tvAppInfo;
       TextView tvAppInfo = ViewBindings.findChildViewById(rootView, id);
       if (tvAppInfo == null) {
@@ -278,8 +298,9 @@ public final class FragmentSettingsBinding implements ViewBinding {
           btnGrantExactAlarm, btnSettingsLogout, btnTestReminder, layoutExactAlarmWarning,
           layoutExportContacts, layoutExportTree, layoutImportMembers, layoutLanguageSetting,
           layoutRelationshipFinder, layoutReminderTime, layoutThemeSetting, switchDailyReminders,
-          tvAppInfo, tvCurrentLanguageValue, tvCurrentThemeValue, tvNextAlertStatus,
-          tvReminderTimeValue, tvSettingsFamilyCode, tvSettingsFamilyName, tvSettingsUserEmail);
+          switchOnThisDay, tvAppInfo, tvCurrentLanguageValue, tvCurrentThemeValue,
+          tvNextAlertStatus, tvReminderTimeValue, tvSettingsFamilyCode, tvSettingsFamilyName,
+          tvSettingsUserEmail);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

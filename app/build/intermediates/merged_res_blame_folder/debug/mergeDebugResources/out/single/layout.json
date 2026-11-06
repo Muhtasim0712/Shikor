@@ -1,7 +1,15 @@
 [
     {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\dialog_select_root_ancestor.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\dialog_select_root_ancestor.xml"
+    },
+    {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\dialog_add_timeline_photo.xml",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\dialog_add_timeline_photo.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\item_root_ancestor.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_root_ancestor.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_splash.xml",
@@ -10,10 +18,6 @@
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\fragment_members.xml",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\fragment_members.xml"
-    },
-    {
-        "merged": "com.shikor.app-mergeDebugResources-47:/layout/fragment_tree.xml",
-        "source": "com.shikor.app-main-50:/layout/fragment_tree.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_add_edit_person.xml",
@@ -30,6 +34,10 @@
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\item_timeline_photo.xml",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_timeline_photo.xml"
+    },
+    {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\item_root_selection.xml",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_root_selection.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_family_setup.xml",
@@ -102,6 +110,10 @@
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\activity_register.xml",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "com.shikor.app-mergeDebugResources-47:/layout/fragment_settings.xml",
+        "source": "com.shikor.app-main-50:/layout/fragment_settings.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-mergeDebugResources-47:\\layout\\item_member.xml",

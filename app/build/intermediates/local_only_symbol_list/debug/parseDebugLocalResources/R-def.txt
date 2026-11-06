@@ -41,6 +41,7 @@ color overlay_scrim
 color primary
 color primary_container
 color primary_variant
+color root_button_bg
 color secondary
 color secondary_container
 color secondary_variant
@@ -80,8 +81,13 @@ dimen text_size_subtitle
 dimen text_size_title
 drawable bg_code_box
 drawable bg_indicator_active
+drawable bg_pill_badge
+drawable bg_root_avatar_circle
+drawable bg_root_selector
 drawable bg_window_dawn
+drawable ic_arrow_drop_down
 drawable ic_chart_view
+drawable ic_check_circle
 drawable ic_dawn_botanical_accent
 drawable ic_diurnal_weather
 drawable ic_fit_screen
@@ -143,6 +149,7 @@ id btnRegister
 id btnRemovePhoto
 id btnSavePerson
 id btnSaveStory
+id btnSelectRoot
 id btnSettingsLogout
 id btnShare
 id btnShareCode
@@ -163,6 +170,7 @@ id cardPersonTag
 id cardPhotoPreview
 id cardRecordingLive
 id cardResult
+id cardRootItem
 id cardStoryBody
 id cardStoryPhoto
 id cardSuccess
@@ -205,13 +213,17 @@ id familySetupRoot
 id familyTreeView
 id indicatorDot
 id indicatorLine
+id ivAllGenIcon
 id ivArrow
 id ivDialogPhotoPreview
+id ivDropdownArrow
 id ivEmptyIcon
 id ivLoginLogo
 id ivLogo
 id ivPhotoPreview
 id ivRegisterLogo
+id ivSelectedCheck
+id ivSelectedRootIcon
 id ivStoryPhoto
 id ivTimelinePhoto
 id layoutAudioBadge
@@ -253,6 +265,7 @@ id rgGender
 id rvExportContacts
 id rvMembers
 id rvPersonStories
+id rvRootAncestors
 id rvTimeline
 id seekBarAudio
 id spinnerChild
@@ -265,6 +278,7 @@ id splashProgress
 id splashRoot
 id switchDailyReminders
 id switchDeceased
+id switchOnThisDay
 id tilBiography
 id tilBirthDate
 id tilBody
@@ -310,6 +324,7 @@ id tvDetailBiography
 id tvDetailFullName
 id tvDetailLifespan
 id tvDetailNickName
+id tvDialogInstructions
 id tvDialogSubtitle
 id tvDialogTitle
 id tvDisplayCode
@@ -322,6 +337,7 @@ id tvFactDeathDate
 id tvFactHijriDate
 id tvFactHometown
 id tvFactOccupation
+id tvGenBadge
 id tvKinshipBangla
 id tvKinshipEnglish
 id tvKinshipExplanation
@@ -341,6 +357,11 @@ id tvRecordingTimer
 id tvRegisterSubtitle
 id tvRegisterTitle
 id tvReminderTimeValue
+id tvRootItemDetails
+id tvRootItemName
+id tvSelectedRootAvatar
+id tvSelectedRootDetail
+id tvSelectedRootName
 id tvSettingsFamilyCode
 id tvSettingsFamilyName
 id tvSettingsUserEmail
@@ -356,6 +377,8 @@ id tvSuccessHeader
 id tvTagline
 id tvTimelineCaption
 id tvTimelineYear
+id tvTreeRootHeader
+id tvTreeRootSubtitle
 id viewRecordingIndicator
 layout activity_add_edit_person
 layout activity_add_story
@@ -369,6 +392,7 @@ layout activity_relationship_finder
 layout activity_splash
 layout activity_story_detail
 layout dialog_add_timeline_photo
+layout dialog_select_root_ancestor
 layout dialog_time_picker
 layout fragment_members
 layout fragment_settings
@@ -377,6 +401,7 @@ layout fragment_tree
 layout item_export_contact
 layout item_member
 layout item_relationship_step
+layout item_root_ancestor
 layout item_story_photo
 layout item_story_text_audio
 layout item_timeline_photo
@@ -477,6 +502,9 @@ string nav_members
 string nav_settings
 string nav_timeline
 string nav_tree
+string notification_action_open_family
+string notification_on_this_day_more_fmt
+string notification_on_this_day_title
 string password_label
 string person_biography_hint
 string person_biography_title
@@ -569,6 +597,8 @@ string settings_logout_confirm_title
 string settings_logout_dialog_msg
 string settings_logout_dialog_title
 string settings_logout_label
+string settings_on_this_day
+string settings_on_this_day_desc
 string settings_preferred_alert_time
 string settings_relationship_finder
 string settings_relationship_finder_desc
@@ -628,7 +658,18 @@ string timeline_tag_relatives
 string timeline_tag_subtitle
 string timeline_year_hint
 string tree_diurnal_weather
+string tree_root_all_badge
+string tree_root_all_generations
+string tree_root_all_subtitle
+string tree_root_all_summary
+string tree_root_descendant_summary
+string tree_root_dialog_subtitle
+string tree_root_dialog_title
+string tree_root_gen_format
+string tree_root_gen_zero_badge
+string tree_root_header
 string tree_root_label
+string tree_root_subtitle
 string tree_view_chart
 string tree_view_natural
 style Base.Theme.Shikor

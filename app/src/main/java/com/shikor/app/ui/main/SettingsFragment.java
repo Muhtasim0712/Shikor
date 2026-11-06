@@ -68,13 +68,22 @@ public class SettingsFragment extends Fragment {
                 if (isGranted) {
                     NotificationHelper.createNotificationChannels(requireContext());
                     prefs.setNotificationsEnabled(true);
-                    if (binding != null) binding.switchDailyReminders.setChecked(true);
+                    prefs.setOnThisDayEnabled(true);
+                    if (binding != null) {
+                        binding.switchDailyReminders.setChecked(true);
+                        binding.switchOnThisDay.setChecked(true);
+                    }
                     AlarmScheduler.scheduleDailyReminder(requireContext());
+                    AlarmScheduler.scheduleOnThisDay(requireContext());
                     updateTimeDisplay(prefs.getReminderHour(), prefs.getReminderMinute());
                     Toast.makeText(requireContext(), "Notification permission granted. Reminders scheduled!", Toast.LENGTH_SHORT).show();
                 } else {
                     prefs.setNotificationsEnabled(false);
-                    if (binding != null) binding.switchDailyReminders.setChecked(false);
+                    prefs.setOnThisDayEnabled(false);
+                    if (binding != null) {
+                        binding.switchDailyReminders.setChecked(false);
+                        binding.switchOnThisDay.setChecked(false);
+                    }
                     updateTimeDisplay(prefs.getReminderHour(), prefs.getReminderMinute());
                     Toast.makeText(requireContext(), "Permission denied. Reminders cannot show notifications.", Toast.LENGTH_LONG).show();
                 }
@@ -146,6 +155,27 @@ public class SettingsFragment extends Fragment {
                 AlarmScheduler.cancelDailyReminder(requireContext());
                 updateTimeDisplay(prefs.getReminderHour(), prefs.getReminderMinute());
                 Toast.makeText(requireContext(), "Daily reminders paused", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // On This Day Memories Toggle
+        binding.switchOnThisDay.setChecked(prefs.isOnThisDayEnabled());
+        binding.switchOnThisDay.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                        ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS)
+                                != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                } else {
+                    NotificationHelper.createNotificationChannels(requireContext());
+                    prefs.setOnThisDayEnabled(true);
+                    AlarmScheduler.scheduleOnThisDay(requireContext());
+                    Toast.makeText(requireContext(), "On This Day memories enabled", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                prefs.setOnThisDayEnabled(false);
+                AlarmScheduler.cancelOnThisDay(requireContext());
+                Toast.makeText(requireContext(), "On This Day memories disabled", Toast.LENGTH_SHORT).show();
             }
         });
 

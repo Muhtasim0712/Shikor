@@ -39,6 +39,7 @@ int color overlay_scrim 0x0
 int color primary 0x0
 int color primary_container 0x0
 int color primary_variant 0x0
+int color root_button_bg 0x0
 int color secondary 0x0
 int color secondary_container 0x0
 int color secondary_variant 0x0
@@ -78,8 +79,13 @@ int dimen text_size_subtitle 0x0
 int dimen text_size_title 0x0
 int drawable bg_code_box 0x0
 int drawable bg_indicator_active 0x0
+int drawable bg_pill_badge 0x0
+int drawable bg_root_avatar_circle 0x0
+int drawable bg_root_selector 0x0
 int drawable bg_window_dawn 0x0
+int drawable ic_arrow_drop_down 0x0
 int drawable ic_chart_view 0x0
+int drawable ic_check_circle 0x0
 int drawable ic_dawn_botanical_accent 0x0
 int drawable ic_diurnal_weather 0x0
 int drawable ic_fit_screen 0x0
@@ -141,6 +147,7 @@ int id btnRegister 0x0
 int id btnRemovePhoto 0x0
 int id btnSavePerson 0x0
 int id btnSaveStory 0x0
+int id btnSelectRoot 0x0
 int id btnSettingsLogout 0x0
 int id btnShare 0x0
 int id btnShareCode 0x0
@@ -161,6 +168,7 @@ int id cardPersonTag 0x0
 int id cardPhotoPreview 0x0
 int id cardRecordingLive 0x0
 int id cardResult 0x0
+int id cardRootItem 0x0
 int id cardStoryBody 0x0
 int id cardStoryPhoto 0x0
 int id cardSuccess 0x0
@@ -203,13 +211,17 @@ int id familySetupRoot 0x0
 int id familyTreeView 0x0
 int id indicatorDot 0x0
 int id indicatorLine 0x0
+int id ivAllGenIcon 0x0
 int id ivArrow 0x0
 int id ivDialogPhotoPreview 0x0
+int id ivDropdownArrow 0x0
 int id ivEmptyIcon 0x0
 int id ivLoginLogo 0x0
 int id ivLogo 0x0
 int id ivPhotoPreview 0x0
 int id ivRegisterLogo 0x0
+int id ivSelectedCheck 0x0
+int id ivSelectedRootIcon 0x0
 int id ivStoryPhoto 0x0
 int id ivTimelinePhoto 0x0
 int id layoutAudioBadge 0x0
@@ -251,6 +263,7 @@ int id rgGender 0x0
 int id rvExportContacts 0x0
 int id rvMembers 0x0
 int id rvPersonStories 0x0
+int id rvRootAncestors 0x0
 int id rvTimeline 0x0
 int id seekBarAudio 0x0
 int id spinnerChild 0x0
@@ -263,6 +276,7 @@ int id splashProgress 0x0
 int id splashRoot 0x0
 int id switchDailyReminders 0x0
 int id switchDeceased 0x0
+int id switchOnThisDay 0x0
 int id tilBiography 0x0
 int id tilBirthDate 0x0
 int id tilBody 0x0
@@ -308,6 +322,7 @@ int id tvDetailBiography 0x0
 int id tvDetailFullName 0x0
 int id tvDetailLifespan 0x0
 int id tvDetailNickName 0x0
+int id tvDialogInstructions 0x0
 int id tvDialogSubtitle 0x0
 int id tvDialogTitle 0x0
 int id tvDisplayCode 0x0
@@ -320,6 +335,7 @@ int id tvFactDeathDate 0x0
 int id tvFactHijriDate 0x0
 int id tvFactHometown 0x0
 int id tvFactOccupation 0x0
+int id tvGenBadge 0x0
 int id tvKinshipBangla 0x0
 int id tvKinshipEnglish 0x0
 int id tvKinshipExplanation 0x0
@@ -339,6 +355,11 @@ int id tvRecordingTimer 0x0
 int id tvRegisterSubtitle 0x0
 int id tvRegisterTitle 0x0
 int id tvReminderTimeValue 0x0
+int id tvRootItemDetails 0x0
+int id tvRootItemName 0x0
+int id tvSelectedRootAvatar 0x0
+int id tvSelectedRootDetail 0x0
+int id tvSelectedRootName 0x0
 int id tvSettingsFamilyCode 0x0
 int id tvSettingsFamilyName 0x0
 int id tvSettingsUserEmail 0x0
@@ -354,6 +375,8 @@ int id tvSuccessHeader 0x0
 int id tvTagline 0x0
 int id tvTimelineCaption 0x0
 int id tvTimelineYear 0x0
+int id tvTreeRootHeader 0x0
+int id tvTreeRootSubtitle 0x0
 int id viewRecordingIndicator 0x0
 int layout activity_add_edit_person 0x0
 int layout activity_add_story 0x0
@@ -367,6 +390,7 @@ int layout activity_relationship_finder 0x0
 int layout activity_splash 0x0
 int layout activity_story_detail 0x0
 int layout dialog_add_timeline_photo 0x0
+int layout dialog_select_root_ancestor 0x0
 int layout dialog_time_picker 0x0
 int layout fragment_members 0x0
 int layout fragment_settings 0x0
@@ -375,6 +399,7 @@ int layout fragment_tree 0x0
 int layout item_export_contact 0x0
 int layout item_member 0x0
 int layout item_relationship_step 0x0
+int layout item_root_ancestor 0x0
 int layout item_story_photo 0x0
 int layout item_story_text_audio 0x0
 int layout item_timeline_photo 0x0
@@ -475,6 +500,9 @@ int string nav_members 0x0
 int string nav_settings 0x0
 int string nav_timeline 0x0
 int string nav_tree 0x0
+int string notification_action_open_family 0x0
+int string notification_on_this_day_more_fmt 0x0
+int string notification_on_this_day_title 0x0
 int string password_label 0x0
 int string person_biography_hint 0x0
 int string person_biography_title 0x0
@@ -567,6 +595,8 @@ int string settings_logout_confirm_title 0x0
 int string settings_logout_dialog_msg 0x0
 int string settings_logout_dialog_title 0x0
 int string settings_logout_label 0x0
+int string settings_on_this_day 0x0
+int string settings_on_this_day_desc 0x0
 int string settings_preferred_alert_time 0x0
 int string settings_relationship_finder 0x0
 int string settings_relationship_finder_desc 0x0
@@ -626,7 +656,18 @@ int string timeline_tag_relatives 0x0
 int string timeline_tag_subtitle 0x0
 int string timeline_year_hint 0x0
 int string tree_diurnal_weather 0x0
+int string tree_root_all_badge 0x0
+int string tree_root_all_generations 0x0
+int string tree_root_all_subtitle 0x0
+int string tree_root_all_summary 0x0
+int string tree_root_descendant_summary 0x0
+int string tree_root_dialog_subtitle 0x0
+int string tree_root_dialog_title 0x0
+int string tree_root_gen_format 0x0
+int string tree_root_gen_zero_badge 0x0
+int string tree_root_header 0x0
 int string tree_root_label 0x0
+int string tree_root_subtitle 0x0
 int string tree_view_chart 0x0
 int string tree_view_natural 0x0
 int style Base_Theme_Shikor 0x0

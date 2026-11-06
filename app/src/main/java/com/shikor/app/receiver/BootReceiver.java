@@ -26,7 +26,8 @@ public class BootReceiver extends BroadcastReceiver {
             Log.d(TAG, "Device rebooted, verifying reminder alarm schedule...");
             if (Prefs.getInstance(context).isNotificationsEnabled()) {
                 AlarmScheduler.scheduleDailyReminder(context);
-                Log.d(TAG, "Daily reminders rescheduled successfully after reboot.");
+                AlarmScheduler.scheduleOnThisDay(context);
+                Log.d(TAG, "Reminders and On This Day rescheduled successfully after reboot.");
             }
         }
     }

@@ -28,62 +28,206 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:paddingHorizontal="@dimen/spacing_medium"
-            android:paddingVertical="@dimen/spacing_tiny">
+            android:paddingVertical="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Writing above the button: Title, Subtitle, and Tool Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tree_root_label"
-                android:textAppearance="?attr/textAppearanceLabelMedium"
-                android:textColor="?attr/colorPrimary"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_nature_tree"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="@null" />
+
+                        <TextView
+                            android:id="@+id/tvTreeRootHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/tree_root_header"
+                            android:textAppearance="?attr/textAppearanceLabelMedium"
+                            android:textColor="?attr/colorPrimary"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.03" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvTreeRootSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="@string/tree_root_subtitle"
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Quick Action Buttons -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDiurnalPhase"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:contentDescription="@string/tree_diurnal_weather"
+                        app:icon="@drawable/ic_diurnal_weather"
+                        app:iconTint="?attr/colorPrimary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnToggleMode"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:contentDescription="@string/tree_view_chart"
+                        app:icon="@drawable/ic_chart_view"
+                        app:iconTint="?attr/colorPrimary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFitTree"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:contentDescription="@string/action_fit_tree"
+                        app:icon="@drawable/ic_fit_screen"
+                        app:iconTint="?attr/colorPrimary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnReCenter"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:contentDescription="@string/action_recenter"
+                        app:icon="@android:drawable/ic_menu_rotate"
+                        app:iconTint="?attr/colorPrimary" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Custom Precise Root Selection Button with styled themed background -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnSelectRoot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1.2dp"
+                app:strokeColor="?attr/colorPrimary"
+                app:cardBackgroundColor="@color/root_button_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="9dp">
+
+                    <!-- Leading Icon / Avatar Circle -->
+                    <FrameLayout
+                        android:layout_width="38dp"
+                        android:layout_height="38dp">
+
+                        <ImageView
+                            android:id="@+id/ivSelectedRootIcon"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_root_avatar_circle"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_nature_tree"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="@null" />
+
+                        <TextView
+                            android:id="@+id/tvSelectedRootAvatar"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_root_avatar_circle"
+                            android:gravity="center"
+                            android:textColor="?attr/colorPrimary"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:visibility="gone" />
+                    </FrameLayout>
+
+                    <!-- Selected Root Labels -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvSelectedRootName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tree_root_all_generations"
+                            android:textAppearance="?attr/textAppearanceTitleSmall"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:ellipsize="end"
+                            android:maxLines="1" />
+
+                        <TextView
+                            android:id="@+id/tvSelectedRootDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/tree_root_all_subtitle"
+                            android:textAppearance="?attr/textAppearanceBodySmall"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="11sp"
+                            android:ellipsize="end"
+                            android:maxLines="1" />
+                    </LinearLayout>
+
+                    <!-- Dropdown Arrow Indicator -->
+                    <ImageView
+                        android:id="@+id/ivDropdownArrow"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_arrow_drop_down"
+                        app:tint="?attr/colorPrimary"
+                        android:contentDescription="@null" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Invisible Spinner for programmatic backward-compatibility -->
             <Spinner
                 android:id="@+id/spinnerTreeRoot"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:background="@android:drawable/btn_dropdown"
-                android:minHeight="@dimen/min_touch_target" />
+                android:layout_height="0dp"
+                android:visibility="gone" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDiurnalPhase"
-                style="@style/Widget.Material3.Button.IconButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:contentDescription="@string/tree_diurnal_weather"
-                app:icon="@drawable/ic_diurnal_weather"
-                app:iconTint="?attr/colorPrimary" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnToggleMode"
-                style="@style/Widget.Material3.Button.IconButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:contentDescription="@string/tree_view_chart"
-                app:icon="@drawable/ic_chart_view"
-                app:iconTint="?attr/colorPrimary" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnFitTree"
-                style="@style/Widget.Material3.Button.IconButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:contentDescription="@string/action_fit_tree"
-                app:icon="@drawable/ic_fit_screen"
-                app:iconTint="?attr/colorPrimary" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnReCenter"
-                style="@style/Widget.Material3.Button.IconButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:contentDescription="@string/action_recenter"
-                app:icon="@android:drawable/ic_menu_rotate"
-                app:iconTint="?attr/colorPrimary" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
