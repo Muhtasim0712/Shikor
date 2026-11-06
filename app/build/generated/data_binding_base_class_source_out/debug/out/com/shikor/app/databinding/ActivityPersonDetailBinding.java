@@ -41,6 +41,9 @@ public final class ActivityPersonDetailBinding implements ViewBinding {
   public final MaterialButton btnMaps;
 
   @NonNull
+  public final MaterialButton btnReadAloudBio;
+
+  @NonNull
   public final MaterialButton btnShare;
 
   @NonNull
@@ -115,25 +118,26 @@ public final class ActivityPersonDetailBinding implements ViewBinding {
   private ActivityPersonDetailBinding(@NonNull CoordinatorLayout rootView,
       @NonNull MaterialButton btnAddStory, @NonNull MaterialButton btnCall,
       @NonNull MaterialButton btnEditPerson, @NonNull MaterialButton btnFindRelationship,
-      @NonNull MaterialButton btnMaps, @NonNull MaterialButton btnShare,
-      @NonNull MaterialCardView cardBiography, @NonNull ChipGroup chipGroupChildren,
-      @NonNull ChipGroup chipGroupParents, @NonNull ChipGroup chipGroupSiblings,
-      @NonNull ChipGroup chipGroupSpouse, @NonNull AvatarView detailAvatar,
-      @NonNull CoordinatorLayout personDetailRoot, @NonNull RecyclerView rvPersonStories,
-      @NonNull MaterialToolbar toolbar, @NonNull TextView tvChildrenLabel,
-      @NonNull TextView tvDetailBiography, @NonNull TextView tvDetailFullName,
-      @NonNull TextView tvDetailLifespan, @NonNull TextView tvDetailNickName,
-      @NonNull TextView tvFactBirthDate, @NonNull TextView tvFactDeathDate,
-      @NonNull TextView tvFactHijriDate, @NonNull TextView tvFactHometown,
-      @NonNull TextView tvFactOccupation, @NonNull TextView tvNoStories,
-      @NonNull TextView tvParentsLabel, @NonNull TextView tvSiblingsLabel,
-      @NonNull TextView tvSpouseLabel) {
+      @NonNull MaterialButton btnMaps, @NonNull MaterialButton btnReadAloudBio,
+      @NonNull MaterialButton btnShare, @NonNull MaterialCardView cardBiography,
+      @NonNull ChipGroup chipGroupChildren, @NonNull ChipGroup chipGroupParents,
+      @NonNull ChipGroup chipGroupSiblings, @NonNull ChipGroup chipGroupSpouse,
+      @NonNull AvatarView detailAvatar, @NonNull CoordinatorLayout personDetailRoot,
+      @NonNull RecyclerView rvPersonStories, @NonNull MaterialToolbar toolbar,
+      @NonNull TextView tvChildrenLabel, @NonNull TextView tvDetailBiography,
+      @NonNull TextView tvDetailFullName, @NonNull TextView tvDetailLifespan,
+      @NonNull TextView tvDetailNickName, @NonNull TextView tvFactBirthDate,
+      @NonNull TextView tvFactDeathDate, @NonNull TextView tvFactHijriDate,
+      @NonNull TextView tvFactHometown, @NonNull TextView tvFactOccupation,
+      @NonNull TextView tvNoStories, @NonNull TextView tvParentsLabel,
+      @NonNull TextView tvSiblingsLabel, @NonNull TextView tvSpouseLabel) {
     this.rootView = rootView;
     this.btnAddStory = btnAddStory;
     this.btnCall = btnCall;
     this.btnEditPerson = btnEditPerson;
     this.btnFindRelationship = btnFindRelationship;
     this.btnMaps = btnMaps;
+    this.btnReadAloudBio = btnReadAloudBio;
     this.btnShare = btnShare;
     this.cardBiography = cardBiography;
     this.chipGroupChildren = chipGroupChildren;
@@ -214,6 +218,12 @@ public final class ActivityPersonDetailBinding implements ViewBinding {
       id = R.id.btnMaps;
       MaterialButton btnMaps = ViewBindings.findChildViewById(rootView, id);
       if (btnMaps == null) {
+        break missingId;
+      }
+
+      id = R.id.btnReadAloudBio;
+      MaterialButton btnReadAloudBio = ViewBindings.findChildViewById(rootView, id);
+      if (btnReadAloudBio == null) {
         break missingId;
       }
 
@@ -358,12 +368,12 @@ public final class ActivityPersonDetailBinding implements ViewBinding {
       }
 
       return new ActivityPersonDetailBinding((CoordinatorLayout) rootView, btnAddStory, btnCall,
-          btnEditPerson, btnFindRelationship, btnMaps, btnShare, cardBiography, chipGroupChildren,
-          chipGroupParents, chipGroupSiblings, chipGroupSpouse, detailAvatar, personDetailRoot,
-          rvPersonStories, toolbar, tvChildrenLabel, tvDetailBiography, tvDetailFullName,
-          tvDetailLifespan, tvDetailNickName, tvFactBirthDate, tvFactDeathDate, tvFactHijriDate,
-          tvFactHometown, tvFactOccupation, tvNoStories, tvParentsLabel, tvSiblingsLabel,
-          tvSpouseLabel);
+          btnEditPerson, btnFindRelationship, btnMaps, btnReadAloudBio, btnShare, cardBiography,
+          chipGroupChildren, chipGroupParents, chipGroupSiblings, chipGroupSpouse, detailAvatar,
+          personDetailRoot, rvPersonStories, toolbar, tvChildrenLabel, tvDetailBiography,
+          tvDetailFullName, tvDetailLifespan, tvDetailNickName, tvFactBirthDate, tvFactDeathDate,
+          tvFactHijriDate, tvFactHometown, tvFactOccupation, tvNoStories, tvParentsLabel,
+          tvSiblingsLabel, tvSpouseLabel);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

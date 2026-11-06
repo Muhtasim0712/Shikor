@@ -140,6 +140,10 @@
     <string name="google_app_id" translatable="false">1:633789903240:android:b1f8ca375a233fb5450a3d</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAU2hCyArCSlXJOr7teRfJIsORTShA1tio</string>
     <string name="google_storage_bucket" translatable="false">shikor-app.firebasestorage.app</string>
+    <string name="health_empty_state">No problems found</string>
+    <string name="health_rerun_btn">Re-run</string>
+    <string name="health_screen_title">Tree Health Check</string>
+    <string name="health_summary_title">Integrity Summary</string>
     <string name="import_contacts">Import Family Members</string>
     <string name="join_family_btn">Join Family</string>
     <string name="join_family_desc">Enter the 6-character family code provided by an existing family member.</string>
@@ -198,6 +202,7 @@
     <string name="person_stories_title">Stories &amp; Oral Memories</string>
     <string name="person_take_photo">Take Photo</string>
     <string name="project_id" translatable="false">shikor-app</string>
+    <string name="read_aloud">Read Aloud</string>
     <string name="register_button">Create Account</string>
     <string name="register_subtitle">Start your digital family legacy</string>
     <string name="register_title">Join Shikor</string>
@@ -247,10 +252,14 @@
     <string name="settings_export_tree_png_opt">Export PNG Image (Diagram)</string>
     <string name="settings_export_tree_title">Export Family Tree</string>
     <string name="settings_family_code_title">Family Invite Code</string>
+    <string name="settings_health_check">Tree Health Check</string>
+    <string name="settings_health_check_desc">Inspect tree for invalid dates, cycles, duplicates &amp; disconnected members</string>
     <string name="settings_import_members">Import Family Members</string>
     <string name="settings_import_members_desc">Import relatives from CSV or vCard (.vcf) files</string>
     <string name="settings_language_label">Language</string>
     <string name="settings_language_title">Select Language</string>
+    <string name="settings_larger_text">Larger text for elders</string>
+    <string name="settings_larger_text_desc">Enlarge text size throughout the app for easier reading</string>
     <string name="settings_logout_confirm_msg">Are you sure you want to log out of your family space? You can log back in with your email and password at any time.</string>
     <string name="settings_logout_confirm_title">Log Out</string>
     <string name="settings_logout_dialog_msg">Are you sure you want to log out of your family space? You can log back in with your email and password at any time.</string>
@@ -273,6 +282,10 @@
     <string name="settings_time_selected_fmt">Selected: %s</string>
     <string name="settings_title">Settings</string>
     <string name="settings_tools_title">Data &amp; Export Tools</string>
+    <string name="settings_tts_speech_rate">Speech Rate</string>
+    <string name="settings_tts_speech_rate_fast">Fast (1.25x)</string>
+    <string name="settings_tts_speech_rate_normal">Normal (1.0x)</string>
+    <string name="settings_tts_speech_rate_slow">Slow (0.8x)</string>
     <string name="share_family_code">Share Family Code</string>
     <string name="stats_audio_mins">Audio Mins</string>
     <string name="stats_avg_lifespan">Avg Lifespan</string>
@@ -297,6 +310,7 @@
     <string name="story_body_hint">Story &amp; Memories</string>
     <string name="story_delete">Delete</string>
     <string name="story_detail_oral">Oral History Recording</string>
+    <string name="story_detail_title">Story Content</string>
     <string name="story_oral_recording">Oral Voice Recording</string>
     <string name="story_photo_memory">Photo Memory</string>
     <string name="story_record_btn">Record Voice</string>

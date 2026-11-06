@@ -137,6 +137,24 @@
     <string name="stats_hometown_row_fmt">%s: %d member(s)</string>
     <string name="stats_no_hometown">No hometown data available</string>
 
+    <!-- TTS Read Aloud & Accessibility Strings -->
+    <string name="read_aloud">Read Aloud</string>
+    <string name="story_detail_title">Story Content</string>
+    <string name="settings_larger_text">Larger text for elders</string>
+    <string name="settings_larger_text_desc">Enlarge text size throughout the app for easier reading</string>
+    <string name="settings_tts_speech_rate">Speech Rate</string>
+    <string name="settings_tts_speech_rate_normal">Normal (1.0x)</string>
+    <string name="settings_tts_speech_rate_slow">Slow (0.8x)</string>
+    <string name="settings_tts_speech_rate_fast">Fast (1.25x)</string>
+
+    <!-- Tree Health Check Strings -->
+    <string name="settings_health_check">Tree Health Check</string>
+    <string name="settings_health_check_desc">Inspect tree for invalid dates, cycles, duplicates &amp; disconnected members</string>
+    <string name="health_screen_title">Tree Health Check</string>
+    <string name="health_summary_title">Integrity Summary</string>
+    <string name="health_rerun_btn">Re-run</string>
+    <string name="health_empty_state">No problems found</string>
+
     <!-- Person / Member Detail Screen -->
     <string name="action_call">Call</string>
     <string name="action_maps">Maps</string>

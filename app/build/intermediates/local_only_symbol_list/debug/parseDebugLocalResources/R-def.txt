@@ -150,8 +150,11 @@ id btnPlayPauseAudio
 id btnPlayPreview
 id btnPm
 id btnReCenter
+id btnReadAloudBio
+id btnReadAloudStory
 id btnRegister
 id btnRemovePhoto
+id btnRerunCheck
 id btnSavePerson
 id btnSaveStory
 id btnSelectRoot
@@ -169,6 +172,8 @@ id cardAudioPlayer
 id cardAudioPreview
 id cardBiography
 id cardCreateFamily
+id cardHealthItem
+id cardHealthSummary
 id cardJoinFamily
 id cardMember
 id cardPersonTag
@@ -231,6 +236,7 @@ id ivPhotoPreview
 id ivRegisterLogo
 id ivSelectedCheck
 id ivSelectedRootIcon
+id ivSeverityIcon
 id ivStoryPhoto
 id ivTimelinePhoto
 id ivWidgetReload
@@ -239,6 +245,7 @@ id layoutAudioCapsule
 id layoutExactAlarmWarning
 id layoutExportContacts
 id layoutExportTree
+id layoutHealthCheck
 id layoutHometownsContainer
 id layoutImportMembers
 id layoutLanguageSetting
@@ -249,6 +256,7 @@ id layoutRelationshipFinder
 id layoutReminderTime
 id layoutStatsContent
 id layoutThemeSetting
+id layoutTtsSpeechRate
 id loadingLayout
 id loadingOverlay
 id loadingText
@@ -267,6 +275,7 @@ id personDetailRoot
 id pickerHour
 id pickerMinute
 id progressBar
+id progressHealth
 id progressStats
 id rbFemale
 id rbMale
@@ -274,6 +283,7 @@ id rbOther
 id registerRoot
 id rgGender
 id rvExportContacts
+id rvHealthIssues
 id rvMembers
 id rvPersonStories
 id rvRootAncestors
@@ -289,6 +299,7 @@ id splashProgress
 id splashRoot
 id switchDailyReminders
 id switchDeceased
+id switchLargerText
 id switchOnThisDay
 id tilBiography
 id tilBirthDate
@@ -313,9 +324,11 @@ id tilYear
 id timelineEmptyState
 id timelineRoot
 id toolbar
+id toolbarHealth
 id toolbarStats
 id treeEmptyState
 id treeFragmentRoot
+id tvAffectedName
 id tvAppInfo
 id tvAppName
 id tvAudioCapsuleDuration
@@ -331,6 +344,7 @@ id tvContactDetails
 id tvContactName
 id tvContactPhone
 id tvCurrentLanguageValue
+id tvCurrentSpeechRateValue
 id tvCurrentThemeValue
 id tvDetailBiography
 id tvDetailFullName
@@ -350,6 +364,10 @@ id tvFactHijriDate
 id tvFactHometown
 id tvFactOccupation
 id tvGenBadge
+id tvHealthEmpty
+id tvHighCount
+id tvIssueDescription
+id tvIssueTitle
 id tvItemDetails
 id tvItemName
 id tvKinshipBangla
@@ -359,6 +377,8 @@ id tvLivePreview
 id tvLiveScheduleHint
 id tvLoginSubtitle
 id tvLoginTitle
+id tvLowCount
+id tvMediumCount
 id tvMemberLifespan
 id tvMemberName
 id tvMemberRelation
@@ -379,6 +399,7 @@ id tvSelectedRootName
 id tvSettingsFamilyCode
 id tvSettingsFamilyName
 id tvSettingsUserEmail
+id tvSeverityBadge
 id tvSiblingsLabel
 id tvSpouseLabel
 id tvStatAudioMins
@@ -411,6 +432,7 @@ layout activity_add_edit_person
 layout activity_add_story
 layout activity_export
 layout activity_family_setup
+layout activity_health_check
 layout activity_login
 layout activity_main
 layout activity_person_detail
@@ -427,6 +449,7 @@ layout fragment_settings
 layout fragment_timeline
 layout fragment_tree
 layout item_export_contact
+layout item_health_issue
 layout item_member
 layout item_relationship_step
 layout item_root_ancestor
@@ -512,6 +535,10 @@ string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
+string health_empty_state
+string health_rerun_btn
+string health_screen_title
+string health_summary_title
 string import_contacts
 string join_family_btn
 string join_family_desc
@@ -570,6 +597,7 @@ string person_spouse_label
 string person_stories_title
 string person_take_photo
 string project_id
+string read_aloud
 string register_button
 string register_subtitle
 string register_title
@@ -619,10 +647,14 @@ string settings_export_tree_pdf_opt
 string settings_export_tree_png_opt
 string settings_export_tree_title
 string settings_family_code_title
+string settings_health_check
+string settings_health_check_desc
 string settings_import_members
 string settings_import_members_desc
 string settings_language_label
 string settings_language_title
+string settings_larger_text
+string settings_larger_text_desc
 string settings_logout_confirm_msg
 string settings_logout_confirm_title
 string settings_logout_dialog_msg
@@ -645,6 +677,10 @@ string settings_time_picker_hint
 string settings_time_selected_fmt
 string settings_title
 string settings_tools_title
+string settings_tts_speech_rate
+string settings_tts_speech_rate_fast
+string settings_tts_speech_rate_normal
+string settings_tts_speech_rate_slow
 string share_family_code
 string stats_audio_mins
 string stats_avg_lifespan
@@ -669,6 +705,7 @@ string story_attach_photo
 string story_body_hint
 string story_delete
 string story_detail_oral
+string story_detail_title
 string story_oral_recording
 string story_photo_memory
 string story_record_btn

@@ -36,6 +36,9 @@ public final class ActivityStoryDetailBinding implements ViewBinding {
   public final FloatingActionButton btnPlayPauseAudio;
 
   @NonNull
+  public final MaterialButton btnReadAloudStory;
+
+  @NonNull
   public final MaterialButton btnShareStory;
 
   @NonNull
@@ -82,18 +85,20 @@ public final class ActivityStoryDetailBinding implements ViewBinding {
 
   private ActivityStoryDetailBinding(@NonNull CoordinatorLayout rootView,
       @NonNull AvatarView avatarPerson, @NonNull MaterialButton btnDeleteStory,
-      @NonNull FloatingActionButton btnPlayPauseAudio, @NonNull MaterialButton btnShareStory,
-      @NonNull MaterialCardView cardAudioPlayer, @NonNull MaterialCardView cardPersonTag,
-      @NonNull MaterialCardView cardStoryBody, @NonNull MaterialCardView cardStoryPhoto,
-      @NonNull ImageView ivStoryPhoto, @NonNull SeekBar seekBarAudio,
-      @NonNull MaterialToolbar toolbar, @NonNull TextView tvAudioCurrentTime,
-      @NonNull TextView tvAudioStatus, @NonNull TextView tvAudioTotalTime,
-      @NonNull TextView tvPersonName, @NonNull TextView tvStoryBody, @NonNull TextView tvStoryDate,
+      @NonNull FloatingActionButton btnPlayPauseAudio, @NonNull MaterialButton btnReadAloudStory,
+      @NonNull MaterialButton btnShareStory, @NonNull MaterialCardView cardAudioPlayer,
+      @NonNull MaterialCardView cardPersonTag, @NonNull MaterialCardView cardStoryBody,
+      @NonNull MaterialCardView cardStoryPhoto, @NonNull ImageView ivStoryPhoto,
+      @NonNull SeekBar seekBarAudio, @NonNull MaterialToolbar toolbar,
+      @NonNull TextView tvAudioCurrentTime, @NonNull TextView tvAudioStatus,
+      @NonNull TextView tvAudioTotalTime, @NonNull TextView tvPersonName,
+      @NonNull TextView tvStoryBody, @NonNull TextView tvStoryDate,
       @NonNull TextView tvStoryTitle) {
     this.rootView = rootView;
     this.avatarPerson = avatarPerson;
     this.btnDeleteStory = btnDeleteStory;
     this.btnPlayPauseAudio = btnPlayPauseAudio;
+    this.btnReadAloudStory = btnReadAloudStory;
     this.btnShareStory = btnShareStory;
     this.cardAudioPlayer = cardAudioPlayer;
     this.cardPersonTag = cardPersonTag;
@@ -153,6 +158,12 @@ public final class ActivityStoryDetailBinding implements ViewBinding {
       id = R.id.btnPlayPauseAudio;
       FloatingActionButton btnPlayPauseAudio = ViewBindings.findChildViewById(rootView, id);
       if (btnPlayPauseAudio == null) {
+        break missingId;
+      }
+
+      id = R.id.btnReadAloudStory;
+      MaterialButton btnReadAloudStory = ViewBindings.findChildViewById(rootView, id);
+      if (btnReadAloudStory == null) {
         break missingId;
       }
 
@@ -247,9 +258,10 @@ public final class ActivityStoryDetailBinding implements ViewBinding {
       }
 
       return new ActivityStoryDetailBinding((CoordinatorLayout) rootView, avatarPerson,
-          btnDeleteStory, btnPlayPauseAudio, btnShareStory, cardAudioPlayer, cardPersonTag,
-          cardStoryBody, cardStoryPhoto, ivStoryPhoto, seekBarAudio, toolbar, tvAudioCurrentTime,
-          tvAudioStatus, tvAudioTotalTime, tvPersonName, tvStoryBody, tvStoryDate, tvStoryTitle);
+          btnDeleteStory, btnPlayPauseAudio, btnReadAloudStory, btnShareStory, cardAudioPlayer,
+          cardPersonTag, cardStoryBody, cardStoryPhoto, ivStoryPhoto, seekBarAudio, toolbar,
+          tvAudioCurrentTime, tvAudioStatus, tvAudioTotalTime, tvPersonName, tvStoryBody,
+          tvStoryDate, tvStoryTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

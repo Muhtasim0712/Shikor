@@ -384,6 +384,12 @@ public class SettingsFragment extends Fragment {
 
         // Export Family Tree (PDF & PNG)
         binding.layoutExportTree.setOnClickListener(v -> showExportTreeDialog());
+
+        // Open Tree Health Check Tool
+        binding.layoutHealthCheck.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), com.shikor.app.ui.tools.HealthCheckActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void showExportTreeDialog() {
@@ -436,9 +442,56 @@ public class SettingsFragment extends Fragment {
     private void setupPreferencesSection() {
         updateThemeDisplay();
         updateLanguageDisplay();
+        updateSpeechRateDisplay();
 
         binding.layoutThemeSetting.setOnClickListener(v -> showThemeDialog());
         binding.layoutLanguageSetting.setOnClickListener(v -> showLanguageDialog());
+
+        binding.switchLargerText.setChecked(prefs.isLargerTextElders());
+        binding.switchLargerText.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.setLargerTextElders(isChecked);
+            if (isAdded() && getActivity() != null) {
+                requireActivity().recreate();
+            }
+        });
+
+        binding.layoutTtsSpeechRate.setOnClickListener(v -> showSpeechRateDialog());
+    }
+
+    private void updateSpeechRateDisplay() {
+        float rate = prefs.getTtsSpeechRate();
+        if (rate <= 0.85f) {
+            binding.tvCurrentSpeechRateValue.setText(getString(R.string.settings_tts_speech_rate_slow));
+        } else if (rate >= 1.2f) {
+            binding.tvCurrentSpeechRateValue.setText(getString(R.string.settings_tts_speech_rate_fast));
+        } else {
+            binding.tvCurrentSpeechRateValue.setText(getString(R.string.settings_tts_speech_rate_normal));
+        }
+    }
+
+    private void showSpeechRateDialog() {
+        String[] options = {
+                getString(R.string.settings_tts_speech_rate_slow),
+                getString(R.string.settings_tts_speech_rate_normal),
+                getString(R.string.settings_tts_speech_rate_fast)
+        };
+        float currentRate = prefs.getTtsSpeechRate();
+        int selectedIdx = 1;
+        if (currentRate <= 0.85f) selectedIdx = 0;
+        else if (currentRate >= 1.2f) selectedIdx = 2;
+
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.settings_tts_speech_rate))
+                .setSingleChoiceItems(options, selectedIdx, (dialog, which) -> {
+                    dialog.dismiss();
+                    float newRate = 1.0f;
+                    if (which == 0) newRate = 0.8f;
+                    else if (which == 2) newRate = 1.25f;
+                    prefs.setTtsSpeechRate(newRate);
+                    updateSpeechRateDisplay();
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     private void updateThemeDisplay() {

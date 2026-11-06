@@ -50,6 +50,7 @@ public class StoryDetailActivity extends BaseActivity {
     private boolean isUserSeeking = false;
     private final Handler progressHandler = new Handler(Looper.getMainLooper());
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy", Locale.getDefault());
+    private com.shikor.app.util.TtsHelper ttsHelper;
 
     private final Runnable updateProgressRunnable = new Runnable() {
         @Override
@@ -70,6 +71,8 @@ public class StoryDetailActivity extends BaseActivity {
         setContentView(binding.getRoot());
         applySystemWindowInsets(binding.getRoot());
 
+        ttsHelper = new com.shikor.app.util.TtsHelper(this);
+
         storyId = getIntent().getStringExtra(EXTRA_STORY_ID);
         if (storyId == null || storyId.isEmpty()) {
             Toast.makeText(this, "Story ID missing", Toast.LENGTH_SHORT).show();
@@ -87,6 +90,18 @@ public class StoryDetailActivity extends BaseActivity {
     }
 
     private void setupClickListeners() {
+        // Read Aloud Story TTS
+        binding.btnReadAloudStory.setOnClickListener(v -> {
+            if (currentStory != null) {
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                    pauseAudio();
+                }
+                String title = currentStory.getTitle() != null ? currentStory.getTitle() : "";
+                String body = currentStory.getBody() != null ? currentStory.getBody() : "";
+                ttsHelper.speak(title + ". " + body);
+            }
+        });
+
         // Tagged person chip opens PersonDetailActivity
         binding.cardPersonTag.setOnClickListener(v -> {
             if (currentPerson != null) {
@@ -370,11 +385,13 @@ public class StoryDetailActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         pauseAudio();
+        if (ttsHelper != null) ttsHelper.stop();
     }
 
     @Override
     protected void onDestroy() {
         releaseMediaPlayer();
+        if (ttsHelper != null) ttsHelper.shutdown();
         super.onDestroy();
     }
 }

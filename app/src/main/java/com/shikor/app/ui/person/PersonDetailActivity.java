@@ -43,6 +43,7 @@ public class PersonDetailActivity extends BaseActivity {
     private StoryAdapter storyAdapter;
     private String personId;
     private PersonEntity currentPerson;
+    private com.shikor.app.util.TtsHelper ttsHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class PersonDetailActivity extends BaseActivity {
         binding = ActivityPersonDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         applySystemWindowInsets(binding.getRoot());
+
+        ttsHelper = new com.shikor.app.util.TtsHelper(this);
 
         personId = getIntent().getStringExtra(EXTRA_PERSON_ID);
         if (personId == null || personId.isEmpty()) {
@@ -97,6 +100,15 @@ public class PersonDetailActivity extends BaseActivity {
             Intent intent = new Intent(PersonDetailActivity.this, AddStoryActivity.class);
             intent.putExtra(AddStoryActivity.EXTRA_PERSON_ID, personId);
             startActivity(intent);
+        });
+
+        // Read Aloud Biography TTS
+        binding.btnReadAloudBio.setOnClickListener(v -> {
+            if (currentPerson != null) {
+                String bio = !TextUtils.isEmpty(currentPerson.getBiography()) ? currentPerson.getBiography() : "No biography recorded.";
+                String text = currentPerson.getFullName() + ". " + bio;
+                ttsHelper.speak(text);
+            }
         });
 
         // CONCEPT: Implicit Intent with ACTION_DIAL
@@ -348,5 +360,17 @@ public class PersonDetailActivity extends BaseActivity {
             startActivity(intent);
         });
         group.addView(chip);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (ttsHelper != null) ttsHelper.stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (ttsHelper != null) ttsHelper.shutdown();
     }
 }

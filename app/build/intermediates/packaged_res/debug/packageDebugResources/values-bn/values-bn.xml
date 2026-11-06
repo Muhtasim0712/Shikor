@@ -64,6 +64,10 @@
     <string name="family_setup_title">পারিবারিক স্পেস</string>
     <string name="find_relationship">আত্মীয়তার সম্পর্ক নির্ণয়</string>
     <string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
+    <string name="health_empty_state">কোনো সমস্যা পাওয়া যায়নি</string>
+    <string name="health_rerun_btn">পুনরায় পরীক্ষা</string>
+    <string name="health_screen_title">গাছ পরীক্ষা</string>
+    <string name="health_summary_title">পরীক্ষার সারসংক্ষেপ</string>
     <string name="import_contacts">আত্মীয়দের তথ্য আমদানি</string>
     <string name="join_family_btn">যুক্ত হোন</string>
     <string name="join_family_desc">আত্মীয়দের পাঠানো ৬ অক্ষরের পারিবারিক কোডটি দিন।</string>
@@ -121,6 +125,7 @@
     <string name="person_spouse_label">স্বামী/স্ত্রী:</string>
     <string name="person_stories_title">স্মৃতিকথা ও মৌখিক ইতিহাস</string>
     <string name="person_take_photo">ছবি তুলুন</string>
+    <string name="read_aloud">পড়ে শুনুন</string>
     <string name="register_button">অ্যাকাউন্ট তৈরি করুন</string>
     <string name="register_subtitle">আপনার ডিজিটাল বংশলতিকা তৈরি শুরু করুন</string>
     <string name="register_title">শিকড়ে যোগ দিন</string>
@@ -170,10 +175,14 @@
     <string name="settings_export_tree_png_opt">ছবি (PNG) হিসেবে সংরক্ষণ (ডায়াগ্রাম)</string>
     <string name="settings_export_tree_title">বংশলতিকা রপ্তানি</string>
     <string name="settings_family_code_title">পারিবারিক আমন্ত্রণ কোড</string>
+    <string name="settings_health_check">গাছ পরীক্ষা ও পর্যবেক্ষণ</string>
+    <string name="settings_health_check_desc">ভুল তারিখ, সম্পর্কের চক্র, দ্বৈত তথ্য ও বিচ্ছিন্ন সদস্যদের খুঁজে বের করুন</string>
     <string name="settings_import_members">আত্মীয়দের তথ্য আমদানি</string>
     <string name="settings_import_members_desc">CSV বা vCard (.vcf) ফাইল থেকে আত্মীয়দের তালিকায় যুক্ত করুন</string>
     <string name="settings_language_label">ভাষা</string>
     <string name="settings_language_title">ভাষা নির্বাচন করুন</string>
+    <string name="settings_larger_text">বয়স্কদের জন্য বড় ফন্ট</string>
+    <string name="settings_larger_text_desc">সহজে পড়ার জন্য অ্যাপ জুড়ে লেখার আকার বড় করুন</string>
     <string name="settings_logout_confirm_msg">আপনি কি আপনার পারিবারিক স্পেস থেকে লগ আউট করতে চান? আপনি যে কোনো সময় ইমেইল ও পাসওয়ার্ড দিয়ে পুনরায় লগইন করতে পারবেন।</string>
     <string name="settings_logout_confirm_title">লগ আউট</string>
     <string name="settings_logout_dialog_msg">আপনি কি পরিবার থেকে লগ আউট করতে চান? আপনি যে কোনো সময় আপনার ইমেইল ও পাসওয়ার্ড দিয়ে পুনরায় লগ ইন করতে পারবেন।</string>
@@ -196,6 +205,10 @@
     <string name="settings_time_selected_fmt">নির্বাচিত: %s</string>
     <string name="settings_title">সেটিংস</string>
     <string name="settings_tools_title">ডাটা ও রপ্তানি সরঞ্জাম</string>
+    <string name="settings_tts_speech_rate">পড়ার গতি</string>
+    <string name="settings_tts_speech_rate_fast">দ্রুত (১.২৫x)</string>
+    <string name="settings_tts_speech_rate_normal">স্বাভাবিক (১.০x)</string>
+    <string name="settings_tts_speech_rate_slow">ধীরে (০.৮x)</string>
     <string name="share_family_code">ফ্যামিলি কোড শেয়ার করুন</string>
     <string name="stats_audio_mins">অডিও মিনিট</string>
     <string name="stats_avg_lifespan">গড় আয়ু</string>
@@ -220,6 +233,7 @@
     <string name="story_body_hint">স্মৃতিকথা ও গল্প</string>
     <string name="story_delete">মুছে ফেলুন</string>
     <string name="story_detail_oral">মৌখিক ইতিহাস ও স্মৃতিকথা</string>
+    <string name="story_detail_title">গল্পের বিষয়বস্তু</string>
     <string name="story_oral_recording">মৌখিক স্মৃতিচারণ ও কণ্ঠ ধারণ</string>
     <string name="story_photo_memory">স্মৃতির আলোকচিত্র</string>
     <string name="story_record_btn">ভয়েস রেকর্ড করুন</string>

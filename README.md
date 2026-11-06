@@ -32,6 +32,11 @@
 - **Data Export & Safe Sharing (`TreeExporter`, `ExportActivity`, `FamilyProvider`)**: Export full graphical family trees as high-resolution PNG images or multi-page archival PDF reports (`PdfDocument`), plus vCard (.vcf) and CSV export/import via `FileProvider`.
 - **Cloud Synchronization & Status Indicator (`SyncManager`, `MainActivity`)**: Automatic background synchronization between Room and Firebase Firestore with connectivity callbacks and a reactive toolbar status chip.
 - **Tablet Optimization (`sw600dp`) & Dual Language**: Adaptive tablet layouts with Material 3 `NavigationRailView`, side-by-side selectors, and comprehensive English / Bengali localization.
+- **On This Day Memories (`OnThisDayReceiver`)**: Daily background notification resurfacing past family stories created on today's month and day in previous years, complete with "Open family" actions and boot auto-rescheduling.
+- **Scrollable Home-Screen Widget (`NextEventWidgetProvider`, `NextEventRemoteViewsService`)**: RemoteViews collection widget displaying upcoming family events (birthdays, anniversaries, remembrance days) with a reload button and countdown status.
+- **Family Statistics Dashboard (`StatsActivity`, `BarChartView`, `DonutChartView`)**: Analytical dashboard featuring hand-drawn Canvas bar and donut charts (birthdays per month, gender distribution, top hometowns) built from scratch without third-party chart libraries.
+- **Read Aloud TTS & Accessibility (`TtsHelper`, `LocaleHelper`)**: Android TextToSpeech integration for reading stories and biographies aloud in English or Bengali, with missing voice data detection (`ACTION_INSTALL_TTS_DATA`) and an Elder Text Scaling mode (`fontScale = 1.25f`).
+- **Tree Health Check (`HealthCheckActivity`, `HealthChecker`)**: Read-only integrity tool inspecting family data for death before birth, underage parents, ancestor cycles (DFS), non-mutual spouse links, duplicate profiles, future dates, and disconnected tree components.
 
 ---
 
@@ -109,6 +114,9 @@ Every single Android development syllabus concept is implemented in production c
 | | Dark Mode | [`values-night/colors.xml`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/res/values-night/colors.xml)<br>[`values-night/themes.xml`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/res/values-night/themes.xml) | Calibrated low-saturation dark palette featuring Deep Moss, Forest Charcoal, and Amber Bark. |
 | | Full Bangla Localization | [`values-bn/strings.xml`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/res/values-bn/strings.xml) | Authentic Bengali strings for every label, button, navigation item, kinship title, and notification. |
 | | Accessibility (a11y) | Layouts across `app/src/main/res/layout/` | Minimum 48dp touch targets, semantic content descriptions, and `importantForAccessibility="no"` on decorative visuals. |
+| | TextToSpeech API & Voice Data | [`TtsHelper.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/util/TtsHelper.java) | On-demand Text-To-Speech engine reading stories and biographies aloud in English or Bengali, with missing voice data detection (`ACTION_INSTALL_TTS_DATA`) and speech rate preferences. |
+| | Font Scaling for Accessibility | [`BaseActivity.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/ui/base/BaseActivity.java)<br>[`LocaleHelper.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/util/LocaleHelper.java) | Elder accessibility text scaling (`fontScale = 1.25f`) applied dynamically through `attachBaseContext`. |
+| | Graph Traversal & Integrity Analysis | [`HealthCheckActivity.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/ui/tools/HealthCheckActivity.java)<br>[`HealthChecker.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/util/HealthChecker.java) | Read-only tree health inspection tool executing graph cycle detection (DFS/BFS), date verification, non-mutual spouse detection, and duplicate checks off main thread. |
 
 ---
 

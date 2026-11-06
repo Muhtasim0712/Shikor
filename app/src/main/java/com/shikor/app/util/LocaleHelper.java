@@ -15,6 +15,11 @@ import java.util.Locale;
 public class LocaleHelper {
 
     public static Context wrap(Context context, String language) {
+        boolean largerText = Prefs.getInstance(context).isLargerTextElders();
+        return wrap(context, language, largerText);
+    }
+
+    public static Context wrap(Context context, String language, boolean largerText) {
         if (language == null || language.trim().isEmpty()) {
             language = "en";
         }
@@ -24,6 +29,9 @@ public class LocaleHelper {
 
         Resources res = context.getResources();
         Configuration config = new Configuration(res.getConfiguration());
+        if (largerText) {
+            config.fontScale = 1.25f;
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             config.setLocale(locale);

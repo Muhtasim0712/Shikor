@@ -151,6 +151,8 @@ public class Prefs {
     }
 
     private static final String KEY_HIDE_NAMES_WIDGET_NOTIF = "key_hide_names_in_widget_and_notifications";
+    private static final String KEY_TTS_SPEECH_RATE = "key_tts_speech_rate";
+    private static final String KEY_LARGER_TEXT_ELDERS = "key_larger_text_elders";
 
     public boolean isHideNamesInWidgetAndNotifications() {
         return preferences.getBoolean(KEY_HIDE_NAMES_WIDGET_NOTIF, false);
@@ -158,6 +160,22 @@ public class Prefs {
 
     public void setHideNamesInWidgetAndNotifications(boolean hide) {
         preferences.edit().putBoolean(KEY_HIDE_NAMES_WIDGET_NOTIF, hide).apply();
+    }
+
+    public float getTtsSpeechRate() {
+        return preferences.getFloat(KEY_TTS_SPEECH_RATE, 1.0f);
+    }
+
+    public void setTtsSpeechRate(float rate) {
+        preferences.edit().putFloat(KEY_TTS_SPEECH_RATE, rate).apply();
+    }
+
+    public boolean isLargerTextElders() {
+        return preferences.getBoolean(KEY_LARGER_TEXT_ELDERS, false);
+    }
+
+    public void setLargerTextElders(boolean enabled) {
+        preferences.edit().putBoolean(KEY_LARGER_TEXT_ELDERS, enabled).apply();
     }
 
     public String getThemeMode() {

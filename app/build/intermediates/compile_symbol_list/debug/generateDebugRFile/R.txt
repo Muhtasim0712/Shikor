@@ -148,8 +148,11 @@ int id btnPlayPauseAudio 0x0
 int id btnPlayPreview 0x0
 int id btnPm 0x0
 int id btnReCenter 0x0
+int id btnReadAloudBio 0x0
+int id btnReadAloudStory 0x0
 int id btnRegister 0x0
 int id btnRemovePhoto 0x0
+int id btnRerunCheck 0x0
 int id btnSavePerson 0x0
 int id btnSaveStory 0x0
 int id btnSelectRoot 0x0
@@ -167,6 +170,8 @@ int id cardAudioPlayer 0x0
 int id cardAudioPreview 0x0
 int id cardBiography 0x0
 int id cardCreateFamily 0x0
+int id cardHealthItem 0x0
+int id cardHealthSummary 0x0
 int id cardJoinFamily 0x0
 int id cardMember 0x0
 int id cardPersonTag 0x0
@@ -229,6 +234,7 @@ int id ivPhotoPreview 0x0
 int id ivRegisterLogo 0x0
 int id ivSelectedCheck 0x0
 int id ivSelectedRootIcon 0x0
+int id ivSeverityIcon 0x0
 int id ivStoryPhoto 0x0
 int id ivTimelinePhoto 0x0
 int id ivWidgetReload 0x0
@@ -237,6 +243,7 @@ int id layoutAudioCapsule 0x0
 int id layoutExactAlarmWarning 0x0
 int id layoutExportContacts 0x0
 int id layoutExportTree 0x0
+int id layoutHealthCheck 0x0
 int id layoutHometownsContainer 0x0
 int id layoutImportMembers 0x0
 int id layoutLanguageSetting 0x0
@@ -247,6 +254,7 @@ int id layoutRelationshipFinder 0x0
 int id layoutReminderTime 0x0
 int id layoutStatsContent 0x0
 int id layoutThemeSetting 0x0
+int id layoutTtsSpeechRate 0x0
 int id loadingLayout 0x0
 int id loadingOverlay 0x0
 int id loadingText 0x0
@@ -265,6 +273,7 @@ int id personDetailRoot 0x0
 int id pickerHour 0x0
 int id pickerMinute 0x0
 int id progressBar 0x0
+int id progressHealth 0x0
 int id progressStats 0x0
 int id rbFemale 0x0
 int id rbMale 0x0
@@ -272,6 +281,7 @@ int id rbOther 0x0
 int id registerRoot 0x0
 int id rgGender 0x0
 int id rvExportContacts 0x0
+int id rvHealthIssues 0x0
 int id rvMembers 0x0
 int id rvPersonStories 0x0
 int id rvRootAncestors 0x0
@@ -287,6 +297,7 @@ int id splashProgress 0x0
 int id splashRoot 0x0
 int id switchDailyReminders 0x0
 int id switchDeceased 0x0
+int id switchLargerText 0x0
 int id switchOnThisDay 0x0
 int id tilBiography 0x0
 int id tilBirthDate 0x0
@@ -311,9 +322,11 @@ int id tilYear 0x0
 int id timelineEmptyState 0x0
 int id timelineRoot 0x0
 int id toolbar 0x0
+int id toolbarHealth 0x0
 int id toolbarStats 0x0
 int id treeEmptyState 0x0
 int id treeFragmentRoot 0x0
+int id tvAffectedName 0x0
 int id tvAppInfo 0x0
 int id tvAppName 0x0
 int id tvAudioCapsuleDuration 0x0
@@ -329,6 +342,7 @@ int id tvContactDetails 0x0
 int id tvContactName 0x0
 int id tvContactPhone 0x0
 int id tvCurrentLanguageValue 0x0
+int id tvCurrentSpeechRateValue 0x0
 int id tvCurrentThemeValue 0x0
 int id tvDetailBiography 0x0
 int id tvDetailFullName 0x0
@@ -348,6 +362,10 @@ int id tvFactHijriDate 0x0
 int id tvFactHometown 0x0
 int id tvFactOccupation 0x0
 int id tvGenBadge 0x0
+int id tvHealthEmpty 0x0
+int id tvHighCount 0x0
+int id tvIssueDescription 0x0
+int id tvIssueTitle 0x0
 int id tvItemDetails 0x0
 int id tvItemName 0x0
 int id tvKinshipBangla 0x0
@@ -357,6 +375,8 @@ int id tvLivePreview 0x0
 int id tvLiveScheduleHint 0x0
 int id tvLoginSubtitle 0x0
 int id tvLoginTitle 0x0
+int id tvLowCount 0x0
+int id tvMediumCount 0x0
 int id tvMemberLifespan 0x0
 int id tvMemberName 0x0
 int id tvMemberRelation 0x0
@@ -377,6 +397,7 @@ int id tvSelectedRootName 0x0
 int id tvSettingsFamilyCode 0x0
 int id tvSettingsFamilyName 0x0
 int id tvSettingsUserEmail 0x0
+int id tvSeverityBadge 0x0
 int id tvSiblingsLabel 0x0
 int id tvSpouseLabel 0x0
 int id tvStatAudioMins 0x0
@@ -409,6 +430,7 @@ int layout activity_add_edit_person 0x0
 int layout activity_add_story 0x0
 int layout activity_export 0x0
 int layout activity_family_setup 0x0
+int layout activity_health_check 0x0
 int layout activity_login 0x0
 int layout activity_main 0x0
 int layout activity_person_detail 0x0
@@ -425,6 +447,7 @@ int layout fragment_settings 0x0
 int layout fragment_timeline 0x0
 int layout fragment_tree 0x0
 int layout item_export_contact 0x0
+int layout item_health_issue 0x0
 int layout item_member 0x0
 int layout item_relationship_step 0x0
 int layout item_root_ancestor 0x0
@@ -510,6 +533,10 @@ int string google_api_key 0x0
 int string google_app_id 0x0
 int string google_crash_reporting_api_key 0x0
 int string google_storage_bucket 0x0
+int string health_empty_state 0x0
+int string health_rerun_btn 0x0
+int string health_screen_title 0x0
+int string health_summary_title 0x0
 int string import_contacts 0x0
 int string join_family_btn 0x0
 int string join_family_desc 0x0
@@ -568,6 +595,7 @@ int string person_spouse_label 0x0
 int string person_stories_title 0x0
 int string person_take_photo 0x0
 int string project_id 0x0
+int string read_aloud 0x0
 int string register_button 0x0
 int string register_subtitle 0x0
 int string register_title 0x0
@@ -617,10 +645,14 @@ int string settings_export_tree_pdf_opt 0x0
 int string settings_export_tree_png_opt 0x0
 int string settings_export_tree_title 0x0
 int string settings_family_code_title 0x0
+int string settings_health_check 0x0
+int string settings_health_check_desc 0x0
 int string settings_import_members 0x0
 int string settings_import_members_desc 0x0
 int string settings_language_label 0x0
 int string settings_language_title 0x0
+int string settings_larger_text 0x0
+int string settings_larger_text_desc 0x0
 int string settings_logout_confirm_msg 0x0
 int string settings_logout_confirm_title 0x0
 int string settings_logout_dialog_msg 0x0
@@ -643,6 +675,10 @@ int string settings_time_picker_hint 0x0
 int string settings_time_selected_fmt 0x0
 int string settings_title 0x0
 int string settings_tools_title 0x0
+int string settings_tts_speech_rate 0x0
+int string settings_tts_speech_rate_fast 0x0
+int string settings_tts_speech_rate_normal 0x0
+int string settings_tts_speech_rate_slow 0x0
 int string share_family_code 0x0
 int string stats_audio_mins 0x0
 int string stats_avg_lifespan 0x0
@@ -667,6 +703,7 @@ int string story_attach_photo 0x0
 int string story_body_hint 0x0
 int string story_delete 0x0
 int string story_detail_oral 0x0
+int string story_detail_title 0x0
 int string story_oral_recording 0x0
 int string story_photo_memory 0x0
 int string story_record_btn 0x0
