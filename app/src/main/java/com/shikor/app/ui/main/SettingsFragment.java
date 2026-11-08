@@ -182,6 +182,9 @@ public class SettingsFragment extends Fragment {
         // Exact alarm capability check (Android 12+)
         checkExactAlarmPermission();
 
+        // Update about app version display
+        updateAboutSection();
+
         // Current alert time display
         updateTimeDisplay(prefs.getReminderHour(), prefs.getReminderMinute());
 
@@ -439,6 +442,17 @@ public class SettingsFragment extends Fragment {
                 .show();
     }
 
+    private void updateAboutSection() {
+        if (!isAdded() || getContext() == null) return;
+        try {
+            String versionName = requireContext().getPackageManager()
+                    .getPackageInfo(requireContext().getPackageName(), 0).versionName;
+            binding.tvAboutAppVersion.setText("v" + versionName);
+        } catch (Exception ignored) {
+            binding.tvAboutAppVersion.setText("v1.0.0");
+        }
+    }
+
     private void setupPreferencesSection() {
         updateThemeDisplay();
         updateLanguageDisplay();
@@ -453,6 +467,11 @@ public class SettingsFragment extends Fragment {
             if (isAdded() && getActivity() != null) {
                 requireActivity().recreate();
             }
+        });
+
+        binding.switchIntroAnimation.setChecked(prefs.isIntroAnimationEnabled());
+        binding.switchIntroAnimation.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.setIntroAnimationEnabled(isChecked);
         });
 
         binding.layoutTtsSpeechRate.setOnClickListener(v -> showSpeechRateDialog());

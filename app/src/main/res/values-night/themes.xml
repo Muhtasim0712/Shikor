@@ -69,4 +69,13 @@
         <item name="chipStyle">@style/Widget.Shikor.Chip</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.Shikor.MaterialAlertDialog</item>
     </style>
+
+    <style name="Theme.Shikor" parent="Base.Theme.Shikor" />
+
+    <!-- Splash Screen API Theme (Dark Mode) -->
+    <style name="Theme.Shikor.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#16221B</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_shikor_splash</item>
+        <item name="postSplashScreenTheme">@style/Theme.Shikor</item>
+    </style>
 </resources>

@@ -59,6 +59,7 @@ public class BarChartView extends View {
     }
 
     private void init(Context context, AttributeSet attrs) {
+        if (isInEditMode()) return;
         barColor = MaterialColors.getColor(context, com.google.android.material.R.attr.colorPrimary, ContextCompat.getColor(context, R.color.primary));
         barSelectedColor = MaterialColors.getColor(context, com.google.android.material.R.attr.colorTertiary, ContextCompat.getColor(context, R.color.tertiary));
 

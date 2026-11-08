@@ -80,8 +80,9 @@
     <string name="action_stats">Family Statistics</string>
     <string name="already_have_account">Already have an account? Sign In</string>
     <string name="app_name">Shikor</string>
-    <string name="app_tagline">Preserving family roots, memories &amp; stories</string>
+    <string name="app_tagline">Your roots. Your stories.</string>
     <string name="cancel">Cancel</string>
+    <string name="cd_shikor_logo">Shikor logo</string>
     <string name="confirm_password_label">Confirm Password</string>
     <string name="create_family_btn">Create Family</string>
     <string name="create_family_desc">Start a brand new family archive and receive a 6-character code to invite relatives.</string>
@@ -226,6 +227,7 @@
     <string name="save">Save</string>
     <string name="select_person_1">Select First Relative</string>
     <string name="select_person_2">Select Second Relative</string>
+    <string name="settings_about_title">About Shikor</string>
     <string name="settings_account_title">Account &amp; App Info</string>
     <string name="settings_alert_paused">Daily reminders are currently paused</string>
     <string name="settings_alert_set_today_fmt">Reminder set for today at %1$s (in %2$d min)</string>
@@ -256,6 +258,8 @@
     <string name="settings_health_check_desc">Inspect tree for invalid dates, cycles, duplicates &amp; disconnected members</string>
     <string name="settings_import_members">Import Family Members</string>
     <string name="settings_import_members_desc">Import relatives from CSV or vCard (.vcf) files</string>
+    <string name="settings_intro_animation">Show intro animation</string>
+    <string name="settings_intro_animation_desc">Play animated botanical tree sequence at launch</string>
     <string name="settings_language_label">Language</string>
     <string name="settings_language_title">Select Language</string>
     <string name="settings_larger_text">Larger text for elders</string>
@@ -470,6 +474,11 @@
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
     <style name="Theme.Shikor" parent="Base.Theme.Shikor"/>
+    <style name="Theme.Shikor.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_shikor_splash</item>
+        <item name="postSplashScreenTheme">@style/Theme.Shikor</item>
+    </style>
     <style name="ThemeOverlay.Shikor.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Shikor.Medium</item>
         <item name="colorSurface">@color/surface</item>

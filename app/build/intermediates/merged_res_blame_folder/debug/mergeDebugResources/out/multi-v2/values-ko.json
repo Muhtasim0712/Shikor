@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.shikor.app-mergeDebugResources-46:/values-ko/values-ko.xml",
+            "outputFile": "com.shikor.app-mergeDebugResources-47:/values-ko/values-ko.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\b09ba16907948ddf3c05d9339a33dc7f\\transformed\\play-services-basement-18.4.0\\res\\values-ko\\values.xml",

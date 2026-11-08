@@ -178,6 +178,25 @@ public class Prefs {
         preferences.edit().putBoolean(KEY_LARGER_TEXT_ELDERS, enabled).apply();
     }
 
+    private static final String KEY_ENABLE_INTRO_ANIMATION = "key_enable_intro_animation";
+    private static final String KEY_INTRO_SHOWN = "key_intro_shown";
+
+    public boolean isIntroAnimationEnabled() {
+        return preferences.getBoolean(KEY_ENABLE_INTRO_ANIMATION, true);
+    }
+
+    public void setIntroAnimationEnabled(boolean enabled) {
+        preferences.edit().putBoolean(KEY_ENABLE_INTRO_ANIMATION, enabled).apply();
+    }
+
+    public boolean hasSeenIntro() {
+        return preferences.getBoolean(KEY_INTRO_SHOWN, false);
+    }
+
+    public void setHasSeenIntro(boolean shown) {
+        preferences.edit().putBoolean(KEY_INTRO_SHOWN, shown).apply();
+    }
+
     public String getThemeMode() {
         return preferences.getString(KEY_THEME_MODE, THEME_SYSTEM);
     }

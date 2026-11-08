@@ -57,6 +57,7 @@ public class DonutChartView extends View {
     }
 
     private void init(Context context) {
+        if (isInEditMode()) return;
         slicePaint.setStyle(Paint.Style.STROKE);
         slicePaint.setStrokeWidth(80f);
 

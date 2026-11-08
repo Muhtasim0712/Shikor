@@ -37,6 +37,7 @@
 - **Family Statistics Dashboard (`StatsActivity`, `BarChartView`, `DonutChartView`)**: Analytical dashboard featuring hand-drawn Canvas bar and donut charts (birthdays per month, gender distribution, top hometowns) built from scratch without third-party chart libraries.
 - **Read Aloud TTS & Accessibility (`TtsHelper`, `LocaleHelper`)**: Android TextToSpeech integration for reading stories and biographies aloud in English or Bengali, with missing voice data detection (`ACTION_INSTALL_TTS_DATA`) and an Elder Text Scaling mode (`fontScale = 1.25f`).
 - **Tree Health Check (`HealthCheckActivity`, `HealthChecker`)**: Read-only integrity tool inspecting family data for death before birth, underage parents, ancestor cycles (DFS), non-mutual spouse links, duplicate profiles, future dates, and disconnected tree components.
+- **Animated Botanical Intro & System Splash (`IntroTreeView`, `SplashActivity`)**: Custom 2D Canvas animated botanical sequence that grows seed, roots, trunk, canopy, branches, nodes, and wordmark using `PathMeasure` and `AnimatorSet`, backed by Android 12+ SplashScreen API.
 
 ---
 
@@ -117,6 +118,7 @@ Every single Android development syllabus concept is implemented in production c
 | | TextToSpeech API & Voice Data | [`TtsHelper.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/util/TtsHelper.java) | On-demand Text-To-Speech engine reading stories and biographies aloud in English or Bengali, with missing voice data detection (`ACTION_INSTALL_TTS_DATA`) and speech rate preferences. |
 | | Font Scaling for Accessibility | [`BaseActivity.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/ui/base/BaseActivity.java)<br>[`LocaleHelper.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/util/LocaleHelper.java) | Elder accessibility text scaling (`fontScale = 1.25f`) applied dynamically through `attachBaseContext`. |
 | | Graph Traversal & Integrity Analysis | [`HealthCheckActivity.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/ui/tools/HealthCheckActivity.java)<br>[`HealthChecker.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/util/HealthChecker.java) | Read-only tree health inspection tool executing graph cycle detection (DFS/BFS), date verification, non-mutual spouse detection, and duplicate checks off main thread. |
+| | Animated Botanical Intro & SplashScreen API | [`IntroTreeView.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/view/IntroTreeView.java)<br>[`SplashActivity.java`](file:///c:/Users/Nafij/Desktop/Shikor/app/src/main/java/com/shikor/app/ui/auth/SplashActivity.java) | Custom 2D Canvas view animating seed growth, roots, trunk, canopy, branches, nodes, and wordmark using `PathMeasure` and `AnimatorSet`, paired with Android 12+ SplashScreen API. |
 
 ---
 

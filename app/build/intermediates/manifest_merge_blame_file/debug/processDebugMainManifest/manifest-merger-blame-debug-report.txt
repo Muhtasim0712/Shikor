@@ -110,8 +110,8 @@
 61-->C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:43:13-51
 62            android:exported="true"
 62-->C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:44:13-36
-63            android:theme="@style/Theme.Shikor" >
-63-->C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:45:13-48
+63            android:theme="@style/Theme.Shikor.Starting" >
+63-->C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:45:13-57
 64            <intent-filter>
 64-->C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:46:13-49:29
 65                <action android:name="android.intent.action.MAIN" />

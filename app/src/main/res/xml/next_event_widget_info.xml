@@ -4,4 +4,6 @@
     android:minHeight="110dp"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0"
-    android:initialLayout="@layout/widget_next_event" />
+    android:initialLayout="@layout/widget_next_event"
+    android:previewLayout="@layout/widget_next_event"
+    android:previewImage="@drawable/ic_shikor_logo" />

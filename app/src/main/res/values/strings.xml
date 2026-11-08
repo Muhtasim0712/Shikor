@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Shikor</string>
-    <string name="app_tagline">Preserving family roots, memories &amp; stories</string>
+    <string name="app_tagline">Your roots. Your stories.</string>
 
     <!-- Auth & Splash -->
     <string name="login_title">Welcome Back</string>
@@ -154,6 +154,12 @@
     <string name="health_summary_title">Integrity Summary</string>
     <string name="health_rerun_btn">Re-run</string>
     <string name="health_empty_state">No problems found</string>
+
+    <!-- Branding, Logo & About Strings -->
+    <string name="cd_shikor_logo">Shikor logo</string>
+    <string name="settings_about_title">About Shikor</string>
+    <string name="settings_intro_animation">Show intro animation</string>
+    <string name="settings_intro_animation_desc">Play animated botanical tree sequence at launch</string>
 
     <!-- Person / Member Detail Screen -->
     <string name="action_call">Call</string>

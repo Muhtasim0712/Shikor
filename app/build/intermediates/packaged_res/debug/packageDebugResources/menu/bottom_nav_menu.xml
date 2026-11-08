@@ -3,7 +3,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_tree"
-        android:icon="@drawable/ic_shikor_logo"
+        android:icon="@drawable/ic_nav_tree"
         android:title="@string/nav_tree" />
 
     <item

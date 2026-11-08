@@ -60,7 +60,7 @@
         <activity
             android:name="com.shikor.app.ui.auth.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.Shikor" >
+            android:theme="@style/Theme.Shikor.Starting" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

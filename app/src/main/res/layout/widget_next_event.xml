@@ -15,11 +15,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:contentDescription="@null"
-            android:src="@android:drawable/ic_menu_today"
-            app:tint="@color/primary" />
+            android:src="@drawable/ic_shikor_logo" />
 
         <TextView
             android:layout_width="0dp"
@@ -58,6 +57,8 @@
         android:id="@+id/tvWidgetEmpty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:drawableTop="@drawable/ic_shikor_logo"
+        android:drawablePadding="8dp"
         android:gravity="center"
         android:text="@string/widget_no_events"
         android:textColor="@color/on_surface_variant"

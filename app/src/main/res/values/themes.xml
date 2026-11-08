@@ -72,6 +72,13 @@
 
     <style name="Theme.Shikor" parent="Base.Theme.Shikor" />
 
+    <!-- Splash Screen API Theme (Android 12+) -->
+    <style name="Theme.Shikor.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_shikor_splash</item>
+        <item name="postSplashScreenTheme">@style/Theme.Shikor</item>
+    </style>
+
     <!-- Window Animations (Gentle subtle fade, respects Remove Animations system setting) -->
     <style name="ShikorWindowAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/fade_in_subtle</item>

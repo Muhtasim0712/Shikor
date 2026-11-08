@@ -94,8 +94,14 @@ int drawable ic_diurnal_weather 0x0
 int drawable ic_fit_screen 0x0
 int drawable ic_launcher_background 0x0
 int drawable ic_launcher_foreground 0x0
+int drawable ic_launcher_monochrome 0x0
 int drawable ic_nature_tree 0x0
+int drawable ic_nav_tree 0x0
 int drawable ic_shikor_logo 0x0
+int drawable ic_shikor_logo_dark 0x0
+int drawable ic_shikor_splash 0x0
+int drawable ic_stat_shikor 0x0
+int drawable shikor_wordmark 0x0
 int font noto_sans_bengali 0x0
 int font noto_sans_bengali_bold 0x0
 int font noto_sans_bengali_regular 0x0
@@ -222,6 +228,7 @@ int id familySetupRoot 0x0
 int id familyTreeView 0x0
 int id indicatorDot 0x0
 int id indicatorLine 0x0
+int id introTreeView 0x0
 int id ivAllGenIcon 0x0
 int id ivArrow 0x0
 int id ivDialogPhotoPreview 0x0
@@ -229,7 +236,6 @@ int id ivDropdownArrow 0x0
 int id ivEmptyIcon 0x0
 int id ivItemAvatar 0x0
 int id ivLoginLogo 0x0
-int id ivLogo 0x0
 int id ivPhotoPreview 0x0
 int id ivRegisterLogo 0x0
 int id ivSelectedCheck 0x0
@@ -295,10 +301,10 @@ int id spinnerMother 0x0
 int id spinnerPerson 0x0
 int id spinnerSpouse 0x0
 int id spinnerTreeRoot 0x0
-int id splashProgress 0x0
 int id splashRoot 0x0
 int id switchDailyReminders 0x0
 int id switchDeceased 0x0
+int id switchIntroAnimation 0x0
 int id switchLargerText 0x0
 int id switchOnThisDay 0x0
 int id tilBiography 0x0
@@ -328,9 +334,9 @@ int id toolbarHealth 0x0
 int id toolbarStats 0x0
 int id treeEmptyState 0x0
 int id treeFragmentRoot 0x0
+int id tvAboutAppVersion 0x0
 int id tvAffectedName 0x0
 int id tvAppInfo 0x0
-int id tvAppName 0x0
 int id tvAudioCapsuleDuration 0x0
 int id tvAudioCurrentTime 0x0
 int id tvAudioDurationBadge 0x0
@@ -420,7 +426,6 @@ int id tvStoryDate 0x0
 int id tvStoryExcerpt 0x0
 int id tvStoryTitle 0x0
 int id tvSuccessHeader 0x0
-int id tvTagline 0x0
 int id tvTimelineCaption 0x0
 int id tvTimelineYear 0x0
 int id tvTreeRootHeader 0x0
@@ -477,6 +482,7 @@ int string already_have_account 0x0
 int string app_name 0x0
 int string app_tagline 0x0
 int string cancel 0x0
+int string cd_shikor_logo 0x0
 int string confirm_password_label 0x0
 int string create_family_btn 0x0
 int string create_family_desc 0x0
@@ -621,6 +627,7 @@ int string rf_start_relative 0x0
 int string save 0x0
 int string select_person_1 0x0
 int string select_person_2 0x0
+int string settings_about_title 0x0
 int string settings_account_title 0x0
 int string settings_alert_paused 0x0
 int string settings_alert_set_today_fmt 0x0
@@ -651,6 +658,8 @@ int string settings_health_check 0x0
 int string settings_health_check_desc 0x0
 int string settings_import_members 0x0
 int string settings_import_members_desc 0x0
+int string settings_intro_animation 0x0
+int string settings_intro_animation_desc 0x0
 int string settings_language_label 0x0
 int string settings_language_title 0x0
 int string settings_larger_text 0x0
@@ -775,6 +784,7 @@ int style TextAppearance_Shikor_BodyLarge 0x0
 int style TextAppearance_Shikor_BodyMedium 0x0
 int style ThemeOverlay_Shikor_MaterialAlertDialog 0x0
 int style Theme_Shikor 0x0
+int style Theme_Shikor_Starting 0x0
 int style Widget_Shikor_BottomNavigationView 0x0
 int style Widget_Shikor_Button 0x0
 int style Widget_Shikor_Button_Outlined 0x0

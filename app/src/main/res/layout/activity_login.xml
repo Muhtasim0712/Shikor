@@ -24,10 +24,10 @@
 
             <ImageView
                 android:id="@+id/ivLoginLogo"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
                 android:layout_marginTop="@dimen/spacing_xlarge"
-                android:contentDescription="@string/app_name"
+                android:contentDescription="@string/cd_shikor_logo"
                 android:src="@drawable/ic_shikor_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

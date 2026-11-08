@@ -9,8 +9,9 @@
     <string name="action_stats">পারিবারিক পরিসংখ্যান</string>
     <string name="already_have_account">ইতিমধ্যে অ্যাকাউন্ট আছে? লগ ইন করুন</string>
     <string name="app_name">শিকড়</string>
-    <string name="app_tagline">পারিবারিক স্মৃতি, ঐতিহ্য ও ইতিহাস সংরক্ষণে</string>
+    <string name="app_tagline">আপনার শিকড়, আপনার গল্প</string>
     <string name="cancel">বাতিল</string>
+    <string name="cd_shikor_logo">শিকড় লোগো</string>
     <string name="confirm_password_label">পাসওয়ার্ড নিশ্চিত করুন</string>
     <string name="create_family_btn">পরিবার তৈরি করুন</string>
     <string name="create_family_desc">একটি নতুন পারিবারিক অ্যালবাম শুরু করুন এবং আত্মীয়দের আমন্ত্রণ জানাতে ৬ অক্ষরের কোড পান।</string>
@@ -149,6 +150,7 @@
     <string name="save">সংরক্ষণ</string>
     <string name="select_person_1">প্রথম আত্মীয় নির্বাচন করুন</string>
     <string name="select_person_2">দ্বিতীয় আত্মীয় নির্বাচন করুন</string>
+    <string name="settings_about_title">শিকড় সম্পর্কে</string>
     <string name="settings_account_title">অ্যাকাউন্ট ও তথ্য</string>
     <string name="settings_alert_paused">দৈনিক রিমাইন্ডার বর্তমানে বন্ধ রয়েছে</string>
     <string name="settings_alert_set_today_fmt">আজ %1$s-এ রিমাইন্ডার নির্ধারণ করা হয়েছে (আর %2$d মিনিট)</string>
@@ -179,6 +181,8 @@
     <string name="settings_health_check_desc">ভুল তারিখ, সম্পর্কের চক্র, দ্বৈত তথ্য ও বিচ্ছিন্ন সদস্যদের খুঁজে বের করুন</string>
     <string name="settings_import_members">আত্মীয়দের তথ্য আমদানি</string>
     <string name="settings_import_members_desc">CSV বা vCard (.vcf) ফাইল থেকে আত্মীয়দের তালিকায় যুক্ত করুন</string>
+    <string name="settings_intro_animation">অ্যানিমেটেড ইন্ট্রো প্রদর্শন</string>
+    <string name="settings_intro_animation_desc">অ্যাপ চালুর সময় লোগো অ্যানিমেশন চালান</string>
     <string name="settings_language_label">ভাষা</string>
     <string name="settings_language_title">ভাষা নির্বাচন করুন</string>
     <string name="settings_larger_text">বয়স্কদের জন্য বড় ফন্ট</string>

@@ -96,8 +96,14 @@ drawable ic_diurnal_weather
 drawable ic_fit_screen
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_launcher_monochrome
 drawable ic_nature_tree
+drawable ic_nav_tree
 drawable ic_shikor_logo
+drawable ic_shikor_logo_dark
+drawable ic_shikor_splash
+drawable ic_stat_shikor
+drawable shikor_wordmark
 font noto_sans_bengali
 font noto_sans_bengali_bold
 font noto_sans_bengali_regular
@@ -224,6 +230,7 @@ id familySetupRoot
 id familyTreeView
 id indicatorDot
 id indicatorLine
+id introTreeView
 id ivAllGenIcon
 id ivArrow
 id ivDialogPhotoPreview
@@ -231,7 +238,6 @@ id ivDropdownArrow
 id ivEmptyIcon
 id ivItemAvatar
 id ivLoginLogo
-id ivLogo
 id ivPhotoPreview
 id ivRegisterLogo
 id ivSelectedCheck
@@ -297,10 +303,10 @@ id spinnerMother
 id spinnerPerson
 id spinnerSpouse
 id spinnerTreeRoot
-id splashProgress
 id splashRoot
 id switchDailyReminders
 id switchDeceased
+id switchIntroAnimation
 id switchLargerText
 id switchOnThisDay
 id tilBiography
@@ -330,9 +336,9 @@ id toolbarHealth
 id toolbarStats
 id treeEmptyState
 id treeFragmentRoot
+id tvAboutAppVersion
 id tvAffectedName
 id tvAppInfo
-id tvAppName
 id tvAudioCapsuleDuration
 id tvAudioCurrentTime
 id tvAudioDurationBadge
@@ -422,7 +428,6 @@ id tvStoryDate
 id tvStoryExcerpt
 id tvStoryTitle
 id tvSuccessHeader
-id tvTagline
 id tvTimelineCaption
 id tvTimelineYear
 id tvTreeRootHeader
@@ -479,6 +484,7 @@ string already_have_account
 string app_name
 string app_tagline
 string cancel
+string cd_shikor_logo
 string confirm_password_label
 string create_family_btn
 string create_family_desc
@@ -623,6 +629,7 @@ string rf_start_relative
 string save
 string select_person_1
 string select_person_2
+string settings_about_title
 string settings_account_title
 string settings_alert_paused
 string settings_alert_set_today_fmt
@@ -653,6 +660,8 @@ string settings_health_check
 string settings_health_check_desc
 string settings_import_members
 string settings_import_members_desc
+string settings_intro_animation
+string settings_intro_animation_desc
 string settings_language_label
 string settings_language_title
 string settings_larger_text
@@ -777,6 +786,7 @@ style TextAppearance.Shikor.BodyLarge
 style TextAppearance.Shikor.BodyMedium
 style ThemeOverlay.Shikor.MaterialAlertDialog
 style Theme.Shikor
+style Theme.Shikor.Starting
 style Widget.Shikor.BottomNavigationView
 style Widget.Shikor.Button
 style Widget.Shikor.Button.Outlined

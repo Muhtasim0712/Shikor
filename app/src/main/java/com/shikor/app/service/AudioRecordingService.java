@@ -317,7 +317,7 @@ public class AudioRecordingService extends Service {
         return new NotificationCompat.Builder(this, NotificationHelper.CHANNEL_RECORDING_ID)
                 .setContentTitle("Recording Memory: " + storyTitle)
                 .setContentText("Recording in progress: " + timeStr)
-                .setSmallIcon(android.R.drawable.ic_btn_speak_now)
+                .setSmallIcon(R.drawable.ic_stat_shikor)
                 .setColor(androidx.core.content.ContextCompat.getColor(this, R.color.primary))
                 .setOngoing(true)
                 .setContentIntent(contentPendingIntent)

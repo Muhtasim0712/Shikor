@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">শিকড়</string>
-    <string name="app_tagline">পারিবারিক স্মৃতি, ঐতিহ্য ও ইতিহাস সংরক্ষণে</string>
+    <string name="app_tagline">আপনার শিকড়, আপনার গল্প</string>
 
     <!-- Auth & Splash -->
     <string name="login_title">স্বাগতম</string>
@@ -154,6 +154,12 @@
     <string name="health_summary_title">পরীক্ষার সারসংক্ষেপ</string>
     <string name="health_rerun_btn">পুনরায় পরীক্ষা</string>
     <string name="health_empty_state">কোনো সমস্যা পাওয়া যায়নি</string>
+
+    <!-- Branding, Logo & About Strings -->
+    <string name="cd_shikor_logo">শিকড় লোগো</string>
+    <string name="settings_about_title">শিকড় সম্পর্কে</string>
+    <string name="settings_intro_animation">অ্যানিমেটেড ইন্ট্রো প্রদর্শন</string>
+    <string name="settings_intro_animation_desc">অ্যাপ চালুর সময় লোগো অ্যানিমেশন চালান</string>
 
     <!-- Person / Member Detail Screen -->
     <string name="action_call">কল</string>

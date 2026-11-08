@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="@dimen/spacing_small"
-            android:text="Synced"
+            android:text="@string/sync_synced"
             android:textAppearance="?attr/textAppearanceLabelSmall"
             app:chipIcon="@android:drawable/stat_sys_upload_done"
             app:chipIconSize="16dp"
