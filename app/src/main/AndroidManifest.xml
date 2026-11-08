@@ -106,6 +106,10 @@
             android:name=".ui.tools.StatsActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".ui.tools.HealthCheckActivity"
+            android:exported="false" />
+
         <!-- CONCEPT: Foreground Service for background elder voice recording -->
         <service
             android:name=".service.AudioRecordingService"

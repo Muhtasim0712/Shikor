@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:2:1-178:12
-INJECTED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:2:1-178:12
-INJECTED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:2:1-178:12
-INJECTED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:2:1-178:12
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:2:1-182:12
+INJECTED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:2:1-182:12
+INJECTED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:2:1-182:12
+INJECTED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:2:1-182:12
 MERGED from [androidx.databinding:viewbinding:9.4.1] C:\Users\Nafij\.gradle\caches\9.6.0\transforms\b86b5a10c7715701d895a75267b1e858\transformed\viewbinding-9.4.1\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\Nafij\.gradle\caches\9.6.0\transforms\f2d5d2973ee8d3d5ec212be912523bae\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] C:\Users\Nafij\.gradle\caches\9.6.0\transforms\05a04efe845126e274cd132401d1e6f9\transformed\constraintlayout-2.2.0\AndroidManifest.xml:2:1-9:12
@@ -159,8 +159,8 @@ ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:27:5-7
 	android:name
 		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:27:22-74
 application
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:29:5-176:19
-INJECTED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:29:5-176:19
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:29:5-180:19
+INJECTED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:29:5-180:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\Nafij\.gradle\caches\9.6.0\transforms\f2d5d2973ee8d3d5ec212be912523bae\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\Nafij\.gradle\caches\9.6.0\transforms\f2d5d2973ee8d3d5ec212be912523bae\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.0] C:\Users\Nafij\.gradle\caches\9.6.0\transforms\05a04efe845126e274cd132401d1e6f9\transformed\constraintlayout-2.2.0\AndroidManifest.xml:7:5-20
@@ -331,102 +331,108 @@ ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:105:9-
 		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:107:13-37
 	android:name
 		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:106:13-51
+activity#com.shikor.app.ui.tools.HealthCheckActivity
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:109:9-111:40
+	android:exported
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:111:13-37
+	android:name
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:110:13-57
 service#com.shikor.app.service.AudioRecordingService
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:110:9-114:58
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:114:9-118:58
 	android:enabled
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:112:13-35
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:116:13-35
 	android:exported
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:113:13-37
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:117:13-37
 	android:foregroundServiceType
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:114:13-55
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:118:13-55
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:111:13-58
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:115:13-58
 receiver#com.shikor.app.receiver.ReminderReceiver
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:118:9-121:40
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:122:9-125:40
 	android:enabled
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:120:13-35
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:124:13-35
 	android:exported
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:121:13-37
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:125:13-37
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:119:13-54
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:123:13-54
 receiver#com.shikor.app.receiver.ReminderActionReceiver
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:124:9-127:40
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:128:9-131:40
 	android:enabled
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:126:13-35
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:130:13-35
 	android:exported
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:127:13-37
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:131:13-37
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:125:13-60
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:129:13-60
 receiver#com.shikor.app.receiver.OnThisDayReceiver
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:130:9-133:40
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:134:9-137:40
 	android:enabled
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:132:13-35
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:136:13-35
 	android:exported
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:133:13-37
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:137:13-37
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:131:13-55
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:135:13-55
 receiver#com.shikor.app.widget.NextEventWidgetProvider
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:136:9-145:20
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:140:9-149:20
 	android:exported
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:138:13-36
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:142:13-36
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:137:13-59
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:141:13-59
 intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:139:13-141:29
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:143:13-145:29
 action#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:140:17-84
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:144:17-84
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:140:25-81
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:144:25-81
 meta-data#android.appwidget.provider
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:142:13-144:66
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:146:13-148:66
 	android:resource
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:144:17-63
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:148:17-63
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:143:17-58
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:147:17-58
 receiver#com.shikor.app.receiver.BootReceiver
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:148:9-156:20
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:152:9-160:20
 	android:enabled
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:150:13-35
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:154:13-35
 	android:exported
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:151:13-36
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:155:13-36
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:149:13-50
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:153:13-50
 intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.QUICKBOOT_POWERON
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:152:13-155:29
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:156:13-159:29
 action#android.intent.action.BOOT_COMPLETED
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:153:17-79
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:157:17-79
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:153:25-76
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:157:25-76
 action#android.intent.action.QUICKBOOT_POWERON
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:154:17-82
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:158:17-82
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:154:25-79
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:158:25-79
 provider#com.shikor.app.provider.FamilyProvider
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:159:9-163:74
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:163:9-167:74
 	android:authorities
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:161:13-58
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:165:13-58
 	android:exported
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:162:13-37
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:166:13-37
 	android:permission
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:163:13-71
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:167:13-71
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:160:13-52
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:164:13-52
 provider#androidx.core.content.FileProvider
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:166:9-174:20
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:170:9-178:20
 	android:grantUriPermissions
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:170:13-47
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:174:13-47
 	android:authorities
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:168:13-62
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:172:13-62
 	android:exported
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:169:13-37
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:173:13-37
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:167:13-62
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:171:13-62
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:171:13-173:54
+ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:175:13-177:54
 	android:resource
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:173:17-51
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:177:17-51
 	android:name
-		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:172:17-67
+		ADDED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml:176:17-67
 uses-sdk
 INJECTED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Nafij\Desktop\Shikor\app\src\main\AndroidManifest.xml

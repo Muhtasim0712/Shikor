@@ -16,6 +16,8 @@ import com.google.android.material.card.MaterialCardView;
 import com.shikor.app.R;
 import com.shikor.app.util.HealthChecker;
 
+import java.util.Objects;
+
 /**
  * HealthCheckAdapter - ListAdapter displaying tree health issues with severity icons and colors.
  * CONCEPT: ListAdapter with DiffUtil.ItemCallback, View Binding / View Holders, and item click callbacks.
@@ -37,12 +39,12 @@ public class HealthCheckAdapter extends ListAdapter<HealthChecker.HealthIssue, H
             new DiffUtil.ItemCallback<HealthChecker.HealthIssue>() {
                 @Override
                 public boolean areItemsTheSame(@NonNull HealthChecker.HealthIssue oldItem, @NonNull HealthChecker.HealthIssue newItem) {
-                    return oldItem.personId.equals(newItem.personId) && oldItem.issueTitle.equals(newItem.issueTitle);
+                    return Objects.equals(oldItem.personId, newItem.personId) && Objects.equals(oldItem.issueTitle, newItem.issueTitle);
                 }
 
                 @Override
                 public boolean areContentsTheSame(@NonNull HealthChecker.HealthIssue oldItem, @NonNull HealthChecker.HealthIssue newItem) {
-                    return oldItem.issueDescription.equals(newItem.issueDescription) && oldItem.severity == newItem.severity;
+                    return Objects.equals(oldItem.issueDescription, newItem.issueDescription) && oldItem.severity == newItem.severity;
                 }
             };
 
@@ -56,30 +58,27 @@ public class HealthCheckAdapter extends ListAdapter<HealthChecker.HealthIssue, H
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HealthChecker.HealthIssue issue = getItem(position);
-        holder.tvIssueTitle.setText(issue.issueTitle);
-        holder.tvAffectedName.setText(issue.personName);
-        holder.tvIssueDescription.setText(issue.issueDescription);
+        if (issue == null) return;
+
+        holder.tvIssueTitle.setText(issue.issueTitle != null ? issue.issueTitle : "Issue");
+        holder.tvAffectedName.setText(issue.personName != null ? issue.personName : "Relative");
+        holder.tvIssueDescription.setText(issue.issueDescription != null ? issue.issueDescription : "");
 
         int badgeBg;
         int iconRes;
 
-        switch (issue.severity) {
-            case HIGH:
-                badgeBg = ContextCompat.getColor(holder.itemView.getContext(), R.color.error);
-                iconRes = android.R.drawable.ic_dialog_alert;
-                holder.tvSeverityBadge.setText("CRITICAL");
-                break;
-            case MEDIUM:
-                badgeBg = ContextCompat.getColor(holder.itemView.getContext(), R.color.tertiary);
-                iconRes = android.R.drawable.ic_dialog_info;
-                holder.tvSeverityBadge.setText("WARNING");
-                break;
-            case LOW:
-            default:
-                badgeBg = ContextCompat.getColor(holder.itemView.getContext(), R.color.gender_male);
-                iconRes = android.R.drawable.ic_menu_info_details;
-                holder.tvSeverityBadge.setText("INFO");
-                break;
+        if (issue.severity == HealthChecker.Severity.HIGH) {
+            badgeBg = ContextCompat.getColor(holder.itemView.getContext(), R.color.error);
+            iconRes = android.R.drawable.ic_dialog_alert;
+            holder.tvSeverityBadge.setText("CRITICAL");
+        } else if (issue.severity == HealthChecker.Severity.MEDIUM) {
+            badgeBg = ContextCompat.getColor(holder.itemView.getContext(), R.color.tertiary);
+            iconRes = android.R.drawable.ic_dialog_info;
+            holder.tvSeverityBadge.setText("WARNING");
+        } else {
+            badgeBg = ContextCompat.getColor(holder.itemView.getContext(), R.color.gender_male);
+            iconRes = android.R.drawable.ic_menu_info_details;
+            holder.tvSeverityBadge.setText("INFO");
         }
 
         holder.tvSeverityBadge.setBackgroundColor(badgeBg);

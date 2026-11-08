@@ -35,10 +35,10 @@ public class HealthChecker {
 
         public HealthIssue(String personId, String personName, String issueTitle, String issueDescription, Severity severity) {
             this.personId = personId;
-            this.personName = personName;
-            this.issueTitle = issueTitle;
-            this.issueDescription = issueDescription;
-            this.severity = severity;
+            this.personName = personName != null ? personName : "Relative";
+            this.issueTitle = issueTitle != null ? issueTitle : "Issue";
+            this.issueDescription = issueDescription != null ? issueDescription : "";
+            this.severity = severity != null ? severity : Severity.LOW;
         }
     }
 
@@ -57,13 +57,18 @@ public class HealthChecker {
         List<HealthIssue> issues = new ArrayList<>();
         Map<String, PersonEntity> personMap = new HashMap<>();
         for (PersonEntity p : people) {
-            personMap.put(p.getId(), p);
+            if (p != null && p.getId() != null) {
+                personMap.put(p.getId(), p);
+            }
         }
 
         long now = System.currentTimeMillis();
 
         // 1. Date & Individual Validation
         for (PersonEntity p : people) {
+            if (p == null || p.getId() == null) continue;
+            String fullName = p.getFullName() != null ? p.getFullName() : "Relative";
+
             long birthMs = parseDateToMillis(p.getBirthDate());
             long deathMs = parseDateToMillis(p.getDeathDate());
             long marriageMs = parseDateToMillis(p.getMarriageDate());
@@ -71,9 +76,9 @@ public class HealthChecker {
             // Rule 1: Death before birth
             if (birthMs > 0 && deathMs > 0 && deathMs < birthMs) {
                 issues.add(new HealthIssue(
-                        p.getId(), p.getFullName(),
+                        p.getId(), fullName,
                         "Death before birth",
-                        p.getFullName() + "'s recorded death date is earlier than their birth date.",
+                        fullName + "'s recorded death date is earlier than their birth date.",
                         Severity.HIGH
                 ));
             }
@@ -81,25 +86,25 @@ public class HealthChecker {
             // Rule 7: Future dates
             if (birthMs > now) {
                 issues.add(new HealthIssue(
-                        p.getId(), p.getFullName(),
+                        p.getId(), fullName,
                         "Future birth date",
-                        p.getFullName() + "'s birth date is set in the future.",
+                        fullName + "'s birth date is set in the future.",
                         Severity.HIGH
                 ));
             }
             if (deathMs > now) {
                 issues.add(new HealthIssue(
-                        p.getId(), p.getFullName(),
+                        p.getId(), fullName,
                         "Future death date",
-                        p.getFullName() + "'s death date is set in the future.",
+                        fullName + "'s death date is set in the future.",
                         Severity.HIGH
                 ));
             }
             if (marriageMs > now) {
                 issues.add(new HealthIssue(
-                        p.getId(), p.getFullName(),
+                        p.getId(), fullName,
                         "Future marriage date",
-                        p.getFullName() + "'s marriage date is set in the future.",
+                        fullName + "'s marriage date is set in the future.",
                         Severity.HIGH
                 ));
             }
@@ -121,9 +126,9 @@ public class HealthChecker {
                 PersonEntity spouse = personMap.get(p.getSpouseId());
                 if (spouse == null || !Objects.equals(spouse.getSpouseId(), p.getId())) {
                     issues.add(new HealthIssue(
-                            p.getId(), p.getFullName(),
+                            p.getId(), fullName,
                             "Unmatched spouse link",
-                            p.getFullName() + " lists a spouse who does not link back to them.",
+                            fullName + " lists a spouse who does not link back to them.",
                             Severity.MEDIUM
                     ));
                 }
@@ -132,17 +137,17 @@ public class HealthChecker {
             // Rule 8: Missing photo or birth date (Low severity)
             if (p.getBirthDate() == null || p.getBirthDate().trim().isEmpty()) {
                 issues.add(new HealthIssue(
-                        p.getId(), p.getFullName(),
+                        p.getId(), fullName,
                         "Missing birth date",
-                        p.getFullName() + " has no birth date recorded.",
+                        fullName + " has no birth date recorded.",
                         Severity.LOW
                 ));
             }
             if (p.getPhotoPath() == null || p.getPhotoPath().trim().isEmpty()) {
                 issues.add(new HealthIssue(
-                        p.getId(), p.getFullName(),
+                        p.getId(), fullName,
                         "Missing profile photo",
-                        p.getFullName() + " has no profile photo uploaded.",
+                        fullName + " has no profile photo uploaded.",
                         Severity.LOW
                 ));
             }
@@ -150,12 +155,14 @@ public class HealthChecker {
 
         // Rule 3: Ancestor cycle detection (DFS)
         for (PersonEntity p : people) {
+            if (p == null || p.getId() == null) continue;
             Set<String> visited = new HashSet<>();
             if (hasAncestorCycle(p.getId(), personMap, visited)) {
+                String fullName = p.getFullName() != null ? p.getFullName() : "Relative";
                 issues.add(new HealthIssue(
-                        p.getId(), p.getFullName(),
+                        p.getId(), fullName,
                         "Ancestor cycle detected",
-                        p.getFullName() + " is listed as their own ancestor in parent links.",
+                        fullName + " is listed as their own ancestor in parent links.",
                         Severity.HIGH
                 ));
             }
@@ -164,7 +171,7 @@ public class HealthChecker {
         // Rule 5: Likely duplicates (Same full name & birth date)
         Map<String, List<PersonEntity>> duplicateMap = new HashMap<>();
         for (PersonEntity p : people) {
-            if (p.getBirthDate() != null && !p.getBirthDate().trim().isEmpty()) {
+            if (p != null && p.getFullName() != null && p.getBirthDate() != null && !p.getBirthDate().trim().isEmpty()) {
                 String key = p.getFullName().trim().toLowerCase() + "_" + p.getBirthDate().trim();
                 duplicateMap.computeIfAbsent(key, k -> new ArrayList<>()).add(p);
             }
@@ -172,10 +179,11 @@ public class HealthChecker {
         for (List<PersonEntity> dups : duplicateMap.values()) {
             if (dups.size() > 1) {
                 for (PersonEntity dup : dups) {
+                    String fullName = dup.getFullName() != null ? dup.getFullName() : "Relative";
                     issues.add(new HealthIssue(
-                            dup.getId(), dup.getFullName(),
+                            dup.getId(), fullName,
                             "Likely duplicate relative",
-                            dup.getFullName() + " shares an identical name and birth date with another profile.",
+                            fullName + " shares an identical name and birth date with another profile.",
                             Severity.MEDIUM
                     ));
                 }
@@ -186,11 +194,12 @@ public class HealthChecker {
         if (people.size() > 2) {
             Set<String> mainConnectedSet = findMainConnectedComponent(people, personMap);
             for (PersonEntity p : people) {
-                if (!mainConnectedSet.contains(p.getId())) {
+                if (p != null && p.getId() != null && !mainConnectedSet.contains(p.getId())) {
+                    String fullName = p.getFullName() != null ? p.getFullName() : "Relative";
                     issues.add(new HealthIssue(
-                            p.getId(), p.getFullName(),
+                            p.getId(), fullName,
                             "Disconnected relative",
-                            p.getFullName() + " is not connected to the main family tree.",
+                            fullName + " is not connected to the main family tree.",
                             Severity.MEDIUM
                     ));
                 }
@@ -201,24 +210,27 @@ public class HealthChecker {
     }
 
     private static void checkParentChildAge(PersonEntity child, PersonEntity parent, String parentRole, long childBirthMs, List<HealthIssue> issues) {
-        if (parent == null) return;
+        if (child == null || parent == null) return;
         long parentBirthMs = parseDateToMillis(parent.getBirthDate());
         if (parentBirthMs <= 0) return;
 
+        String childName = child.getFullName() != null ? child.getFullName() : "Relative";
+        String parentName = parent.getFullName() != null ? parent.getFullName() : "Parent";
+
         if (childBirthMs < parentBirthMs) {
             issues.add(new HealthIssue(
-                    child.getId(), child.getFullName(),
+                    child.getId(), childName,
                     "Child born before " + parentRole.toLowerCase(),
-                    child.getFullName() + " is recorded as born before their " + parentRole.toLowerCase() + " (" + parent.getFullName() + ").",
+                    childName + " is recorded as born before their " + parentRole.toLowerCase() + " (" + parentName + ").",
                     Severity.HIGH
             ));
         } else {
             long diffYears = (childBirthMs - parentBirthMs) / (1000L * 60 * 60 * 24 * 365);
             if (diffYears < 12) {
                 issues.add(new HealthIssue(
-                        child.getId(), child.getFullName(),
+                        child.getId(), childName,
                         "Parent under 12 at child's birth",
-                        parent.getFullName() + " was under 12 years old when " + child.getFullName() + " was born.",
+                        parentName + " was under 12 years old when " + childName + " was born.",
                         Severity.HIGH
                 ));
             }
@@ -226,7 +238,7 @@ public class HealthChecker {
     }
 
     private static boolean hasAncestorCycle(String personId, Map<String, PersonEntity> map, Set<String> visited) {
-        if (personId == null) return false;
+        if (personId == null || map == null) return false;
         if (visited.contains(personId)) return true; // Cycle detected!
 
         visited.add(personId);
@@ -243,11 +255,11 @@ public class HealthChecker {
     }
 
     private static Set<String> findMainConnectedComponent(List<PersonEntity> people, Map<String, PersonEntity> personMap) {
-        if (people.isEmpty()) return Collections.emptySet();
+        if (people == null || people.isEmpty()) return Collections.emptySet();
 
-        // Build adjacency graph for all relations
         Map<String, Set<String>> graph = new HashMap<>();
         for (PersonEntity p : people) {
+            if (p == null || p.getId() == null) continue;
             graph.computeIfAbsent(p.getId(), k -> new HashSet<>());
             if (p.getFatherId() != null && personMap.containsKey(p.getFatherId())) {
                 graph.get(p.getId()).add(p.getFatherId());
@@ -263,8 +275,9 @@ public class HealthChecker {
             }
         }
 
-        // BFS from first root/person to find largest connected component
-        String startId = people.get(0).getId();
+        String startId = people.get(0) != null ? people.get(0).getId() : null;
+        if (startId == null) return Collections.emptySet();
+
         Set<String> visited = new HashSet<>();
         List<String> queue = new ArrayList<>();
         queue.add(startId);
