@@ -49,6 +49,7 @@ public class StatsActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+        applySystemWindowInsets(findViewById(R.id.rootStats));
 
         MaterialToolbar toolbar = findViewById(R.id.toolbarStats);
         setSupportActionBar(toolbar);

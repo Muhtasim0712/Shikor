@@ -33,9 +33,17 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        // Edge-to-edge support for Android 15+
-        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        // Enforce system window fitting so content fits neatly between top status bar and bottom navigation bar
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), true);
         super.onCreate(savedInstanceState);
+
+        androidx.core.view.WindowInsetsControllerCompat insetsController = WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
+        if (insetsController != null) {
+            boolean isNight = (getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES;
+            insetsController.setAppearanceLightStatusBars(!isNight);
+            insetsController.setAppearanceLightNavigationBars(!isNight);
+        }
+
         Log.d(TAG, "LIFECYCLE: onCreate(savedInstanceState=" + (savedInstanceState != null) + ")");
     }
 

@@ -76,6 +76,10 @@
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\widget_item_event.xml"
     },
     {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_health_check.xml.flat",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_health_check.xml"
+    },
+    {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-hdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-hdpi\\ic_launcher.webp"
     },
@@ -156,10 +160,6 @@
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_login.xml"
     },
     {
-        "merged": "com.shikor.app-debug-48:/layout_fragment_settings.xml.flat",
-        "source": "com.shikor.app-main-50:/layout/fragment_settings.xml"
-    },
-    {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_activity_main.xml.flat",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\activity_main.xml"
     },
@@ -198,10 +198,6 @@
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_item_member.xml.flat",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_member.xml"
-    },
-    {
-        "merged": "com.shikor.app-debug-48:/layout_item_health_issue.xml.flat",
-        "source": "com.shikor.app-main-50:/layout/item_health_issue.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\anim_fade_in_subtle.xml.flat",
@@ -248,6 +244,10 @@
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\bg_root_avatar_circle.xml"
     },
     {
+        "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\layout_item_health_issue.xml.flat",
+        "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\layout\\item_health_issue.xml"
+    },
+    {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\mipmap-mdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\mipmap-mdpi\\ic_launcher.webp"
     },
@@ -290,6 +290,10 @@
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\drawable_ic_diurnal_weather.xml.flat",
         "source": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-main-50:\\drawable\\ic_diurnal_weather.xml"
+    },
+    {
+        "merged": "com.shikor.app-debug-48:/layout_activity_stats.xml.flat",
+        "source": "com.shikor.app-main-50:/layout/activity_stats.xml"
     },
     {
         "merged": "C:\\Users\\Nafij\\.gradle\\daemon\\9.6.0\\com.shikor.app-debug-48:\\xml_file_paths.xml.flat",

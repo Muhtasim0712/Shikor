@@ -281,6 +281,8 @@ id rbMale
 id rbOther
 id registerRoot
 id rgGender
+id rootHealth
+id rootStats
 id rvExportContacts
 id rvHealthIssues
 id rvMembers

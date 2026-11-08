@@ -41,6 +41,7 @@ public class HealthCheckActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_check);
+        applySystemWindowInsets(findViewById(R.id.rootHealth));
 
         MaterialToolbar toolbar = findViewById(R.id.toolbarHealth);
         setSupportActionBar(toolbar);
