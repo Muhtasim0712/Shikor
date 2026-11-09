@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="intro_title">শিকড়</string>
+    <string name="intro_tagline">আপনার শিকড়, আপনার গল্প</string>
+    <string name="intro_logo_description">শিকড় লোগো: শিকড়সহ একটি গাছ</string>
+    <string name="settings_intro_title">ইন্ট্রো অ্যানিমেশন দেখান</string>
+    <string name="settings_intro_summary">অ্যাপ চালু হলে শিকড়ের ইন্ট্রো চালান</string>
+</resources>

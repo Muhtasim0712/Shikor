@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="intro_tree_size">380dp</dimen>
+    <dimen name="intro_title_margin_top">8dp</dimen>
+    <dimen name="intro_title_text_size">56sp</dimen>
+    <dimen name="intro_tagline_text_size">22sp</dimen>
+</resources>

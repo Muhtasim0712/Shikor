@@ -1,27 +1,22 @@
 package com.shikor.app.view;
 
 import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
+import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
-import android.graphics.RectF;
-import android.graphics.Typeface;
-import android.os.Build;
-import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.PathParser;
 
 import com.shikor.app.R;
 
@@ -29,483 +24,323 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * IntroTreeView - Custom 2D Canvas animated view rendering the Shikor botanical tree logo,
- * roots growth, trunk rising, canopy expansion, branch drawing, nodes popping, and tagline fading.
+ * CONCEPT: Custom View + Canvas drawing + property animation (ValueAnimator, AnimatorSet,
+ * interpolators, PathMeasure).
  *
- * CONCEPT: Custom View, Canvas 2D, PathMeasure, Property Animation, Hardware Acceleration, and Accessibility.
+ * Draws the Shikor logo (tree with roots, canopy, branches and gold family nodes) and grows it
+ * step by step. All geometry lives in a 1024 x 1024 design space and is scaled to the view size,
+ * so it works on phones and tablets. Paint, Path and PathMeasure objects are created once.
  */
 public class IntroTreeView extends View {
 
-    public interface OnIntroCompleteListener {
-        void onIntroComplete();
+    // Region of the 1024 design space that contains the whole symbol.
+    private static final float DESIGN_LEFT = 190f;
+    private static final float DESIGN_TOP = 190f;
+    private static final float DESIGN_SIZE = 644f;
+
+    // Roots: stroke widths. Paths are built in buildPaths().
+    private static final float[] ROOT_WIDTH = {26f, 22f, 24f, 22f, 26f};
+
+    // Canopy circles: cx, cy, r.
+    private static final float[][] CANOPY = {
+            {512f, 350f, 135f}, {400f, 430f, 105f}, {624f, 430f, 105f}, {512f, 452f, 120f}};
+    private static final float[][] HIGHLIGHT = {{470f, 300f, 62f}, {352f, 395f, 44f}};
+    private static final float[][] SHADE = {{578f, 468f, 46f}};
+    // People nodes: cx, cy, r.
+    private static final float[][] NODES = {
+            {512f, 300f, 30f}, {404f, 394f, 26f}, {620f, 394f, 26f}, {386f, 480f, 24f}, {638f, 480f, 24f}};
+
+    private interface FloatSetter {
+        void set(float value);
     }
 
-    private OnIntroCompleteListener listener;
-    private AnimatorSet animatorSet;
+    private final Path[] rootPaths = new Path[5];
+    private final PathMeasure[] rootMeasures = new PathMeasure[5];
+    private final float[] rootLengths = new float[5];
+    private final Path[] branchPaths = new Path[5];
+    private final PathMeasure[] branchMeasures = new PathMeasure[5];
+    private final float[] branchLengths = new float[5];
+    private final Path trunkPath = new Path();
+    private final Path trunkLine = new Path();
+    private final Path segment = new Path();
 
-    // Design Space: 1024 x 1024
-    private static final float DESIGN_SIZE = 1024f;
+    private final Paint rootPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint trunkPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint trunkLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint seedPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint canopyPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint highlightPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint shadePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint branchPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint nodeFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint nodeRingPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    // Paints
-    private Paint seedPaint;
-    private Paint rootPaint;
-    private Paint trunkPaint;
-    private Paint canopyPaint;
-    private Paint highlightPaint;
-    private Paint shadePaint;
-    private Paint branchPaint;
-    private Paint nodeFillPaint;
-    private Paint nodeStrokePaint;
-    private Paint titleTextPaint;
-    private Paint taglineTextPaint;
+    private final TimeInterpolator overshoot = new OvershootInterpolator(2f);
+    private final TimeInterpolator decelerate = new DecelerateInterpolator();
 
-    // Path & Geometry Structures
-    private static final String[] ROOT_PATH_DATA = {
-            "M480,648 C440,684 398,706 348,764",
-            "M495,655 C470,702 452,742 432,792",
-            "M512,655 L512,802",
-            "M529,655 C554,702 572,742 592,792",
-            "M544,648 C584,684 626,706 676,764"
-    };
-    private static final float[] ROOT_WIDTHS = {26f, 22f, 24f, 22f, 26f};
+    // Animation progress values (0 = hidden, 1 = fully drawn).
+    private float seedP;
+    private final float[] rootP = new float[5];
+    private float trunkP;
+    private final float[] canopyP = new float[4];
+    private float detailP;
+    private final float[] branchP = new float[5];
+    private final float[] nodeP = new float[5];
 
-    private static final String TRUNK_PATH_DATA = "M484,540 L540,540 C538,590 550,624 576,654 L448,654 C474,624 486,590 484,540 Z";
-
-    private static final String[] BRANCH_PATH_DATA = {
-            "M512,562 C512,480 512,380 512,304",
-            "M512,530 C500,478 452,432 408,398",
-            "M512,530 C524,478 572,432 616,398",
-            "M512,552 C470,524 430,498 390,480",
-            "M512,552 C554,524 594,498 634,480"
-    };
-
-    private final List<Path> rootPaths = new ArrayList<>();
-    private final List<PathMeasure> rootMeasures = new ArrayList<>();
-    private final List<Path> rootPartialPaths = new ArrayList<>();
-
-    private Path trunkPath;
-    private final RectF trunkBounds = new RectF();
-
-    private final List<Path> branchPaths = new ArrayList<>();
-    private final List<PathMeasure> branchMeasures = new ArrayList<>();
-    private final List<Path> branchPartialPaths = new ArrayList<>();
-
-    // Circles (cx, cy, r)
-    private static final float[][] CANOPY_CIRCLES = {
-            {512f, 350f, 135f},
-            {400f, 430f, 105f},
-            {624f, 430f, 105f},
-            {512f, 452f, 120f}
-    };
-    private static final float[][] HIGHLIGHT_CIRCLES = {
-            {470f, 300f, 62f},
-            {352f, 395f, 44f}
-    };
-    private static final float[] SHADE_CIRCLE = {578f, 468f, 46f};
-
-    private static final float[][] PEOPLE_NODES = {
-            {512f, 300f, 30f},
-            {404f, 394f, 26f},
-            {620f, 394f, 26f},
-            {386f, 480f, 24f},
-            {638f, 480f, 24f}
-    };
-
-    // Animation progress values
-    private float seedProgress = 0f;
-    private float rootProgress = 0f;
-    private float trunkProgress = 0f;
-    private float canopyProgress = 0f;
-    private float branchProgress = 0f;
-    private float nodeProgress = 0f;
-    private float textProgress = 0f;
-
-    private boolean isCompleted = false;
-    private String appNameStr;
-    private String taglineStr;
-
-    public IntroTreeView(Context context) {
-        super(context);
-        init(context);
+    public IntroTreeView(@NonNull Context context) {
+        this(context, null);
     }
 
-    public IntroTreeView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
+    public IntroTreeView(@NonNull Context context, @Nullable AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
-    public IntroTreeView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public IntroTreeView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        initPaints(context);
+        buildPaths();
     }
 
-    private void init(Context context) {
-        if (isInEditMode()) return;
-        appNameStr = context.getString(R.string.app_name);
-        taglineStr = context.getString(R.string.app_tagline);
+    private void initPaints(Context c) {
+        int green = ContextCompat.getColor(c, R.color.intro_green);
+        int greenLight = ContextCompat.getColor(c, R.color.intro_green_light);
+        int greenDark = ContextCompat.getColor(c, R.color.intro_green_dark);
+        int brown = ContextCompat.getColor(c, R.color.intro_brown);
+        int brownDark = ContextCompat.getColor(c, R.color.intro_brown_dark);
+        int gold = ContextCompat.getColor(c, R.color.intro_gold);
+        int cream = ContextCompat.getColor(c, R.color.intro_cream);
 
-        int greenColor = ContextCompat.getColor(context, R.color.primary);
-        int lightGreenColor = ContextCompat.getColor(context, R.color.primary_container);
-        int darkGreenColor = ContextCompat.getColor(context, R.color.primary_variant);
-        int brownColor = ContextCompat.getColor(context, R.color.secondary);
-        int darkBrownColor = ContextCompat.getColor(context, R.color.secondary_variant);
-        int goldColor = ContextCompat.getColor(context, R.color.tertiary);
-        int creamColor = ContextCompat.getColor(context, R.color.background);
-        int textOnBg = ContextCompat.getColor(context, R.color.on_background);
-
-        // Seed Paint
-        seedPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        seedPaint.setColor(goldColor);
-        seedPaint.setStyle(Paint.Style.FILL);
-
-        // Root Paint
-        rootPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        rootPaint.setColor(brownColor);
         rootPaint.setStyle(Paint.Style.STROKE);
         rootPaint.setStrokeCap(Paint.Cap.ROUND);
+        rootPaint.setStrokeJoin(Paint.Join.ROUND);
+        rootPaint.setColor(brown);
 
-        // Trunk Paint
-        trunkPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        trunkPaint.setColor(brownColor);
         trunkPaint.setStyle(Paint.Style.FILL);
+        trunkPaint.setColor(brown);
 
-        // Canopy Paints
-        canopyPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        canopyPaint.setColor(greenColor);
+        trunkLinePaint.setStyle(Paint.Style.STROKE);
+        trunkLinePaint.setStrokeCap(Paint.Cap.ROUND);
+        trunkLinePaint.setStrokeWidth(6f);
+        trunkLinePaint.setColor(brownDark);
+        trunkLinePaint.setAlpha(128);
+
+        seedPaint.setStyle(Paint.Style.FILL);
+        seedPaint.setColor(gold);
+
         canopyPaint.setStyle(Paint.Style.FILL);
+        canopyPaint.setColor(green);
 
-        highlightPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        highlightPaint.setColor(lightGreenColor);
         highlightPaint.setStyle(Paint.Style.FILL);
-        highlightPaint.setAlpha(140); // ~55% alpha
+        highlightPaint.setColor(greenLight);
 
-        shadePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        shadePaint.setColor(darkGreenColor);
         shadePaint.setStyle(Paint.Style.FILL);
-        shadePaint.setAlpha(90); // ~35% alpha
+        shadePaint.setColor(greenDark);
 
-        // Branch Paint
-        branchPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        branchPaint.setColor(creamColor);
         branchPaint.setStyle(Paint.Style.STROKE);
-        branchPaint.setStrokeWidth(13f);
         branchPaint.setStrokeCap(Paint.Cap.ROUND);
+        branchPaint.setStrokeJoin(Paint.Join.ROUND);
+        branchPaint.setStrokeWidth(13f);
+        branchPaint.setColor(cream);
 
-        // Node Paints
-        nodeFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        nodeFillPaint.setColor(goldColor);
         nodeFillPaint.setStyle(Paint.Style.FILL);
+        nodeFillPaint.setColor(gold);
 
-        nodeStrokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        nodeStrokePaint.setColor(creamColor);
-        nodeStrokePaint.setStyle(Paint.Style.STROKE);
-        nodeStrokePaint.setStrokeWidth(8f);
-
-        // Text Paints
-        Typeface typeface = ResourcesCompat.getFont(context, R.font.noto_sans_bengali);
-
-        titleTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        titleTextPaint.setColor(greenColor);
-        titleTextPaint.setTextAlign(Paint.Align.CENTER);
-        titleTextPaint.setTextSize(72f);
-        titleTextPaint.setFakeBoldText(true);
-        if (typeface != null) titleTextPaint.setTypeface(typeface);
-
-        taglineTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        taglineTextPaint.setColor(textOnBg);
-        taglineTextPaint.setTextAlign(Paint.Align.CENTER);
-        taglineTextPaint.setTextSize(34f);
-        if (typeface != null) taglineTextPaint.setTypeface(typeface);
-
-        // Parse & Store Paths
-        for (int i = 0; i < ROOT_PATH_DATA.length; i++) {
-            Path p = PathParser.createPathFromPathData(ROOT_PATH_DATA[i]);
-            rootPaths.add(p);
-            rootMeasures.add(new PathMeasure(p, false));
-            rootPartialPaths.add(new Path());
-        }
-
-        trunkPath = PathParser.createPathFromPathData(TRUNK_PATH_DATA);
-        trunkPath.computeBounds(trunkBounds, true);
-
-        for (int i = 0; i < BRANCH_PATH_DATA.length; i++) {
-            Path p = PathParser.createPathFromPathData(BRANCH_PATH_DATA[i]);
-            branchPaths.add(p);
-            branchMeasures.add(new PathMeasure(p, false));
-            branchPartialPaths.add(new Path());
-        }
-
-        // Tap to skip
-        setOnClickListener(v -> skipAnimation());
+        nodeRingPaint.setStyle(Paint.Style.STROKE);
+        nodeRingPaint.setStrokeWidth(8f);
+        nodeRingPaint.setColor(cream);
     }
 
-    public void setOnIntroCompleteListener(OnIntroCompleteListener listener) {
-        this.listener = listener;
-    }
-
-    public void startAnimation(boolean isFullIntro) {
-        if (animatorSet != null) {
-            animatorSet.cancel();
+    private void buildPaths() {
+        for (int i = 0; i < 5; i++) {
+            rootPaths[i] = new Path();
+            branchPaths[i] = new Path();
         }
+        // Roots
+        rootPaths[0].moveTo(480f, 648f);
+        rootPaths[0].cubicTo(440f, 684f, 398f, 706f, 348f, 764f);
+        rootPaths[1].moveTo(495f, 655f);
+        rootPaths[1].cubicTo(470f, 702f, 452f, 742f, 432f, 792f);
+        rootPaths[2].moveTo(512f, 655f);
+        rootPaths[2].lineTo(512f, 802f);
+        rootPaths[3].moveTo(529f, 655f);
+        rootPaths[3].cubicTo(554f, 702f, 572f, 742f, 592f, 792f);
+        rootPaths[4].moveTo(544f, 648f);
+        rootPaths[4].cubicTo(584f, 684f, 626f, 706f, 676f, 764f);
 
-        // Check if system animations are disabled
-        float animScale = 1.0f;
-        try {
-            animScale = Settings.Global.getFloat(getContext().getContentResolver(), Settings.Global.ANIMATOR_DURATION_SCALE, 1.0f);
-        } catch (Exception ignored) {}
+        // Trunk
+        trunkPath.moveTo(484f, 540f);
+        trunkPath.lineTo(540f, 540f);
+        trunkPath.cubicTo(538f, 590f, 550f, 624f, 576f, 654f);
+        trunkPath.lineTo(448f, 654f);
+        trunkPath.cubicTo(474f, 624f, 486f, 590f, 484f, 540f);
+        trunkPath.close();
+        trunkLine.moveTo(512f, 560f);
+        trunkLine.lineTo(512f, 640f);
 
-        if (animScale == 0f) {
-            // Fast 600ms fade for disabled animations
-            showEndState();
-            postDelayed(this::notifyComplete, 600);
-            return;
-        }
+        // Branches inside the canopy
+        branchPaths[0].moveTo(512f, 562f);
+        branchPaths[0].cubicTo(512f, 480f, 512f, 380f, 512f, 304f);
+        branchPaths[1].moveTo(512f, 530f);
+        branchPaths[1].cubicTo(500f, 478f, 452f, 432f, 408f, 398f);
+        branchPaths[2].moveTo(512f, 530f);
+        branchPaths[2].cubicTo(524f, 478f, 572f, 432f, 616f, 398f);
+        branchPaths[3].moveTo(512f, 552f);
+        branchPaths[3].cubicTo(470f, 524f, 430f, 498f, 390f, 480f);
+        branchPaths[4].moveTo(512f, 552f);
+        branchPaths[4].cubicTo(554f, 524f, 594f, 498f, 634f, 480f);
 
-        if (!isFullIntro) {
-            // Short intro (1.0s logo and text fade)
-            startShortAnimation();
-            return;
-        }
-
-        // Full Intro Animation Sequence (~2.2s)
-        ValueAnimator seedAnim = ValueAnimator.ofFloat(0f, 1f);
-        seedAnim.setDuration(350);
-        seedAnim.setInterpolator(new OvershootInterpolator(1.2f));
-        seedAnim.addUpdateListener(a -> {
-            seedProgress = (float) a.getAnimatedValue();
-            invalidate();
-        });
-
-        ValueAnimator rootAnim = ValueAnimator.ofFloat(0f, 1f);
-        rootAnim.setStartDelay(200);
-        rootAnim.setDuration(600);
-        rootAnim.setInterpolator(new DecelerateInterpolator());
-        rootAnim.addUpdateListener(a -> {
-            rootProgress = (float) a.getAnimatedValue();
-            invalidate();
-        });
-
-        ValueAnimator trunkAnim = ValueAnimator.ofFloat(0f, 1f);
-        trunkAnim.setStartDelay(500);
-        trunkAnim.setDuration(500);
-        trunkAnim.setInterpolator(new DecelerateInterpolator());
-        trunkAnim.addUpdateListener(a -> {
-            trunkProgress = (float) a.getAnimatedValue();
-            invalidate();
-        });
-
-        ValueAnimator canopyAnim = ValueAnimator.ofFloat(0f, 1f);
-        canopyAnim.setStartDelay(800);
-        canopyAnim.setDuration(500);
-        canopyAnim.setInterpolator(new OvershootInterpolator(1.1f));
-        canopyAnim.addUpdateListener(a -> {
-            canopyProgress = (float) a.getAnimatedValue();
-            invalidate();
-        });
-
-        ValueAnimator branchAnim = ValueAnimator.ofFloat(0f, 1f);
-        branchAnim.setStartDelay(1100);
-        branchAnim.setDuration(500);
-        branchAnim.addUpdateListener(a -> {
-            branchProgress = (float) a.getAnimatedValue();
-            nodeProgress = (float) a.getAnimatedValue();
-            invalidate();
-        });
-
-        ValueAnimator textAnim = ValueAnimator.ofFloat(0f, 1f);
-        textAnim.setStartDelay(1500);
-        textAnim.setDuration(500);
-        textAnim.addUpdateListener(a -> {
-            textProgress = (float) a.getAnimatedValue();
-            invalidate();
-        });
-
-        animatorSet = new AnimatorSet();
-        animatorSet.playTogether(seedAnim, rootAnim, trunkAnim, canopyAnim, branchAnim, textAnim);
-        animatorSet.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                if (!isCompleted) {
-                    isCompleted = true;
-                    notifyComplete();
-                }
-            }
-        });
-        animatorSet.start();
-    }
-
-    private void startShortAnimation() {
-        seedProgress = 1f;
-        rootProgress = 1f;
-        trunkProgress = 1f;
-        canopyProgress = 1f;
-        branchProgress = 1f;
-        nodeProgress = 1f;
-
-        ValueAnimator fadeAnim = ValueAnimator.ofFloat(0f, 1f);
-        fadeAnim.setDuration(1000);
-        fadeAnim.addUpdateListener(a -> {
-            textProgress = (float) a.getAnimatedValue();
-            invalidate();
-        });
-        fadeAnim.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                if (!isCompleted) {
-                    isCompleted = true;
-                    notifyComplete();
-                }
-            }
-        });
-
-        animatorSet = new AnimatorSet();
-        animatorSet.play(fadeAnim);
-        animatorSet.start();
-    }
-
-    public void skipAnimation() {
-        if (isCompleted) return;
-        if (animatorSet != null) {
-            animatorSet.cancel();
-        }
-        showEndState();
-        notifyComplete();
-    }
-
-    public void showEndState() {
-        seedProgress = 1f;
-        rootProgress = 1f;
-        trunkProgress = 1f;
-        canopyProgress = 1f;
-        branchProgress = 1f;
-        nodeProgress = 1f;
-        textProgress = 1f;
-        isCompleted = true;
-        invalidate();
-    }
-
-    private void notifyComplete() {
-        if (listener != null) {
-            listener.onIntroComplete();
+        for (int i = 0; i < 5; i++) {
+            rootMeasures[i] = new PathMeasure(rootPaths[i], false);
+            rootLengths[i] = rootMeasures[i].getLength();
+            branchMeasures[i] = new PathMeasure(branchPaths[i], false);
+            branchLengths[i] = branchMeasures[i].getLength();
         }
     }
 
-    public void stopAnimation() {
-        if (animatorSet != null) {
-            animatorSet.cancel();
-        }
-    }
+    // ---------------------------------------------------------------- drawing
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         int w = getWidth();
         int h = getHeight();
-        if (w == 0 || h == 0) return;
+        float s = Math.min(w, h) / DESIGN_SIZE;
+        float dx = (w - DESIGN_SIZE * s) / 2f - DESIGN_LEFT * s;
+        float dy = (h - DESIGN_SIZE * s) / 2f - DESIGN_TOP * s;
 
-        float scale = Math.min(w, h) * 0.62f / DESIGN_SIZE;
-        float translateX = (w - DESIGN_SIZE * scale) / 2f;
-        float translateY = (h - DESIGN_SIZE * scale) / 2f - 40f * scale;
+        canvas.save();
+        canvas.translate(dx, dy);
+        canvas.scale(s, s);
 
-        int saveCount = canvas.save();
-        canvas.translate(translateX, translateY);
-        canvas.scale(scale, scale);
-
-        // 1. Seed (0.0 -> 0.35s)
-        if (seedProgress > 0f) {
-            float seedScale = Math.min(1.0f, seedProgress);
-            canvas.drawCircle(512f, 640f, 16f * seedScale, seedPaint);
+        // 1. roots grow downward
+        for (int i = 0; i < 5; i++) {
+            rootPaint.setStrokeWidth(ROOT_WIDTH[i]);
+            drawGrown(canvas, rootPaths[i], rootMeasures[i], rootLengths[i], rootP[i], rootPaint);
         }
 
-        // 2. Roots (0.2 -> 0.8s)
-        if (rootProgress > 0f) {
-            for (int i = 0; i < rootPaths.size(); i++) {
-                float startDelay = i * 0.12f;
-                float p = Math.max(0f, Math.min(1.0f, (rootProgress - startDelay) / (1.0f - startDelay)));
-                if (p > 0f) {
-                    PathMeasure pm = rootMeasures.get(i);
-                    Path partial = rootPartialPaths.get(i);
-                    partial.reset();
-                    pm.getSegment(0f, pm.getLength() * p, partial, true);
-
-                    rootPaint.setStrokeWidth(ROOT_WIDTHS[i]);
-                    canvas.drawPath(partial, rootPaint);
-                }
-            }
-        }
-
-        // 3. Trunk (0.5 -> 1.0s)
-        if (trunkProgress > 0f) {
-            int clipSave = canvas.save();
-            float topY = trunkBounds.bottom - (trunkBounds.height() * trunkProgress);
-            canvas.clipRect(0f, topY, DESIGN_SIZE, trunkBounds.bottom + 10f);
+        // 2. trunk rises from the roots (revealed bottom to top)
+        float t = clamp(trunkP);
+        if (t > 0f) {
+            canvas.save();
+            float top = 654f - 114f * t;
+            canvas.clipRect(400f, top, 620f, 700f);
             canvas.drawPath(trunkPath, trunkPaint);
-            canvas.restoreToCount(clipSave);
+            canvas.drawPath(trunkLine, trunkLinePaint);
+            canvas.restore();
         }
 
-        // 4. Canopy Circles (0.8 -> 1.3s)
-        if (canopyProgress > 0f) {
-            for (int i = 0; i < CANOPY_CIRCLES.length; i++) {
-                float delay = i * 0.12f;
-                float p = Math.max(0f, Math.min(1.0f, (canopyProgress - delay) / (1.0f - delay)));
-                if (p > 0f) {
-                    float cx = CANOPY_CIRCLES[i][0];
-                    float cy = CANOPY_CIRCLES[i][1];
-                    float r = CANOPY_CIRCLES[i][2] * p;
-                    canvas.drawCircle(cx, cy, r, canopyPaint);
-                }
-            }
-
-            // Highlights & Shade
-            if (canopyProgress > 0.5f) {
-                float alphaP = (canopyProgress - 0.5f) / 0.5f;
-                highlightPaint.setAlpha((int) (140 * alphaP));
-                shadePaint.setAlpha((int) (90 * alphaP));
-
-                for (float[] hc : HIGHLIGHT_CIRCLES) {
-                    canvas.drawCircle(hc[0], hc[1], hc[2], highlightPaint);
-                }
-                canvas.drawCircle(SHADE_CIRCLE[0], SHADE_CIRCLE[1], SHADE_CIRCLE[2], shadePaint);
-            }
+        // 3. gold seed, fades as the trunk appears
+        float seedAlpha = 1f - clamp(trunkP * 2f);
+        if (seedP > 0f && seedAlpha > 0f) {
+            seedPaint.setAlpha((int) (255f * seedAlpha));
+            canvas.drawCircle(512f, 650f, 22f * seedP, seedPaint);
         }
 
-        // 5. Branches (1.1 -> 1.6s)
-        if (branchProgress > 0f) {
-            for (int i = 0; i < branchPaths.size(); i++) {
-                PathMeasure pm = branchMeasures.get(i);
-                Path partial = branchPartialPaths.get(i);
-                partial.reset();
-                pm.getSegment(0f, pm.getLength() * branchProgress, partial, true);
-                canvas.drawPath(partial, branchPaint);
-            }
+        // 4. canopy circles pop in one after another
+        for (int i = 0; i < CANOPY.length; i++) {
+            if (canopyP[i] <= 0f) continue;
+            canvas.drawCircle(CANOPY[i][0], CANOPY[i][1], CANOPY[i][2] * canopyP[i], canopyPaint);
         }
 
-        // 6. People Nodes (1.1 -> 1.6s)
-        if (nodeProgress > 0f) {
-            for (int i = 0; i < PEOPLE_NODES.length; i++) {
-                float delay = i * 0.15f;
-                float p = Math.max(0f, Math.min(1.0f, (nodeProgress - delay) / (1.0f - delay)));
-                if (p > 0f) {
-                    float cx = PEOPLE_NODES[i][0];
-                    float cy = PEOPLE_NODES[i][1];
-                    float r = PEOPLE_NODES[i][2] * p;
-                    canvas.drawCircle(cx, cy, r, nodeFillPaint);
-                    canvas.drawCircle(cx, cy, r, nodeStrokePaint);
-                }
-            }
+        // 5. soft highlight and shade
+        float d = clamp(detailP);
+        if (d > 0f) {
+            highlightPaint.setAlpha((int) (255f * 0.55f * d));
+            for (float[] c : HIGHLIGHT) canvas.drawCircle(c[0], c[1], c[2], highlightPaint);
+            shadePaint.setAlpha((int) (255f * 0.35f * d));
+            for (float[] c : SHADE) canvas.drawCircle(c[0], c[1], c[2], shadePaint);
         }
 
-        // 7. Text & Tagline (1.5 -> 2.0s)
-        if (textProgress > 0f) {
-            titleTextPaint.setAlpha((int) (255 * textProgress));
-            taglineTextPaint.setAlpha((int) (220 * textProgress));
-
-            float slideY = (1.0f - textProgress) * 20f;
-            canvas.drawText(appNameStr, 512f, 910f + slideY, titleTextPaint);
-            canvas.drawText(taglineStr, 512f, 975f + slideY, taglineTextPaint);
+        // 6. cream branches grow outward
+        for (int i = 0; i < 5; i++) {
+            drawGrown(canvas, branchPaths[i], branchMeasures[i], branchLengths[i], branchP[i], branchPaint);
         }
 
-        canvas.restoreToCount(saveCount);
+        // 7. gold people nodes pop in
+        for (int i = 0; i < NODES.length; i++) {
+            if (nodeP[i] <= 0f) continue;
+            float r = NODES[i][2] * nodeP[i];
+            canvas.drawCircle(NODES[i][0], NODES[i][1], r, nodeFillPaint);
+            canvas.drawCircle(NODES[i][0], NODES[i][1], r, nodeRingPaint);
+        }
+
+        canvas.restore();
+    }
+
+    private void drawGrown(Canvas canvas, Path full, PathMeasure pm, float length, float p, Paint paint) {
+        float c = clamp(p);
+        if (c <= 0f) return;
+        if (c >= 1f) {
+            canvas.drawPath(full, paint);
+        } else {
+            segment.rewind();
+            pm.getSegment(0f, length * c, segment, true);
+            canvas.drawPath(segment, paint);
+        }
+    }
+
+    private static float clamp(float v) {
+        return v < 0f ? 0f : (v > 1f ? 1f : v);
+    }
+
+    // ---------------------------------------------------------------- animation
+
+    /** Jump to the finished state (used for the short intro, skip, and reduced motion). */
+    public void setAllProgress(float value) {
+        seedP = value;
+        trunkP = value;
+        detailP = value;
+        for (int i = 0; i < 5; i++) {
+            rootP[i] = value;
+            branchP[i] = value;
+            nodeP[i] = value;
+        }
+        for (int i = 0; i < canopyP.length; i++) canopyP[i] = value;
+        invalidate();
+    }
+
+    /**
+     * Builds the full grow animation (about 1.9 seconds): seed, roots, trunk, canopy,
+     * highlights, branches, then gold nodes. Call setAllProgress(0f) before starting it.
+     */
+    public AnimatorSet createGrowAnimator() {
+        List<Animator> list = new ArrayList<>();
+
+        list.add(anim(0, 350, overshoot, v -> seedP = v));
+        for (int i = 0; i < 5; i++) {
+            final int index = i;
+            list.add(anim(200 + i * 60L, 550, decelerate, v -> rootP[index] = v));
+        }
+        list.add(anim(500, 500, decelerate, v -> trunkP = v));
+        for (int i = 0; i < canopyP.length; i++) {
+            final int index = i;
+            list.add(anim(800 + i * 80L, 320, overshoot, v -> canopyP[index] = v));
+        }
+        list.add(anim(1100, 400, decelerate, v -> detailP = v));
+        for (int i = 0; i < 5; i++) {
+            final int index = i;
+            list.add(anim(1100 + i * 70L, 350, decelerate, v -> branchP[index] = v));
+        }
+        for (int i = 0; i < 5; i++) {
+            final int index = i;
+            list.add(anim(1350 + i * 70L, 300, overshoot, v -> nodeP[index] = v));
+        }
+
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(list);
+        return set;
+    }
+
+    private ValueAnimator anim(long delay, long duration, TimeInterpolator interpolator,
+                               final FloatSetter setter) {
+        ValueAnimator a = ValueAnimator.ofFloat(0f, 1f);
+        a.setStartDelay(delay);
+        a.setDuration(duration);
+        a.setInterpolator(interpolator);
+        a.addUpdateListener(animation -> {
+            setter.set((Float) animation.getAnimatedValue());
+            invalidate();
+        });
+        return a;
     }
 }

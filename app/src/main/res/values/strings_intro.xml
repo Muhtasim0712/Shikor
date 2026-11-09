@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="intro_title">Shikor</string>
+    <string name="intro_tagline">Your roots. Your stories.</string>
+    <string name="intro_logo_description">Shikor logo: a tree with roots</string>
+    <string name="settings_intro_title">Show intro animation</string>
+    <string name="settings_intro_summary">Play the Shikor intro when the app starts</string>
+</resources>

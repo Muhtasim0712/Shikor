@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        System splash theme (androidx.core:core-splashscreen). Set it on SplashActivity in the
+        manifest. IMPORTANT: replace @style/Theme.Shikor below with the name of YOUR existing
+        app theme (see android:theme on <application> in AndroidManifest.xml).
+    -->
+    <style name="Theme.Shikor.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/intro_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_shikor_splash</item>
+        <item name="postSplashScreenTheme">@style/Theme.Shikor</item>
+    </style>
+</resources>

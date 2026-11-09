@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Logo palette (same as the Shikor logo) -->
+    <color name="intro_green">#3F6B4F</color>
+    <color name="intro_green_light">#5A8C69</color>
+    <color name="intro_green_dark">#2F5640</color>
+    <color name="intro_brown">#8A6A4B</color>
+    <color name="intro_brown_dark">#6E5238</color>
+    <color name="intro_gold">#C9A24B</color>
+    <color name="intro_cream">#F6F3EA</color>
+
+    <!-- Intro and system splash background, and text colors (light mode) -->
+    <color name="intro_background">#F6F3EA</color>
+    <color name="intro_title_color">#3F6B4F</color>
+    <color name="intro_tagline_color">#8A6A4B</color>
+</resources>

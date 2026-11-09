@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark mode: deep green background with softer text colors -->
+    <color name="intro_background">#16221B</color>
+    <color name="intro_title_color">#9CCB9F</color>
+    <color name="intro_tagline_color">#D3B08A</color>
+</resources>

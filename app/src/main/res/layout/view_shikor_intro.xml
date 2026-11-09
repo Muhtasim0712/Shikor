@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Full-screen intro overlay added on top of SplashActivity by SplashIntroController.
+    Opaque background so the old splash screen underneath is hidden.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/intro_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/intro_background"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Centered like the system splash icon, so there is no visible jump. -->
+    <com.shikor.app.view.IntroTreeView
+        android:id="@+id/intro_tree"
+        android:layout_width="@dimen/intro_tree_size"
+        android:layout_height="@dimen/intro_tree_size"
+        android:contentDescription="@string/intro_logo_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/intro_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/intro_title_margin_top"
+        android:fontFamily="serif"
+        android:text="@string/intro_title"
+        android:textColor="@color/intro_title_color"
+        android:textSize="@dimen/intro_title_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/intro_tree" />
+
+    <TextView
+        android:id="@+id/intro_tagline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:text="@string/intro_tagline"
+        android:textColor="@color/intro_tagline_color"
+        android:textSize="@dimen/intro_tagline_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/intro_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

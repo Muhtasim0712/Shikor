@@ -27,6 +27,16 @@ color gender_male_text
 color gender_other
 color gender_other_bg
 color gender_other_text
+color intro_background
+color intro_brown
+color intro_brown_dark
+color intro_cream
+color intro_gold
+color intro_green
+color intro_green_dark
+color intro_green_light
+color intro_tagline_color
+color intro_title_color
 color on_background
 color on_error
 color on_error_container
@@ -69,6 +79,10 @@ dimen card_elevation
 dimen chip_corner_radius
 dimen dialog_corner_radius
 dimen input_corner_radius
+dimen intro_tagline_text_size
+dimen intro_title_margin_top
+dimen intro_title_text_size
+dimen intro_tree_size
 dimen min_touch_target
 dimen spacing_huge
 dimen spacing_large
@@ -231,6 +245,10 @@ id familyTreeView
 id indicatorDot
 id indicatorLine
 id introTreeView
+id intro_root
+id intro_tagline
+id intro_title
+id intro_tree
 id ivAllGenIcon
 id ivArrow
 id ivDialogPhotoPreview
@@ -466,6 +484,7 @@ layout item_timeline_photo
 layout item_timeline_year_header
 layout layout_empty_state
 layout layout_loading
+layout view_shikor_intro
 layout widget_item_event
 layout widget_next_event
 menu bottom_nav_menu
@@ -548,6 +567,9 @@ string health_rerun_btn
 string health_screen_title
 string health_summary_title
 string import_contacts
+string intro_logo_description
+string intro_tagline
+string intro_title
 string join_family_btn
 string join_family_desc
 string join_family_title
@@ -662,6 +684,8 @@ string settings_import_members
 string settings_import_members_desc
 string settings_intro_animation
 string settings_intro_animation_desc
+string settings_intro_summary
+string settings_intro_title
 string settings_language_label
 string settings_language_title
 string settings_larger_text

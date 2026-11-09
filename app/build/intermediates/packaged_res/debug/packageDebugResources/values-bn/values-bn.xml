@@ -70,6 +70,9 @@
     <string name="health_screen_title">গাছ পরীক্ষা</string>
     <string name="health_summary_title">পরীক্ষার সারসংক্ষেপ</string>
     <string name="import_contacts">আত্মীয়দের তথ্য আমদানি</string>
+    <string name="intro_logo_description">শিকড় লোগো: শিকড়সহ একটি গাছ</string>
+    <string name="intro_tagline">আপনার শিকড়, আপনার গল্প</string>
+    <string name="intro_title">শিকড়</string>
     <string name="join_family_btn">যুক্ত হোন</string>
     <string name="join_family_desc">আত্মীয়দের পাঠানো ৬ অক্ষরের পারিবারিক কোডটি দিন।</string>
     <string name="join_family_title">পরিবারে যুক্ত হোন</string>
@@ -183,6 +186,8 @@
     <string name="settings_import_members_desc">CSV বা vCard (.vcf) ফাইল থেকে আত্মীয়দের তালিকায় যুক্ত করুন</string>
     <string name="settings_intro_animation">অ্যানিমেটেড ইন্ট্রো প্রদর্শন</string>
     <string name="settings_intro_animation_desc">অ্যাপ চালুর সময় লোগো অ্যানিমেশন চালান</string>
+    <string name="settings_intro_summary">অ্যাপ চালু হলে শিকড়ের ইন্ট্রো চালান</string>
+    <string name="settings_intro_title">ইন্ট্রো অ্যানিমেশন দেখান</string>
     <string name="settings_language_label">ভাষা</string>
     <string name="settings_language_title">ভাষা নির্বাচন করুন</string>
     <string name="settings_larger_text">বয়স্কদের জন্য বড় ফন্ট</string>

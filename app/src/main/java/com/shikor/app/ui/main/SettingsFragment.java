@@ -33,6 +33,7 @@ import com.shikor.app.databinding.FragmentSettingsBinding;
 import com.shikor.app.ui.tools.ExportActivity;
 import com.shikor.app.ui.tools.RelationshipFinderActivity;
 import com.shikor.app.util.AlarmScheduler;
+import com.shikor.app.util.IntroPrefs;
 import com.shikor.app.util.AppExecutors;
 import com.shikor.app.util.FamilyImporter;
 import com.shikor.app.util.NotificationHelper;
@@ -469,9 +470,9 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        binding.switchIntroAnimation.setChecked(prefs.isIntroAnimationEnabled());
+        binding.switchIntroAnimation.setChecked(IntroPrefs.isEnabled(requireContext()));
         binding.switchIntroAnimation.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            prefs.setIntroAnimationEnabled(isChecked);
+            IntroPrefs.setEnabled(requireContext(), isChecked);
         });
 
         binding.layoutTtsSpeechRate.setOnClickListener(v -> showSpeechRateDialog());

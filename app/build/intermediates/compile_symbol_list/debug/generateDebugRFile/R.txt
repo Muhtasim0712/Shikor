@@ -25,6 +25,16 @@ int color gender_male_text 0x0
 int color gender_other 0x0
 int color gender_other_bg 0x0
 int color gender_other_text 0x0
+int color intro_background 0x0
+int color intro_brown 0x0
+int color intro_brown_dark 0x0
+int color intro_cream 0x0
+int color intro_gold 0x0
+int color intro_green 0x0
+int color intro_green_dark 0x0
+int color intro_green_light 0x0
+int color intro_tagline_color 0x0
+int color intro_title_color 0x0
 int color on_background 0x0
 int color on_error 0x0
 int color on_error_container 0x0
@@ -67,6 +77,10 @@ int dimen card_elevation 0x0
 int dimen chip_corner_radius 0x0
 int dimen dialog_corner_radius 0x0
 int dimen input_corner_radius 0x0
+int dimen intro_tagline_text_size 0x0
+int dimen intro_title_margin_top 0x0
+int dimen intro_title_text_size 0x0
+int dimen intro_tree_size 0x0
 int dimen min_touch_target 0x0
 int dimen spacing_huge 0x0
 int dimen spacing_large 0x0
@@ -229,6 +243,10 @@ int id familyTreeView 0x0
 int id indicatorDot 0x0
 int id indicatorLine 0x0
 int id introTreeView 0x0
+int id intro_root 0x0
+int id intro_tagline 0x0
+int id intro_title 0x0
+int id intro_tree 0x0
 int id ivAllGenIcon 0x0
 int id ivArrow 0x0
 int id ivDialogPhotoPreview 0x0
@@ -464,6 +482,7 @@ int layout item_timeline_photo 0x0
 int layout item_timeline_year_header 0x0
 int layout layout_empty_state 0x0
 int layout layout_loading 0x0
+int layout view_shikor_intro 0x0
 int layout widget_item_event 0x0
 int layout widget_next_event 0x0
 int menu bottom_nav_menu 0x0
@@ -546,6 +565,9 @@ int string health_rerun_btn 0x0
 int string health_screen_title 0x0
 int string health_summary_title 0x0
 int string import_contacts 0x0
+int string intro_logo_description 0x0
+int string intro_tagline 0x0
+int string intro_title 0x0
 int string join_family_btn 0x0
 int string join_family_desc 0x0
 int string join_family_title 0x0
@@ -660,6 +682,8 @@ int string settings_import_members 0x0
 int string settings_import_members_desc 0x0
 int string settings_intro_animation 0x0
 int string settings_intro_animation_desc 0x0
+int string settings_intro_summary 0x0
+int string settings_intro_title 0x0
 int string settings_language_label 0x0
 int string settings_language_title 0x0
 int string settings_larger_text 0x0

@@ -17,6 +17,16 @@
     <color name="gender_other">#7E6E8E</color>
     <color name="gender_other_bg">#EBE5F2</color>
     <color name="gender_other_text">#352943</color>
+    <color name="intro_background">#F6F3EA</color>
+    <color name="intro_brown">#8A6A4B</color>
+    <color name="intro_brown_dark">#6E5238</color>
+    <color name="intro_cream">#F6F3EA</color>
+    <color name="intro_gold">#C9A24B</color>
+    <color name="intro_green">#3F6B4F</color>
+    <color name="intro_green_dark">#2F5640</color>
+    <color name="intro_green_light">#5A8C69</color>
+    <color name="intro_tagline_color">#8A6A4B</color>
+    <color name="intro_title_color">#3F6B4F</color>
     <color name="on_background">#2B2F2A</color>
     <color name="on_error">#FFFFFF</color>
     <color name="on_error_container">#420F0C</color>
@@ -58,6 +68,10 @@
     <dimen name="chip_corner_radius">24dp</dimen>
     <dimen name="dialog_corner_radius">16dp</dimen>
     <dimen name="input_corner_radius">16dp</dimen>
+    <dimen name="intro_tagline_text_size">16sp</dimen>
+    <dimen name="intro_title_margin_top">4dp</dimen>
+    <dimen name="intro_title_text_size">40sp</dimen>
+    <dimen name="intro_tree_size">260dp</dimen>
     <dimen name="min_touch_target">48dp</dimen>
     <dimen name="spacing_huge">48dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
@@ -146,6 +160,9 @@
     <string name="health_screen_title">Tree Health Check</string>
     <string name="health_summary_title">Integrity Summary</string>
     <string name="import_contacts">Import Family Members</string>
+    <string name="intro_logo_description">Shikor logo: a tree with roots</string>
+    <string name="intro_tagline">Your roots. Your stories.</string>
+    <string name="intro_title">Shikor</string>
     <string name="join_family_btn">Join Family</string>
     <string name="join_family_desc">Enter the 6-character family code provided by an existing family member.</string>
     <string name="join_family_title">Join Existing Family</string>
@@ -260,6 +277,8 @@
     <string name="settings_import_members_desc">Import relatives from CSV or vCard (.vcf) files</string>
     <string name="settings_intro_animation">Show intro animation</string>
     <string name="settings_intro_animation_desc">Play animated botanical tree sequence at launch</string>
+    <string name="settings_intro_summary">Play the Shikor intro when the app starts</string>
+    <string name="settings_intro_title">Show intro animation</string>
     <string name="settings_language_label">Language</string>
     <string name="settings_language_title">Select Language</string>
     <string name="settings_larger_text">Larger text for elders</string>
@@ -475,7 +494,7 @@
     </style>
     <style name="Theme.Shikor" parent="Base.Theme.Shikor"/>
     <style name="Theme.Shikor.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/background</item>
+        <item name="windowSplashScreenBackground">@color/intro_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_shikor_splash</item>
         <item name="postSplashScreenTheme">@style/Theme.Shikor</item>
     </style>
