@@ -486,6 +486,7 @@ public class SettingsFragment extends Fragment {
         });
 
         binding.layoutTtsSpeechRate.setOnClickListener(v -> showSpeechRateDialog());
+        binding.cardAboutShikor.setOnClickListener(v -> showAppFeatureInstructionsDialog());
     }
 
     private void updateSpeechRateDisplay() {
@@ -521,6 +522,49 @@ public class SettingsFragment extends Fragment {
                     updateSpeechRateDisplay();
                 })
                 .setNegativeButton(R.string.cancel, null)
+                .show();
+    }
+
+    private void showAppFeatureInstructionsDialog() {
+        if (!isAdded() || getContext() == null) return;
+
+        String title = "Shikor v1.0 — Feature Guide & Instructions";
+        String message =
+                "🌿 SHIKOR (শিকড়) — FEATURE INSTRUCTIONS & USER GUIDE\n\n" +
+
+                "1. 🌳 Interactive 2D Canvas Family Tree\n" +
+                "• Modes: Switch between Botanical Tree (organic trunk & upward canopy) and Classic Genealogy Chart using the toolbar button.\n" +
+                "• Gestures: Pinch-to-zoom (0.4x to 3.0x), drag to pan, and double-tap to re-center.\n" +
+                "• Lineage Alignment: Paternal grandparents branch to father, maternal grandparents branch to mother, joined by the golden spouse vine.\n" +
+                "• Root Filter: Tap 'Root Ancestor' to filter the tree starting from any relative.\n\n" +
+
+                "2. 👥 Family Member Directory & Profiles\n" +
+                "• Relative Directory: Add & view relatives with living/deceased indicators, hometowns, occupations, and contact numbers.\n" +
+                "• Hijri Calendar: Converts birth/death dates to Islamic Hijri dates offline.\n" +
+                "• Kinship Finder: Tap 'Find Family Relationship' on any profile to compute authentic Bengali kinship terms (চাচা, মামা, খালা, ফুফু, দাদা, নানা).\n\n" +
+
+                "3. 📸 Memories & Photo Feed\n" +
+                "• Create Memories: Add family memories with titles, descriptions, event dates, tagged relatives, up to 4 photos, and voice notes.\n" +
+                "• Real-Time Cloud Sync: Photos & memories sync automatically across all connected family members' phones.\n" +
+                "• Detail View: Tap any memory to view photo pagers, play audio notes with a SeekBar, or use Read Aloud TTS.\n\n" +
+
+                "4. 🎙️ Elder Voice Notes & Audio Archive\n" +
+                "• Foreground Service: Record oral histories using background microphone recording with active notification tray controls.\n" +
+                "• Playback: Listen to recorded elder voice notes with scrubbable progress bar.\n\n" +
+
+                "5. 🔔 Reminders & Notifications\n" +
+                "• Daily Alert: Daily reminder at your preferred time for birthdays, anniversaries, and family memory check-ins.\n" +
+                "• New Memory Alerts: Real-time notifications when family members post new memories.\n\n" +
+
+                "6. 📊 Statistics & Tree Health Inspection\n" +
+                "• Analytics: View bar & donut charts for birthday months, gender split, and top hometowns.\n" +
+                "• Integrity Check: Run Tree Health Check to inspect data for date errors, cycles, or duplicate entries.";
+
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(title)
+                .setIcon(R.drawable.ic_shikor_logo)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, null)
                 .show();
     }
 

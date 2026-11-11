@@ -92,10 +92,16 @@ public class NotificationHelper {
                                                 int notificationId, String eventType) {
         createNotificationChannels(context);
 
-        // Content Intent: Opens PersonDetailActivity on notification tap
-        Intent contentIntent = new Intent(context, PersonDetailActivity.class);
-        contentIntent.putExtra(PersonDetailActivity.EXTRA_PERSON_ID, personId);
-        contentIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        // Content Intent: Opens MainActivity for daily digest or PersonDetailActivity for person events
+        Intent contentIntent;
+        if ("daily_digest".equals(eventType) || "daily-digest".equals(personId)) {
+            contentIntent = new Intent(context, com.shikor.app.ui.main.MainActivity.class);
+            contentIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        } else {
+            contentIntent = new Intent(context, PersonDetailActivity.class);
+            contentIntent.putExtra(PersonDetailActivity.EXTRA_PERSON_ID, personId);
+            contentIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
         PendingIntent contentPendingIntent = PendingIntent.getActivity(
                 context,
                 notificationId,

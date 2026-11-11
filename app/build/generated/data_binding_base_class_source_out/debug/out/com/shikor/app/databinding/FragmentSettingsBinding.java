@@ -12,6 +12,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.shikor.app.R;
 import java.lang.NullPointerException;
@@ -33,6 +34,22 @@ public final class FragmentSettingsBinding implements ViewBinding {
 
   @NonNull
   public final MaterialButton btnTestReminder;
+
+  /**
+   * This binding is not available in all configurations.
+   * <p>
+   * Present:
+   * <ul>
+   *   <li>layout/</li>
+   * </ul>
+   *
+   * Absent:
+   * <ul>
+   *   <li>layout-sw600dp/</li>
+   * </ul>
+   */
+  @Nullable
+  public final MaterialCardView cardAboutShikor;
 
   @NonNull
   public final LinearLayout layoutExactAlarmWarning;
@@ -245,24 +262,26 @@ public final class FragmentSettingsBinding implements ViewBinding {
   private FragmentSettingsBinding(@NonNull NestedScrollView rootView,
       @NonNull MaterialButton btnCopyCode, @NonNull MaterialButton btnGrantExactAlarm,
       @NonNull MaterialButton btnSettingsLogout, @NonNull MaterialButton btnTestReminder,
-      @NonNull LinearLayout layoutExactAlarmWarning, @NonNull LinearLayout layoutExportContacts,
-      @NonNull LinearLayout layoutExportTree, @Nullable LinearLayout layoutHealthCheck,
-      @NonNull LinearLayout layoutImportMembers, @NonNull LinearLayout layoutLanguageSetting,
-      @NonNull LinearLayout layoutRelationshipFinder, @NonNull LinearLayout layoutReminderTime,
-      @NonNull LinearLayout layoutThemeSetting, @Nullable LinearLayout layoutTtsSpeechRate,
-      @NonNull MaterialSwitch switchDailyReminders, @Nullable MaterialSwitch switchHideNamesNotif,
-      @Nullable MaterialSwitch switchIntroAnimation, @Nullable MaterialSwitch switchLargerText,
-      @Nullable MaterialSwitch switchNewMemoryAlerts, @Nullable MaterialSwitch switchOnThisDay,
-      @Nullable TextView tvAboutAppVersion, @Nullable TextView tvAppInfo,
-      @NonNull TextView tvCurrentLanguageValue, @Nullable TextView tvCurrentSpeechRateValue,
-      @NonNull TextView tvCurrentThemeValue, @NonNull TextView tvNextAlertStatus,
-      @NonNull TextView tvReminderTimeValue, @NonNull TextView tvSettingsFamilyCode,
-      @NonNull TextView tvSettingsFamilyName, @NonNull TextView tvSettingsUserEmail) {
+      @Nullable MaterialCardView cardAboutShikor, @NonNull LinearLayout layoutExactAlarmWarning,
+      @NonNull LinearLayout layoutExportContacts, @NonNull LinearLayout layoutExportTree,
+      @Nullable LinearLayout layoutHealthCheck, @NonNull LinearLayout layoutImportMembers,
+      @NonNull LinearLayout layoutLanguageSetting, @NonNull LinearLayout layoutRelationshipFinder,
+      @NonNull LinearLayout layoutReminderTime, @NonNull LinearLayout layoutThemeSetting,
+      @Nullable LinearLayout layoutTtsSpeechRate, @NonNull MaterialSwitch switchDailyReminders,
+      @Nullable MaterialSwitch switchHideNamesNotif, @Nullable MaterialSwitch switchIntroAnimation,
+      @Nullable MaterialSwitch switchLargerText, @Nullable MaterialSwitch switchNewMemoryAlerts,
+      @Nullable MaterialSwitch switchOnThisDay, @Nullable TextView tvAboutAppVersion,
+      @Nullable TextView tvAppInfo, @NonNull TextView tvCurrentLanguageValue,
+      @Nullable TextView tvCurrentSpeechRateValue, @NonNull TextView tvCurrentThemeValue,
+      @NonNull TextView tvNextAlertStatus, @NonNull TextView tvReminderTimeValue,
+      @NonNull TextView tvSettingsFamilyCode, @NonNull TextView tvSettingsFamilyName,
+      @NonNull TextView tvSettingsUserEmail) {
     this.rootView = rootView;
     this.btnCopyCode = btnCopyCode;
     this.btnGrantExactAlarm = btnGrantExactAlarm;
     this.btnSettingsLogout = btnSettingsLogout;
     this.btnTestReminder = btnTestReminder;
+    this.cardAboutShikor = cardAboutShikor;
     this.layoutExactAlarmWarning = layoutExactAlarmWarning;
     this.layoutExportContacts = layoutExportContacts;
     this.layoutExportTree = layoutExportTree;
@@ -341,6 +360,9 @@ public final class FragmentSettingsBinding implements ViewBinding {
       if (btnTestReminder == null) {
         break missingId;
       }
+
+      id = R.id.cardAboutShikor;
+      MaterialCardView cardAboutShikor = ViewBindings.findChildViewById(rootView, id);
 
       id = R.id.layoutExactAlarmWarning;
       LinearLayout layoutExactAlarmWarning = ViewBindings.findChildViewById(rootView, id);
@@ -469,13 +491,14 @@ public final class FragmentSettingsBinding implements ViewBinding {
       }
 
       return new FragmentSettingsBinding((NestedScrollView) rootView, btnCopyCode,
-          btnGrantExactAlarm, btnSettingsLogout, btnTestReminder, layoutExactAlarmWarning,
-          layoutExportContacts, layoutExportTree, layoutHealthCheck, layoutImportMembers,
-          layoutLanguageSetting, layoutRelationshipFinder, layoutReminderTime, layoutThemeSetting,
-          layoutTtsSpeechRate, switchDailyReminders, switchHideNamesNotif, switchIntroAnimation,
-          switchLargerText, switchNewMemoryAlerts, switchOnThisDay, tvAboutAppVersion, tvAppInfo,
-          tvCurrentLanguageValue, tvCurrentSpeechRateValue, tvCurrentThemeValue, tvNextAlertStatus,
-          tvReminderTimeValue, tvSettingsFamilyCode, tvSettingsFamilyName, tvSettingsUserEmail);
+          btnGrantExactAlarm, btnSettingsLogout, btnTestReminder, cardAboutShikor,
+          layoutExactAlarmWarning, layoutExportContacts, layoutExportTree, layoutHealthCheck,
+          layoutImportMembers, layoutLanguageSetting, layoutRelationshipFinder, layoutReminderTime,
+          layoutThemeSetting, layoutTtsSpeechRate, switchDailyReminders, switchHideNamesNotif,
+          switchIntroAnimation, switchLargerText, switchNewMemoryAlerts, switchOnThisDay,
+          tvAboutAppVersion, tvAppInfo, tvCurrentLanguageValue, tvCurrentSpeechRateValue,
+          tvCurrentThemeValue, tvNextAlertStatus, tvReminderTimeValue, tvSettingsFamilyCode,
+          tvSettingsFamilyName, tvSettingsUserEmail);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

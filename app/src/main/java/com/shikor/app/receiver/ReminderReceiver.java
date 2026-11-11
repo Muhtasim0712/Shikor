@@ -155,11 +155,11 @@ public class ReminderReceiver extends BroadcastReceiver {
                 // Regular scheduled alarm fired at user's preferred alert time!
                 NotificationHelper.showReminderNotification(
                         context,
-                        testId,
-                        testName,
-                        "🌿 Shikor Daily Digest",
-                        "No family birthdays or anniversaries today. Have a wonderful, peaceful day with your loved ones!",
-                        testPhone,
+                        "daily-digest",
+                        "Family",
+                        "🌿 Shikor Family Reminder",
+                        "Visit Shikor today to check for new family memories, photos, and updates from your relatives!",
+                        "",
                         2000,
                         "daily_digest"
                 );

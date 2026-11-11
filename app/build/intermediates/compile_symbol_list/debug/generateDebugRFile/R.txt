@@ -191,6 +191,7 @@ int id btnSwap 0x0
 int id btnTakePhoto 0x0
 int id btnTestReminder 0x0
 int id btnToggleMode 0x0
+int id cardAboutShikor 0x0
 int id cardAudioPlayer 0x0
 int id cardAudioPreview 0x0
 int id cardBiography 0x0

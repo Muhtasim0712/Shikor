@@ -192,6 +192,7 @@ id btnSwap
 id btnTakePhoto
 id btnTestReminder
 id btnToggleMode
+id cardAboutShikor
 id cardAudioPlayer
 id cardAudioPreview
 id cardBiography
