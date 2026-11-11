@@ -66,8 +66,8 @@ public class FamilyTreeView extends View {
     private final Matrix swayMatrix = new Matrix();
     private final float[] matrixValues = new float[9];
     private float currentScale = 1.0f;
-    private static final float MIN_SCALE = 0.4f;
-    private static final float MAX_SCALE = 3.0f;
+    private static final float MIN_SCALE = 0.05f;
+    private static final float MAX_SCALE = 5.0f;
 
     private ScaleGestureDetector scaleDetector;
     private GestureDetector gestureDetector;
@@ -422,25 +422,15 @@ public class FamilyTreeView extends View {
         if (targetUnit != null) {
             targetX = targetUnit.primaryRect.centerX();
             targetY = targetUnit.primaryRect.centerY();
-        } else if (isNaturalTreeMode()) {
-            targetX = layoutResult.trunkBaseX;
-            targetY = layoutResult.trunkTopY;
+            float dx = (viewWidth / 2.0f) - targetX;
+            float dy = isNaturalTreeMode()
+                    ? (viewHeight * 0.65f) - targetY
+                    : (viewHeight / 3.0f) - targetY;
+            transformMatrix.postTranslate(dx, dy);
+            invalidate();
         } else {
-            targetX = layoutResult.rootUnits.isEmpty()
-                    ? layoutResult.allUnits.get(0).primaryRect.centerX()
-                    : layoutResult.rootUnits.get(0).primaryRect.centerX();
-            targetY = layoutResult.rootUnits.isEmpty()
-                    ? layoutResult.allUnits.get(0).primaryRect.centerY()
-                    : layoutResult.rootUnits.get(0).primaryRect.centerY();
+            fitWholeTree();
         }
-
-        float dx = (viewWidth / 2.0f) - targetX;
-        float dy = isNaturalTreeMode()
-                ? (viewHeight * 0.65f) - targetY
-                : (viewHeight / 3.0f) - targetY;
-
-        transformMatrix.postTranslate(dx, dy);
-        invalidate();
     }
 
     @Override
