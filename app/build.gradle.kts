@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.recyclerview)
     implementation(libs.cardview)
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     // Lifecycle (ViewModel & LiveData)
     implementation(libs.lifecycle.viewmodel)
@@ -67,6 +68,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation("com.google.firebase:firebase-database")
 
     // Glide for image loading
     implementation(libs.glide)

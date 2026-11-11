@@ -256,22 +256,6 @@ public class TreeFragment extends Fragment {
 
     private void setupControls() {
         binding.btnSelectRoot.setOnClickListener(v -> showRootSelectionDialog());
-
-        binding.spinnerTreeRoot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    currentRootPersonId = null;
-                } else if (position - 1 < membersList.size()) {
-                    currentRootPersonId = membersList.get(position - 1).getId();
-                }
-                binding.familyTreeView.setRoot(currentRootPersonId);
-                updateRootButtonDisplay();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
     }
 
     private void observeFamilyMembers() {
@@ -284,19 +268,14 @@ public class TreeFragment extends Fragment {
                 // Populate tree view with data
                 binding.familyTreeView.setPeople(people);
 
+                // Maintain current root selection if still present in data
+                if (currentRootPersonId != null && findPersonById(currentRootPersonId) == null) {
+                    currentRootPersonId = null;
+                }
+                binding.familyTreeView.setRoot(currentRootPersonId);
+
                 // Update styled Root Selection button display
                 updateRootButtonDisplay();
-
-                // Populate Root Selector Spinner for background compatibility
-                List<String> names = new ArrayList<>();
-                names.add(getString(R.string.tree_root_all_generations));
-                for (PersonEntity p : people) {
-                    names.add(p.getFullName());
-                }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                        requireContext(), android.R.layout.simple_spinner_dropdown_item, names
-                );
-                binding.spinnerTreeRoot.setAdapter(adapter);
             } else {
                 binding.treeEmptyState.emptyStateLayout.setVisibility(View.VISIBLE);
                 binding.familyTreeView.setVisibility(View.GONE);
@@ -415,20 +394,6 @@ public class TreeFragment extends Fragment {
             currentRootPersonId = selectedId;
             binding.familyTreeView.setRoot(currentRootPersonId);
             updateRootButtonDisplay();
-
-            // Keep hidden spinner in sync
-            if (selectedId == null) {
-                binding.spinnerTreeRoot.setSelection(0);
-            } else {
-                int i = 0;
-                while (i < membersList.size()) {
-                    if (Objects.equals(membersList.get(i).getId(), selectedId)) {
-                        binding.spinnerTreeRoot.setSelection(i + 1);
-                        break;
-                    }
-                    i++;
-                }
-            }
             dialog.dismiss();
         });
 

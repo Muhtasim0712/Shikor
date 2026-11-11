@@ -41,6 +41,9 @@ public interface StoryDao {
     @Query("SELECT * FROM stories WHERE familyId = :familyId ORDER BY createdAt DESC")
     LiveData<List<StoryEntity>> getAllStoriesForFamily(String familyId);
 
+    @Query("SELECT * FROM stories ORDER BY createdAt DESC")
+    LiveData<List<StoryEntity>> getAllStoriesGlobal();
+
     @Query("SELECT * FROM stories WHERE familyId = :familyId ORDER BY createdAt DESC")
     List<StoryEntity> getAllStoriesForFamilySync(String familyId);
 

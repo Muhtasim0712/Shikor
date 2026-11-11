@@ -36,6 +36,9 @@ public interface PhotoDao {
     @Query("SELECT * FROM photos WHERE familyId = :familyId ORDER BY year DESC, createdAt DESC")
     LiveData<List<PhotoEntity>> getTimelinePhotos(String familyId);
 
+    @Query("SELECT * FROM photos ORDER BY year DESC, createdAt DESC")
+    LiveData<List<PhotoEntity>> getAllPhotosGlobal();
+
     @Query("SELECT * FROM photos WHERE familyId = :familyId ORDER BY year DESC, createdAt DESC")
     List<PhotoEntity> getAllPhotosForFamilySync(String familyId);
 

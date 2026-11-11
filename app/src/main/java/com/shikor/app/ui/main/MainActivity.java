@@ -82,6 +82,10 @@ public class MainActivity extends BaseActivity {
 
         setSupportActionBar(binding.toolbar);
 
+        // Run one-time memory migration and missing photo repair in background
+        com.shikor.app.util.MemoryMigrationHelper.migrateStoriesToMemories(this);
+        com.shikor.app.data.repository.MemoryRepository.getInstance(this).repairMissingPhotos(this);
+
         String familyName = Prefs.getInstance(this).getFamilyName();
         if (familyName != null && !familyName.isEmpty()) {
             binding.toolbar.setTitle(familyName);
@@ -234,8 +238,8 @@ public class MainActivity extends BaseActivity {
             } else if (itemId == R.id.nav_tree) {
                 loadFragment(new TreeFragment());
                 return true;
-            } else if (itemId == R.id.nav_timeline) {
-                loadFragment(new TimelineFragment());
+            } else if (itemId == R.id.nav_memories) {
+                loadFragment(new MemoriesFragment());
                 return true;
             } else if (itemId == R.id.nav_settings) {
                 loadFragment(new SettingsFragment());

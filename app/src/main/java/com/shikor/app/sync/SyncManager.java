@@ -17,6 +17,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.shikor.app.data.local.AppDatabase;
 import com.shikor.app.data.local.daos.PersonDao;
 import com.shikor.app.data.local.daos.PhotoDao;
@@ -85,6 +90,8 @@ public class SyncManager {
     private ListenerRegistration peopleListener;
     private ListenerRegistration storiesListener;
     private ListenerRegistration photosListener;
+    private DatabaseReference rtdbPhotosRef;
+    private ValueEventListener rtdbPhotosListener;
 
     private SyncManager(Context context) {
         this.appContext = context.getApplicationContext();
@@ -186,6 +193,7 @@ public class SyncManager {
 
         detachSnapshotListeners();
         Log.d(TAG, "Attaching real-time Firestore snapshot listeners for family: " + familyId);
+        com.shikor.app.data.repository.MemoryRepository.getInstance(appContext).attachMemoryListener(familyId);
 
         // 1. Real-time People listener
         peopleListener = firestore.collection("families")
@@ -223,19 +231,16 @@ public class SyncManager {
                     if (e != null) return;
                     if (querySnapshot != null && !querySnapshot.isEmpty()) {
                         executors.diskIO().execute(() -> {
-                            List<StoryEntity> incomingStories = new ArrayList<>();
                             for (DocumentChange dc : querySnapshot.getDocumentChanges()) {
                                 if (dc.getType() == DocumentChange.Type.ADDED || dc.getType() == DocumentChange.Type.MODIFIED) {
+                                    String legacyPhotoBase64 = dc.getDocument().getString("photoPath");
                                     StoryEntity s = parseStoryFromDoc(dc.getDocument(), familyId);
-                                    if (s != null && personDao.getPersonByIdSync(s.getPersonId()) != null) {
-                                        incomingStories.add(s);
+                                    if (s != null) {
+                                        FamilyRepository.getInstance(appContext).upsertRemoteStory(s, legacyPhotoBase64);
                                     }
                                 } else if (dc.getType() == DocumentChange.Type.REMOVED) {
                                     storyDao.deleteById(dc.getDocument().getId());
                                 }
-                            }
-                            if (!incomingStories.isEmpty()) {
-                                storyDao.insertAll(incomingStories);
                             }
                         });
                     }
@@ -253,7 +258,7 @@ public class SyncManager {
                             for (DocumentChange dc : querySnapshot.getDocumentChanges()) {
                                 if (dc.getType() == DocumentChange.Type.ADDED || dc.getType() == DocumentChange.Type.MODIFIED) {
                                     PhotoEntity p = parsePhotoFromDoc(dc.getDocument(), familyId);
-                                    if (p != null && personDao.getPersonByIdSync(p.getPersonId()) != null) {
+                                    if (p != null) {
                                         incomingPhotos.add(p);
                                     }
                                 } else if (dc.getType() == DocumentChange.Type.REMOVED) {
@@ -266,6 +271,61 @@ public class SyncManager {
                         });
                     }
                 });
+
+        // 4. Real-time Firebase Realtime Database Photos listener
+        rtdbPhotosRef = com.google.firebase.database.FirebaseDatabase.getInstance()
+                .getReference("families")
+                .child(familyId)
+                .child("photos");
+
+        rtdbPhotosListener = new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot snapshot) {
+                if (!snapshot.exists()) return;
+                executors.diskIO().execute(() -> {
+                    List<PhotoEntity> incomingPhotos = new ArrayList<>();
+                    for (com.google.firebase.database.DataSnapshot child : snapshot.getChildren()) {
+                        try {
+                            Map<String, Object> map = (Map<String, Object>) child.getValue();
+                            if (map != null) {
+                                String id = (String) map.get("id");
+                                String personId = (String) map.get("personId");
+                                String fId = (String) map.get("familyId");
+                                String path = (String) map.get("path");
+                                if (path != null && !path.trim().isEmpty()) {
+                                    path = com.shikor.app.util.ImageEncoder.base64ToFile(appContext, path);
+                                }
+                                String caption = (String) map.get("caption");
+                                Object yearObj = map.get("year");
+                                int year = yearObj instanceof Number ? ((Number) yearObj).intValue() : 2026;
+                                List<String> tagged = (List<String>) map.get("taggedPersonIds");
+                                Object createdObj = map.get("createdAt");
+                                long createdAt = createdObj instanceof Number ? ((Number) createdObj).longValue() : System.currentTimeMillis();
+
+                                if (id != null && personId != null) {
+                                    incomingPhotos.add(new PhotoEntity(
+                                            id, personId, fId != null ? fId : familyId,
+                                            path != null ? path : "", caption != null ? caption : "",
+                                            year, tagged != null ? tagged : new ArrayList<>(),
+                                            createdAt, createdAt, PhotoEntity.SYNC_STATE_SYNCED
+                                    ));
+                                }
+                            }
+                        } catch (Exception ignored) {}
+                    }
+                    if (!incomingPhotos.isEmpty()) {
+                        photoDao.insertAll(incomingPhotos);
+                        Log.d(TAG, "Realtime Database sync applied: " + incomingPhotos.size() + " photos updated.");
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull com.google.firebase.database.DatabaseError error) {
+                Log.w(TAG, "RTDB photos listener cancelled: " + error.getMessage());
+            }
+        };
+        rtdbPhotosRef.addValueEventListener(rtdbPhotosListener);
     }
 
     /**
@@ -284,7 +344,13 @@ public class SyncManager {
             photosListener.remove();
             photosListener = null;
         }
-        Log.d(TAG, "Detached Firestore snapshot listeners.");
+        if (rtdbPhotosRef != null && rtdbPhotosListener != null) {
+            rtdbPhotosRef.removeEventListener(rtdbPhotosListener);
+            rtdbPhotosRef = null;
+            rtdbPhotosListener = null;
+        }
+        com.shikor.app.data.repository.MemoryRepository.getInstance(appContext).detachMemoryListener();
+        Log.d(TAG, "Detached Firestore and RTDB listeners.");
     }
 
     /**
@@ -530,6 +596,9 @@ public class SyncManager {
             String phoneNumber = doc.getString("phoneNumber");
             String biography = doc.getString("biography");
             String photoPath = doc.getString("photoPath");
+            if (photoPath != null && !photoPath.trim().isEmpty()) {
+                photoPath = com.shikor.app.util.ImageEncoder.base64ToFile(appContext, photoPath);
+            }
             String photoBase64 = doc.getString("photoBase64");
             if (photoBase64 != null && !photoBase64.trim().isEmpty()) {
                 boolean fileExists = photoPath != null && new java.io.File(photoPath).exists();
@@ -575,7 +644,21 @@ public class SyncManager {
             String audioPath = doc.getString("audioPath");
             Long durLong = doc.getLong("audioDurationMs");
             long audioDurationMs = durLong != null ? durLong : 0;
+
             String photoPath = doc.getString("photoPath");
+            String photoBase64 = doc.getString("photoBase64");
+            if (photoBase64 != null && !photoBase64.trim().isEmpty()) {
+                boolean fileExists = photoPath != null && new java.io.File(photoPath).exists();
+                if (!fileExists) {
+                    java.io.File storiesDir = new java.io.File(appContext.getFilesDir(), "stories_photos");
+                    if (!storiesDir.exists()) storiesDir.mkdirs();
+                    java.io.File destFile = new java.io.File(storiesDir, "story_" + id + ".jpg");
+                    if (com.shikor.app.util.ImageUtils.base64ToFile(photoBase64, destFile)) {
+                        photoPath = destFile.getAbsolutePath();
+                    }
+                }
+            }
+
             Long createdLong = doc.getLong("createdAt");
             long createdAt = createdLong != null ? createdLong : System.currentTimeMillis();
             String authorUid = doc.getString("authorUid");
@@ -599,7 +682,19 @@ public class SyncManager {
             String id = doc.getString("id") != null ? doc.getString("id") : doc.getId();
             String personId = doc.getString("personId");
             String familyId = doc.getString("familyId") != null ? doc.getString("familyId") : fallbackFamilyId;
-            String path = doc.getString("path") != null ? doc.getString("path") : "";
+            String path = doc.getString("path");
+            String photoBase64 = doc.getString("photoBase64");
+            if (photoBase64 != null && !photoBase64.trim().isEmpty()) {
+                boolean fileExists = path != null && new java.io.File(path).exists();
+                if (!fileExists) {
+                    java.io.File photosDir = new java.io.File(appContext.getFilesDir(), "photos");
+                    if (!photosDir.exists()) photosDir.mkdirs();
+                    java.io.File destFile = new java.io.File(photosDir, "photo_" + id + ".jpg");
+                    if (com.shikor.app.util.ImageUtils.base64ToFile(photoBase64, destFile)) {
+                        path = destFile.getAbsolutePath();
+                    }
+                }
+            }
             String caption = doc.getString("caption");
             Long yearLong = doc.getLong("year");
             int year = yearLong != null ? yearLong.intValue() : 0;

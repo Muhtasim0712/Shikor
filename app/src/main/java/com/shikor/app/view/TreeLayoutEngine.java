@@ -79,15 +79,22 @@ public class TreeLayoutEngine {
             PersonEntity primary = p;
             PersonEntity partner = spouse;
             if (partner != null) {
-                // If partner has parents in active tree but p does not, prioritize the blood descendant as primary!
-                boolean pHasParents = (p.getFatherId() != null && activeIds.contains(p.getFatherId()))
-                        || (p.getMotherId() != null && activeIds.contains(p.getMotherId()));
-                boolean partnerHasParents = (partner.getFatherId() != null && activeIds.contains(partner.getFatherId()))
-                        || (partner.getMotherId() != null && activeIds.contains(partner.getMotherId()));
-
-                if (!pHasParents && partnerHasParents) {
+                if (rootPersonId != null && partner.getId().equals(rootPersonId)) {
                     primary = partner;
                     partner = p;
+                } else if (rootPersonId != null && primary.getId().equals(rootPersonId)) {
+                    // Already primary
+                } else {
+                    // If partner has parents in active tree but p does not, prioritize the blood descendant as primary!
+                    boolean pHasParents = (p.getFatherId() != null && activeIds.contains(p.getFatherId()))
+                            || (p.getMotherId() != null && activeIds.contains(p.getMotherId()));
+                    boolean partnerHasParents = (partner.getFatherId() != null && activeIds.contains(partner.getFatherId()))
+                            || (partner.getMotherId() != null && activeIds.contains(partner.getMotherId()));
+
+                    if (!pHasParents && partnerHasParents) {
+                        primary = partner;
+                        partner = p;
+                    }
                 }
             }
 
@@ -99,49 +106,54 @@ public class TreeLayoutEngine {
             }
         }
 
-        // 3. Establish Parent-Child hierarchy between units
+        // 3. Establish Parent-Child hierarchy between units for both primary and spouse
         for (TreeUnit unit : result.allUnits) {
             String fId = unit.primary.getFatherId();
             String mId = unit.primary.getMotherId();
-            TreeUnit parentUnit = null;
+            TreeUnit primaryParent = null;
 
             if (fId != null && unitMap.containsKey(fId)) {
-                parentUnit = unitMap.get(fId);
+                primaryParent = unitMap.get(fId);
             } else if (mId != null && unitMap.containsKey(mId)) {
-                parentUnit = unitMap.get(mId);
+                primaryParent = unitMap.get(mId);
             }
 
-            // Fallback: If primary's parents were not found in the tree, check spouse's parents!
-            if (parentUnit == null && unit.spouse != null) {
-                String sfId = unit.spouse.getFatherId();
-                String smId = unit.spouse.getMotherId();
-                if (sfId != null && unitMap.containsKey(sfId)) {
-                    parentUnit = unitMap.get(sfId);
-                    // Swap so the blood child in the family lineage is primary
-                    PersonEntity temp = unit.primary;
-                    unit.primary = unit.spouse;
-                    unit.spouse = temp;
-                } else if (smId != null && unitMap.containsKey(smId)) {
-                    parentUnit = unitMap.get(smId);
-                    // Swap so the blood child in the family lineage is primary
-                    PersonEntity temp = unit.primary;
-                    unit.primary = unit.spouse;
-                    unit.spouse = temp;
+            if (primaryParent != null && primaryParent != unit) {
+                unit.parentUnit = primaryParent;
+                if (!primaryParent.childrenUnits.contains(unit)) {
+                    primaryParent.childrenUnits.add(unit);
                 }
             }
 
-            if (parentUnit != null && parentUnit != unit) {
-                unit.parentUnit = parentUnit;
-                if (!parentUnit.childrenUnits.contains(unit)) {
-                    parentUnit.childrenUnits.add(unit);
+            // Check spouse's parents (maternal grandparents / in-laws)
+            if (unit.spouse != null) {
+                String sfId = unit.spouse.getFatherId();
+                String smId = unit.spouse.getMotherId();
+                TreeUnit spouseParent = null;
+
+                if (sfId != null && unitMap.containsKey(sfId)) {
+                    spouseParent = unitMap.get(sfId);
+                } else if (smId != null && unitMap.containsKey(smId)) {
+                    spouseParent = unitMap.get(smId);
+                }
+
+                if (spouseParent != null && spouseParent != unit) {
+                    unit.spouseParentUnit = spouseParent;
+                    if (unit.parentUnit == null && !spouseParent.childrenUnits.contains(unit)) {
+                        spouseParent.childrenUnits.add(unit);
+                    }
                 }
             }
         }
 
         // 4. Identify root units (units with no parent in this subtree)
-        for (TreeUnit unit : result.allUnits) {
-            if (unit.parentUnit == null) {
-                result.rootUnits.add(unit);
+        Set<TreeUnit> childUnits = new HashSet<>();
+        for (TreeUnit u : result.allUnits) {
+            childUnits.addAll(u.childrenUnits);
+        }
+        for (TreeUnit u : result.allUnits) {
+            if (!childUnits.contains(u)) {
+                result.rootUnits.add(u);
             }
         }
 
@@ -213,12 +225,14 @@ public class TreeLayoutEngine {
     }
 
     private static void assignLevels(TreeUnit unit, int level, LayoutResult result) {
-        unit.level = level;
-        if (level > result.maxLevel) {
-            result.maxLevel = level;
+        if (level > unit.level) {
+            unit.level = level;
+        }
+        if (unit.level > result.maxLevel) {
+            result.maxLevel = unit.level;
         }
         for (TreeUnit child : unit.childrenUnits) {
-            assignLevels(child, level + 1, result);
+            assignLevels(child, unit.level + 1, result);
         }
     }
 
@@ -267,7 +281,22 @@ public class TreeLayoutEngine {
             unit.spouseRect.set(spouseLeft, y, spouseLeft + nodeWidth, y + nodeHeight);
         }
 
-        float childX = leftX;
+        float childX;
+        if (!unit.childrenUnits.isEmpty()) {
+            float childrenTotalWidth = 0;
+            for (TreeUnit child : unit.childrenUnits) {
+                childrenTotalWidth += child.subtreeWidth;
+            }
+            childrenTotalWidth += Math.max(0, unit.childrenUnits.size() - 1) * siblingGap;
+
+            float parentCenterX = unit.spouse != null
+                    ? (unit.primaryRect.left + unit.spouseRect.right) / 2f
+                    : unit.primaryRect.centerX();
+            childX = parentCenterX - (childrenTotalWidth / 2.0f);
+        } else {
+            childX = leftX;
+        }
+
         for (TreeUnit child : unit.childrenUnits) {
             positionSubtree(child, childX, maxLevel, isNaturalTreeMode,
                     paddingTop, nodeWidth, nodeHeight, coupleGap, siblingGap, levelGap);
@@ -276,25 +305,43 @@ public class TreeLayoutEngine {
     }
 
     private static void collectDescendants(
-            String personId,
+            String rootPersonId,
             Map<String, PersonEntity> personMap,
             List<PersonEntity> allPeople,
             Set<String> collected
     ) {
-        if (collected.contains(personId)) return;
-        collected.add(personId);
+        if (rootPersonId == null || collected.contains(rootPersonId)) return;
 
-        PersonEntity person = personMap.get(personId);
-        String spouseId = person != null ? person.getSpouseId() : null;
-        if (spouseId != null) {
-            collected.add(spouseId);
+        List<String> queue = new ArrayList<>();
+        queue.add(rootPersonId);
+        collected.add(rootPersonId);
+
+        // Include root person's spouse so the root couple is displayed together
+        PersonEntity rootPerson = personMap.get(rootPersonId);
+        if (rootPerson != null && rootPerson.getSpouseId() != null && personMap.containsKey(rootPerson.getSpouseId())) {
+            collected.add(rootPerson.getSpouseId());
         }
 
-        for (PersonEntity p : allPeople) {
-            boolean isChildOfPerson = personId.equals(p.getFatherId()) || personId.equals(p.getMotherId());
-            boolean isChildOfSpouse = spouseId != null && (spouseId.equals(p.getFatherId()) || spouseId.equals(p.getMotherId()));
-            if (isChildOfPerson || isChildOfSpouse) {
-                collectDescendants(p.getId(), personMap, allPeople, collected);
+        int head = 0;
+        while (head < queue.size()) {
+            String currId = queue.get(head++);
+            PersonEntity p = personMap.get(currId);
+            String currSpouseId = (p != null) ? p.getSpouseId() : null;
+
+            for (PersonEntity other : allPeople) {
+                if (other == null) continue;
+                boolean isChild = currId.equals(other.getFatherId()) || currId.equals(other.getMotherId())
+                        || (currSpouseId != null && (currSpouseId.equals(other.getFatherId()) || currSpouseId.equals(other.getMotherId())));
+
+                if (isChild && !collected.contains(other.getId())) {
+                    collected.add(other.getId());
+                    queue.add(other.getId());
+
+                    // Include child's spouse so married couples in the branch are kept intact
+                    if (other.getSpouseId() != null && personMap.containsKey(other.getSpouseId())) {
+                        collected.add(other.getSpouseId());
+                    }
+                }
             }
         }
     }

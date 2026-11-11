@@ -235,11 +235,8 @@ public class StoryDetailActivity extends BaseActivity {
 
         // Photo
         if (story.getPhotoPath() != null && !story.getPhotoPath().trim().isEmpty()) {
-            File photoFile = new File(story.getPhotoPath());
             binding.cardStoryPhoto.setVisibility(View.VISIBLE);
-            Glide.with(this)
-                    .load(photoFile.exists() ? photoFile : story.getPhotoPath())
-                    .into(binding.ivStoryPhoto);
+            com.shikor.app.util.ImageEncoder.loadImage(binding.ivStoryPhoto, story.getPhotoPath());
         } else {
             binding.cardStoryPhoto.setVisibility(View.GONE);
         }

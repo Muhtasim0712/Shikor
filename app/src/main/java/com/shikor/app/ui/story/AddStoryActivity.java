@@ -415,13 +415,16 @@ public class AddStoryActivity extends BaseActivity implements RecordingStateRece
 
         String storyId = UUID.randomUUID().toString();
         String familyId = Prefs.getInstance(this).getFamilyId();
+        if (familyId == null || familyId.trim().isEmpty()) {
+            familyId = "default_family";
+        }
         String authorUid = Prefs.getInstance(this).getUserId();
         long now = System.currentTimeMillis();
 
         StoryEntity story = new StoryEntity(
                 storyId,
                 selectedPerson.getId(),
-                familyId != null ? familyId : "",
+                familyId,
                 title,
                 body,
                 recordedAudioPath,

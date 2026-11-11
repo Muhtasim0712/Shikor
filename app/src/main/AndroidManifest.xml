@@ -110,6 +110,23 @@
             android:name=".ui.tools.HealthCheckActivity"
             android:exported="false" />
 
+        <!-- New Memories Feature Activities & Receiver -->
+        <activity
+            android:name=".ui.memory.AddMemoryActivity"
+            android:exported="false"
+            android:label="Add Memory"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.memory.MemoryDetailActivity"
+            android:exported="false"
+            android:label="Memory Details" />
+
+        <receiver
+            android:name=".receiver.MemoryNotificationReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
         <!-- CONCEPT: Foreground Service for background elder voice recording -->
         <service
             android:name=".service.AudioRecordingService"

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.shikor.app-mergeDebugResources-47:/values-v23/values-v23.xml",
+            "outputFile": "com.shikor.app-mergeDebugResources-48:/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\d9de9e94ffbfaf5d5988beddef557b99\\transformed\\work-runtime-2.9.1\\res\\values-v23\\values-v23.xml",

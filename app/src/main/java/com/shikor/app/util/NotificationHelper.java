@@ -14,8 +14,12 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import com.shikor.app.R;
+import com.shikor.app.data.local.entities.MemoryEntity;
+import com.shikor.app.receiver.MemoryNotificationReceiver;
 import com.shikor.app.receiver.ReminderActionReceiver;
 import com.shikor.app.ui.person.PersonDetailActivity;
+
+import java.io.File;
 
 /**
  * NotificationHelper - Configures system notification channels and dispatches
@@ -209,6 +213,158 @@ public class NotificationHelper {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_REMINDER)
                 .addAction(android.R.drawable.ic_menu_agenda, context.getString(R.string.notification_action_open_family), mainPendingIntent);
+
+        try {
+            NotificationManagerCompat.from(context).notify(notificationId, builder.build());
+        } catch (SecurityException e) {
+            Log.e(TAG, "Notification permission not granted: " + e.getMessage());
+        }
+    }
+
+    public static final String CHANNEL_FAMILY_MEMORIES_ID = "family_memories";
+
+    public static void createFamilyMemoriesChannel(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager manager = context.getSystemService(NotificationManager.class);
+            if (manager != null) {
+                NotificationChannel channel = new NotificationChannel(
+                        CHANNEL_FAMILY_MEMORIES_ID,
+                        "Family Memories",
+                        NotificationManager.IMPORTANCE_HIGH
+                );
+                channel.setDescription("Notifications when family members add new memories");
+                channel.enableLights(true);
+                channel.setLightColor(ContextCompat.getColor(context, R.color.primary));
+                channel.enableVibration(true);
+                manager.createNotificationChannel(channel);
+            }
+        }
+    }
+
+    public static void showNewMemoryNotification(Context context, MemoryEntity memory, boolean hideNames) {
+        createFamilyMemoriesChannel(context);
+        int notificationId = Math.abs(memory.getId().hashCode());
+
+        Intent detailIntent = new Intent(context, com.shikor.app.ui.memory.MemoryDetailActivity.class);
+        detailIntent.putExtra(com.shikor.app.ui.memory.MemoryDetailActivity.EXTRA_MEMORY_ID, memory.getId());
+        detailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent contentPendingIntent = PendingIntent.getActivity(
+                context,
+                notificationId,
+                detailIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        Intent viewIntent = new Intent(context, MemoryNotificationReceiver.class);
+        viewIntent.setAction(MemoryNotificationReceiver.ACTION_VIEW_MEMORY);
+        viewIntent.putExtra(MemoryNotificationReceiver.EXTRA_MEMORY_ID, memory.getId());
+        viewIntent.putExtra(MemoryNotificationReceiver.EXTRA_NOTIFICATION_ID, notificationId);
+        PendingIntent viewPendingIntent = PendingIntent.getBroadcast(
+                context,
+                notificationId + 100,
+                viewIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        String title = hideNames ? "New memory in your family" : ("New memory from " + (memory.getUploaderName() != null ? memory.getUploaderName() : "Family Member"));
+        String text = memory.getTitle() != null ? memory.getTitle() : "Tap to view memory";
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_FAMILY_MEMORIES_ID)
+                .setSmallIcon(R.drawable.ic_stat_shikor)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setColor(ContextCompat.getColor(context, R.color.primary))
+                .setContentIntent(contentPendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_SOCIAL)
+                .setGroup("family_memories_group")
+                .addAction(android.R.drawable.ic_menu_view, "View", viewPendingIntent);
+
+        File photoDir = new File(context.getFilesDir(), "memories/" + memory.getId());
+        File thumb = new File(photoDir, "photo_0.jpg");
+        if (thumb.exists()) {
+            try {
+                android.graphics.Bitmap bmp = android.graphics.BitmapFactory.decodeFile(thumb.getAbsolutePath());
+                if (bmp != null) {
+                    builder.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bmp).bigLargeIcon((android.graphics.Bitmap) null));
+                }
+            } catch (Exception ignored) {}
+        } else {
+            builder.setStyle(new NotificationCompat.BigTextStyle().bigText(text));
+        }
+
+        try {
+            NotificationManagerCompat.from(context).notify(notificationId, builder.build());
+        } catch (SecurityException e) {
+            Log.e(TAG, "Notification permission not granted: " + e.getMessage());
+        }
+    }
+
+    public static void showGroupedMemoryNotification(Context context, int count, boolean hideNames) {
+        createFamilyMemoriesChannel(context);
+        int summaryId = 999999;
+
+        Intent mainIntent = new Intent(context, com.shikor.app.ui.main.MainActivity.class);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent mainPending = PendingIntent.getActivity(
+                context,
+                summaryId,
+                mainIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        String title = hideNames ? "New memories in your family" : (count + " new memories from your family");
+
+        NotificationCompat.Builder summaryBuilder = new NotificationCompat.Builder(context, CHANNEL_FAMILY_MEMORIES_ID)
+                .setSmallIcon(R.drawable.ic_stat_shikor)
+                .setContentTitle(title)
+                .setContentText("Tap to view all family memories")
+                .setColor(ContextCompat.getColor(context, R.color.primary))
+                .setContentIntent(mainPending)
+                .setAutoCancel(true)
+                .setGroup("family_memories_group")
+                .setGroupSummary(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+        try {
+            NotificationManagerCompat.from(context).notify(summaryId, summaryBuilder.build());
+        } catch (SecurityException e) {
+            Log.e(TAG, "Notification permission not granted: " + e.getMessage());
+        }
+    }
+
+    public static void showOnThisDayMemoryNotification(Context context, MemoryEntity memory,
+                                                     String personName, int yearsAgo, int extraCount, int notificationId) {
+        createFamilyMemoriesChannel(context);
+
+        Intent contentIntent = new Intent(context, com.shikor.app.ui.memory.MemoryDetailActivity.class);
+        contentIntent.putExtra(com.shikor.app.ui.memory.MemoryDetailActivity.EXTRA_MEMORY_ID, memory.getId());
+        contentIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent contentPendingIntent = PendingIntent.getActivity(
+                context,
+                notificationId,
+                contentIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        String title = context.getString(R.string.notification_on_this_day_title, yearsAgo);
+        String body = memory.getDescription() != null ? memory.getDescription() : "";
+        String contentText = body.isEmpty() ? (memory.getTitle() != null ? memory.getTitle() : "") : body;
+        if (personName != null && !personName.isEmpty()) {
+            contentText += " (" + personName + ")";
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_FAMILY_MEMORIES_ID)
+                .setSmallIcon(R.drawable.ic_stat_shikor)
+                .setContentTitle(title)
+                .setContentText(contentText)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(body))
+                .setColor(ContextCompat.getColor(context, R.color.primary))
+                .setContentIntent(contentPendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_REMINDER);
 
         try {
             NotificationManagerCompat.from(context).notify(notificationId, builder.build());

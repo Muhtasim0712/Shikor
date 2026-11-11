@@ -1,6 +1,7 @@
 package com.shikor.app.ui.main;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,9 +26,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.shikor.app.adapter.TimelineAdapter;
 import com.shikor.app.data.local.entities.PersonEntity;
 import com.shikor.app.data.local.entities.PhotoEntity;
+import com.shikor.app.data.local.entities.StoryEntity;
 import com.shikor.app.databinding.DialogAddTimelinePhotoBinding;
 import com.shikor.app.databinding.FragmentTimelineBinding;
 import com.shikor.app.ui.person.PersonViewModel;
+import com.shikor.app.ui.story.StoryDetailActivity;
 import com.shikor.app.ui.story.StoryViewModel;
 import com.shikor.app.ui.timeline.TimelineItem;
 import com.shikor.app.util.AppExecutors;
@@ -58,6 +61,9 @@ public class TimelineFragment extends Fragment {
     private TimelineAdapter timelineAdapter;
     private List<PersonEntity> familyMembers = new ArrayList<>();
     private final Map<String, String> personNameMap = new HashMap<>();
+
+    private List<StoryEntity> latestStories = new ArrayList<>();
+    private List<PhotoEntity> latestPhotos = new ArrayList<>();
 
     // State for Dialog photo picking
     private String dialogSelectedPhotoPath = null;
@@ -93,10 +99,14 @@ public class TimelineFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        timelineAdapter = new TimelineAdapter(photo -> {
-            // Photo clicked: show preview in a dialog
-            showPhotoDetailDialog(photo);
-        });
+        timelineAdapter = new TimelineAdapter(
+                photo -> showPhotoDetailDialog(photo),
+                story -> {
+                    Intent intent = new Intent(requireContext(), StoryDetailActivity.class);
+                    intent.putExtra(StoryDetailActivity.EXTRA_STORY_ID, story.getId());
+                    startActivity(intent);
+                }
+        );
 
         binding.rvTimeline.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvTimeline.setAdapter(timelineAdapter);
@@ -115,51 +125,63 @@ public class TimelineFragment extends Fragment {
             }
         });
 
+        // Observe Stories
+        storyViewModel.getAllStories().observe(getViewLifecycleOwner(), stories -> {
+            latestStories = stories != null ? stories : new ArrayList<>();
+            updateTimeline();
+        });
+
         // Observe Timeline Photos
         storyViewModel.getTimelinePhotos().observe(getViewLifecycleOwner(), photos -> {
-            if (photos != null && !photos.isEmpty()) {
-                binding.timelineEmptyState.emptyStateLayout.setVisibility(View.GONE);
-                binding.rvTimeline.setVisibility(View.VISIBLE);
-
-                List<TimelineItem> items = buildTimelineItemsWithHeaders(photos);
-                timelineAdapter.submitList(items);
-            } else {
-                binding.timelineEmptyState.emptyStateLayout.setVisibility(View.VISIBLE);
-                binding.rvTimeline.setVisibility(View.GONE);
-                binding.timelineEmptyState.tvEmptyTitle.setText(R.string.empty_timeline_title);
-                binding.timelineEmptyState.tvEmptySubtitle.setText(R.string.empty_timeline_subtitle);
-            }
+            latestPhotos = photos != null ? photos : new ArrayList<>();
+            updateTimeline();
         });
     }
 
-    /**
-     * Groups photos by year and generates header items followed by photo cards.
-     */
-    private List<TimelineItem> buildTimelineItemsWithHeaders(List<PhotoEntity> photos) {
-        // Group by year (preserving DESC order)
-        Map<Integer, List<PhotoEntity>> groupedByYear = new LinkedHashMap<>();
-        for (PhotoEntity p : photos) {
-            int year = p.getYear();
-            if (!groupedByYear.containsKey(year)) {
-                groupedByYear.put(year, new ArrayList<>());
-            }
-            groupedByYear.get(year).add(p);
+    private void updateTimeline() {
+        if (binding == null) return;
+        List<TimelineItem> items = buildCombinedTimelineItems(latestStories, latestPhotos);
+        if (!items.isEmpty()) {
+            binding.timelineEmptyState.emptyStateLayout.setVisibility(View.GONE);
+            binding.rvTimeline.setVisibility(View.VISIBLE);
+            timelineAdapter.submitList(items);
+        } else {
+            binding.timelineEmptyState.emptyStateLayout.setVisibility(View.VISIBLE);
+            binding.rvTimeline.setVisibility(View.GONE);
+            binding.timelineEmptyState.tvEmptyTitle.setText(R.string.empty_timeline_title);
+            binding.timelineEmptyState.tvEmptySubtitle.setText(R.string.empty_timeline_subtitle);
         }
+    }
 
-        List<TimelineItem> timelineItems = new ArrayList<>();
-        for (Map.Entry<Integer, List<PhotoEntity>> entry : groupedByYear.entrySet()) {
-            int year = entry.getKey();
-            List<PhotoEntity> yearPhotos = entry.getValue();
+    private List<TimelineItem> buildCombinedTimelineItems(List<StoryEntity> stories, List<PhotoEntity> photos) {
+        Map<Integer, List<TimelineItem>> groupedByYear = new java.util.LinkedHashMap<>();
 
-            // Add Year Header item
-            timelineItems.add(TimelineItem.header(year, yearPhotos.size()));
-
-            // Add Photo items
-            for (PhotoEntity p : yearPhotos) {
-                timelineItems.add(TimelineItem.photo(p));
+        if (stories != null) {
+            for (StoryEntity s : stories) {
+                TimelineItem item = TimelineItem.story(s);
+                groupedByYear.computeIfAbsent(item.getYear(), k -> new ArrayList<>()).add(item);
             }
         }
-        return timelineItems;
+
+        if (photos != null) {
+            for (PhotoEntity p : photos) {
+                TimelineItem item = TimelineItem.photo(p);
+                groupedByYear.computeIfAbsent(item.getYear(), k -> new ArrayList<>()).add(item);
+            }
+        }
+
+        List<Integer> years = new ArrayList<>(groupedByYear.keySet());
+        years.sort((a, b) -> Integer.compare(b, a));
+
+        List<TimelineItem> result = new ArrayList<>();
+        for (int year : years) {
+            List<TimelineItem> itemsInYear = groupedByYear.get(year);
+            if (itemsInYear != null && !itemsInYear.isEmpty()) {
+                result.add(TimelineItem.header(year, itemsInYear.size()));
+                result.addAll(itemsInYear);
+            }
+        }
+        return result;
     }
 
     private void showAddPhotoDialog() {
@@ -249,6 +271,9 @@ public class TimelineFragment extends Fragment {
 
             String primaryPersonId = selectedPersonIds.get(0);
             String familyId = Prefs.getInstance(requireContext()).getFamilyId();
+            if (familyId == null || familyId.trim().isEmpty()) {
+                familyId = "default_family";
+            }
             String photoId = UUID.randomUUID().toString();
             long now = System.currentTimeMillis();
 

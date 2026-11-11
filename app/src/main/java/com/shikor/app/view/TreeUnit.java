@@ -15,6 +15,7 @@ public class TreeUnit {
     public PersonEntity primary;
     public PersonEntity spouse;
     public TreeUnit parentUnit;
+    public TreeUnit spouseParentUnit;
     public final List<TreeUnit> childrenUnits = new ArrayList<>();
 
     public int level = 0;

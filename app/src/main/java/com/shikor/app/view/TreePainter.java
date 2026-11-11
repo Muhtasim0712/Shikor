@@ -130,12 +130,12 @@ public class TreePainter {
         this.context = context;
         this.density = context.getResources().getDisplayMetrics().density;
 
-        NODE_WIDTH = 136 * density;
+        NODE_WIDTH = 160 * density;
         NODE_HEIGHT = 70 * density;
         AVATAR_RADIUS = 20 * density;
-        COUPLE_GAP = 18 * density;
-        SIBLING_GAP = 32 * density;
-        LEVEL_GAP = 96 * density;
+        COUPLE_GAP = 14 * density;
+        SIBLING_GAP = 80 * density;
+        LEVEL_GAP = 100 * density;
 
         initPaints();
         initStars();
@@ -536,16 +536,20 @@ public class TreePainter {
 
         // 2. Curved, Tapered Branches & Spouse Vines
         for (TreeUnit unit : layout.allUnits) {
-            // Spouse connection vine
+            // Spouse connection branch resembling a tree branch
             if (unit.spouse != null) {
                 float midY = unit.primaryRect.centerY();
                 float x1 = unit.primaryRect.right;
                 float x2 = unit.spouseRect.left;
-                canvas.drawLine(x1, midY, x2, midY, spouseVinePaint);
+                float midX = (x1 + x2) / 2f;
+
+                Path spouseBranch = new Path();
+                spouseBranch.moveTo(x1, midY);
+                spouseBranch.quadTo(midX, midY - (6 * density), x2, midY);
+                canvas.drawPath(spouseBranch, branchPaint);
 
                 // Small golden union marker in center
-                float midX = (x1 + x2) / 2f;
-                canvas.drawCircle(midX, midY, 3.5f * density, spouseVinePaint);
+                canvas.drawCircle(midX, midY - (3 * density), 3.5f * density, spouseVinePaint);
             }
 
             // Branches from parent to children
@@ -556,14 +560,33 @@ public class TreePainter {
                 float parentStartY = unit.primaryRect.top; // Branch reaches upward from top of parent
 
                 for (TreeUnit child : unit.childrenUnits) {
-                    float childEndX = child.spouse != null
-                            ? (child.primaryRect.left + child.spouseRect.right) / 2f
-                            : child.primaryRect.centerX();
+                    float childEndX;
+                    if (child.spouse != null) {
+                        if (unit == child.spouseParentUnit) {
+                            childEndX = child.spouseRect.centerX();
+                        } else {
+                            childEndX = child.primaryRect.centerX();
+                        }
+                    } else {
+                        childEndX = child.primaryRect.centerX();
+                    }
                     float childEndY = child.primaryRect.bottom; // Connects to bottom of child
 
                     drawCurvedBranch(canvas, parentStartX, parentStartY, childEndX, childEndY,
                             unit.level, child.primary.getId(), phase == DiurnalPhase.NIGHT);
                 }
+            }
+
+            // In-laws connection branch if spouse's parents are also present in tree
+            if (unit.spouse != null && unit.spouseParentUnit != null && unit.parentUnit != null) {
+                float sParentStartX = unit.spouseParentUnit.spouse != null
+                        ? (unit.spouseParentUnit.primaryRect.left + unit.spouseParentUnit.spouseRect.right) / 2f
+                        : unit.spouseParentUnit.primaryRect.centerX();
+                float sParentStartY = unit.spouseParentUnit.primaryRect.top;
+                float sChildEndX = unit.spouseRect.centerX();
+                float sChildEndY = unit.spouseRect.bottom;
+                drawCurvedBranch(canvas, sParentStartX, sParentStartY, sChildEndX, sChildEndY,
+                        unit.spouseParentUnit.level, unit.spouse.getId(), phase == DiurnalPhase.NIGHT);
             }
         }
     }
@@ -636,6 +659,17 @@ public class TreePainter {
         drawSingleRoot(canvas, trunkX - (8 * density), groundY, trunkX - (30 * density), groundY + (60 * density), 8 * density);
         drawSingleRoot(canvas, trunkX + (16 * density), groundY, trunkX + (65 * density), groundY + (45 * density), 10 * density);
         drawSingleRoot(canvas, trunkX + (8 * density), groundY, trunkX + (30 * density), groundY + (60 * density), 8 * density);
+
+        // Upward spreading branches connecting trunk top to base root ancestors
+        if (layout.rootUnits != null) {
+            for (TreeUnit rootUnit : layout.rootUnits) {
+                float rootX = rootUnit.spouse != null
+                        ? (rootUnit.primaryRect.left + rootUnit.spouseRect.right) / 2f
+                        : rootUnit.primaryRect.centerX();
+                float rootY = rootUnit.primaryRect.bottom;
+                drawCurvedBranch(canvas, trunkX, trunkTopY, rootX, rootY, 0, rootUnit.primary.getId(), phase == DiurnalPhase.NIGHT);
+            }
+        }
     }
 
     private void drawSingleRoot(Canvas canvas, float startX, float startY, float endX, float endY, float width) {
@@ -961,11 +995,31 @@ public class TreePainter {
 
                 // Vertical drop to each child
                 for (TreeUnit child : unit.childrenUnits) {
-                    float childMidX = child.spouse != null
-                            ? (child.primaryRect.left + child.spouseRect.right) / 2.0f
-                            : child.primaryRect.centerX();
+                    float childMidX;
+                    if (child.spouse != null) {
+                        if (unit == child.spouseParentUnit) {
+                            childMidX = child.spouseRect.centerX();
+                        } else {
+                            childMidX = child.primaryRect.centerX();
+                        }
+                    } else {
+                        childMidX = child.primaryRect.centerX();
+                    }
                     canvas.drawLine(childMidX, branchY, childMidX, child.primaryRect.top, branchPaint);
                 }
+            }
+
+            // In-laws connection in Classic Chart mode
+            if (unit.spouse != null && unit.spouseParentUnit != null && unit.parentUnit != null) {
+                float sParentMidX = unit.spouseParentUnit.spouse != null
+                        ? (unit.spouseParentUnit.primaryRect.left + unit.spouseParentUnit.spouseRect.right) / 2.0f
+                        : unit.spouseParentUnit.primaryRect.centerX();
+                float sParentBottomY = unit.spouseParentUnit.primaryRect.bottom;
+                float branchY = sParentBottomY + (LEVEL_GAP / 2.0f);
+                float sChildMidX = unit.spouseRect.centerX();
+                canvas.drawLine(sParentMidX, sParentBottomY, sParentMidX, branchY, branchPaint);
+                canvas.drawLine(sParentMidX, branchY, sChildMidX, branchY, branchPaint);
+                canvas.drawLine(sChildMidX, branchY, sChildMidX, unit.spouseRect.top, branchPaint);
             }
         }
     }

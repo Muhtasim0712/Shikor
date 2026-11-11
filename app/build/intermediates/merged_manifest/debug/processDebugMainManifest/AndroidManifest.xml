@@ -121,6 +121,22 @@
             android:name="com.shikor.app.ui.tools.HealthCheckActivity"
             android:exported="false" />
 
+        <!-- New Memories Feature Activities & Receiver -->
+        <activity
+            android:name="com.shikor.app.ui.memory.AddMemoryActivity"
+            android:exported="false"
+            android:label="Add Memory"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.shikor.app.ui.memory.MemoryDetailActivity"
+            android:exported="false"
+            android:label="Memory Details" />
+
+        <receiver
+            android:name="com.shikor.app.receiver.MemoryNotificationReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
         <!-- CONCEPT: Foreground Service for background elder voice recording -->
         <service
             android:name="com.shikor.app.service.AudioRecordingService"
@@ -238,6 +254,12 @@
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.database.FirebaseDatabaseKtxRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"

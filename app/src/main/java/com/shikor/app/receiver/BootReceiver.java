@@ -28,7 +28,23 @@ public class BootReceiver extends BroadcastReceiver {
                 AlarmScheduler.scheduleDailyReminder(context);
                 AlarmScheduler.scheduleOnThisDay(context);
                 com.shikor.app.widget.WidgetUpdater.scheduleDailyRefresh(context);
-                Log.d(TAG, "Reminders and On This Day rescheduled successfully after reboot.");
+
+                androidx.work.Constraints constraints = new androidx.work.Constraints.Builder()
+                        .setRequiredNetworkType(androidx.work.NetworkType.CONNECTED)
+                        .build();
+                androidx.work.PeriodicWorkRequest memoryWork = new androidx.work.PeriodicWorkRequest.Builder(
+                        com.shikor.app.worker.MemoryCheckWorker.class,
+                        15, java.util.concurrent.TimeUnit.MINUTES
+                )
+                .setConstraints(constraints)
+                .build();
+                androidx.work.WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+                        "memory_check_periodic",
+                        androidx.work.ExistingPeriodicWorkPolicy.KEEP,
+                        memoryWork
+                );
+
+                Log.d(TAG, "Reminders, On This Day, and Memory check periodic work rescheduled successfully after reboot.");
             }
         }
     }

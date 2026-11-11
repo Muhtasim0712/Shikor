@@ -55,10 +55,7 @@ public class StoryViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<StoryEntity>> getAllStories() {
-        if (currentFamilyId == null || currentFamilyId.isEmpty()) {
-            return new MutableLiveData<>();
-        }
-        return repository.getAllStoriesForFamily(currentFamilyId);
+        return repository.getAllStoriesGlobal();
     }
 
     public LiveData<StoryEntity> getStoryById(String storyId) {
@@ -94,10 +91,7 @@ public class StoryViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<PhotoEntity>> getTimelinePhotos() {
-        if (currentFamilyId == null || currentFamilyId.isEmpty()) {
-            return new MutableLiveData<>();
-        }
-        return repository.getTimelinePhotos(currentFamilyId);
+        return repository.getAllPhotosGlobal();
     }
 
     public void savePhoto(PhotoEntity photo) {

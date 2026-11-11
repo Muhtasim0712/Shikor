@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.shikor.app-mergeDebugResources-47:/values-en-rGB/values-en-rGB.xml",
+            "outputFile": "com.shikor.app-mergeDebugResources-48:/values-en-rGB/values-en-rGB.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\f2d5d2973ee8d3d5ec212be912523bae\\transformed\\material-1.12.0\\res\\values-en-rGB\\values-en-rGB.xml",
@@ -40,7 +40,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\759cfd38b8a1905281118deff95122c6\\transformed\\play-services-base-18.0.1\\res\\values-en-rGB\\values.xml",
+                    "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\50bdee86cdac1ca89f45efb5a367db97\\transformed\\play-services-base-18.1.0\\res\\values-en-rGB\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

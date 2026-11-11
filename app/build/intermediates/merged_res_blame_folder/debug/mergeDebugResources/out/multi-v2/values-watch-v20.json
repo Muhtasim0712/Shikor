@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.shikor.app-mergeDebugResources-47:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.shikor.app-mergeDebugResources-48:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\4c6df9001139868649e6afefc5b2d7ad\\transformed\\play-services-auth-20.7.0\\res\\values-watch-v20\\values.xml",

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="84dp"
+    android:layout_height="84dp"
+    android:layout_marginEnd="8dp">
+
+    <ImageView
+        android:id="@+id/ivPhotoThumb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null" />
+
+    <ImageView
+        android:id="@+id/btnRemoveThumb"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="4dp"
+        android:background="@drawable/bg_code_box"
+        android:padding="2dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:contentDescription="@null" />
+</FrameLayout>

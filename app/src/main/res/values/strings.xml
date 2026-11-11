@@ -45,6 +45,10 @@
     <string name="nav_tree">Family Tree</string>
     <string name="nav_members">Members</string>
     <string name="nav_timeline">Timeline</string>
+    <string name="nav_memories">Memories</string>
+    <string name="empty_memories_title">No memories yet</string>
+    <string name="empty_memories_subtitle">Add the first family memory using the button below.</string>
+    <string name="memory_added_by">Added by %s</string>
     <string name="nav_settings">Settings</string>
 
     <!-- Tree View & Actions -->
@@ -160,6 +164,10 @@
     <string name="settings_about_title">About Shikor</string>
     <string name="settings_intro_animation">Show intro animation</string>
     <string name="settings_intro_animation_desc">Play animated botanical tree sequence at launch</string>
+    <string name="settings_new_memory_alerts_title">New memory alerts</string>
+    <string name="settings_new_memory_alerts_desc">Get notified when family members add new memories</string>
+    <string name="settings_hide_names_notif_title">Hide names in notifications</string>
+    <string name="settings_hide_names_notif_desc">Show generic alerts without uploader names</string>
 
     <!-- Person / Member Detail Screen -->
     <string name="action_call">Call</string>

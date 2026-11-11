@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.shikor.app-mergeDebugResources-47:/values-b+sr+Latn/values-b+sr+Latn.xml",
+            "outputFile": "com.shikor.app-mergeDebugResources-48:/values-b+sr+Latn/values-b+sr+Latn.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\7a716d9d74727e4011158f453d79c9cd\\transformed\\browser-1.4.0\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
@@ -57,7 +57,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\759cfd38b8a1905281118deff95122c6\\transformed\\play-services-base-18.0.1\\res\\values-b+sr+Latn\\values.xml",
+                    "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\50bdee86cdac1ca89f45efb5a367db97\\transformed\\play-services-base-18.1.0\\res\\values-b+sr+Latn\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

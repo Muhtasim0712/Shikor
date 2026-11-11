@@ -68,6 +68,55 @@ public class ImageUtils {
     }
 
     /**
+     * Reads an image file, resizes preserving aspect ratio so max dimension <= maxDim,
+     * compresses to JPEG, and returns a Base64 string.
+     */
+    @Nullable
+    public static String fileToBase64Photo(File file, int maxDim, int quality) {
+        if (file == null || !file.exists()) return null;
+
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+
+            int width = options.outWidth;
+            int height = options.outHeight;
+            if (width <= 0 || height <= 0) return null;
+
+            int sampleSize = 1;
+            while (Math.max(width / sampleSize, height / sampleSize) > maxDim * 2) {
+                sampleSize *= 2;
+            }
+
+            options.inJustDecodeBounds = false;
+            options.inSampleSize = sampleSize;
+            Bitmap raw = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+            if (raw == null) return null;
+
+            int targetW, targetH;
+            if (raw.getWidth() >= raw.getHeight()) {
+                targetW = maxDim;
+                targetH = Math.max(1, (int) ((float) raw.getHeight() * maxDim / raw.getWidth()));
+            } else {
+                targetH = maxDim;
+                targetW = Math.max(1, (int) ((float) raw.getWidth() * maxDim / raw.getHeight()));
+            }
+
+            Bitmap scaled = Bitmap.createScaledBitmap(raw, targetW, targetH, true);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            scaled.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+            byte[] bytes = baos.toByteArray();
+
+            return Base64.encodeToString(bytes, Base64.NO_WRAP);
+        } catch (Exception e) {
+            Log.e(TAG, "Error encoding photo to Base64: " + e.getMessage(), e);
+            return null;
+        }
+    }
+
+    /**
      * Decodes a Base64 string and writes it to destFile.
      */
     public static boolean base64ToFile(String base64Str, File destFile) {

@@ -475,6 +475,16 @@ public class SettingsFragment extends Fragment {
             IntroPrefs.setEnabled(requireContext(), isChecked);
         });
 
+        binding.switchNewMemoryAlerts.setChecked(prefs.isNewMemoryAlertsEnabled());
+        binding.switchNewMemoryAlerts.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.setNewMemoryAlertsEnabled(isChecked);
+        });
+
+        binding.switchHideNamesNotif.setChecked(prefs.isHideNamesMemoriesNotif());
+        binding.switchHideNamesNotif.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.setHideNamesMemoriesNotif(isChecked);
+        });
+
         binding.layoutTtsSpeechRate.setOnClickListener(v -> showSpeechRateDialog());
     }
 

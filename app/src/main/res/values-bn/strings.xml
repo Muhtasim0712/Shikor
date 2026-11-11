@@ -45,6 +45,10 @@
     <string name="nav_tree">বংশলতিকা</string>
     <string name="nav_members">সদস্যবৃন্দ</string>
     <string name="nav_timeline">টাইমলাইন</string>
+    <string name="nav_memories">স্মৃতি</string>
+    <string name="empty_memories_title">এখনো কোনো স্মৃতি নেই</string>
+    <string name="empty_memories_subtitle">নিচের বোতামটি ব্যবহার করে প্রথম পারিবারিক স্মৃতি যোগ করুন।</string>
+    <string name="memory_added_by">%s কর্তৃক যোগ করা হয়েছে</string>
     <string name="nav_settings">সেটিংস</string>
 
     <!-- Tree View & Actions -->
@@ -160,6 +164,10 @@
     <string name="settings_about_title">শিকড় সম্পর্কে</string>
     <string name="settings_intro_animation">অ্যানিমেটেড ইন্ট্রো প্রদর্শন</string>
     <string name="settings_intro_animation_desc">অ্যাপ চালুর সময় লোগো অ্যানিমেশন চালান</string>
+    <string name="settings_new_memory_alerts_title">নতুন স্মৃতির নোটিফিকেশন</string>
+    <string name="settings_new_memory_alerts_desc">পরিবারের সদস্যরা নতুন স্মৃতি যোগ করলে নোটিফিকেশন পান</string>
+    <string name="settings_hide_names_notif_title">নোটিফিকেশনে নাম লুকান</string>
+    <string name="settings_hide_names_notif_desc">আপলোডকারীর নাম ছাড়া সাধারণ নোটিফিকেশন দেখান</string>
 
     <!-- Person / Member Detail Screen -->
     <string name="action_call">কল</string>

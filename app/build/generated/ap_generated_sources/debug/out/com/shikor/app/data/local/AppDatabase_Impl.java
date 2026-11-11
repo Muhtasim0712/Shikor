@@ -15,6 +15,10 @@ import com.shikor.app.data.local.daos.FamilyDao;
 import com.shikor.app.data.local.daos.FamilyDao_Impl;
 import com.shikor.app.data.local.daos.HijriDao;
 import com.shikor.app.data.local.daos.HijriDao_Impl;
+import com.shikor.app.data.local.daos.MemoryDao;
+import com.shikor.app.data.local.daos.MemoryDao_Impl;
+import com.shikor.app.data.local.daos.MemoryPhotoDao;
+import com.shikor.app.data.local.daos.MemoryPhotoDao_Impl;
 import com.shikor.app.data.local.daos.PersonDao;
 import com.shikor.app.data.local.daos.PersonDao_Impl;
 import com.shikor.app.data.local.daos.PhotoDao;
@@ -47,10 +51,14 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   private volatile HijriDao _hijriDao;
 
+  private volatile MemoryDao _memoryDao;
+
+  private volatile MemoryPhotoDao _memoryPhotoDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(3) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `families` (`id` TEXT NOT NULL, `name` TEXT, `code` TEXT, `adminUid` TEXT, `updatedAt` INTEGER NOT NULL, `syncState` INTEGER NOT NULL, PRIMARY KEY(`id`))");
@@ -66,8 +74,14 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_photos_personId` ON `photos` (`personId`)");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_photos_familyId` ON `photos` (`familyId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `hijri_cache` (`gregorianDate` TEXT NOT NULL, `hijriDay` TEXT, `hijriMonthEn` TEXT, `hijriMonthAr` TEXT, `hijriYear` TEXT, `cachedAt` INTEGER NOT NULL, PRIMARY KEY(`gregorianDate`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `memories` (`id` TEXT NOT NULL, `familyId` TEXT NOT NULL, `title` TEXT, `description` TEXT, `eventDate` INTEGER NOT NULL, `year` INTEGER NOT NULL, `taggedPersonIds` TEXT, `photoCount` INTEGER NOT NULL, `hasAudio` INTEGER NOT NULL, `audioDurationMs` INTEGER NOT NULL, `audioPath` TEXT, `uploaderUid` TEXT, `uploaderName` TEXT, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `syncState` INTEGER NOT NULL, `failureReason` TEXT, `notified` INTEGER NOT NULL, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_memories_familyId` ON `memories` (`familyId`)");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_memories_eventDate` ON `memories` (`eventDate`)");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_memories_year` ON `memories` (`year`)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `memory_photos` (`id` TEXT NOT NULL, `memoryId` TEXT NOT NULL, `index` INTEGER NOT NULL, `localPath` TEXT, `remoteVersion` INTEGER NOT NULL, `downloadState` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`memoryId`) REFERENCES `memories`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_memory_photos_memoryId` ON `memory_photos` (`memoryId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dc0c447ec21efa4f9936a2623e9aba5c')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1aaf6c437625ef3f0bb4e8e24156becf')");
       }
 
       @Override
@@ -77,6 +91,8 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("DROP TABLE IF EXISTS `stories`");
         db.execSQL("DROP TABLE IF EXISTS `photos`");
         db.execSQL("DROP TABLE IF EXISTS `hijri_cache`");
+        db.execSQL("DROP TABLE IF EXISTS `memories`");
+        db.execSQL("DROP TABLE IF EXISTS `memory_photos`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -236,9 +252,58 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoHijriCache + "\n"
                   + " Found:\n" + _existingHijriCache);
         }
+        final HashMap<String, TableInfo.Column> _columnsMemories = new HashMap<String, TableInfo.Column>(18);
+        _columnsMemories.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("familyId", new TableInfo.Column("familyId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("title", new TableInfo.Column("title", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("description", new TableInfo.Column("description", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("eventDate", new TableInfo.Column("eventDate", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("year", new TableInfo.Column("year", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("taggedPersonIds", new TableInfo.Column("taggedPersonIds", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("photoCount", new TableInfo.Column("photoCount", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("hasAudio", new TableInfo.Column("hasAudio", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("audioDurationMs", new TableInfo.Column("audioDurationMs", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("audioPath", new TableInfo.Column("audioPath", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("uploaderUid", new TableInfo.Column("uploaderUid", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("uploaderName", new TableInfo.Column("uploaderName", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("updatedAt", new TableInfo.Column("updatedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("syncState", new TableInfo.Column("syncState", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("failureReason", new TableInfo.Column("failureReason", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemories.put("notified", new TableInfo.Column("notified", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysMemories = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesMemories = new HashSet<TableInfo.Index>(3);
+        _indicesMemories.add(new TableInfo.Index("index_memories_familyId", false, Arrays.asList("familyId"), Arrays.asList("ASC")));
+        _indicesMemories.add(new TableInfo.Index("index_memories_eventDate", false, Arrays.asList("eventDate"), Arrays.asList("ASC")));
+        _indicesMemories.add(new TableInfo.Index("index_memories_year", false, Arrays.asList("year"), Arrays.asList("ASC")));
+        final TableInfo _infoMemories = new TableInfo("memories", _columnsMemories, _foreignKeysMemories, _indicesMemories);
+        final TableInfo _existingMemories = TableInfo.read(db, "memories");
+        if (!_infoMemories.equals(_existingMemories)) {
+          return new RoomOpenHelper.ValidationResult(false, "memories(com.shikor.app.data.local.entities.MemoryEntity).\n"
+                  + " Expected:\n" + _infoMemories + "\n"
+                  + " Found:\n" + _existingMemories);
+        }
+        final HashMap<String, TableInfo.Column> _columnsMemoryPhotos = new HashMap<String, TableInfo.Column>(6);
+        _columnsMemoryPhotos.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemoryPhotos.put("memoryId", new TableInfo.Column("memoryId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemoryPhotos.put("index", new TableInfo.Column("index", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemoryPhotos.put("localPath", new TableInfo.Column("localPath", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemoryPhotos.put("remoteVersion", new TableInfo.Column("remoteVersion", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsMemoryPhotos.put("downloadState", new TableInfo.Column("downloadState", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysMemoryPhotos = new HashSet<TableInfo.ForeignKey>(1);
+        _foreignKeysMemoryPhotos.add(new TableInfo.ForeignKey("memories", "CASCADE", "NO ACTION", Arrays.asList("memoryId"), Arrays.asList("id")));
+        final HashSet<TableInfo.Index> _indicesMemoryPhotos = new HashSet<TableInfo.Index>(1);
+        _indicesMemoryPhotos.add(new TableInfo.Index("index_memory_photos_memoryId", false, Arrays.asList("memoryId"), Arrays.asList("ASC")));
+        final TableInfo _infoMemoryPhotos = new TableInfo("memory_photos", _columnsMemoryPhotos, _foreignKeysMemoryPhotos, _indicesMemoryPhotos);
+        final TableInfo _existingMemoryPhotos = TableInfo.read(db, "memory_photos");
+        if (!_infoMemoryPhotos.equals(_existingMemoryPhotos)) {
+          return new RoomOpenHelper.ValidationResult(false, "memory_photos(com.shikor.app.data.local.entities.MemoryPhotoEntity).\n"
+                  + " Expected:\n" + _infoMemoryPhotos + "\n"
+                  + " Found:\n" + _existingMemoryPhotos);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "dc0c447ec21efa4f9936a2623e9aba5c", "3856cb3c13ac91d5c41742518f94a9df");
+    }, "1aaf6c437625ef3f0bb4e8e24156becf", "2fccaf168c72fc3ca3ebb3660a5f5300");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -249,7 +314,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "families","people","stories","photos","hijri_cache");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "families","people","stories","photos","hijri_cache","memories","memory_photos");
   }
 
   @Override
@@ -270,6 +335,8 @@ public final class AppDatabase_Impl extends AppDatabase {
       _db.execSQL("DELETE FROM `stories`");
       _db.execSQL("DELETE FROM `photos`");
       _db.execSQL("DELETE FROM `hijri_cache`");
+      _db.execSQL("DELETE FROM `memories`");
+      _db.execSQL("DELETE FROM `memory_photos`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -292,6 +359,8 @@ public final class AppDatabase_Impl extends AppDatabase {
     _typeConvertersMap.put(PhotoDao.class, PhotoDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(FamilyDao.class, FamilyDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(HijriDao.class, HijriDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(MemoryDao.class, MemoryDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(MemoryPhotoDao.class, MemoryPhotoDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -376,6 +445,34 @@ public final class AppDatabase_Impl extends AppDatabase {
           _hijriDao = new HijriDao_Impl(this);
         }
         return _hijriDao;
+      }
+    }
+  }
+
+  @Override
+  public MemoryDao memoryDao() {
+    if (_memoryDao != null) {
+      return _memoryDao;
+    } else {
+      synchronized(this) {
+        if(_memoryDao == null) {
+          _memoryDao = new MemoryDao_Impl(this);
+        }
+        return _memoryDao;
+      }
+    }
+  }
+
+  @Override
+  public MemoryPhotoDao memoryPhotoDao() {
+    if (_memoryPhotoDao != null) {
+      return _memoryPhotoDao;
+    } else {
+      synchronized(this) {
+        if(_memoryPhotoDao == null) {
+          _memoryPhotoDao = new MemoryPhotoDao_Impl(this);
+        }
+        return _memoryPhotoDao;
       }
     }
   }

@@ -3,11 +3,13 @@ package com.shikor.app.data.repository;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.database.FirebaseDatabase;
 import com.shikor.app.data.local.AppDatabase;
 import com.shikor.app.data.local.daos.FamilyDao;
 import com.shikor.app.data.local.daos.PersonDao;
@@ -18,6 +20,9 @@ import com.shikor.app.data.local.entities.PersonEntity;
 import com.shikor.app.data.local.entities.PhotoEntity;
 import com.shikor.app.data.local.entities.StoryEntity;
 import com.shikor.app.util.AppExecutors;
+import com.shikor.app.util.ImageEncoder;
+
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -216,6 +221,10 @@ public class FamilyRepository {
         return storyDao.getAllStoriesForFamily(familyId);
     }
 
+    public LiveData<List<StoryEntity>> getAllStoriesGlobal() {
+        return storyDao.getAllStoriesGlobal();
+    }
+
     public void insertStory(StoryEntity story, RepositoryCallback<Void> callback) {
         executors.diskIO().execute(() -> {
             story.setUpdatedAt(System.currentTimeMillis());
@@ -241,6 +250,13 @@ public class FamilyRepository {
                     .delete()
                     .addOnFailureListener(e -> Log.e(TAG, "Failed to delete story in Firestore", e));
 
+            firestore.collection("families")
+                    .document(story.getFamilyId())
+                    .collection("storyPhotos")
+                    .document(story.getId())
+                    .delete()
+                    .addOnFailureListener(e -> Log.e(TAG, "Failed to delete story photo in Firestore", e));
+
             executors.mainThread().execute(() -> {
                 if (callback != null) callback.onSuccess(null);
             });
@@ -248,29 +264,134 @@ public class FamilyRepository {
     }
 
     private void syncStoryToFirestore(StoryEntity story) {
+        String fId = (story.getFamilyId() != null && !story.getFamilyId().trim().isEmpty())
+                ? story.getFamilyId().trim()
+                : "default_family";
+
         Map<String, Object> map = new HashMap<>();
         map.put("id", story.getId());
         map.put("personId", story.getPersonId());
-        map.put("familyId", story.getFamilyId());
+        map.put("familyId", fId);
         map.put("title", story.getTitle());
         map.put("body", story.getBody());
         map.put("audioPath", story.getAudioPath());
         map.put("audioDurationMs", story.getAudioDurationMs());
         map.put("photoPath", story.getPhotoPath());
+
+        // Attach Base64 photo string directly in story document, exactly like relatives' profile pictures!
+        if (story.getPhotoPath() != null) {
+            File photoFile = new File(story.getPhotoPath());
+            if (photoFile.exists()) {
+                String base64 = com.shikor.app.util.ImageUtils.fileToBase64Photo(photoFile, 800, 80);
+                if (base64 != null) {
+                    map.put("photoBase64", base64);
+                }
+            }
+        }
+
         map.put("createdAt", story.getCreatedAt());
         map.put("authorUid", story.getAuthorUid());
         map.put("updatedAt", story.getUpdatedAt());
 
         firestore.collection("families")
-                .document(story.getFamilyId())
+                .document(fId)
                 .collection("stories")
                 .document(story.getId())
                 .set(map, SetOptions.merge())
                 .addOnSuccessListener(aVoid -> executors.diskIO().execute(() -> {
                     story.setSyncState(StoryEntity.SYNC_STATE_SYNCED);
                     storyDao.update(story);
+                    com.shikor.app.sync.SyncManager.getInstance(context).notifyDataChanged();
                 }))
                 .addOnFailureListener(e -> Log.w(TAG, "Story sync to Firestore postponed (offline): " + e.getMessage()));
+    }
+
+    public void upsertRemoteStory(StoryEntity remoteStory, String photoBase64FromDoc) {
+        executors.diskIO().execute(() -> {
+            StoryEntity existing = storyDao.getStoryByIdSync(remoteStory.getId());
+            boolean needsPhotoDownload = false;
+
+            if (existing != null) {
+                if (existing.hasPhoto()) {
+                    File localFile = new File(existing.getPhotoPath());
+                    if (localFile.exists()) {
+                        if (!remoteStory.hasPhoto() || remoteStory.getUpdatedAt() <= existing.getUpdatedAt()) {
+                            Log.d("ShikorPhotoSync", "Merge decision: Retaining valid local photo for story " + remoteStory.getId());
+                            remoteStory.setPhotoPath(existing.getPhotoPath());
+                        } else {
+                            needsPhotoDownload = true;
+                        }
+                    } else {
+                        needsPhotoDownload = remoteStory.hasPhoto();
+                    }
+                } else {
+                    needsPhotoDownload = remoteStory.hasPhoto();
+                }
+            } else {
+                needsPhotoDownload = remoteStory.hasPhoto();
+            }
+
+            if (photoBase64FromDoc != null && photoBase64FromDoc.length() > 200 && !photoBase64FromDoc.contains("/")) {
+                String localPath = ImageEncoder.saveBase64ToStoryFile(context, remoteStory.getId(), photoBase64FromDoc);
+                if (!localPath.isEmpty()) {
+                    remoteStory.setPhotoPath(localPath);
+                    needsPhotoDownload = false;
+                }
+            }
+
+            storyDao.insert(remoteStory);
+
+            if (needsPhotoDownload) {
+                File localFile = (remoteStory.getPhotoPath() != null) ? new File(remoteStory.getPhotoPath()) : null;
+                if (localFile == null || !localFile.exists()) {
+                    fetchAndSaveStoryPhoto(remoteStory.getFamilyId(), remoteStory.getId());
+                }
+            }
+        });
+    }
+
+    public void fetchAndSaveStoryPhoto(String familyId, String storyId) {
+        String fId = (familyId != null && !familyId.trim().isEmpty()) ? familyId.trim() : "default_family";
+        Log.d("ShikorPhotoSync", "Download start for story photo " + storyId);
+
+        firestore.collection("families")
+                .document(fId)
+                .collection("stories")
+                .document(storyId)
+                .get()
+                .addOnSuccessListener(doc -> executors.diskIO().execute(() -> {
+                    String base64 = doc != null ? doc.getString("photoBase64") : null;
+                    if (base64 == null || base64.trim().isEmpty()) {
+                        firestore.collection("families")
+                                .document(fId)
+                                .collection("storyPhotos")
+                                .document(storyId)
+                                .get()
+                                .addOnSuccessListener(photoDoc -> executors.diskIO().execute(() -> {
+                                    String pBase64 = photoDoc != null ? photoDoc.getString("photoBase64") : null;
+                                    if (pBase64 != null && !pBase64.trim().isEmpty()) {
+                                        saveAndSetStoryPhoto(storyId, pBase64);
+                                    }
+                                }));
+                    } else {
+                        saveAndSetStoryPhoto(storyId, base64);
+                    }
+                }))
+                .addOnFailureListener(e -> Log.w("ShikorPhotoSync", "Failed to fetch story photo " + storyId + ": " + e.getMessage()));
+    }
+
+    private void saveAndSetStoryPhoto(String storyId, String base64) {
+        String localPath = ImageEncoder.saveBase64ToStoryFile(context, storyId, base64);
+        if (!localPath.isEmpty()) {
+            executors.diskIO().execute(() -> {
+                StoryEntity existing = storyDao.getStoryByIdSync(storyId);
+                if (existing != null) {
+                    existing.setPhotoPath(localPath);
+                    storyDao.update(existing);
+                    Log.d("ShikorPhotoSync", "Local photoPath updated from Firestore for story " + storyId + ": " + localPath);
+                }
+            });
+        }
     }
 
     public LiveData<StoryEntity> getStoryById(String storyId) {
@@ -281,6 +402,10 @@ public class FamilyRepository {
 
     public LiveData<List<PhotoEntity>> getTimelinePhotos(String familyId) {
         return photoDao.getTimelinePhotos(familyId);
+    }
+
+    public LiveData<List<PhotoEntity>> getAllPhotosGlobal() {
+        return photoDao.getAllPhotosGlobal();
     }
 
     public void insertPhoto(PhotoEntity photo, RepositoryCallback<Void> callback) {
@@ -298,11 +423,15 @@ public class FamilyRepository {
     }
 
     private void syncPhotoToFirestore(PhotoEntity photo) {
+        String fId = (photo.getFamilyId() != null && !photo.getFamilyId().trim().isEmpty())
+                ? photo.getFamilyId().trim()
+                : "default_family";
+
         Map<String, Object> map = new HashMap<>();
         map.put("id", photo.getId());
         map.put("personId", photo.getPersonId());
-        map.put("familyId", photo.getFamilyId());
-        map.put("path", photo.getPath());
+        map.put("familyId", fId);
+        map.put("path", ImageEncoder.fileToBase64(photo.getPath()));
         map.put("caption", photo.getCaption());
         map.put("year", photo.getYear());
         map.put("taggedPersonIds", photo.getTaggedPersonIds());
@@ -310,13 +439,14 @@ public class FamilyRepository {
         map.put("updatedAt", photo.getUpdatedAt());
 
         firestore.collection("families")
-                .document(photo.getFamilyId())
+                .document(fId)
                 .collection("photos")
                 .document(photo.getId())
                 .set(map, SetOptions.merge())
                 .addOnSuccessListener(aVoid -> executors.diskIO().execute(() -> {
                     photo.setSyncState(PhotoEntity.SYNC_STATE_SYNCED);
                     photoDao.update(photo);
+                    com.shikor.app.sync.SyncManager.getInstance(context).notifyDataChanged();
                 }))
                 .addOnFailureListener(e -> Log.w(TAG, "Photo sync to Firestore postponed (offline): " + e.getMessage()));
     }

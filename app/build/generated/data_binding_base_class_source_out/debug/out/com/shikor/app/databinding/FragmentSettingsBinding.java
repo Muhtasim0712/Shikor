@@ -107,6 +107,22 @@ public final class FragmentSettingsBinding implements ViewBinding {
    * </ul>
    */
   @Nullable
+  public final MaterialSwitch switchHideNamesNotif;
+
+  /**
+   * This binding is not available in all configurations.
+   * <p>
+   * Present:
+   * <ul>
+   *   <li>layout/</li>
+   * </ul>
+   *
+   * Absent:
+   * <ul>
+   *   <li>layout-sw600dp/</li>
+   * </ul>
+   */
+  @Nullable
   public final MaterialSwitch switchIntroAnimation;
 
   /**
@@ -124,6 +140,22 @@ public final class FragmentSettingsBinding implements ViewBinding {
    */
   @Nullable
   public final MaterialSwitch switchLargerText;
+
+  /**
+   * This binding is not available in all configurations.
+   * <p>
+   * Present:
+   * <ul>
+   *   <li>layout/</li>
+   * </ul>
+   *
+   * Absent:
+   * <ul>
+   *   <li>layout-sw600dp/</li>
+   * </ul>
+   */
+  @Nullable
+  public final MaterialSwitch switchNewMemoryAlerts;
 
   /**
    * This binding is not available in all configurations.
@@ -218,8 +250,9 @@ public final class FragmentSettingsBinding implements ViewBinding {
       @NonNull LinearLayout layoutImportMembers, @NonNull LinearLayout layoutLanguageSetting,
       @NonNull LinearLayout layoutRelationshipFinder, @NonNull LinearLayout layoutReminderTime,
       @NonNull LinearLayout layoutThemeSetting, @Nullable LinearLayout layoutTtsSpeechRate,
-      @NonNull MaterialSwitch switchDailyReminders, @Nullable MaterialSwitch switchIntroAnimation,
-      @Nullable MaterialSwitch switchLargerText, @Nullable MaterialSwitch switchOnThisDay,
+      @NonNull MaterialSwitch switchDailyReminders, @Nullable MaterialSwitch switchHideNamesNotif,
+      @Nullable MaterialSwitch switchIntroAnimation, @Nullable MaterialSwitch switchLargerText,
+      @Nullable MaterialSwitch switchNewMemoryAlerts, @Nullable MaterialSwitch switchOnThisDay,
       @Nullable TextView tvAboutAppVersion, @Nullable TextView tvAppInfo,
       @NonNull TextView tvCurrentLanguageValue, @Nullable TextView tvCurrentSpeechRateValue,
       @NonNull TextView tvCurrentThemeValue, @NonNull TextView tvNextAlertStatus,
@@ -241,8 +274,10 @@ public final class FragmentSettingsBinding implements ViewBinding {
     this.layoutThemeSetting = layoutThemeSetting;
     this.layoutTtsSpeechRate = layoutTtsSpeechRate;
     this.switchDailyReminders = switchDailyReminders;
+    this.switchHideNamesNotif = switchHideNamesNotif;
     this.switchIntroAnimation = switchIntroAnimation;
     this.switchLargerText = switchLargerText;
+    this.switchNewMemoryAlerts = switchNewMemoryAlerts;
     this.switchOnThisDay = switchOnThisDay;
     this.tvAboutAppVersion = tvAboutAppVersion;
     this.tvAppInfo = tvAppInfo;
@@ -367,11 +402,17 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.switchHideNamesNotif;
+      MaterialSwitch switchHideNamesNotif = ViewBindings.findChildViewById(rootView, id);
+
       id = R.id.switchIntroAnimation;
       MaterialSwitch switchIntroAnimation = ViewBindings.findChildViewById(rootView, id);
 
       id = R.id.switchLargerText;
       MaterialSwitch switchLargerText = ViewBindings.findChildViewById(rootView, id);
+
+      id = R.id.switchNewMemoryAlerts;
+      MaterialSwitch switchNewMemoryAlerts = ViewBindings.findChildViewById(rootView, id);
 
       id = R.id.switchOnThisDay;
       MaterialSwitch switchOnThisDay = ViewBindings.findChildViewById(rootView, id);
@@ -431,10 +472,10 @@ public final class FragmentSettingsBinding implements ViewBinding {
           btnGrantExactAlarm, btnSettingsLogout, btnTestReminder, layoutExactAlarmWarning,
           layoutExportContacts, layoutExportTree, layoutHealthCheck, layoutImportMembers,
           layoutLanguageSetting, layoutRelationshipFinder, layoutReminderTime, layoutThemeSetting,
-          layoutTtsSpeechRate, switchDailyReminders, switchIntroAnimation, switchLargerText,
-          switchOnThisDay, tvAboutAppVersion, tvAppInfo, tvCurrentLanguageValue,
-          tvCurrentSpeechRateValue, tvCurrentThemeValue, tvNextAlertStatus, tvReminderTimeValue,
-          tvSettingsFamilyCode, tvSettingsFamilyName, tvSettingsUserEmail);
+          layoutTtsSpeechRate, switchDailyReminders, switchHideNamesNotif, switchIntroAnimation,
+          switchLargerText, switchNewMemoryAlerts, switchOnThisDay, tvAboutAppVersion, tvAppInfo,
+          tvCurrentLanguageValue, tvCurrentSpeechRateValue, tvCurrentThemeValue, tvNextAlertStatus,
+          tvReminderTimeValue, tvSettingsFamilyCode, tvSettingsFamilyName, tvSettingsUserEmail);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

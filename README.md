@@ -246,6 +246,29 @@ Run these commands from your terminal to monitor specific subsystems:
 
 ---
 
+## New 'Memories' Feature Architecture & Migration
+
+Shikor features a robust, rebuilt **Memories** module replacing the legacy Timeline:
+1. **Idempotent Data Migration**: `MemoryMigrationHelper` automatically converts legacy stories into `MemoryEntity` and `MemoryPhotoEntity` upon startup on a background thread, logging migration counts and ensuring zero data loss.
+2. **Separated Realtime Database Layout**:
+   - Metadata: `families/{familyId}/memories/{memoryId}` (lightweight text and timestamps).
+   - Media: `families/{familyId}/memoryMedia/{memoryId}/photos/{index}` and `audio` (Base64 JPEG/m4a strings).
+3. **Real-Time Sync & Notifications**:
+   - Foreground Realtime Database `ChildEventListener` via `MemoryRepository` and background WorkManager polling (`MemoryCheckWorker` every 15 minutes) dispatch rich notifications via the `"family_memories"` channel with `BigPictureStyle` and `MemoryNotificationReceiver` action handling.
+4. **Concepts Demonstrated**: Room with non-destructive version 3 migration, Firebase Realtime Database child event listeners, WorkManager background workers, BroadcastReceivers, notification channels & BigPictureStyle, RecyclerView with multi-view types (`ListAdapter` + `DiffUtil`), Glide, image compression/EXIF rotation, and AppExecutors background threads.
+
+---
+
+## Photo Sync Architecture & Storage Design
+
+To maintain fast, lightweight real-time synchronization while supporting high-resolution image attachments:
+1. **Background Compression & Downscaling**: Before upload, photos are decoded with EXIF rotation correction, scaled to at most 1024px on the longest side, and compressed to JPEG (starting at quality 75, target &le; 300 KB) on background threads (`AppExecutors`).
+2. **Separated Storage Node**: Story metadata (title, body, timestamps) is stored in `families/{familyId}/stories/{storyId}`, while Base64 photo payloads are stored in a separate node (`families/{familyId}/storyPhotos/{storyId}`). This prevents main real-time family listeners from downloading heavy image payloads continuously.
+3. **On-Demand Fetch & Local Disk Caching**: Photos are downloaded on demand when missing locally, decoded to a deterministic local file (`story_<storyId>.jpg` in app-specific storage), and cached locally.
+4. **Non-Destructive Room Merge Rule**: When remote stories sync down, Room merges fields without overwriting valid local `photoPath` file paths. Remote updates never reset a valid local image path to empty.
+
+---
+
 ## Known Limitations & Design Considerations
 
 1. **Aladhan API Rate Limits & Initial Lookup**:
@@ -256,3 +279,5 @@ Run these commands from your terminal to monitor specific subsystems:
    - The custom Canvas tree layout engine (`TreeLayoutEngine`) and `TreePainter` compute coordinates recursively off the main thread and cache static structures into `android.graphics.Picture`. While tested up to several hundred nodes at sustained 60 FPS, trees with thousands of nodes are best navigated using the generation selector or pinch-zoom overview (`fitWholeTree`).
 4. **Android FileProvider Scoping**:
    - PDF, PNG, CSV, and vCard exports are stored in the app's secure internal cache directory (`getCacheDir()/exports`) and granted temporary read access to third-party apps (WhatsApp, Drive, Gmail) using `FLAG_GRANT_READ_URI_PERMISSION`. This avoids requiring legacy external storage permissions on modern Android versions.
+5. **Background Memory Notifications & Battery Optimization**:
+   - The 'Memories' feature uses Firebase Realtime Database `ChildEventListener` and WorkManager (`MemoryCheckWorker` every 15 minutes) to notify family members when new memories are added. When the app is fully closed, background polling can be delayed by up to 15 minutes or by aggressive OEM battery optimization skins. Users can toggle alerts and privacy name hiding in Settings.

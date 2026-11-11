@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.shikor.app-mergeDebugResources-47:/values-hy/values-hy.xml",
+            "outputFile": "com.shikor.app-mergeDebugResources-48:/values-hy/values-hy.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\326ec5cc83de1df8b7c3dfda5367dfb7\\transformed\\core-1.13.0\\res\\values-hy\\values-hy.xml",
@@ -57,23 +57,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\759cfd38b8a1905281118deff95122c6\\transformed\\play-services-base-18.0.1\\res\\values-hy\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "193,295,456,586,690,840,972,1095,1204,1367,1471,1635,1767,1925,2087,2148,2211",
-                        "endColumns": "101,160,129,103,149,131,122,108,162,103,163,131,157,161,60,62,77",
-                        "endOffsets": "294,455,585,689,839,971,1094,1203,1366,1470,1634,1766,1924,2086,2147,2210,2288"
-                    },
-                    "to": {
-                        "startLines": "50,51,52,53,54,55,56,57,59,60,61,62,63,64,65,66,67",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "4689,4795,4960,5094,5202,5356,5492,5619,5883,6050,6158,6326,6462,6624,6790,6855,6922",
-                        "endColumns": "105,164,133,107,153,135,126,112,166,107,167,135,161,165,64,66,81",
-                        "endOffsets": "4790,4955,5089,5197,5351,5487,5614,5727,6045,6153,6321,6457,6619,6785,6850,6917,6999"
-                    }
-                },
-                {
                     "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\0bfc013e87a9f8cd99f01899aa3fb8ac\\transformed\\credentials-1.2.0-rc01\\res\\values-hy\\values-hy.xml",
                     "from": {
                         "startLines": "2,3",
@@ -88,6 +71,23 @@
                         "startOffsets": "3024,3137",
                         "endColumns": "112,113",
                         "endOffsets": "3132,3246"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\50bdee86cdac1ca89f45efb5a367db97\\transformed\\play-services-base-18.1.0\\res\\values-hy\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "193,295,456,586,690,840,972,1095,1204,1367,1471,1635,1767,1925,2087,2148,2211",
+                        "endColumns": "101,160,129,103,149,131,122,108,162,103,163,131,157,161,60,62,77",
+                        "endOffsets": "294,455,585,689,839,971,1094,1203,1366,1470,1634,1766,1924,2086,2147,2210,2288"
+                    },
+                    "to": {
+                        "startLines": "50,51,52,53,54,55,56,57,59,60,61,62,63,64,65,66,67",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "4689,4795,4960,5094,5202,5356,5492,5619,5883,6050,6158,6326,6462,6624,6790,6855,6922",
+                        "endColumns": "105,164,133,107,153,135,126,112,166,107,167,135,161,165,64,66,81",
+                        "endOffsets": "4790,4955,5089,5197,5351,5487,5614,5727,6045,6153,6321,6457,6619,6785,6850,6917,6999"
                     }
                 },
                 {

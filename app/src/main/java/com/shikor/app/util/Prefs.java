@@ -208,4 +208,41 @@ public class Prefs {
     public void clearSession() {
         preferences.edit().clear().apply();
     }
+
+    private static final String KEY_NEW_MEMORY_ALERTS = "key_new_memory_alerts_enabled";
+    private static final String KEY_HIDE_NAMES_MEMORIES_NOTIF = "key_hide_names_memories_notif";
+    private static final String KEY_FAMILY_BASELINE_PREFIX = "key_family_baseline_";
+    private static final String KEY_LAST_CHECKED_PREFIX = "key_last_checked_";
+
+    public boolean isNewMemoryAlertsEnabled() {
+        return preferences.getBoolean(KEY_NEW_MEMORY_ALERTS, true);
+    }
+
+    public void setNewMemoryAlertsEnabled(boolean enabled) {
+        preferences.edit().putBoolean(KEY_NEW_MEMORY_ALERTS, enabled).apply();
+    }
+
+    public boolean isHideNamesMemoriesNotif() {
+        return preferences.getBoolean(KEY_HIDE_NAMES_MEMORIES_NOTIF, false);
+    }
+
+    public void setHideNamesMemoriesNotif(boolean hide) {
+        preferences.edit().putBoolean(KEY_HIDE_NAMES_MEMORIES_NOTIF, hide).apply();
+    }
+
+    public long getFamilyBaseline(String familyId) {
+        return preferences.getLong(KEY_FAMILY_BASELINE_PREFIX + familyId, 0L);
+    }
+
+    public void setFamilyBaseline(String familyId, long timestamp) {
+        preferences.edit().putLong(KEY_FAMILY_BASELINE_PREFIX + familyId, timestamp).apply();
+    }
+
+    public long getLastCheckedTimestamp(String familyId) {
+        return preferences.getLong(KEY_LAST_CHECKED_PREFIX + familyId, getFamilyBaseline(familyId));
+    }
+
+    public void setLastCheckedTimestamp(String familyId, long timestamp) {
+        preferences.edit().putLong(KEY_LAST_CHECKED_PREFIX + familyId, timestamp).apply();
+    }
 }

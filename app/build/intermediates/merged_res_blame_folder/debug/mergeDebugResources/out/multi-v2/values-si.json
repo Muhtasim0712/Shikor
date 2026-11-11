@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.shikor.app-mergeDebugResources-47:/values-si/values-si.xml",
+            "outputFile": "com.shikor.app-mergeDebugResources-48:/values-si/values-si.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\326ec5cc83de1df8b7c3dfda5367dfb7\\transformed\\core-1.13.0\\res\\values-si\\values-si.xml",
@@ -74,23 +74,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\759cfd38b8a1905281118deff95122c6\\transformed\\play-services-base-18.0.1\\res\\values-si\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "193,297,447,567,676,814,934,1046,1140,1287,1398,1550,1677,1817,1974,2043,2100",
-                        "endColumns": "103,149,119,108,137,119,111,93,146,110,151,126,139,156,68,56,75",
-                        "endOffsets": "296,446,566,675,813,933,1045,1139,1286,1397,1549,1676,1816,1973,2042,2099,2175"
-                    },
-                    "to": {
-                        "startLines": "50,51,52,53,54,55,56,57,59,60,61,62,63,64,65,66,67",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "4698,4806,4960,5084,5197,5339,5463,5579,5816,5967,6082,6238,6369,6513,6674,6747,6808",
-                        "endColumns": "107,153,123,112,141,123,115,97,150,114,155,130,143,160,72,60,79",
-                        "endOffsets": "4801,4955,5079,5192,5334,5458,5574,5672,5962,6077,6233,6364,6508,6669,6742,6803,6883"
-                    }
-                },
-                {
                     "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\b09ba16907948ddf3c05d9339a33dc7f\\transformed\\play-services-basement-18.4.0\\res\\values-si\\values.xml",
                     "from": {
                         "startLines": "4",
@@ -122,6 +105,23 @@
                         "startOffsets": "3035,3145",
                         "endColumns": "109,113",
                         "endOffsets": "3140,3254"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nafij\\.gradle\\caches\\9.6.0\\transforms\\50bdee86cdac1ca89f45efb5a367db97\\transformed\\play-services-base-18.1.0\\res\\values-si\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "193,297,447,567,676,814,934,1046,1140,1287,1398,1550,1677,1817,1974,2043,2100",
+                        "endColumns": "103,149,119,108,137,119,111,93,146,110,151,126,139,156,68,56,75",
+                        "endOffsets": "296,446,566,675,813,933,1045,1139,1286,1397,1549,1676,1816,1973,2042,2099,2175"
+                    },
+                    "to": {
+                        "startLines": "50,51,52,53,54,55,56,57,59,60,61,62,63,64,65,66,67",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "4698,4806,4960,5084,5197,5339,5463,5579,5816,5967,6082,6238,6369,6513,6674,6747,6808",
+                        "endColumns": "107,153,123,112,141,123,115,97,150,114,155,130,143,160,72,60,79",
+                        "endOffsets": "4801,4955,5079,5192,5334,5458,5574,5672,5962,6077,6233,6364,6508,6669,6742,6803,6883"
                     }
                 }
             ]
